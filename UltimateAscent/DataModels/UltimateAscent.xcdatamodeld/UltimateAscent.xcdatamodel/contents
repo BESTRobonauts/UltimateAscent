@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="872" systemVersion="10K549" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="MatchData" representedClassName="MatchData" syncable="YES">
+        <attribute name="blueScore" optional="YES" attributeType="Integer 16" defaultValueString="-1" syncable="YES"/>
+        <attribute name="matchType" optional="YES" attributeType="String" maxValueString="100" defaultValueString="Seeding" syncable="YES"/>
+        <attribute name="number" optional="YES" attributeType="Integer 16" maxValueString="250" defaultValueString="0" syncable="YES"/>
+        <attribute name="redScore" optional="YES" attributeType="Integer 16" defaultValueString="-1" syncable="YES"/>
+    </entity>
+    <entity name="TeamData" representedClassName="TeamData" syncable="YES">
+        <attribute name="history" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" maxValueString="50" syncable="YES"/>
+        <attribute name="notes" optional="YES" attributeType="String" maxValueString="1000" syncable="YES"/>
+        <attribute name="number" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="saved" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="MatchData" positionX="160" positionY="192" width="128" height="105"/>
+        <element name="TeamData" positionX="351" positionY="189" width="128" height="120"/>
+    </elements>
+</model>
