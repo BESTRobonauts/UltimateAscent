@@ -10,7 +10,7 @@
 #import "LoadCSVData.h"
 #import "parseCSV.h"
 #import "CreateTeam.h"
-//#import "CreateMatch.h"
+#import "CreateMatch.h"
 #import "AddRecordResults.h"
 
 @implementation LoadCSVData
@@ -57,7 +57,7 @@
      [parser closeFile]; 
 }
 
--(void)loadMatchFile:(NSString *)filePath {/*
+-(void)loadMatchFile:(NSString *)filePath {
     CSVParser *parser = [CSVParser new];
     [parser openFile: filePath];
     NSMutableArray *csvContent = [parser parseFile];
@@ -69,10 +69,10 @@
             AddRecordResults results = [match createMatchFromFile:[csvContent objectAtIndex: 0] dataFields:[csvContent objectAtIndex: c]];
         }
     }
-    [parser closeFile]; */
+    [parser closeFile]; 
 } 
 
--(void)loadMatchResults:(NSString *)filePath {/*
+-(void)loadMatchResults:(NSString *)filePath {
     CSVParser *parser = [CSVParser new];
     [parser openFile: filePath];
     NSMutableArray *csvContent = [parser parseFile];
@@ -84,7 +84,7 @@
             AddRecordResults results = [match addMatchResultsFromFile:[csvContent objectAtIndex: 0] dataFields:[csvContent objectAtIndex: c]];
         }
     }
-    [parser closeFile];    */
+    [parser closeFile];    
 }
 
 
