@@ -31,7 +31,7 @@
     
     matchNumber = [NSNumber numberWithInt:[[data objectAtIndex: 0] intValue]];
     type = [data objectAtIndex:7];
-    // NSLog(@"createMatchFromFile:Match Number = %@", matchNumber);
+    NSLog(@"createMatchFromFile:Match Number = %@", matchNumber);
     MatchData *match = [self GetMatch:matchNumber forMatchType:type];
     if (match) {
         // NSLog(@"createMatchFromFile:Match %@ %@ already exists", matchNumber, type);

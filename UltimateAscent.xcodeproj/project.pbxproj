@@ -1,0 +1,508 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		21528C9816AA215800CF7E8E /* CreateMatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 21528C9516AA215800CF7E8E /* CreateMatch.m */; };
+		21F72D6016A78135000B99AB /* TeamListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F72D5F16A78135000B99AB /* TeamListViewController.m */; };
+		2F30EABC16A0EB4F0026B258 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F30EABB16A0EB4F0026B258 /* UIKit.framework */; };
+		2F30EABE16A0EB4F0026B258 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F30EABD16A0EB4F0026B258 /* Foundation.framework */; };
+		2F30EAC016A0EB4F0026B258 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F30EABF16A0EB4F0026B258 /* CoreGraphics.framework */; };
+		2F30EAC216A0EB4F0026B258 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F30EAC116A0EB4F0026B258 /* CoreData.framework */; };
+		2F30EAC816A0EB4F0026B258 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2F30EAC616A0EB4F0026B258 /* InfoPlist.strings */; };
+		2F30EAE516A100060026B258 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F30EAE416A100060026B258 /* Default.png */; };
+		2F30EAE716A100170026B258 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F30EAE616A100170026B258 /* Default@2x.png */; };
+		2F30EAE916A100250026B258 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F30EAE816A100250026B258 /* Default-568h@2x.png */; };
+		2F30EAEB16A100850026B258 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F30EAEA16A100850026B258 /* main.m */; };
+		2F30EAEE16A101AB0026B258 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F30EAED16A101AB0026B258 /* AppDelegate.m */; };
+		2F30EAF416A102330026B258 /* UltimateAscent.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2F30EAF216A102330026B258 /* UltimateAscent.xcdatamodeld */; };
+		2F8F8B9A16A21F1B00D3B176 /* TeamData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F8F8B9916A21F1B00D3B176 /* TeamData.m */; };
+		2F8F8B9E16A24D8C00D3B176 /* CreateTeam.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F8F8B9D16A24D8C00D3B176 /* CreateTeam.m */; };
+		2FC18E9516A1F7D100D42251 /* UltimateAscent_ipad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FC18E9416A1F7D100D42251 /* UltimateAscent_ipad.storyboard */; };
+		2FC18EAC16A202FD00D42251 /* LoadCSVData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC18EA916A202FD00D42251 /* LoadCSVData.m */; };
+		2FC18EAD16A202FD00D42251 /* parseCSV.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC18EAB16A202FD00D42251 /* parseCSV.m */; };
+		2FC18EAF16A2042000D42251 /* SplashPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC18EAE16A2042000D42251 /* SplashPageViewController.m */; };
+		2FC18EEA16A2083500D42251 /* Blue Fade.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2FC18ED816A2083500D42251 /* Blue Fade.gif */; };
+		2FC18EEB16A2083500D42251 /* button_robonaut_gold.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FC18ED916A2083500D42251 /* button_robonaut_gold.png */; };
+		2FC18EEC16A2083500D42251 /* cell_robonaut_gold.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FC18EDA16A2083500D42251 /* cell_robonaut_gold.png */; };
+		2FC18EED16A2083500D42251 /* dataMarker.csv in Resources */ = {isa = PBXBuildFile; fileRef = 2FC18EDB16A2083500D42251 /* dataMarker.csv */; };
+		2FC18EEE16A2083500D42251 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FC18EDC16A2083500D42251 /* Default-568h@2x.png */; };
+		2FC18EEF16A2083500D42251 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FC18EDD16A2083500D42251 /* Default.png */; };
+		2FC18EF016A2083500D42251 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FC18EDE16A2083500D42251 /* Default@2x.png */; };
+		2FC18EF116A2083500D42251 /* Gold Fade.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2FC18EDF16A2083500D42251 /* Gold Fade.gif */; };
+		2FC18EF216A2083500D42251 /* MatchList.csv in Resources */ = {isa = PBXBuildFile; fileRef = 2FC18EE016A2083500D42251 /* MatchList.csv */; };
+		2FC18EF316A2083500D42251 /* MatchResults.csv in Resources */ = {isa = PBXBuildFile; fileRef = 2FC18EE116A2083500D42251 /* MatchResults.csv */; };
+		2FC18EF416A2083500D42251 /* nasalization rg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FC18EE216A2083500D42251 /* nasalization rg.ttf */; };
+		2FC18EF516A2083500D42251 /* photo.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 2FC18EE316A2083500D42251 /* photo.JPG */; };
+		2FC18EF616A2083500D42251 /* R Big Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FC18EE416A2083500D42251 /* R Big Icon.png */; };
+		2FC18EF716A2083500D42251 /* R Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FC18EE516A2083500D42251 /* R Icon.png */; };
+		2FC18EF816A2083500D42251 /* robonauts app banner.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2FC18EE616A2083500D42251 /* robonauts app banner.jpg */; };
+		2FC18EF916A2083500D42251 /* robonauts button.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FC18EE716A2083500D42251 /* robonauts button.png */; };
+		2FC18EFA16A2083500D42251 /* TeamList.csv in Resources */ = {isa = PBXBuildFile; fileRef = 2FC18EE816A2083500D42251 /* TeamList.csv */; };
+		2FC18EFB16A2083500D42251 /* the_app_logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2FC18EE916A2083500D42251 /* the_app_logo.jpg */; };
+		2FC18F0D16A212CE00D42251 /* SetUpPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC18F0C16A212CE00D42251 /* SetUpPageViewController.m */; };
+		2FC18F1016A215EA00D42251 /* DownloadPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC18F0F16A215EA00D42251 /* DownloadPageViewController.m */; };
+		2FC18F1316A21AA900D42251 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC18F1216A21AA900D42251 /* DataManager.m */; };
+		2FC18F1616A21E4D00D42251 /* MatchData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC18F1516A21E4D00D42251 /* MatchData.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		21528C9416AA215800CF7E8E /* CreateMatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CreateMatch.h; path = DataModels/CreateMatch.h; sourceTree = "<group>"; };
+		21528C9516AA215800CF7E8E /* CreateMatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CreateMatch.m; path = DataModels/CreateMatch.m; sourceTree = "<group>"; };
+		21F72D5E16A78135000B99AB /* TeamListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TeamListViewController.h; path = TeamScouting/TeamListViewController.h; sourceTree = "<group>"; };
+		21F72D5F16A78135000B99AB /* TeamListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TeamListViewController.m; path = TeamScouting/TeamListViewController.m; sourceTree = "<group>"; };
+		2F30EAB716A0EB4F0026B258 /* UltimateAscent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UltimateAscent.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F30EABB16A0EB4F0026B258 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		2F30EABD16A0EB4F0026B258 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		2F30EABF16A0EB4F0026B258 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		2F30EAC116A0EB4F0026B258 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		2F30EAC716A0EB4F0026B258 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2F30EAE416A100060026B258 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Resources/Default.png; sourceTree = "<group>"; };
+		2F30EAE616A100170026B258 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "Resources/Default@2x.png"; sourceTree = "<group>"; };
+		2F30EAE816A100250026B258 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "Resources/Default-568h@2x.png"; sourceTree = "<group>"; };
+		2F30EAEA16A100850026B258 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = MainApp/main.m; sourceTree = "<group>"; };
+		2F30EAEC16A101570026B258 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = MainApp/AppDelegate.h; sourceTree = "<group>"; };
+		2F30EAED16A101AB0026B258 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = MainApp/AppDelegate.m; sourceTree = "<group>"; };
+		2F30EAF316A102330026B258 /* UltimateAscent.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UltimateAscent.xcdatamodel; sourceTree = "<group>"; };
+		2F8F8B9816A21F1B00D3B176 /* TeamData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TeamData.h; path = DataModels/TeamData.h; sourceTree = "<group>"; };
+		2F8F8B9916A21F1B00D3B176 /* TeamData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TeamData.m; path = DataModels/TeamData.m; sourceTree = "<group>"; };
+		2F8F8B9C16A24D8C00D3B176 /* CreateTeam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CreateTeam.h; path = DataModels/CreateTeam.h; sourceTree = "<group>"; };
+		2F8F8B9D16A24D8C00D3B176 /* CreateTeam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CreateTeam.m; path = DataModels/CreateTeam.m; sourceTree = "<group>"; };
+		2FC18E9416A1F7D100D42251 /* UltimateAscent_ipad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UltimateAscent_ipad.storyboard; sourceTree = "<group>"; };
+		2FC18E9F16A1F9A900D42251 /* UltimateAscent-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "UltimateAscent-Info.plist"; path = "MainApp/UltimateAscent-Info.plist"; sourceTree = "<group>"; };
+		2FC18EA016A1F9A900D42251 /* UltimateAscent-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UltimateAscent-Prefix.pch"; path = "MainApp/UltimateAscent-Prefix.pch"; sourceTree = "<group>"; };
+		2FC18EA716A202FD00D42251 /* AddRecordResults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddRecordResults.h; path = DataImport/AddRecordResults.h; sourceTree = "<group>"; };
+		2FC18EA816A202FD00D42251 /* LoadCSVData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoadCSVData.h; path = DataImport/LoadCSVData.h; sourceTree = "<group>"; };
+		2FC18EA916A202FD00D42251 /* LoadCSVData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoadCSVData.m; path = DataImport/LoadCSVData.m; sourceTree = "<group>"; };
+		2FC18EAA16A202FD00D42251 /* parseCSV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = parseCSV.h; path = DataImport/parseCSV.h; sourceTree = "<group>"; };
+		2FC18EAB16A202FD00D42251 /* parseCSV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = parseCSV.m; path = DataImport/parseCSV.m; sourceTree = "<group>"; };
+		2FC18EAE16A2042000D42251 /* SplashPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SplashPageViewController.m; path = MainApp/SplashPageViewController.m; sourceTree = "<group>"; };
+		2FC18EB016A2042600D42251 /* SplashPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SplashPageViewController.h; path = MainApp/SplashPageViewController.h; sourceTree = "<group>"; };
+		2FC18ED816A2083500D42251 /* Blue Fade.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "Blue Fade.gif"; path = "Resources/Blue Fade.gif"; sourceTree = "<group>"; };
+		2FC18ED916A2083500D42251 /* button_robonaut_gold.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button_robonaut_gold.png; path = Resources/button_robonaut_gold.png; sourceTree = "<group>"; };
+		2FC18EDA16A2083500D42251 /* cell_robonaut_gold.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cell_robonaut_gold.png; path = Resources/cell_robonaut_gold.png; sourceTree = "<group>"; };
+		2FC18EDB16A2083500D42251 /* dataMarker.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dataMarker.csv; path = Resources/dataMarker.csv; sourceTree = "<group>"; };
+		2FC18EDC16A2083500D42251 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "Resources/Default-568h@2x.png"; sourceTree = "<group>"; };
+		2FC18EDD16A2083500D42251 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Resources/Default.png; sourceTree = "<group>"; };
+		2FC18EDE16A2083500D42251 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "Resources/Default@2x.png"; sourceTree = "<group>"; };
+		2FC18EDF16A2083500D42251 /* Gold Fade.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "Gold Fade.gif"; path = "Resources/Gold Fade.gif"; sourceTree = "<group>"; };
+		2FC18EE016A2083500D42251 /* MatchList.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = MatchList.csv; path = Resources/MatchList.csv; sourceTree = "<group>"; };
+		2FC18EE116A2083500D42251 /* MatchResults.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = MatchResults.csv; path = Resources/MatchResults.csv; sourceTree = "<group>"; };
+		2FC18EE216A2083500D42251 /* nasalization rg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "nasalization rg.ttf"; path = "Resources/nasalization rg.ttf"; sourceTree = "<group>"; };
+		2FC18EE316A2083500D42251 /* photo.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = photo.JPG; path = Resources/photo.JPG; sourceTree = "<group>"; };
+		2FC18EE416A2083500D42251 /* R Big Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "R Big Icon.png"; path = "Resources/R Big Icon.png"; sourceTree = "<group>"; };
+		2FC18EE516A2083500D42251 /* R Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "R Icon.png"; path = "Resources/R Icon.png"; sourceTree = "<group>"; };
+		2FC18EE616A2083500D42251 /* robonauts app banner.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "robonauts app banner.jpg"; path = "Resources/robonauts app banner.jpg"; sourceTree = "<group>"; };
+		2FC18EE716A2083500D42251 /* robonauts button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "robonauts button.png"; path = "Resources/robonauts button.png"; sourceTree = "<group>"; };
+		2FC18EE816A2083500D42251 /* TeamList.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TeamList.csv; path = Resources/TeamList.csv; sourceTree = "<group>"; };
+		2FC18EE916A2083500D42251 /* the_app_logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = the_app_logo.jpg; path = Resources/the_app_logo.jpg; sourceTree = "<group>"; };
+		2FC18F0B16A212CE00D42251 /* SetUpPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SetUpPageViewController.h; path = MainApp/SetUpPageViewController.h; sourceTree = "<group>"; };
+		2FC18F0C16A212CE00D42251 /* SetUpPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SetUpPageViewController.m; path = MainApp/SetUpPageViewController.m; sourceTree = "<group>"; };
+		2FC18F0E16A215EA00D42251 /* DownloadPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DownloadPageViewController.h; path = DataExport/DownloadPageViewController.h; sourceTree = "<group>"; };
+		2FC18F0F16A215EA00D42251 /* DownloadPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DownloadPageViewController.m; path = DataExport/DownloadPageViewController.m; sourceTree = "<group>"; };
+		2FC18F1116A21AA900D42251 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataManager.h; path = DataManagement/DataManager.h; sourceTree = "<group>"; };
+		2FC18F1216A21AA900D42251 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataManager.m; path = DataManagement/DataManager.m; sourceTree = "<group>"; };
+		2FC18F1416A21E4D00D42251 /* MatchData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MatchData.h; path = DataModels/MatchData.h; sourceTree = "<group>"; };
+		2FC18F1516A21E4D00D42251 /* MatchData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MatchData.m; path = DataModels/MatchData.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2F30EAB416A0EB4F0026B258 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2F30EABC16A0EB4F0026B258 /* UIKit.framework in Frameworks */,
+				2F30EABE16A0EB4F0026B258 /* Foundation.framework in Frameworks */,
+				2F30EAC016A0EB4F0026B258 /* CoreGraphics.framework in Frameworks */,
+				2F30EAC216A0EB4F0026B258 /* CoreData.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2F30EAAC16A0EB4F0026B258 = {
+			isa = PBXGroup;
+			children = (
+				2F30EAC316A0EB4F0026B258 /* UltimateAscent */,
+				2F30EABA16A0EB4F0026B258 /* Frameworks */,
+				2F30EAB816A0EB4F0026B258 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2F30EAB816A0EB4F0026B258 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2F30EAB716A0EB4F0026B258 /* UltimateAscent.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2F30EABA16A0EB4F0026B258 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2F30EABB16A0EB4F0026B258 /* UIKit.framework */,
+				2F30EABD16A0EB4F0026B258 /* Foundation.framework */,
+				2F30EABF16A0EB4F0026B258 /* CoreGraphics.framework */,
+				2F30EAC116A0EB4F0026B258 /* CoreData.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2F30EAC316A0EB4F0026B258 /* UltimateAscent */ = {
+			isa = PBXGroup;
+			children = (
+				2F30EAE116A0F5150026B258 /* Data Models */,
+				2F30EADE16A0F40B0026B258 /* Data Import */,
+				2F30EADD16A0F3F40026B258 /* Data Export */,
+				2F30EADF16A0F47B0026B258 /* Data Management */,
+				2F30EAE016A0F4E50026B258 /* Team Scouting */,
+				2F30EAE216A0F56E0026B258 /* Main App */,
+				2F30EAE316A0F66F0026B258 /* Resources */,
+				2F30EAC416A0EB4F0026B258 /* Supporting Files */,
+			);
+			path = UltimateAscent;
+			sourceTree = "<group>";
+		};
+		2F30EAC416A0EB4F0026B258 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2FC18E9F16A1F9A900D42251 /* UltimateAscent-Info.plist */,
+				2FC18EA016A1F9A900D42251 /* UltimateAscent-Prefix.pch */,
+				2F30EAC616A0EB4F0026B258 /* InfoPlist.strings */,
+				2F30EAE416A100060026B258 /* Default.png */,
+				2F30EAE616A100170026B258 /* Default@2x.png */,
+				2F30EAE816A100250026B258 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2F30EADD16A0F3F40026B258 /* Data Export */ = {
+			isa = PBXGroup;
+			children = (
+				2FC18F0E16A215EA00D42251 /* DownloadPageViewController.h */,
+				2FC18F0F16A215EA00D42251 /* DownloadPageViewController.m */,
+			);
+			name = "Data Export";
+			sourceTree = "<group>";
+		};
+		2F30EADE16A0F40B0026B258 /* Data Import */ = {
+			isa = PBXGroup;
+			children = (
+				2FC18EA716A202FD00D42251 /* AddRecordResults.h */,
+				2FC18EA816A202FD00D42251 /* LoadCSVData.h */,
+				2FC18EA916A202FD00D42251 /* LoadCSVData.m */,
+				2FC18EAA16A202FD00D42251 /* parseCSV.h */,
+				2FC18EAB16A202FD00D42251 /* parseCSV.m */,
+			);
+			name = "Data Import";
+			sourceTree = "<group>";
+		};
+		2F30EADF16A0F47B0026B258 /* Data Management */ = {
+			isa = PBXGroup;
+			children = (
+				2FC18F1116A21AA900D42251 /* DataManager.h */,
+				2FC18F1216A21AA900D42251 /* DataManager.m */,
+			);
+			name = "Data Management";
+			sourceTree = "<group>";
+		};
+		2F30EAE016A0F4E50026B258 /* Team Scouting */ = {
+			isa = PBXGroup;
+			children = (
+				21F72D5E16A78135000B99AB /* TeamListViewController.h */,
+				21F72D5F16A78135000B99AB /* TeamListViewController.m */,
+			);
+			name = "Team Scouting";
+			sourceTree = "<group>";
+		};
+		2F30EAE116A0F5150026B258 /* Data Models */ = {
+			isa = PBXGroup;
+			children = (
+				21528C9416AA215800CF7E8E /* CreateMatch.h */,
+				21528C9516AA215800CF7E8E /* CreateMatch.m */,
+				2F8F8B9C16A24D8C00D3B176 /* CreateTeam.h */,
+				2F8F8B9D16A24D8C00D3B176 /* CreateTeam.m */,
+				2FC18F1416A21E4D00D42251 /* MatchData.h */,
+				2FC18F1516A21E4D00D42251 /* MatchData.m */,
+				2F30EAF216A102330026B258 /* UltimateAscent.xcdatamodeld */,
+				2F8F8B9816A21F1B00D3B176 /* TeamData.h */,
+				2F8F8B9916A21F1B00D3B176 /* TeamData.m */,
+			);
+			name = "Data Models";
+			sourceTree = "<group>";
+		};
+		2F30EAE216A0F56E0026B258 /* Main App */ = {
+			isa = PBXGroup;
+			children = (
+				2FC18F0B16A212CE00D42251 /* SetUpPageViewController.h */,
+				2FC18F0C16A212CE00D42251 /* SetUpPageViewController.m */,
+				2FC18EB016A2042600D42251 /* SplashPageViewController.h */,
+				2FC18EAE16A2042000D42251 /* SplashPageViewController.m */,
+				2F30EAEC16A101570026B258 /* AppDelegate.h */,
+				2F30EAED16A101AB0026B258 /* AppDelegate.m */,
+				2F30EAEA16A100850026B258 /* main.m */,
+				2FC18E9416A1F7D100D42251 /* UltimateAscent_ipad.storyboard */,
+			);
+			name = "Main App";
+			sourceTree = "<group>";
+		};
+		2F30EAE316A0F66F0026B258 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2FC18ED816A2083500D42251 /* Blue Fade.gif */,
+				2FC18ED916A2083500D42251 /* button_robonaut_gold.png */,
+				2FC18EDA16A2083500D42251 /* cell_robonaut_gold.png */,
+				2FC18EDB16A2083500D42251 /* dataMarker.csv */,
+				2FC18EDC16A2083500D42251 /* Default-568h@2x.png */,
+				2FC18EDD16A2083500D42251 /* Default.png */,
+				2FC18EDE16A2083500D42251 /* Default@2x.png */,
+				2FC18EDF16A2083500D42251 /* Gold Fade.gif */,
+				2FC18EE016A2083500D42251 /* MatchList.csv */,
+				2FC18EE116A2083500D42251 /* MatchResults.csv */,
+				2FC18EE216A2083500D42251 /* nasalization rg.ttf */,
+				2FC18EE316A2083500D42251 /* photo.JPG */,
+				2FC18EE416A2083500D42251 /* R Big Icon.png */,
+				2FC18EE516A2083500D42251 /* R Icon.png */,
+				2FC18EE616A2083500D42251 /* robonauts app banner.jpg */,
+				2FC18EE716A2083500D42251 /* robonauts button.png */,
+				2FC18EE816A2083500D42251 /* TeamList.csv */,
+				2FC18EE916A2083500D42251 /* the_app_logo.jpg */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2F30EAB616A0EB4F0026B258 /* UltimateAscent */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2F30EADA16A0EB4F0026B258 /* Build configuration list for PBXNativeTarget "UltimateAscent" */;
+			buildPhases = (
+				2F30EAB316A0EB4F0026B258 /* Sources */,
+				2F30EAB416A0EB4F0026B258 /* Frameworks */,
+				2F30EAB516A0EB4F0026B258 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = UltimateAscent;
+			productName = UltimateAscent;
+			productReference = 2F30EAB716A0EB4F0026B258 /* UltimateAscent.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2F30EAAE16A0EB4F0026B258 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = FRC;
+			};
+			buildConfigurationList = 2F30EAB116A0EB4F0026B258 /* Build configuration list for PBXProject "UltimateAscent" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 2F30EAAC16A0EB4F0026B258;
+			productRefGroup = 2F30EAB816A0EB4F0026B258 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2F30EAB616A0EB4F0026B258 /* UltimateAscent */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2F30EAB516A0EB4F0026B258 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2F30EAC816A0EB4F0026B258 /* InfoPlist.strings in Resources */,
+				2F30EAE516A100060026B258 /* Default.png in Resources */,
+				2F30EAE716A100170026B258 /* Default@2x.png in Resources */,
+				2F30EAE916A100250026B258 /* Default-568h@2x.png in Resources */,
+				2FC18E9516A1F7D100D42251 /* UltimateAscent_ipad.storyboard in Resources */,
+				2FC18EEA16A2083500D42251 /* Blue Fade.gif in Resources */,
+				2FC18EEB16A2083500D42251 /* button_robonaut_gold.png in Resources */,
+				2FC18EEC16A2083500D42251 /* cell_robonaut_gold.png in Resources */,
+				2FC18EED16A2083500D42251 /* dataMarker.csv in Resources */,
+				2FC18EEE16A2083500D42251 /* Default-568h@2x.png in Resources */,
+				2FC18EEF16A2083500D42251 /* Default.png in Resources */,
+				2FC18EF016A2083500D42251 /* Default@2x.png in Resources */,
+				2FC18EF116A2083500D42251 /* Gold Fade.gif in Resources */,
+				2FC18EF216A2083500D42251 /* MatchList.csv in Resources */,
+				2FC18EF316A2083500D42251 /* MatchResults.csv in Resources */,
+				2FC18EF416A2083500D42251 /* nasalization rg.ttf in Resources */,
+				2FC18EF516A2083500D42251 /* photo.JPG in Resources */,
+				2FC18EF616A2083500D42251 /* R Big Icon.png in Resources */,
+				2FC18EF716A2083500D42251 /* R Icon.png in Resources */,
+				2FC18EF816A2083500D42251 /* robonauts app banner.jpg in Resources */,
+				2FC18EF916A2083500D42251 /* robonauts button.png in Resources */,
+				2FC18EFA16A2083500D42251 /* TeamList.csv in Resources */,
+				2FC18EFB16A2083500D42251 /* the_app_logo.jpg in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2F30EAB316A0EB4F0026B258 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2F30EAEB16A100850026B258 /* main.m in Sources */,
+				2F30EAEE16A101AB0026B258 /* AppDelegate.m in Sources */,
+				2F30EAF416A102330026B258 /* UltimateAscent.xcdatamodeld in Sources */,
+				2FC18EAC16A202FD00D42251 /* LoadCSVData.m in Sources */,
+				2FC18EAD16A202FD00D42251 /* parseCSV.m in Sources */,
+				2FC18EAF16A2042000D42251 /* SplashPageViewController.m in Sources */,
+				2FC18F0D16A212CE00D42251 /* SetUpPageViewController.m in Sources */,
+				2FC18F1016A215EA00D42251 /* DownloadPageViewController.m in Sources */,
+				2FC18F1316A21AA900D42251 /* DataManager.m in Sources */,
+				2FC18F1616A21E4D00D42251 /* MatchData.m in Sources */,
+				2F8F8B9A16A21F1B00D3B176 /* TeamData.m in Sources */,
+				2F8F8B9E16A24D8C00D3B176 /* CreateTeam.m in Sources */,
+				21F72D6016A78135000B99AB /* TeamListViewController.m in Sources */,
+				21528C9816AA215800CF7E8E /* CreateMatch.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		2F30EAC616A0EB4F0026B258 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2F30EAC716A0EB4F0026B258 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2F30EAD816A0EB4F0026B258 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2F30EAD916A0EB4F0026B258 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2F30EADB16A0EB4F0026B258 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "UltimateAscent/MainApp/UltimateAscent-Prefix.pch";
+				INFOPLIST_FILE = "UltimateAscent/MainApp/UltimateAscent-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		2F30EADC16A0EB4F0026B258 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "UltimateAscent/MainApp/UltimateAscent-Prefix.pch";
+				INFOPLIST_FILE = "UltimateAscent/MainApp/UltimateAscent-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2F30EAB116A0EB4F0026B258 /* Build configuration list for PBXProject "UltimateAscent" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2F30EAD816A0EB4F0026B258 /* Debug */,
+				2F30EAD916A0EB4F0026B258 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2F30EADA16A0EB4F0026B258 /* Build configuration list for PBXNativeTarget "UltimateAscent" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2F30EADB16A0EB4F0026B258 /* Debug */,
+				2F30EADC16A0EB4F0026B258 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		2F30EAF216A102330026B258 /* UltimateAscent.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				2F30EAF316A102330026B258 /* UltimateAscent.xcdatamodel */,
+			);
+			currentVersion = 2F30EAF316A102330026B258 /* UltimateAscent.xcdatamodel */;
+			name = UltimateAscent.xcdatamodeld;
+			path = DataModels/UltimateAscent.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 2F30EAAE16A0EB4F0026B258 /* Project object */;
+}
