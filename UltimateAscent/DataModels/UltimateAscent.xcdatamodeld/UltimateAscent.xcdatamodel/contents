@@ -9,7 +9,10 @@
         <attribute name="teamScore" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
     </entity>
     <entity name="TeamData" representedClassName="TeamData" syncable="YES">
+        <attribute name="climb" optional="YES" attributeType="Integer 16" minValueString="-1" maxValueString="2" defaultValueString="-1" syncable="YES"/>
+        <attribute name="down" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="history" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="intake" optional="YES" attributeType="Integer 16" minValueString="-1" maxValueString="1" defaultValueString="-1" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" maxValueString="50" syncable="YES"/>
         <attribute name="notes" optional="YES" attributeType="String" maxValueString="1000" syncable="YES"/>
         <attribute name="number" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -17,6 +20,6 @@
     </entity>
     <elements>
         <element name="MatchData" positionX="160" positionY="192" width="128" height="105"/>
-        <element name="TeamData" positionX="351" positionY="189" width="128" height="120"/>
+        <element name="TeamData" positionX="351" positionY="189" width="128" height="165"/>
     </elements>
 </model>
