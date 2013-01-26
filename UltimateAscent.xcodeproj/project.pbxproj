@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		21528C9816AA215800CF7E8E /* CreateMatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 21528C9516AA215800CF7E8E /* CreateMatch.m */; };
+		21EBC7D716B358D000CBFDFD /* TeamDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21EBC7D616B358D000CBFDFD /* TeamDetailViewController.m */; };
 		21F72D6016A78135000B99AB /* TeamListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F72D5F16A78135000B99AB /* TeamListViewController.m */; };
 		2F30EABC16A0EB4F0026B258 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F30EABB16A0EB4F0026B258 /* UIKit.framework */; };
 		2F30EABE16A0EB4F0026B258 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F30EABD16A0EB4F0026B258 /* Foundation.framework */; };
@@ -53,6 +54,8 @@
 /* Begin PBXFileReference section */
 		21528C9416AA215800CF7E8E /* CreateMatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CreateMatch.h; path = DataModels/CreateMatch.h; sourceTree = "<group>"; };
 		21528C9516AA215800CF7E8E /* CreateMatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CreateMatch.m; path = DataModels/CreateMatch.m; sourceTree = "<group>"; };
+		21EBC7D516B358D000CBFDFD /* TeamDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TeamDetailViewController.h; path = TeamScouting/TeamDetailViewController.h; sourceTree = "<group>"; };
+		21EBC7D616B358D000CBFDFD /* TeamDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TeamDetailViewController.m; path = TeamScouting/TeamDetailViewController.m; sourceTree = "<group>"; };
 		21F72D5E16A78135000B99AB /* TeamListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TeamListViewController.h; path = TeamScouting/TeamListViewController.h; sourceTree = "<group>"; };
 		21F72D5F16A78135000B99AB /* TeamListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TeamListViewController.m; path = TeamScouting/TeamListViewController.m; sourceTree = "<group>"; };
 		2F30EAB716A0EB4F0026B258 /* UltimateAscent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UltimateAscent.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -214,6 +217,8 @@
 		2F30EAE016A0F4E50026B258 /* Team Scouting */ = {
 			isa = PBXGroup;
 			children = (
+				21EBC7D516B358D000CBFDFD /* TeamDetailViewController.h */,
+				21EBC7D616B358D000CBFDFD /* TeamDetailViewController.m */,
 				21F72D5E16A78135000B99AB /* TeamListViewController.h */,
 				21F72D5F16A78135000B99AB /* TeamListViewController.m */,
 			);
@@ -374,6 +379,7 @@
 				2F8F8B9E16A24D8C00D3B176 /* CreateTeam.m in Sources */,
 				21F72D6016A78135000B99AB /* TeamListViewController.m in Sources */,
 				21528C9816AA215800CF7E8E /* CreateMatch.m in Sources */,
+				21EBC7D716B358D000CBFDFD /* TeamDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

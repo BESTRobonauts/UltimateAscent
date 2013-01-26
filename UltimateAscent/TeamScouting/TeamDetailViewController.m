@@ -8,9 +8,9 @@
 
 #import "TeamDetailViewController.h"
 #import "TeamData.h"
-#import "TeamScore.h"
+//#import "TeamScore.h"
 #import "MatchData.h"
-#import "SpecificGameData.h"
+//#import "SpecificGameData.h"
 
 @implementation TeamDetailViewController
 @synthesize team;
@@ -107,7 +107,7 @@
     nameTextField.text = team.name;
     historyLabel.text = team.history;
     notesTextField.text = team.notes;
-    driveTrainTextField.text = team.drivetrain;
+  //  driveTrainTextField.text = team.drivetrain;
     [self setSegments];
     NSString *path = [NSString stringWithFormat:@"Library/RobotPhotos/%@", [NSString stringWithFormat:@"%d", [team.number intValue]]];
     photoPath = [NSHomeDirectory() stringByAppendingPathComponent:path];
@@ -117,7 +117,7 @@
 }
 
 -(void)setSegments {
-    int value = [team.orientation intValue];
+  /*  int value = [team.orientation intValue];
     orientation.selectedSegmentIndex = value;
 
     value = [team.brakes intValue];
@@ -127,7 +127,7 @@
     stinger.selectedSegmentIndex = value;
 
     value = [team.moding intValue];
-    moding.selectedSegmentIndex = value;    
+    moding.selectedSegmentIndex = value;    */
 }
 
 -(void)getSelection:(id) sender {
@@ -135,7 +135,7 @@
     NSNumber *current;
     current = [NSNumber numberWithInt:segmentedControl.selectedSegmentIndex];
 
-    if (segmentedControl == brakes) {
+   /* if (segmentedControl == brakes) {
             team.brakes = current;
     }
     else if (segmentedControl == stinger) {
@@ -147,7 +147,7 @@
     else if (segmentedControl == orientation) {
         team.orientation = current;
     }
-    dataChange = YES;
+    dataChange = YES; */
 }
 
 -(void)createSegments {
@@ -197,9 +197,9 @@
 	else if (textField == notesTextField) {
 		team.notes = notesTextField.text;
 	}
-	else if (textField == driveTrainTextField) {
+	/* else if (textField == driveTrainTextField) {
 		team.drivetrain = driveTrainTextField.text;
-	}
+	} */
 	return YES;
 }
 
@@ -327,15 +327,15 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    int x = [team.matchScore count];
+   /* int x = [team.matchScore count];
 //    NSLog(@"Matchscore count = %d", x);
-    return x;
+    return x; */
 }
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    NSArray* objectsArray = [team.matchScore allObjects];
+  /*  NSArray* objectsArray = [team.matchScore allObjects];
     TeamScore *score = [objectsArray objectAtIndex:indexPath.row];
-    MatchData *match = [self getMatchData:score];
+    MatchData *match = [self getMatchData:score]; */
 //    NSLog(@"Match Notes = %@", score.notes);
 //    TeamData *info = [fetchedResultsController objectAtIndexPath:indexPath];
     // Configure the cell...
@@ -346,23 +346,23 @@
 //    cell.backgroundView = imageView;
     
 	UILabel *matchNumber = (UILabel *)[cell viewWithTag:10];
-	matchNumber.text = [NSString stringWithFormat:@"%d", [match.number intValue]];
+//	matchNumber.text = [NSString stringWithFormat:@"%d", [match.number intValue]];
 //	numberLabel.text = [NSString stringWithFormat:@"%d", [info.number intValue]];
 
     
 	UILabel *typeLabel = (UILabel *)[cell viewWithTag:20];
-    typeLabel.text = [match.matchType substringToIndex:4];
+  //  typeLabel.text = [match.matchType substringToIndex:4];
 
-    int autonPoints = [score.autonScore.highBaskets intValue]*6 + [score.autonScore.midBaskets intValue]*5 + [score.autonScore.lowBaskets intValue]*4;
+// int autonPoints = [score.autonScore.highBaskets intValue]*6 + [score.autonScore.midBaskets intValue]*5 + [score.autonScore.lowBaskets intValue]*4;
 	UILabel *autonLabel = (UILabel *)[cell viewWithTag:30];
-	autonLabel.text = [NSString stringWithFormat:@"%d", autonPoints];
+//	autonLabel.text = [NSString stringWithFormat:@"%d", autonPoints];
 
-    int teleOpPoints = [score.teleOpScore.highBaskets intValue]*3 + [score.teleOpScore.midBaskets intValue]*2 + [score.teleOpScore.lowBaskets intValue];
+// int teleOpPoints = [score.teleOpScore.highBaskets intValue]*3 + [score.teleOpScore.midBaskets intValue]*2 + [score.teleOpScore.lowBaskets intValue];
 	UILabel *teleOpLabel = (UILabel *)[cell viewWithTag:40];
-	teleOpLabel.text = [NSString stringWithFormat:@"%d", teleOpPoints];
+//	teleOpLabel.text = [NSString stringWithFormat:@"%d", teleOpPoints];
 
 
-    int basketsMade = [score.autonScore.highBaskets intValue] + [score.autonScore.midBaskets intValue] + [score.autonScore.lowBaskets intValue];
+/*    int basketsMade = [score.autonScore.highBaskets intValue] + [score.autonScore.midBaskets intValue] + [score.autonScore.lowBaskets intValue];
     int totalBaskets = basketsMade + [score.autonScore.missedBaskets intValue];
     int autonAccuracy;
     if (totalBaskets) autonAccuracy = 100 * basketsMade / (basketsMade + [score.autonScore.missedBaskets intValue]);
@@ -377,7 +377,7 @@
     else teleOpAccuracy = 0;
     
 	UILabel *teleOpAccLabel = (UILabel *)[cell viewWithTag:60];
-	teleOpAccLabel.text = [NSString stringWithFormat:@"%d%%", teleOpAccuracy];
+	teleOpAccLabel.text = [NSString stringWithFormat:@"%d%%", teleOpAccuracy]; */
 
 }
 
@@ -392,14 +392,14 @@
 }
 
 -(MatchData *)getMatchData: (TeamScore *) teamScore {
-    if (teamScore.red1) return teamScore.red1;
+   /* if (teamScore.red1) return teamScore.red1;
     if (teamScore.red2) return teamScore.red2;
     if (teamScore.red3) return teamScore.red3;
     if (teamScore.blue1) return teamScore.blue1;
     if (teamScore.blue2) return teamScore.blue2;
     if (teamScore.blue3) return teamScore.blue3;
     
-    return nil;
+    return nil; */
 }
 
 - (void)viewDidUnload
