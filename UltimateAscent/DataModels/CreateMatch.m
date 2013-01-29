@@ -3,16 +3,14 @@
 //  ReboundRumble
 //
 //  Created by Kris Pettinger on 7/12/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2013 ROBONAUTS. All rights reserved.
 //
 
 #import "CreateMatch.h"
 #import "DataManager.h"
 #import "TeamData.h"
 #import "MatchData.h"
-//#import "TeamScore.h"
-//#import "SpecificGameData.h"
-//#import "EndGameData.h"
+#import "TeamScore.h"
 #import "CreateTeam.h"
 
 @implementation CreateMatch
@@ -134,37 +132,36 @@
                                                      inManagedObjectContext:managedObjectContext];        
     match.matchType = matchType;
     match.number = number;
-/*  [match setRed1:[self CreateScore:red1]];
-    [match setRed2:[self CreateScore:red2]];
-    [match setRed3:[self CreateScore:red3]];
-    [match setBlue1:[self CreateScore:blue1]];
-    [match setBlue2:[self CreateScore:blue2]];
-    [match setBlue3:[self CreateScore:blue3]]; 
-    match.tournament = tournament; */
+    
+    [match addScoreObject:[self CreateScore:red1 forAlliance:@"Red 1"]];
+    [match addScoreObject:[self CreateScore:red2 forAlliance:@"Red 2"]];
+    [match addScoreObject:[self CreateScore:red3 forAlliance:@"Red 3"]];
+    [match addScoreObject:[self CreateScore:blue1 forAlliance:@"Blue 1"]];
+    [match addScoreObject:[self CreateScore:blue2 forAlliance:@"Blue 2"]];
+    [match addScoreObject:[self CreateScore:blue3 forAlliance:@"Blue 3"]]; 
+//    match.tournament = tournament;
     match.redScore = redScore;
     match.blueScore = blueScore;
-//    NSLog(@"Adding New Match = %@", match);
+    NSLog(@"Adding New Match = %@", match);
+    NSLog(@"   Team Score = %@", match.score);
 }
 
--(TeamScore *)CreateScore:(NSNumber *)teamNumber { 
-    if ([teamNumber intValue] == 0) return nil;
-   /* TeamScore *teamScore = [NSEntityDescription insertNewObjectForEntityForName:@"TeamScore" 
+-(TeamScore *)CreateScore:(NSNumber *)teamNumber forAlliance:(NSString *)alliance { 
+    // if ([teamNumber intValue] == 0) return 0;
+
+    TeamScore *teamScore = [NSEntityDescription insertNewObjectForEntityForName:@"TeamScore"
                                                          inManagedObjectContext:managedObjectContext];
-    [teamScore setTeleOpScore:[NSEntityDescription insertNewObjectForEntityForName:@"SpecificGameData"
-                                                           inManagedObjectContext:managedObjectContext]];
-    [teamScore setAutonScore:[NSEntityDescription insertNewObjectForEntityForName:@"SpecificGameData"
-                                                         inManagedObjectContext:managedObjectContext]];
-    [teamScore setEndGameScore:[NSEntityDescription insertNewObjectForEntityForName:@"EndGameData"
-                                                           inManagedObjectContext:managedObjectContext]];
-    [teamScore setTeamInfo:[self GetTeam:teamNumber]]; // Set Relationship!!!
-    if (!teamScore.teamInfo) {
+    [teamScore setAlliance:alliance];
+    [teamScore setTeam:[self GetTeam:teamNumber]]; // Set Relationship!!!
+     NSLog(@"   For Team = %@", teamScore.team);
+/*    if (!teamScore.teamInfo) {
         teamScore.teamInfo = [NSEntityDescription insertNewObjectForEntityForName:@"TeamData" 
                                                        inManagedObjectContext:managedObjectContext];        
         [self setTeamDefaults:teamScore.teamInfo];
         teamScore.teamInfo.number = teamNumber;
     }*/
     
-    return nil; //teamScore;
+    return teamScore;
 }
 
 -(MatchData *)GetMatch:(NSNumber *)matchNumber forMatchType:(NSString *) type {
@@ -232,16 +229,14 @@
 }
 
 -(void)setTeamDefaults:(TeamData *)blankTeam {
-    /*
-    blankTeam.moding = [NSNumber numberWithInt:-1];
-    blankTeam.brakes = [NSNumber numberWithInt:-1];
-    blankTeam.drivetrain = @"";
-    blankTeam.balance = [NSNumber numberWithInt:-1];
+//    blankTeam.drivetrain = @"";
     blankTeam.name = @"";
     blankTeam.saved = [NSNumber numberWithInt:0];
     blankTeam.number = [NSNumber numberWithInt:0];
-    blankTeam.orientation = [NSNumber numberWithInt:-1];
-    blankTeam.notes = @""; */
+    blankTeam.climb = [NSNumber numberWithInt:-1];
+    blankTeam.intake = [NSNumber numberWithInt:-1];
+    blankTeam.down = [NSNumber numberWithInt:0];
+    blankTeam.notes = @"";
 }
 
 @end

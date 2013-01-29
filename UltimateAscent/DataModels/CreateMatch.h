@@ -3,7 +3,7 @@
 //  ReboundRumble
 //
 //  Created by Kris Pettinger on 7/12/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2013 ROBONAUTS. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -28,7 +28,7 @@
                                       forTournament:(NSString *)tournament
                                       forRedScore:(NSNumber *)redScore
                                       forBlueScore:(NSNumber *)blueScore;
--(TeamScore *)CreateScore:(NSNumber *)teamNumber;
+-(TeamScore *)CreateScore:(NSNumber *)teamNumber forAlliance:(NSString *)alliance;
 -(TeamData *)GetTeam:(NSNumber *)teamNumber;
 -(void)setTeamDefaults:(TeamData *)blankTeam;
 

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="872" systemVersion="10K549" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1811" systemVersion="12C2034" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="MatchData" representedClassName="MatchData" syncable="YES">
         <attribute name="blueScore" optional="YES" attributeType="Integer 16" maxValueString="250" defaultValueString="-1" syncable="YES"/>
         <attribute name="driverRating" optional="YES" attributeType="Integer 16" maxValueString="5" defaultValueString="0" syncable="YES"/>
         <attribute name="matchType" optional="YES" attributeType="String" maxValueString="100" defaultValueString="Seeding" syncable="YES"/>
         <attribute name="number" optional="YES" attributeType="Integer 16" maxValueString="250" defaultValueString="0" syncable="YES"/>
         <attribute name="redScore" optional="YES" attributeType="Integer 16" maxValueString="250" defaultValueString="-1" syncable="YES"/>
-        <attribute name="teamScore" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="score" optional="YES" toMany="YES" maxCount="6" deletionRule="Cascade" destinationEntity="TeamScore" inverseName="match" inverseEntity="TeamScore" syncable="YES"/>
     </entity>
     <entity name="TeamData" representedClassName="TeamData" syncable="YES">
         <attribute name="climb" optional="YES" attributeType="Integer 16" minValueString="-1" maxValueString="2" defaultValueString="-1" syncable="YES"/>
@@ -15,11 +15,31 @@
         <attribute name="intake" optional="YES" attributeType="Integer 16" minValueString="-1" maxValueString="1" defaultValueString="-1" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" maxValueString="50" syncable="YES"/>
         <attribute name="notes" optional="YES" attributeType="String" maxValueString="1000" syncable="YES"/>
-        <attribute name="number" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="number" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="saved" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <relationship name="match" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TeamScore" inverseName="team" inverseEntity="TeamScore" syncable="YES"/>
+    </entity>
+    <entity name="TeamScore" representedClassName="TeamScore" syncable="YES">
+        <attribute name="alliance" optional="YES" attributeType="String" maxValueString="7" syncable="YES"/>
+        <attribute name="autonFieldDrawing" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="autonHigh" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="2000" defaultValueString="0" syncable="YES"/>
+        <attribute name="autonLow" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="2000" defaultValueString="0" syncable="YES"/>
+        <attribute name="autonMid" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="2000" defaultValueString="0" syncable="YES"/>
+        <attribute name="autonMissed" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="2000" defaultValueString="0" syncable="YES"/>
+        <attribute name="driverRating" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="5" defaultValueString="0" syncable="YES"/>
+        <attribute name="notes" optional="YES" attributeType="String" minValueString="0" maxValueString="500" syncable="YES"/>
+        <attribute name="saved" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="teleOpFieldDrawing" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="teleOpHigh" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="2000" defaultValueString="0" syncable="YES"/>
+        <attribute name="teleOpLow" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="2000" defaultValueString="0" syncable="YES"/>
+        <attribute name="teleOpMid" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="2000" defaultValueString="0" syncable="YES"/>
+        <attribute name="teleOpMissed" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="2000" defaultValueString="0" syncable="YES"/>
+        <relationship name="match" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MatchData" inverseName="score" inverseEntity="MatchData" syncable="YES"/>
+        <relationship name="team" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="TeamData" inverseName="match" inverseEntity="TeamData" syncable="YES"/>
     </entity>
     <elements>
-        <element name="MatchData" positionX="160" positionY="192" width="128" height="105"/>
-        <element name="TeamData" positionX="351" positionY="189" width="128" height="165"/>
+        <element name="MatchData" positionX="27" positionY="33" width="128" height="133"/>
+        <element name="TeamData" positionX="432" positionY="24" width="128" height="178"/>
+        <element name="TeamScore" positionX="223" positionY="-111" width="128" height="283"/>
     </elements>
 </model>

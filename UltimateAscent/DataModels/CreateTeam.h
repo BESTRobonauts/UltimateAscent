@@ -3,7 +3,7 @@
 //  ReboundRumble
 //
 //  Created by Kris Pettinger on 5/24/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2013 ROBONAUTS. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

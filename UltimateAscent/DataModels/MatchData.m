@@ -2,18 +2,21 @@
 //  MatchData.m
 //  UltimateAscent
 //
-//  Created by FRC on 1/12/13.
-//  Copyright (c) 2013 FRC. All rights reserved.
+//  Created by Kris Pettinger on 1/26/13.
+//  Copyright (c) 2013 ROBONAUTS. All rights reserved.
 //
 
 #import "MatchData.h"
+#import "TeamScore.h"
 
 
 @implementation MatchData
 
 @dynamic blueScore;
-@dynamic redScore;
+@dynamic driverRating;
 @dynamic matchType;
 @dynamic number;
+@dynamic redScore;
+@dynamic score;
 
 @end

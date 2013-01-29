@@ -3,7 +3,7 @@
 //  ReboundRumble
 //
 //  Created by Kris Pettinger on 5/24/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2013 ROBONAUTS. All rights reserved.
 //
 
 #import "CreateTeam.h"
@@ -14,12 +14,15 @@
 /*
  1  Number
  2  Name
- 3  Orientation
- 4  Brakes
- 5  Balance
- 6  Moding
- 7  Drive Train Notes
- 8  Notes
+ 3  Climbing
+ 4  Intake
+ 5  Upside Down
+ 6  Notes
+ 7  History
+
+ Things to add yet
+    Drive Train Notes
+    
 */
 @implementation CreateTeam
 @synthesize managedObjectContext;
@@ -35,7 +38,7 @@
     }
 
     teamNumber = [NSNumber numberWithInt:[[data objectAtIndex: 0] intValue]];
-//    NSLog(@"createTeamFromFile:Team Number = %@", teamNumber);
+    NSLog(@"createTeamFromFile:Team Number = %@", teamNumber);
     TeamData *team = [self GetTeam:teamNumber];
     if (team) {
         NSLog(@"createTeamFromFile:Team %@ already exists", teamNumber);
@@ -46,15 +49,25 @@
         TeamData *team = [NSEntityDescription insertNewObjectForEntityForName:@"TeamData" 
                                                            inManagedObjectContext:managedObjectContext];        
         switch ([data count]) {
-            case 4:
+            case 7:
                 team.history = [data objectAtIndex: 3];
-            case 3:   
+            case 6:
                  team.notes = [data objectAtIndex: 2];
-            case 2:    
+            case 5:
+                number = [NSNumber numberWithInt:[[data objectAtIndex:4] intValue]];
+                team.down = number;
+            case 4:
+                number = [NSNumber numberWithInt:[[data objectAtIndex:3] intValue]];
+                team.intake = number;
+            case 3:
+                number = [NSNumber numberWithInt:[[data objectAtIndex:2] intValue]];
+                team.climb = number;
+            case 2:
                 team.name = [data objectAtIndex: 1];
             case 1:
                 team.number = teamNumber;
         }
+        // NSLog(@"Added Team Record %@", team);
         NSError *error;
         if (![managedObjectContext save:&error]) {
             NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
@@ -67,7 +80,7 @@
 -(TeamData *)GetTeam:(NSNumber *)teamNumber {
     TeamData *team;
 
-//    NSLog(@"Searching for team = %@", teamNumber);
+    NSLog(@"Searching for team = %@", teamNumber);
     NSError *error;
     if (!managedObjectContext) {
         DataManager *dataManager = [DataManager new];
@@ -88,7 +101,7 @@
     else {
         if([teamData count] > 0) {  // Team Exists
             team = [teamData objectAtIndex:0];
-//            NSLog(@"Team %@ exists", team.number);
+            NSLog(@"Team %@ exists", team.number);
             return team;
         }
         else {
@@ -98,11 +111,14 @@
 }
 
 -(void)setTeamDefaults:(TeamData *)blankTeam {
-    blankTeam.name = @"";
-    blankTeam.saved = [NSNumber numberWithInt:0];
     blankTeam.number = [NSNumber numberWithInt:0];
+    blankTeam.name = @"";
+    blankTeam.climb = [NSNumber numberWithInt:-1];
+    blankTeam.intake = [NSNumber numberWithInt:-1];
+    blankTeam.down = [NSNumber numberWithInt:0];
     blankTeam.notes = @"";
     blankTeam.history = @"";
+    blankTeam.saved = [NSNumber numberWithInt:0];
 }
 
 
