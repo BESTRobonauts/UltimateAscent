@@ -59,6 +59,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="WBb-6A-oWA" kind="push" id="o1I-hL-kNS"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="photo.JPG" id="LIX-OB-TXE">
                                 <rect key="frame" x="293" y="563" width="468" height="330"/>
@@ -219,7 +222,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U3t-nV-woX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1066" y="-1600"/>
+            <point key="canvasLocation" x="1026" y="-1660"/>
         </scene>
         <!--Team List View Controller-->
         <scene sceneID="POy-92-07b">
@@ -296,7 +299,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BLW-NJ-lpL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="58" y="-1345"/>
+            <point key="canvasLocation" x="50" y="-1660"/>
         </scene>
         <!--Set Up Page View Controller-->
         <scene sceneID="pDI-Wp-1eW">
@@ -375,6 +378,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8oh-yD-YYR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-756" y="864"/>
+        </scene>
+        <!--Main Scouting Page View Controller-->
+        <scene sceneID="O3r-km-jjh">
+            <objects>
+                <viewController id="WBb-6A-oWA" customClass="MainScoutingPageViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="NVv-ep-wPb">
+                        <rect key="frame" x="0.0" y="64" width="768" height="960"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="1gg-vu-SkO"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="k4z-r3-r5D" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="67" y="-394"/>
         </scene>
         <!--Download Page View Controller-->
         <scene sceneID="etA-7t-4Bv">
@@ -456,6 +474,54 @@
                 <relationship kind="outlet" name="exportMatchData" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="exportTeamData" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="mainLogo" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+        <class className="MainScoutingPageViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainScoutingPageViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="AllianceSelectionChanged:"/>
+                <relationship kind="action" name="MatchNumberChanged"/>
+                <relationship kind="action" name="MatchTypeSelectionChanged:"/>
+                <relationship kind="action" name="NextButton"/>
+                <relationship kind="action" name="PrevButton"/>
+                <relationship kind="action" name="TeamSelectionChanged:"/>
+                <relationship kind="action" name="autonHighButton"/>
+                <relationship kind="action" name="autonLowButton"/>
+                <relationship kind="action" name="autonMediumButton"/>
+                <relationship kind="action" name="autonMissButton"/>
+                <relationship kind="action" name="teleOpHighButton"/>
+                <relationship kind="action" name="teleOpLowButton"/>
+                <relationship kind="action" name="teleOpMediumButton"/>
+                <relationship kind="action" name="teleOpMissButton"/>
+                <relationship kind="action" name="toggleForCoopBalance:"/>
+                <relationship kind="action" name="toggleForCrossesHump:"/>
+                <relationship kind="action" name="toggleForRampModing:"/>
+                <relationship kind="action" name="updateDriverRating:"/>
+                <relationship kind="outlet" name="alliance" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="autonHigh" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="autonLow" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="autonMedium" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="autonMiss" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="blueScore" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="coopBalance" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="crossesHump" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="driverRating" candidateClass="UISlider"/>
+                <relationship kind="outlet" name="fieldImage" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="imageContainer" candidateClass="UIView"/>
+                <relationship kind="outlet" name="matchNumber" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="matchType" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="modedRamp" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="nextMatch" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="notes" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="prevMatch" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="redScore" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="teamEdit" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="teamName" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="teamNumber" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="teleOpHigh" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="teleOpLow" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="teleOpMedium" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="teleOpMiss" candidateClass="UIButton"/>
             </relationships>
         </class>
         <class className="SetUpPageViewController" superclassName="UIViewController">

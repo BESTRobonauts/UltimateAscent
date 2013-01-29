@@ -29,7 +29,7 @@
         [self loadMatchFile:filePath];
 
         filePath = [[NSBundle mainBundle] pathForResource:@"MatchResults" ofType:@"csv"];  
-        [self loadMatchResults:filePath];
+//        [self loadMatchResults:filePath];
     }
  
 }
@@ -42,19 +42,23 @@
     [self loadMatchFile:filePath];
     [self loadMatchResults:filePath];
 }
+
 -(void)loadTeamFile:(NSString *)filePath {
     CSVParser *parser = [CSVParser new];
-     [parser openFile: filePath];
-     NSMutableArray *csvContent = [parser parseFile];
-     if ([[[csvContent objectAtIndex: 0] objectAtIndex:0] isEqualToString:@"Team Number"]) {
-       CreateTeam *team = [CreateTeam new];
-         int c;
-         for (c = 1; c < [csvContent count]; c++) {
-             NSLog(@"loadTeamFile:TeamNumber = %@", [[csvContent objectAtIndex: c] objectAtIndex:0]);
-             AddRecordResults results = [team createTeamFromFile:[csvContent objectAtIndex: 0] dataFields:[csvContent objectAtIndex: c]];
+    [parser openFile: filePath];
+    NSMutableArray *csvContent = [parser parseFile];
+    if ([[[csvContent objectAtIndex: 0] objectAtIndex:0] isEqualToString:@"Team Number"]) {
+        CreateTeam *team = [CreateTeam new];
+        int c;
+        for (c = 1; c < [csvContent count]; c++) {
+            NSLog(@"loadTeamFile:TeamNumber = %@", [[csvContent objectAtIndex: c] objectAtIndex:0]);
+            AddRecordResults results = [team createTeamFromFile:[csvContent objectAtIndex: 0] dataFields:[csvContent objectAtIndex: c]];
+            if (results != DB_ADDED) {
+                NSLog(@"Check database - Team Add Code %d", results);
+            }
         }
-     }
-     [parser closeFile]; 
+    }
+    [parser closeFile]; 
 }
 
 -(void)loadMatchFile:(NSString *)filePath {
@@ -67,6 +71,9 @@
         for (c = 1; c < [csvContent count]; c++) {
 //            NSLog(@"Match = %@", [csvContent objectAtIndex: c]);
             AddRecordResults results = [match createMatchFromFile:[csvContent objectAtIndex: 0] dataFields:[csvContent objectAtIndex: c]];
+            if (results != DB_ADDED) {
+                NSLog(@"Check database - Match Add Code %d", results);
+            }
         }
     }
     [parser closeFile]; 
@@ -82,6 +89,9 @@
         for (c = 1; c < [csvContent count]; c++) {
             //            NSLog(@"Match = %@", [csvContent objectAtIndex: c]);
             AddRecordResults results = [match addMatchResultsFromFile:[csvContent objectAtIndex: 0] dataFields:[csvContent objectAtIndex: c]];
+            if (results != DB_ADDED) {
+                NSLog(@"Check database - Match Results Code %d", results);
+            }
         }
     }
     [parser closeFile];    
