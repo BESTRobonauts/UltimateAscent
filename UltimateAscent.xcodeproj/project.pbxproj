@@ -20,8 +20,9 @@
 		2F30EAE916A100250026B258 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F30EAE816A100250026B258 /* Default-568h@2x.png */; };
 		2F30EAEB16A100850026B258 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F30EAEA16A100850026B258 /* main.m */; };
 		2F30EAEE16A101AB0026B258 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F30EAED16A101AB0026B258 /* AppDelegate.m */; };
-		2F30EAF416A102330026B258 /* UltimateAscent.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2F30EAF216A102330026B258 /* UltimateAscent.xcdatamodeld */; };
 		2F6AE6F016AD93D1005A24C5 /* 2013_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F6AE6EF16AD93D1005A24C5 /* 2013_logo.png */; };
+		2F88647F16B75EC600867385 /* TeamScore.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F88647E16B75EC600867385 /* TeamScore.m */; };
+		2F88648616B75EF600867385 /* UltimateAscent.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2F88648416B75EF600867385 /* UltimateAscent.xcdatamodeld */; };
 		2F8F8B9A16A21F1B00D3B176 /* TeamData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F8F8B9916A21F1B00D3B176 /* TeamData.m */; };
 		2F8F8B9E16A24D8C00D3B176 /* CreateTeam.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F8F8B9D16A24D8C00D3B176 /* CreateTeam.m */; };
 		2FC18E9516A1F7D100D42251 /* UltimateAscent_ipad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FC18E9416A1F7D100D42251 /* UltimateAscent_ipad.storyboard */; };
@@ -70,8 +71,10 @@
 		2F30EAEA16A100850026B258 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = MainApp/main.m; sourceTree = "<group>"; };
 		2F30EAEC16A101570026B258 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = MainApp/AppDelegate.h; sourceTree = "<group>"; };
 		2F30EAED16A101AB0026B258 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = MainApp/AppDelegate.m; sourceTree = "<group>"; };
-		2F30EAF316A102330026B258 /* UltimateAscent.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UltimateAscent.xcdatamodel; sourceTree = "<group>"; };
 		2F6AE6EF16AD93D1005A24C5 /* 2013_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 2013_logo.png; path = Resources/2013_logo.png; sourceTree = "<group>"; };
+		2F88647D16B75EC600867385 /* TeamScore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TeamScore.h; path = DataModels/TeamScore.h; sourceTree = "<group>"; };
+		2F88647E16B75EC600867385 /* TeamScore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TeamScore.m; path = DataModels/TeamScore.m; sourceTree = "<group>"; };
+		2F88648516B75EF600867385 /* UltimateAscent.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UltimateAscent.xcdatamodel; sourceTree = "<group>"; };
 		2F8F8B9816A21F1B00D3B176 /* TeamData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TeamData.h; path = DataModels/TeamData.h; sourceTree = "<group>"; };
 		2F8F8B9916A21F1B00D3B176 /* TeamData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TeamData.m; path = DataModels/TeamData.m; sourceTree = "<group>"; };
 		2F8F8B9C16A24D8C00D3B176 /* CreateTeam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CreateTeam.h; path = DataModels/CreateTeam.h; sourceTree = "<group>"; };
@@ -228,13 +231,15 @@
 		2F30EAE116A0F5150026B258 /* Data Models */ = {
 			isa = PBXGroup;
 			children = (
+				2F88648416B75EF600867385 /* UltimateAscent.xcdatamodeld */,
+				2F88647D16B75EC600867385 /* TeamScore.h */,
+				2F88647E16B75EC600867385 /* TeamScore.m */,
 				21528C9416AA215800CF7E8E /* CreateMatch.h */,
 				21528C9516AA215800CF7E8E /* CreateMatch.m */,
 				2F8F8B9C16A24D8C00D3B176 /* CreateTeam.h */,
 				2F8F8B9D16A24D8C00D3B176 /* CreateTeam.m */,
 				2FC18F1416A21E4D00D42251 /* MatchData.h */,
 				2FC18F1516A21E4D00D42251 /* MatchData.m */,
-				2F30EAF216A102330026B258 /* UltimateAscent.xcdatamodeld */,
 				2F8F8B9816A21F1B00D3B176 /* TeamData.h */,
 				2F8F8B9916A21F1B00D3B176 /* TeamData.m */,
 			);
@@ -367,7 +372,6 @@
 			files = (
 				2F30EAEB16A100850026B258 /* main.m in Sources */,
 				2F30EAEE16A101AB0026B258 /* AppDelegate.m in Sources */,
-				2F30EAF416A102330026B258 /* UltimateAscent.xcdatamodeld in Sources */,
 				2FC18EAC16A202FD00D42251 /* LoadCSVData.m in Sources */,
 				2FC18EAD16A202FD00D42251 /* parseCSV.m in Sources */,
 				2FC18EAF16A2042000D42251 /* SplashPageViewController.m in Sources */,
@@ -380,6 +384,8 @@
 				21F72D6016A78135000B99AB /* TeamListViewController.m in Sources */,
 				21528C9816AA215800CF7E8E /* CreateMatch.m in Sources */,
 				21EBC7D716B358D000CBFDFD /* TeamDetailViewController.m in Sources */,
+				2F88647F16B75EC600867385 /* TeamScore.m in Sources */,
+				2F88648616B75EF600867385 /* UltimateAscent.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -497,12 +503,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		2F30EAF216A102330026B258 /* UltimateAscent.xcdatamodeld */ = {
+		2F88648416B75EF600867385 /* UltimateAscent.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				2F30EAF316A102330026B258 /* UltimateAscent.xcdatamodel */,
+				2F88648516B75EF600867385 /* UltimateAscent.xcdatamodel */,
 			);
-			currentVersion = 2F30EAF316A102330026B258 /* UltimateAscent.xcdatamodel */;
+			currentVersion = 2F88648516B75EF600867385 /* UltimateAscent.xcdatamodel */;
 			name = UltimateAscent.xcdatamodeld;
 			path = DataModels/UltimateAscent.xcdatamodeld;
 			sourceTree = "<group>";
