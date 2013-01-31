@@ -2,12 +2,13 @@
 //  TeamData.m
 //  UltimateAscent
 //
-//  Created by Kris Pettinger on 1/26/13.
-//  Copyright (c) 2013 ROBONAUTS. All rights reserved.
+//  Created by FRC on 1/30/13.
+//  Copyright (c) 2013 FRC. All rights reserved.
 //
 
 #import "TeamData.h"
 #import "TeamScore.h"
+#import "Tournament.h"
 
 
 @implementation TeamData
@@ -21,5 +22,6 @@
 @dynamic number;
 @dynamic saved;
 @dynamic match;
+@dynamic tournament;
 
 @end

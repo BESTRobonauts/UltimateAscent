@@ -7,6 +7,11 @@
         <attribute name="number" optional="YES" attributeType="Integer 16" maxValueString="250" defaultValueString="0" syncable="YES"/>
         <attribute name="redScore" optional="YES" attributeType="Integer 16" maxValueString="250" defaultValueString="-1" syncable="YES"/>
         <relationship name="score" optional="YES" toMany="YES" maxCount="6" deletionRule="Cascade" destinationEntity="TeamScore" inverseName="match" inverseEntity="TeamScore" syncable="YES"/>
+        <relationship name="tournament" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Tournament" inverseName="match" inverseEntity="Tournament" syncable="YES"/>
+    </entity>
+    <entity name="Settings" representedClassName="Settings" syncable="YES">
+        <attribute name="mode" attributeType="String" defaultValueString="Test" syncable="YES"/>
+        <relationship name="tournament" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Tournament" inverseName="settings" inverseEntity="Tournament" syncable="YES"/>
     </entity>
     <entity name="TeamData" representedClassName="TeamData" syncable="YES">
         <attribute name="climb" optional="YES" attributeType="Integer 16" minValueString="-1" maxValueString="2" defaultValueString="-1" syncable="YES"/>
@@ -18,6 +23,7 @@
         <attribute name="number" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="saved" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <relationship name="match" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TeamScore" inverseName="team" inverseEntity="TeamScore" syncable="YES"/>
+        <relationship name="tournament" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tournament" inverseName="teams" inverseEntity="Tournament" syncable="YES"/>
     </entity>
     <entity name="TeamScore" representedClassName="TeamScore" syncable="YES">
         <attribute name="alliance" optional="YES" attributeType="String" maxValueString="7" syncable="YES"/>
@@ -36,10 +42,21 @@
         <attribute name="teleOpMissed" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="2000" defaultValueString="0" syncable="YES"/>
         <relationship name="match" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MatchData" inverseName="score" inverseEntity="MatchData" syncable="YES"/>
         <relationship name="team" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="TeamData" inverseName="match" inverseEntity="TeamData" syncable="YES"/>
+        <relationship name="tournament" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Tournament" inverseName="score" inverseEntity="Tournament" syncable="YES"/>
+    </entity>
+    <entity name="Tournament" representedClassName="Tournament" syncable="YES">
+        <attribute name="directory" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="match" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MatchData" inverseName="tournament" inverseEntity="MatchData" syncable="YES"/>
+        <relationship name="score" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="TeamScore" inverseName="tournament" inverseEntity="TeamScore" syncable="YES"/>
+        <relationship name="settings" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Settings" inverseName="tournament" inverseEntity="Settings" syncable="YES"/>
+        <relationship name="teams" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="TeamData" inverseName="tournament" inverseEntity="TeamData" syncable="YES"/>
     </entity>
     <elements>
-        <element name="MatchData" positionX="27" positionY="33" width="128" height="133"/>
-        <element name="TeamData" positionX="432" positionY="24" width="128" height="178"/>
-        <element name="TeamScore" positionX="223" positionY="-111" width="128" height="283"/>
+        <element name="MatchData" positionX="27" positionY="33" width="128" height="150"/>
+        <element name="Settings" positionX="18" positionY="-144" width="128" height="73"/>
+        <element name="TeamData" positionX="432" positionY="24" width="128" height="193"/>
+        <element name="TeamScore" positionX="207" positionY="-180" width="128" height="298"/>
+        <element name="Tournament" positionX="205" positionY="152" width="128" height="133"/>
     </elements>
 </model>

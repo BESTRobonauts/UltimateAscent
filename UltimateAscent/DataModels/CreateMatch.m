@@ -11,6 +11,7 @@
 #import "TeamData.h"
 #import "MatchData.h"
 #import "TeamScore.h"
+#import "Tournament.h"
 #import "CreateTeam.h"
 
 @implementation CreateMatch
@@ -139,7 +140,7 @@
     [match addScoreObject:[self CreateScore:blue1 forAlliance:@"Blue 1"]];
     [match addScoreObject:[self CreateScore:blue2 forAlliance:@"Blue 2"]];
     [match addScoreObject:[self CreateScore:blue3 forAlliance:@"Blue 3"]]; 
-//    match.tournament = tournament;
+    match.tournament.name = tournament;
     match.redScore = redScore;
     match.blueScore = blueScore;
     NSLog(@"Adding New Match = %@", match);

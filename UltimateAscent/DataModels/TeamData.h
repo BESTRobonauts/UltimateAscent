@@ -2,14 +2,14 @@
 //  TeamData.h
 //  UltimateAscent
 //
-//  Created by Kris Pettinger on 1/26/13.
-//  Copyright (c) 2013 ROBONAUTS. All rights reserved.
+//  Created by FRC on 1/30/13.
+//  Copyright (c) 2013 FRC. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class TeamScore;
+@class TeamScore, Tournament;
 
 @interface TeamData : NSManagedObject
 
@@ -22,6 +22,7 @@
 @property (nonatomic, retain) NSNumber * number;
 @property (nonatomic, retain) NSNumber * saved;
 @property (nonatomic, retain) NSSet *match;
+@property (nonatomic, retain) NSSet *tournament;
 @end
 
 @interface TeamData (CoreDataGeneratedAccessors)
@@ -30,5 +31,10 @@
 - (void)removeMatchObject:(TeamScore *)value;
 - (void)addMatch:(NSSet *)values;
 - (void)removeMatch:(NSSet *)values;
+
+- (void)addTournamentObject:(Tournament *)value;
+- (void)removeTournamentObject:(Tournament *)value;
+- (void)addTournament:(NSSet *)values;
+- (void)removeTournament:(NSSet *)values;
 
 @end
