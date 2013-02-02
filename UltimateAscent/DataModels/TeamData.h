@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class TeamScore, Tournament;
+@class TeamScore, TournamentData;
 
 @interface TeamData : NSManagedObject
 
@@ -32,8 +32,8 @@
 - (void)addMatch:(NSSet *)values;
 - (void)removeMatch:(NSSet *)values;
 
-- (void)addTournamentObject:(Tournament *)value;
-- (void)removeTournamentObject:(Tournament *)value;
+- (void)addTournamentObject:(TournamentData *)value;
+- (void)removeTournamentObject:(TournamentData *)value;
 - (void)addTournament:(NSSet *)values;
 - (void)removeTournament:(NSSet *)values;
 

@@ -11,7 +11,7 @@
 #import "TeamData.h"
 #import "MatchData.h"
 #import "TeamScore.h"
-#import "Tournament.h"
+#import "TournamentData.h"
 #import "CreateTeam.h"
 
 @implementation CreateMatch

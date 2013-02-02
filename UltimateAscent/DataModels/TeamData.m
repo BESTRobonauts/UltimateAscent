@@ -8,7 +8,7 @@
 
 #import "TeamData.h"
 #import "TeamScore.h"
-#import "Tournament.h"
+#import "TournamentData.h"
 
 
 @implementation TeamData

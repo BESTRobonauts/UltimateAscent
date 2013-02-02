@@ -11,6 +11,8 @@
 #import "parseCSV.h"
 #import "CreateTeam.h"
 #import "CreateMatch.h"
+#import "CreateTournament.h"
+#import "CreateSettings.h"
 #import "AddRecordResults.h"
 
 @implementation LoadCSVData
@@ -18,11 +20,17 @@
 -(void)loadCSVDataFromBundle {
     NSLog(@"loadCSVDataFromBundle");
 
-  DataManager *dataManager = [DataManager new];
+    DataManager *dataManager = [DataManager new];
     BOOL loadDataFromBundle = [dataManager databaseExists];
 
     if (loadDataFromBundle) {
-        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"TeamList" ofType:@"csv"];  
+        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"TournamentList" ofType:@"csv"];
+        [self loadTournamentFile:filePath];
+
+        filePath = [[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"csv"];
+        [self loadSettingsFile:filePath];
+
+        filePath = [[NSBundle mainBundle] pathForResource:@"TeamList" ofType:@"csv"];
         [self loadTeamFile:filePath];
 
         filePath = [[NSBundle mainBundle] pathForResource:@"MatchList" ofType:@"csv"];  
@@ -38,9 +46,47 @@
     NSString *filePath = [url path];
     NSLog(@"Emailed File = %@", filePath);
     NSLog(@"Add decision for team or match file");
+    [self loadTournamentFile:filePath];
+    [self loadSettingsFile:filePath];
     [self loadTeamFile:filePath];
     [self loadMatchFile:filePath];
     [self loadMatchResults:filePath];
+}
+
+-(void)loadTournamentFile:(NSString *)filePath {
+    CSVParser *parser = [CSVParser new];
+    [parser openFile: filePath];
+    NSMutableArray *csvContent = [parser parseFile];
+    if ([[[csvContent objectAtIndex: 0] objectAtIndex:0] isEqualToString:@"Tournament"]) {
+        CreateTournament *tournament = [CreateTournament new];
+        int c;
+        for (c = 1; c < [csvContent count]; c++) {
+            NSLog(@"loadTournamentFile:Tournament = %@", [[csvContent objectAtIndex: c] objectAtIndex:0]);
+            AddRecordResults results = [tournament createTournamentFromFile:[csvContent objectAtIndex: 0] dataFields:[csvContent objectAtIndex: c]];
+            if (results != DB_ADDED) {
+                NSLog(@"Check database - Tournament Add Code %d", results);
+            }
+        }
+    }
+    [parser closeFile];
+}
+
+-(void)loadSettingsFile:(NSString *)filePath {
+    CSVParser *parser = [CSVParser new];
+    [parser openFile: filePath];
+    NSMutableArray *csvContent = [parser parseFile];
+    if ([[[csvContent objectAtIndex: 0] objectAtIndex:0] isEqualToString:@"Mode"]) {
+        CreateSettings *settings = [CreateSettings new];
+        int c;
+        for (c = 1; c < [csvContent count]; c++) {
+            NSLog(@"loadSettingsFile:Mode = %@", [[csvContent objectAtIndex: c] objectAtIndex:0]);
+            AddRecordResults results = [settings createSettingsFromFile:[csvContent objectAtIndex: 0] dataFields:[csvContent objectAtIndex: c]];
+            if (results != DB_ADDED) {
+                NSLog(@"Check database - Settings Add Code %d", results);
+            }
+        }
+    }
+    [parser closeFile];
 }
 
 -(void)loadTeamFile:(NSString *)filePath {

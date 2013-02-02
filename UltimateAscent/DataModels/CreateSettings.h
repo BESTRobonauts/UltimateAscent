@@ -7,7 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AddRecordResults.h"
+
+@class SettingsData;
 
 @interface CreateSettings : NSObject
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+
+-(AddRecordResults)createSettingsFromFile:(NSMutableArray *)headers dataFields:(NSMutableArray *)data;
+-(SettingsData *)GetSettings;
+
 
 @end

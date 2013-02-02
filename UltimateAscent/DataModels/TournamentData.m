@@ -1,25 +1,25 @@
 //
-//  Tournament.m
+//  TournamentData.m
 //  UltimateAscent
 //
-//  Created by FRC on 1/30/13.
+//  Created by FRC on 2/1/13.
 //  Copyright (c) 2013 FRC. All rights reserved.
 //
 
-#import "Tournament.h"
+#import "TournamentData.h"
 #import "MatchData.h"
-#import "Settings.h"
+#import "SettingsData.h"
 #import "TeamData.h"
 #import "TeamScore.h"
 
 
-@implementation Tournament
+@implementation TournamentData
 
 @dynamic directory;
 @dynamic name;
 @dynamic match;
 @dynamic score;
-@dynamic teams;
 @dynamic settings;
+@dynamic teams;
 
 @end

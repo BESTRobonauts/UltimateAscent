@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class TeamScore, Tournament;
+@class TeamScore, TournamentData;
 
 @interface MatchData : NSManagedObject
 
@@ -19,7 +19,7 @@
 @property (nonatomic, retain) NSNumber * number;
 @property (nonatomic, retain) NSNumber * redScore;
 @property (nonatomic, retain) NSSet *score;
-@property (nonatomic, retain) Tournament *tournament;
+@property (nonatomic, retain) TournamentData *tournament;
 @end
 
 @interface MatchData (CoreDataGeneratedAccessors)

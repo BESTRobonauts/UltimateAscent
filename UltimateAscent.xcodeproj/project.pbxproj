@@ -10,9 +10,6 @@
 		21528C9816AA215800CF7E8E /* CreateMatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 21528C9516AA215800CF7E8E /* CreateMatch.m */; };
 		21EBC7D716B358D000CBFDFD /* TeamDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21EBC7D616B358D000CBFDFD /* TeamDetailViewController.m */; };
 		21F72D6016A78135000B99AB /* TeamListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F72D5F16A78135000B99AB /* TeamListViewController.m */; };
-		2F17D53C16B9E8F500DC81C1 /* MatchData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F17D53B16B9E8F500DC81C1 /* MatchData.m */; };
-		2F17D53F16B9E90800DC81C1 /* TeamData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F17D53E16B9E90800DC81C1 /* TeamData.m */; };
-		2F17D54216B9E93300DC81C1 /* TeamScore.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F17D54116B9E93300DC81C1 /* TeamScore.m */; };
 		2F17D54816BA092B00DC81C1 /* TournamentList.csv in Resources */ = {isa = PBXBuildFile; fileRef = 2F17D54716BA092B00DC81C1 /* TournamentList.csv */; };
 		2F30EABC16A0EB4F0026B258 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F30EABB16A0EB4F0026B258 /* UIKit.framework */; };
 		2F30EABE16A0EB4F0026B258 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F30EABD16A0EB4F0026B258 /* Foundation.framework */; };
@@ -24,11 +21,14 @@
 		2F30EAE916A100250026B258 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F30EAE816A100250026B258 /* Default-568h@2x.png */; };
 		2F30EAEB16A100850026B258 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F30EAEA16A100850026B258 /* main.m */; };
 		2F30EAEE16A101AB0026B258 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F30EAED16A101AB0026B258 /* AppDelegate.m */; };
-		2F4E01DF16BA0D7B0092DC86 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4E01DE16BA0D7B0092DC86 /* Settings.m */; };
-		2F4E01E316BA0D930092DC86 /* Tournament.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4E01E216BA0D930092DC86 /* Tournament.m */; };
+		2F4C4FFF16BC9977004E0059 /* SettingsData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4C4FFE16BC9977004E0059 /* SettingsData.m */; };
+		2F4C500216BCB2C5004E0059 /* TournamentData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4C500116BCB2C4004E0059 /* TournamentData.m */; };
 		2F4E01EB16BA103E0092DC86 /* CreateTournament.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4E01EA16BA103E0092DC86 /* CreateTournament.m */; };
 		2F4E01EE16BA10560092DC86 /* CreateSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4E01ED16BA10560092DC86 /* CreateSettings.m */; };
 		2F4E01F016BA10C80092DC86 /* Settings.csv in Resources */ = {isa = PBXBuildFile; fileRef = 2F4E01EF16BA10C80092DC86 /* Settings.csv */; };
+		2F6AE50A16BA30950016718F /* MatchData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6AE50916BA30950016718F /* MatchData.m */; };
+		2F6AE51016BA30C70016718F /* TeamData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6AE50F16BA30C70016718F /* TeamData.m */; };
+		2F6AE51616BA31DB0016718F /* TeamScore.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6AE51516BA31DB0016718F /* TeamScore.m */; };
 		2F6AE6F016AD93D1005A24C5 /* 2013_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F6AE6EF16AD93D1005A24C5 /* 2013_logo.png */; };
 		2F88648616B75EF600867385 /* UltimateAscent.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2F88648416B75EF600867385 /* UltimateAscent.xcdatamodeld */; };
 		2F88649A16B76B1700867385 /* AlliancePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F88648D16B76B1700867385 /* AlliancePickerController.m */; };
@@ -72,12 +72,6 @@
 		21EBC7D616B358D000CBFDFD /* TeamDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TeamDetailViewController.m; path = TeamScouting/TeamDetailViewController.m; sourceTree = "<group>"; };
 		21F72D5E16A78135000B99AB /* TeamListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TeamListViewController.h; path = TeamScouting/TeamListViewController.h; sourceTree = "<group>"; };
 		21F72D5F16A78135000B99AB /* TeamListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TeamListViewController.m; path = TeamScouting/TeamListViewController.m; sourceTree = "<group>"; };
-		2F17D53A16B9E8F500DC81C1 /* MatchData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MatchData.h; path = DataModels/MatchData.h; sourceTree = "<group>"; };
-		2F17D53B16B9E8F500DC81C1 /* MatchData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MatchData.m; path = DataModels/MatchData.m; sourceTree = "<group>"; };
-		2F17D53D16B9E90800DC81C1 /* TeamData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TeamData.h; path = DataModels/TeamData.h; sourceTree = "<group>"; };
-		2F17D53E16B9E90800DC81C1 /* TeamData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TeamData.m; path = DataModels/TeamData.m; sourceTree = "<group>"; };
-		2F17D54016B9E93300DC81C1 /* TeamScore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TeamScore.h; path = DataModels/TeamScore.h; sourceTree = "<group>"; };
-		2F17D54116B9E93300DC81C1 /* TeamScore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TeamScore.m; path = DataModels/TeamScore.m; sourceTree = "<group>"; };
 		2F17D54716BA092B00DC81C1 /* TournamentList.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TournamentList.csv; path = Resources/TournamentList.csv; sourceTree = "<group>"; };
 		2F30EAB716A0EB4F0026B258 /* UltimateAscent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UltimateAscent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F30EABB16A0EB4F0026B258 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -91,15 +85,21 @@
 		2F30EAEA16A100850026B258 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = MainApp/main.m; sourceTree = "<group>"; };
 		2F30EAEC16A101570026B258 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = MainApp/AppDelegate.h; sourceTree = "<group>"; };
 		2F30EAED16A101AB0026B258 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = MainApp/AppDelegate.m; sourceTree = "<group>"; };
-		2F4E01DD16BA0D7B0092DC86 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Settings.h; path = DataModels/Settings.h; sourceTree = "<group>"; };
-		2F4E01DE16BA0D7B0092DC86 /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Settings.m; path = DataModels/Settings.m; sourceTree = "<group>"; };
-		2F4E01E116BA0D930092DC86 /* Tournament.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tournament.h; path = DataModels/Tournament.h; sourceTree = "<group>"; };
-		2F4E01E216BA0D930092DC86 /* Tournament.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Tournament.m; path = DataModels/Tournament.m; sourceTree = "<group>"; };
+		2F4C4FFD16BC9977004E0059 /* SettingsData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsData.h; path = DataModels/SettingsData.h; sourceTree = "<group>"; };
+		2F4C4FFE16BC9977004E0059 /* SettingsData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsData.m; path = DataModels/SettingsData.m; sourceTree = "<group>"; };
+		2F4C500016BCB2C4004E0059 /* TournamentData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TournamentData.h; path = DataModels/TournamentData.h; sourceTree = "<group>"; };
+		2F4C500116BCB2C4004E0059 /* TournamentData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TournamentData.m; path = DataModels/TournamentData.m; sourceTree = "<group>"; };
 		2F4E01E916BA103E0092DC86 /* CreateTournament.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CreateTournament.h; path = DataModels/CreateTournament.h; sourceTree = "<group>"; };
 		2F4E01EA16BA103E0092DC86 /* CreateTournament.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CreateTournament.m; path = DataModels/CreateTournament.m; sourceTree = "<group>"; };
 		2F4E01EC16BA10560092DC86 /* CreateSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CreateSettings.h; path = DataModels/CreateSettings.h; sourceTree = "<group>"; };
 		2F4E01ED16BA10560092DC86 /* CreateSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CreateSettings.m; path = DataModels/CreateSettings.m; sourceTree = "<group>"; };
 		2F4E01EF16BA10C80092DC86 /* Settings.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Settings.csv; path = Resources/Settings.csv; sourceTree = "<group>"; };
+		2F6AE50816BA30950016718F /* MatchData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MatchData.h; path = DataModels/MatchData.h; sourceTree = "<group>"; };
+		2F6AE50916BA30950016718F /* MatchData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MatchData.m; path = DataModels/MatchData.m; sourceTree = "<group>"; };
+		2F6AE50E16BA30C70016718F /* TeamData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TeamData.h; path = DataModels/TeamData.h; sourceTree = "<group>"; };
+		2F6AE50F16BA30C70016718F /* TeamData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TeamData.m; path = DataModels/TeamData.m; sourceTree = "<group>"; };
+		2F6AE51416BA31DB0016718F /* TeamScore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TeamScore.h; path = DataModels/TeamScore.h; sourceTree = "<group>"; };
+		2F6AE51516BA31DB0016718F /* TeamScore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TeamScore.m; path = DataModels/TeamScore.m; sourceTree = "<group>"; };
 		2F6AE6EF16AD93D1005A24C5 /* 2013_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 2013_logo.png; path = Resources/2013_logo.png; sourceTree = "<group>"; };
 		2F88648516B75EF600867385 /* UltimateAscent.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UltimateAscent.xcdatamodel; sourceTree = "<group>"; };
 		2F88648C16B76B1700867385 /* AlliancePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlliancePickerController.h; path = MatchScouting/AlliancePickerController.h; sourceTree = "<group>"; };
@@ -270,16 +270,16 @@
 			isa = PBXGroup;
 			children = (
 				2F88648416B75EF600867385 /* UltimateAscent.xcdatamodeld */,
-				2F4E01E116BA0D930092DC86 /* Tournament.h */,
-				2F4E01E216BA0D930092DC86 /* Tournament.m */,
-				2F4E01DD16BA0D7B0092DC86 /* Settings.h */,
-				2F4E01DE16BA0D7B0092DC86 /* Settings.m */,
-				2F17D54016B9E93300DC81C1 /* TeamScore.h */,
-				2F17D54116B9E93300DC81C1 /* TeamScore.m */,
-				2F17D53D16B9E90800DC81C1 /* TeamData.h */,
-				2F17D53E16B9E90800DC81C1 /* TeamData.m */,
-				2F17D53A16B9E8F500DC81C1 /* MatchData.h */,
-				2F17D53B16B9E8F500DC81C1 /* MatchData.m */,
+				2F4C500016BCB2C4004E0059 /* TournamentData.h */,
+				2F4C500116BCB2C4004E0059 /* TournamentData.m */,
+				2F4C4FFD16BC9977004E0059 /* SettingsData.h */,
+				2F4C4FFE16BC9977004E0059 /* SettingsData.m */,
+				2F6AE51416BA31DB0016718F /* TeamScore.h */,
+				2F6AE51516BA31DB0016718F /* TeamScore.m */,
+				2F6AE50E16BA30C70016718F /* TeamData.h */,
+				2F6AE50F16BA30C70016718F /* TeamData.m */,
+				2F6AE50816BA30950016718F /* MatchData.h */,
+				2F6AE50916BA30950016718F /* MatchData.m */,
 				21528C9416AA215800CF7E8E /* CreateMatch.h */,
 				2F4E01E916BA103E0092DC86 /* CreateTournament.h */,
 				2F4E01EA16BA103E0092DC86 /* CreateTournament.m */,
@@ -310,7 +310,11 @@
 		2F30EAE316A0F66F0026B258 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2FC18EE816A2083500D42251 /* TeamList.csv */,
+				2FC18EE016A2083500D42251 /* MatchList.csv */,
+				2FC18EE116A2083500D42251 /* MatchResults.csv */,
 				2F4E01EF16BA10C80092DC86 /* Settings.csv */,
+				2F17D54716BA092B00DC81C1 /* TournamentList.csv */,
 				2F6AE6EF16AD93D1005A24C5 /* 2013_logo.png */,
 				2FC18ED816A2083500D42251 /* Blue Fade.gif */,
 				2FC18ED916A2083500D42251 /* button_robonaut_gold.png */,
@@ -320,16 +324,12 @@
 				2FC18EDD16A2083500D42251 /* Default.png */,
 				2FC18EDE16A2083500D42251 /* Default@2x.png */,
 				2FC18EDF16A2083500D42251 /* Gold Fade.gif */,
-				2FC18EE016A2083500D42251 /* MatchList.csv */,
-				2F17D54716BA092B00DC81C1 /* TournamentList.csv */,
-				2FC18EE116A2083500D42251 /* MatchResults.csv */,
 				2FC18EE216A2083500D42251 /* nasalization rg.ttf */,
 				2FC18EE316A2083500D42251 /* photo.JPG */,
 				2FC18EE416A2083500D42251 /* R Big Icon.png */,
 				2FC18EE516A2083500D42251 /* R Icon.png */,
 				2FC18EE616A2083500D42251 /* robonauts app banner.jpg */,
 				2FC18EE716A2083500D42251 /* robonauts button.png */,
-				2FC18EE816A2083500D42251 /* TeamList.csv */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -461,13 +461,13 @@
 				2F88649F16B76B1700867385 /* RecordScorePickerController.m in Sources */,
 				2F8864A016B76B1700867385 /* TeamPickerController.m in Sources */,
 				2F8864A216B76DAB00867385 /* LoadCSVData.m in Sources */,
-				2F17D53C16B9E8F500DC81C1 /* MatchData.m in Sources */,
-				2F17D53F16B9E90800DC81C1 /* TeamData.m in Sources */,
-				2F17D54216B9E93300DC81C1 /* TeamScore.m in Sources */,
-				2F4E01DF16BA0D7B0092DC86 /* Settings.m in Sources */,
-				2F4E01E316BA0D930092DC86 /* Tournament.m in Sources */,
 				2F4E01EB16BA103E0092DC86 /* CreateTournament.m in Sources */,
 				2F4E01EE16BA10560092DC86 /* CreateSettings.m in Sources */,
+				2F6AE50A16BA30950016718F /* MatchData.m in Sources */,
+				2F6AE51016BA30C70016718F /* TeamData.m in Sources */,
+				2F6AE51616BA31DB0016718F /* TeamScore.m in Sources */,
+				2F4C4FFF16BC9977004E0059 /* SettingsData.m in Sources */,
+				2F4C500216BCB2C5004E0059 /* TournamentData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

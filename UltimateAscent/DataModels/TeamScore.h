@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class MatchData, TeamData, Tournament;
+@class MatchData, TeamData, TournamentData;
 
 @interface TeamScore : NSManagedObject
 
@@ -29,6 +29,6 @@
 @property (nonatomic, retain) NSNumber * teleOpMissed;
 @property (nonatomic, retain) MatchData *match;
 @property (nonatomic, retain) TeamData *team;
-@property (nonatomic, retain) Tournament *tournament;
+@property (nonatomic, retain) TournamentData *tournament;
 
 @end

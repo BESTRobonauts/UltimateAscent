@@ -7,7 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AddRecordResults.h"
+
+@class TournamentData;
 
 @interface CreateTournament : NSObject
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+
+-(AddRecordResults)createTournamentFromFile:(NSMutableArray *)headers dataFields:(NSMutableArray *)data;
+-(TournamentData *)GetTournament:(NSString *)name;
 
 @end
