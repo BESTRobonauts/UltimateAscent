@@ -356,8 +356,7 @@
         self.fetchedResultsController = aFetchedResultsController;
         
     }
-    TeamData *team = [fetchedResultsController objectAtIndexPath:0];
-    NSLog(@"Team = %@", team);
+
 	return fetchedResultsController;
 }    
 
