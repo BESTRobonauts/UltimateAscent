@@ -140,11 +140,12 @@
     [match addScoreObject:[self CreateScore:blue1 forAlliance:@"Blue 1"]];
     [match addScoreObject:[self CreateScore:blue2 forAlliance:@"Blue 2"]];
     [match addScoreObject:[self CreateScore:blue3 forAlliance:@"Blue 3"]]; 
+    NSLog(@"Fix this !!!!!!!!!!!!!!!!!! CreateMatch tournament relationship");
     match.tournament.name = tournament;
     match.redScore = redScore;
     match.blueScore = blueScore;
-    NSLog(@"Adding New Match = %@", match);
-    NSLog(@"   Team Score = %@", match.score);
+//    NSLog(@"Adding New Match = %@", match);
+//    NSLog(@"   Team Score = %@", match.score);
 }
 
 -(TeamScore *)CreateScore:(NSNumber *)teamNumber forAlliance:(NSString *)alliance { 
@@ -154,7 +155,7 @@
                                                          inManagedObjectContext:managedObjectContext];
     [teamScore setAlliance:alliance];
     [teamScore setTeam:[self GetTeam:teamNumber]]; // Set Relationship!!!
-     NSLog(@"   For Team = %@", teamScore.team);
+//     NSLog(@"   For Team = %@", teamScore.team);
 /*    if (!teamScore.teamInfo) {
         teamScore.teamInfo = [NSEntityDescription insertNewObjectForEntityForName:@"TeamData" 
                                                        inManagedObjectContext:managedObjectContext];        
@@ -187,7 +188,7 @@
     else {
         if([matchData count] > 0) {  // Match Exists
             match = [matchData objectAtIndex:0];
-            NSLog(@"Match %@ exists", match.number);
+        //    NSLog(@"Match %@ exists", match.number);
             return match;
         }
         else {
@@ -220,7 +221,7 @@
     else {
         if([teamData count] > 0) {  // Team Exists
             team = [teamData objectAtIndex:0];
-            NSLog(@"Team %@ exists", team.number);
+          //  NSLog(@"Team %@ exists", team.number);
             return team;
         }
         else {

@@ -15,7 +15,5 @@
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 
 -(AddRecordResults)createSettingsFromFile:(NSMutableArray *)headers dataFields:(NSMutableArray *)data;
--(SettingsData *)GetSettings;
-
 
 @end

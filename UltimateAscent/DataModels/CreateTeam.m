@@ -9,16 +9,18 @@
 #import "CreateTeam.h"
 #import "DataManager.h"
 #import "TeamData.h"
+#import "TournamentData.h"
 
 // Current File Order
 /*
  1  Number
  2  Name
- 3  Climbing
- 4  Intake
- 5  Upside Down
- 6  Notes
- 7  History
+ 3  Tournament
+ 4  Climbing
+ 5  Intake
+ 6  Upside Down
+ 7  Notes
+ 8  History
 
  Things to add yet
     Drive Train Notes
@@ -29,6 +31,7 @@
 
 -(AddRecordResults)createTeamFromFile:(NSMutableArray *)headers dataFields:(NSMutableArray *)data {
     NSNumber *teamNumber;
+    NSString *tournament;
 
     if (![data count]) return DB_ERROR;
 
@@ -42,32 +45,38 @@
     TeamData *team = [self GetTeam:teamNumber];
     if (team) {
         NSLog(@"createTeamFromFile:Team %@ already exists", teamNumber);
+        NSLog(@"createTeamFromFile:************************************* Really need to add new tournament");
         return DB_MATCHED;
     }
     else {
         NSNumber *number;
-        TeamData *team = [NSEntityDescription insertNewObjectForEntityForName:@"TeamData" 
+        TournamentData *tournamentRecord;
+        TeamData *team = [NSEntityDescription insertNewObjectForEntityForName:@"TeamData"
                                                            inManagedObjectContext:managedObjectContext];        
         switch ([data count]) {
+            case 8:
+                team.history = [data objectAtIndex: 4];
             case 7:
-                team.history = [data objectAtIndex: 3];
+                 team.notes = [data objectAtIndex: 3];
             case 6:
-                 team.notes = [data objectAtIndex: 2];
-            case 5:
                 number = [NSNumber numberWithInt:[[data objectAtIndex:4] intValue]];
                 team.down = number;
-            case 4:
+            case 5:
                 number = [NSNumber numberWithInt:[[data objectAtIndex:3] intValue]];
                 team.intake = number;
-            case 3:
+            case 4:
                 number = [NSNumber numberWithInt:[[data objectAtIndex:2] intValue]];
                 team.climb = number;
+            case 3:
+                tournament = [data objectAtIndex: 2];
+                tournamentRecord = [self getTournamentRecord:tournament];
+                [team addTournamentObject:tournamentRecord];
             case 2:
                 team.name = [data objectAtIndex: 1];
             case 1:
                 team.number = teamNumber;
         }
-        // NSLog(@"Added Team Record %@", team);
+        NSLog(@"Added Team Record %@", team);
         NSError *error;
         if (![managedObjectContext save:&error]) {
             NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
@@ -107,6 +116,32 @@
         else {
             return Nil;
         }
+    }
+}
+
+-(TournamentData *)getTournamentRecord:(NSString *)tournamentName {
+    NSError *error;
+
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+              entityForName:@"TournamentData" inManagedObjectContext:managedObjectContext];
+    [fetchRequest setEntity:entity];
+
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"name CONTAINS %@", tournamentName];
+    [fetchRequest setPredicate:pred];
+
+    NSArray *tournamentData = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    if(!tournamentData) {
+        NSLog(@"Karma disruption error");
+        return Nil;
+    }
+    else {
+        if([tournamentData count] > 0) {  // Tournament Exists
+            TournamentData *tournamentRecord = [tournamentData objectAtIndex:0];
+            NSLog(@"Tournament %@ exists", tournamentRecord.name);
+            return tournamentRecord;
+        }
+        else return Nil;
     }
 }
 

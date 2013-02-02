@@ -8,14 +8,17 @@
 
 #import <UIKit/UIKit.h>
 @class TeamData;
+@class SettingsData;
 
 @interface TeamListViewController : UITableViewController <NSFetchedResultsControllerDelegate>
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, retain) SettingsData *settings;
 @property (nonatomic, retain) UIView *headerView;
 @property (nonatomic, assign) BOOL dataChange;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section;
 - (void)showTeam:(TeamData *)team animated:(BOOL)animated;
+- (void)retrieveSettings;
 
 @end

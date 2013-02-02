@@ -10,9 +10,12 @@
 #import "TeamDetailViewController.h"
 #import "TeamData.h"
 #import "DataManager.h"
+#import "SettingsData.h"
+#import "TournamentData.h"
 
 @implementation TeamListViewController
 @synthesize managedObjectContext, fetchedResultsController;
+@synthesize settings;
 @synthesize headerView;
 @synthesize dataChange;
 
@@ -37,11 +40,21 @@
 
 - (void)viewDidLoad
 {
+    NSLog(@"Team List viewDidLoad");
     NSError *error = nil;
     if (!managedObjectContext) {
         DataManager *dataManager = [DataManager new];
         managedObjectContext = [dataManager managedObjectContext];
     }
+    
+    [self retrieveSettings];
+    if (settings) {
+        self.title =  [NSString stringWithFormat:@"%@ Team List", settings.tournament.name];
+    }
+    else {
+        self.title = @"Team List";
+    }
+    
     if (![[self fetchedResultsController] performFetch:&error]) {
         /*
          Replace this implementation with code to handle the error appropriately.
@@ -99,7 +112,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     NSLog(@"Team List viewWillAppear");
-    self.title = @"Team List";
     dataChange = NO;
    [super viewWillAppear:animated];
 }
@@ -174,7 +186,7 @@
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     TeamData *info = [fetchedResultsController objectAtIndexPath:indexPath];
-    NSLog(@"name = %@", info.name);
+    // NSLog(@"name = %@", info.name);
     // Configure the cell...
     // Set a background for the cell
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:cell.frame];
@@ -226,13 +238,35 @@
     
 }
 
+- (void)retrieveSettings {
+    NSError *error;
 
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"SettingsData" inManagedObjectContext:managedObjectContext];
+    [fetchRequest setEntity:entity];
+    NSArray *settingsRecord = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    if(!settingsRecord) {
+        NSLog(@"Karma disruption error");
+        settings = Nil;
+    }
+    else {
+        if([settingsRecord count] == 0) {  // No Settings Exists
+            NSLog(@"Karma disruption error");
+            settings = Nil;
+        }
+        else {
+            settings = [settingsRecord objectAtIndex:0];
+        }
+    }
+
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	UITableViewCell *cell = [tableView 
                              dequeueReusableCellWithIdentifier:@"TeamList"];
-    NSLog(@"IndexPath =%@", indexPath);
+    // NSLog(@"IndexPath =%@", indexPath);
     // Set up the cell...
     [self configureCell:cell atIndexPath:indexPath];
     
@@ -302,6 +336,10 @@
         // Edit the sort key as appropriate.
         NSSortDescriptor *numberDescriptor = [[NSSortDescriptor alloc] initWithKey:@"number" ascending:YES];
         NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:numberDescriptor, nil];
+        // Add the search for tournament name
+//        NSPredicate *pred = [NSPredicate predicateWithFormat:@"tournament.name CONTAINS %@", settings.tournament.name];
+        NSPredicate *pred = [NSPredicate predicateWithFormat:@"ANY tournament = %@", settings.tournament];
+        [fetchRequest setPredicate:pred];
         
         [fetchRequest setSortDescriptors:sortDescriptors];
         [fetchRequest setFetchBatchSize:20];
@@ -318,7 +356,8 @@
         self.fetchedResultsController = aFetchedResultsController;
         
     }
-	
+    TeamData *team = [fetchedResultsController objectAtIndexPath:0];
+    NSLog(@"Team = %@", team);
 	return fetchedResultsController;
 }    
 

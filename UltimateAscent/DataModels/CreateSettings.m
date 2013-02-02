@@ -61,6 +61,7 @@
     settings.mode = mode;
 
 
+    // Need to add something to properly "release" the tournament relationship if it already exists
     entity = [NSEntityDescription
               entityForName:@"TournamentData" inManagedObjectContext:managedObjectContext];
     [fetchRequest setEntity:entity];
@@ -70,6 +71,10 @@
     if(!tournamentData) {
         NSLog(@"Karma disruption error");
         settings.tournament = nil;
+        // At least save what we did manage to set
+        if (![managedObjectContext save:&error]) {
+            NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+        }
         return DB_ERROR;
     }
     else {
