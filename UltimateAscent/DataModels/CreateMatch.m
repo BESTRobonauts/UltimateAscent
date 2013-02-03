@@ -140,12 +140,12 @@
     [match addScoreObject:[self CreateScore:blue1 forAlliance:@"Blue 1"]];
     [match addScoreObject:[self CreateScore:blue2 forAlliance:@"Blue 2"]];
     [match addScoreObject:[self CreateScore:blue3 forAlliance:@"Blue 3"]]; 
-    NSLog(@"Fix this !!!!!!!!!!!!!!!!!! CreateMatch tournament relationship");
-    match.tournament.name = tournament;
+    match.tournament = tournament;
     match.redScore = redScore;
     match.blueScore = blueScore;
-//    NSLog(@"Adding New Match = %@", match);
-//    NSLog(@"   Team Score = %@", match.score);
+    NSLog(@"Adding New Match = %@, Tournament = %@, Type = %@", match.number, match.tournament, match.matchType);
+//  NSLog(@" Tournament = %@", match.tournament);
+//  NSLog(@"   Team Score = %@", match.score);
 }
 
 -(TeamScore *)CreateScore:(NSNumber *)teamNumber forAlliance:(NSString *)alliance { 
@@ -155,7 +155,7 @@
                                                          inManagedObjectContext:managedObjectContext];
     [teamScore setAlliance:alliance];
     [teamScore setTeam:[self GetTeam:teamNumber]]; // Set Relationship!!!
-//     NSLog(@"   For Team = %@", teamScore.team);
+    // NSLog(@"   For Team = %@", teamScore.team);
 /*    if (!teamScore.teamInfo) {
         teamScore.teamInfo = [NSEntityDescription insertNewObjectForEntityForName:@"TeamData" 
                                                        inManagedObjectContext:managedObjectContext];        
@@ -227,6 +227,32 @@
         else {
             return Nil;
         }
+    }
+}
+
+-(TournamentData *)getTournamentRecord:(NSString *)tournamentName {
+    NSError *error;
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"TournamentData" inManagedObjectContext:managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"name CONTAINS %@", tournamentName];
+    [fetchRequest setPredicate:pred];
+    
+    NSArray *tournamentData = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    if(!tournamentData) {
+        NSLog(@"Karma disruption error");
+        return Nil;
+    }
+    else {
+        if([tournamentData count] > 0) {  // Tournament Exists
+            TournamentData *tournamentRecord = [tournamentData objectAtIndex:0];
+            // NSLog(@"Tournament %@ exists", tournamentRecord.name);
+            return tournamentRecord;
+        }
+        else return Nil;
     }
 }
 

@@ -2,14 +2,14 @@
 //  MatchData.h
 //  UltimateAscent
 //
-//  Created by FRC on 1/30/13.
+//  Created by FRC on 2/2/13.
 //  Copyright (c) 2013 FRC. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class TeamScore, TournamentData;
+@class TeamScore;
 
 @interface MatchData : NSManagedObject
 
@@ -18,8 +18,8 @@
 @property (nonatomic, retain) NSString * matchType;
 @property (nonatomic, retain) NSNumber * number;
 @property (nonatomic, retain) NSNumber * redScore;
+@property (nonatomic, retain) NSString * tournament;
 @property (nonatomic, retain) NSSet *score;
-@property (nonatomic, retain) TournamentData *tournament;
 @end
 
 @interface MatchData (CoreDataGeneratedAccessors)

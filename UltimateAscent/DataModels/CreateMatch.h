@@ -12,6 +12,7 @@
 @class MatchData;
 @class TeamScore;
 @class TeamData;
+@class TournamentData;
 
 @interface CreateMatch : NSObject
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
@@ -31,5 +32,6 @@
 -(TeamScore *)CreateScore:(NSNumber *)teamNumber forAlliance:(NSString *)alliance;
 -(TeamData *)GetTeam:(NSNumber *)teamNumber;
 -(void)setTeamDefaults:(TeamData *)blankTeam;
+-(TournamentData *)getTournamentRecord:(NSString *)tournamentName;
 
 @end

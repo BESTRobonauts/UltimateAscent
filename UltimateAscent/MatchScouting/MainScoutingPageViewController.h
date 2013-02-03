@@ -18,6 +18,7 @@
 
 @class MatchData;
 @class TeamScore;
+@class SettingsData;
 
 @interface MainScoutingPageViewController : UIViewController <NSFetchedResultsControllerDelegate, UITextFieldDelegate, AlliancePickerDelegate, MatchTypePickerDelegate, TeamPickerDelegate, RecordScorePickerDelegate> {
     
@@ -31,6 +32,7 @@
 }
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, retain) SettingsData *settings;
 @property (nonatomic, assign) NSUInteger sectionIndex;
 @property (nonatomic, assign) NSUInteger rowIndex;
 @property (nonatomic, assign) NSUInteger teamIndex;
@@ -47,6 +49,7 @@
 -(IBAction)NextButton;
 -(NSUInteger)GetNextSection:(NSUInteger) currentSection;
 -(NSUInteger)GetPreviousSection:(NSUInteger) currentSection;
+- (void)retrieveSettings;
 
 // Match Scores
 @property (nonatomic, retain) IBOutlet UITextField *teamName;
@@ -61,22 +64,27 @@
 @property (nonatomic, retain) UISegmentedControl *balanced;
 -(IBAction)toggleForRampModing: (id) sender;  
 @property (nonatomic, retain) IBOutlet UITextField *notes;
-@property (nonatomic, retain) IBOutlet UIButton *teleOpMiss;
--(IBAction)teleOpMissButton;
-@property (nonatomic, retain) IBOutlet UIButton *teleOpHigh;
--(IBAction)teleOpHighButton;
-@property (nonatomic, retain) IBOutlet UIButton *teleOpMedium;
--(IBAction)teleOpMediumButton;
-@property (nonatomic, retain) IBOutlet UIButton *teleOpLow;
--(IBAction)teleOpLowButton;
-@property (nonatomic, retain) IBOutlet UIButton *autonMiss;
--(IBAction)autonMissButton;
-@property (nonatomic, retain) IBOutlet UIButton *autonHigh;
--(IBAction)autonHighButton;
-@property (nonatomic, retain) IBOutlet UIButton *autonMedium;
--(IBAction)autonMediumButton;
-@property (nonatomic, retain) IBOutlet UIButton *autonLow;
--(IBAction)autonLowButton;
+
+
+-(IBAction)scoreButtons: (id)sender;
+
+
+@property (nonatomic, retain) IBOutlet UIButton *teleOpMissButton;
+-(void)teleOpMiss;
+@property (nonatomic, retain) IBOutlet UIButton *teleOpHighButton;
+-(void)teleOpHigh;
+@property (nonatomic, retain) IBOutlet UIButton *teleOpMediumButton;
+-(void)teleOpMedium;
+@property (nonatomic, retain) IBOutlet UIButton *teleOpLowButton;
+-(void)teleOpLow;
+@property (nonatomic, retain) IBOutlet UIButton *autonMissButton;
+-(void)autonMiss;
+@property (nonatomic, retain) IBOutlet UIButton *autonHighButton;
+-(void)autonHigh;
+@property (nonatomic, retain) IBOutlet UIButton *autonMediumButton;
+-(void)autonMedium;
+@property (nonatomic, retain) IBOutlet UIButton *autonLowButton;
+-(void)autonLow;
 
 // Overall Match Scores
 @property (nonatomic, retain) IBOutlet UITextField *redScore;

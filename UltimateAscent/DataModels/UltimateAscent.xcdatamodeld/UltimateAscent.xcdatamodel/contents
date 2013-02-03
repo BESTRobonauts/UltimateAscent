@@ -6,12 +6,12 @@
         <attribute name="matchType" optional="YES" attributeType="String" maxValueString="100" defaultValueString="Seeding" syncable="YES"/>
         <attribute name="number" optional="YES" attributeType="Integer 16" maxValueString="250" defaultValueString="0" syncable="YES"/>
         <attribute name="redScore" optional="YES" attributeType="Integer 16" maxValueString="250" defaultValueString="-1" syncable="YES"/>
+        <attribute name="tournament" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="score" optional="YES" toMany="YES" maxCount="6" deletionRule="Cascade" destinationEntity="TeamScore" inverseName="match" inverseEntity="TeamScore" syncable="YES"/>
-        <relationship name="tournament" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="TournamentData" inverseName="match" inverseEntity="TournamentData" syncable="YES"/>
     </entity>
     <entity name="SettingsData" representedClassName="SettingsData" syncable="YES">
         <attribute name="mode" attributeType="String" defaultValueString="Test" syncable="YES"/>
-        <relationship name="tournament" optional="YES" minCount="1" maxCount="1" deletionRule="No Action" destinationEntity="TournamentData" inverseName="settings" inverseEntity="TournamentData" syncable="YES"/>
+        <relationship name="tournament" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="TournamentData" inverseName="settings" inverseEntity="TournamentData" syncable="YES"/>
     </entity>
     <entity name="TeamData" representedClassName="TeamData" syncable="YES">
         <attribute name="climb" optional="YES" attributeType="Integer 16" minValueString="-1" maxValueString="2" defaultValueString="-1" syncable="YES"/>
@@ -47,7 +47,6 @@
     <entity name="TournamentData" representedClassName="TournamentData" syncable="YES">
         <attribute name="directory" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="match" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MatchData" inverseName="tournament" inverseEntity="MatchData" syncable="YES"/>
         <relationship name="score" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TeamScore" inverseName="tournament" inverseEntity="TeamScore" syncable="YES"/>
         <relationship name="settings" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="SettingsData" inverseName="tournament" inverseEntity="SettingsData" syncable="YES"/>
         <relationship name="teams" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TeamData" inverseName="tournament" inverseEntity="TeamData" syncable="YES"/>
@@ -56,7 +55,7 @@
         <element name="MatchData" positionX="27" positionY="33" width="128" height="150"/>
         <element name="SettingsData" positionX="18" positionY="-144" width="128" height="75"/>
         <element name="TeamData" positionX="432" positionY="24" width="128" height="193"/>
-        <element name="TeamScore" positionX="207" positionY="-180" width="128" height="298"/>
-        <element name="TournamentData" positionX="205" positionY="152" width="128" height="133"/>
+        <element name="TeamScore" positionX="207" positionY="-180" width="128" height="300"/>
+        <element name="TournamentData" positionX="205" positionY="152" width="128" height="120"/>
     </elements>
 </model>

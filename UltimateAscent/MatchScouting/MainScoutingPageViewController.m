@@ -13,6 +13,7 @@
 #import "TeamScore.h"
 #import "TeamData.h"
 #import "TournamentData.h"
+#import "SettingsData.h"
 #import "DataManager.h"
 #import "parseCSV.h"
 
@@ -22,6 +23,7 @@
 @synthesize rowIndex;
 @synthesize sectionIndex;
 @synthesize teamIndex;
+@synthesize settings;
 @synthesize currentMatch;
 @synthesize currentTeam;
 @synthesize dataChange;
@@ -59,14 +61,14 @@
 @synthesize balanced;
 @synthesize modedRamp;
 @synthesize notes;
-@synthesize teleOpMiss;
-@synthesize teleOpHigh;
-@synthesize teleOpMedium;
-@synthesize teleOpLow;
-@synthesize autonMiss;
-@synthesize autonHigh;
-@synthesize autonMedium;
-@synthesize autonLow;
+@synthesize teleOpMissButton;
+@synthesize teleOpHighButton;
+@synthesize teleOpMediumButton;
+@synthesize teleOpLowButton;
+@synthesize autonMissButton;
+@synthesize autonHighButton;
+@synthesize autonMediumButton;
+@synthesize autonLowButton;
 
 // Other Stuff
 @synthesize redScore;
@@ -114,6 +116,13 @@
         DataManager *dataManager = [DataManager new];
         managedObjectContext = [dataManager managedObjectContext];
     }
+    [self retrieveSettings];
+    if (settings) {
+        self.title = settings.tournament.name;
+    }
+    else {
+        self.title = @"Match Scouting";
+    }
     if (![[self fetchedResultsController] performFetch:&error]) {
         /*
          Replace this implementation with code to handle the error appropriately.
@@ -142,20 +151,21 @@
         sectionIndex = [[[csvContent objectAtIndex:0] objectAtIndex:1] intValue];
         teamIndex = [[[csvContent objectAtIndex:0] objectAtIndex:2] intValue];
     }
+    
     [self SetButtonDefaults:prevMatch];
     [self SetButtonDefaults:nextMatch];
     [self SetTextBoxDefaults:matchNumber];
     [self SetButtonDefaults:matchType];
     [self SetTextBoxDefaults:teamName];
     [self SetButtonDefaults:teamNumber];
-    [self SetButtonDefaults:teleOpMiss];
-    [self SetButtonDefaults:teleOpHigh];
-    [self SetButtonDefaults:teleOpMedium];
-    [self SetButtonDefaults:teleOpLow];
-    [self SetButtonDefaults:autonMiss];
-    [self SetButtonDefaults:autonHigh];
-    [self SetButtonDefaults:autonMedium];
-    [self SetButtonDefaults:autonLow];
+    [self SetButtonDefaults:teleOpMissButton];
+    [self SetButtonDefaults:teleOpHighButton];
+    [self SetButtonDefaults:teleOpMediumButton];
+    [self SetButtonDefaults:teleOpLowButton];
+    [self SetButtonDefaults:autonMissButton];
+    [self SetButtonDefaults:autonHighButton];
+    [self SetButtonDefaults:autonMediumButton];
+    [self SetButtonDefaults:autonLowButton];
     [self SetTextBoxDefaults:redScore];
     [self SetTextBoxDefaults:blueScore];
 
@@ -203,8 +213,9 @@
     
     NSIndexPath *matchIndex = [NSIndexPath indexPathForRow:rowIndex inSection:sectionIndex];
     currentMatch = [fetchedResultsController objectAtIndexPath:matchIndex];
+    NSLog(@"Match = %@, Type = %@, Tournament = %@", currentMatch.number, currentMatch.matchType, currentMatch.tournament);
+    NSLog(@"Settings = %@", settings.tournament.name);
     [self setTeamList];
-    self.title = currentMatch.tournament.name;
     baseDrawingPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Library/FieldDrawings/"];
     // NSLog(@"Field Drawing Path = %@", baseDrawingPath);
     dataChange = NO;
@@ -568,65 +579,87 @@
 }
 
 // Keeping the score
--(IBAction)teleOpMissButton {
-    int score = [teleOpMiss.titleLabel.text intValue];
+- (IBAction)scoreButtons:(id)sender {    
+    UIButton * PressedButton = (UIButton*)sender;
+    
+    if (PressedButton == teleOpMissButton) {
+        [self teleOpMiss];
+    } else if (PressedButton == teleOpHighButton) {
+        [self teleOpHigh];
+    } else if (PressedButton == teleOpMediumButton) {
+    [self teleOpMedium];
+    } else if (PressedButton == teleOpLowButton) {
+        [self teleOpLow];
+    } else if (PressedButton == autonMissButton) {
+        [self autonMiss];
+    } else if (PressedButton == autonHighButton) {
+        [self autonHigh];
+    } else if (PressedButton == autonMediumButton) {
+        [self autonMedium];
+    } else if (PressedButton == autonLowButton) {
+        [self autonLow];
+    }
+}
+
+-(void)teleOpMiss {
+    int score = [teleOpMissButton.titleLabel.text intValue];
     score++;
 //    currentTeam.teleOpScore.missedBaskets = [NSNumber numberWithInt:score];
 //    [teleOpMiss setTitle:[NSString stringWithFormat:@"%d", [currentTeam.teleOpScore.missedBaskets intValue]] forState:UIControlStateNormal];
     dataChange = YES;
 }
 
--(IBAction)teleOpHighButton {
-    int score = [teleOpHigh.titleLabel.text intValue];
+-(void)teleOpHigh {
+    int score = [teleOpHighButton.titleLabel.text intValue];
     score++;
 //    currentTeam.teleOpScore.highBaskets = [NSNumber numberWithInt:score];
 //    [teleOpHigh setTitle:[NSString stringWithFormat:@"%d", [currentTeam.teleOpScore.highBaskets intValue]] forState:UIControlStateNormal];
     dataChange = YES;
 }
 
--(IBAction)teleOpMediumButton {
-    int score = [teleOpMedium.titleLabel.text intValue];
+-(void)teleOpMedium {
+    int score = [teleOpMediumButton.titleLabel.text intValue];
     score++;
 //    currentTeam.teleOpScore.midBaskets = [NSNumber numberWithInt:score];
 //    [teleOpMedium setTitle:[NSString stringWithFormat:@"%d", [currentTeam.teleOpScore.midBaskets intValue]] forState:UIControlStateNormal];
     dataChange = YES;
 }
 
--(IBAction)teleOpLowButton {
-    int score = [teleOpLow.titleLabel.text intValue];
+-(void)teleOpLow {
+    int score = [teleOpLowButton.titleLabel.text intValue];
     score++;
 //    currentTeam.teleOpScore.lowBaskets = [NSNumber numberWithInt:score];
 //    [teleOpLow setTitle:[NSString stringWithFormat:@"%d", [currentTeam.teleOpScore.lowBaskets intValue]] forState:UIControlStateNormal];
     dataChange = YES;
 }
 
--(IBAction)autonMissButton {
-    int score = [autonMiss.titleLabel.text intValue];
+-(void)autonMiss {
+    int score = [autonMissButton.titleLabel.text intValue];
     score++;
 //    currentTeam.autonScore.missedBaskets = [NSNumber numberWithInt:score];
 //    [autonMiss setTitle:[NSString stringWithFormat:@"%d", [currentTeam.autonScore.missedBaskets intValue]] forState:UIControlStateNormal];
     dataChange = YES;
 }
 
--(IBAction)autonHighButton {
-    int score = [autonHigh.titleLabel.text intValue];
+-(void)autonHigh {
+    int score = [autonHighButton.titleLabel.text intValue];
     score++;
 //    currentTeam.autonScore.highBaskets = [NSNumber numberWithInt:score];
 //    [autonHigh setTitle:[NSString stringWithFormat:@"%d", [currentTeam.autonScore.highBaskets intValue]] forState:UIControlStateNormal];
     dataChange = YES;
 }
 
--(IBAction)autonMediumButton {
-    int score = [autonMedium.titleLabel.text intValue];
+-(void)autonMedium {
+    int score = [autonMediumButton.titleLabel.text intValue];
     score++;
 //    currentTeam.autonScore.midBaskets = [NSNumber numberWithInt:score];
 //    [autonMedium setTitle:[NSString stringWithFormat:@"%d", [currentTeam.autonScore.midBaskets intValue]] forState:UIControlStateNormal];
     dataChange = YES;
 }
 
--(IBAction)autonLowButton {
+-(void)autonLow {
     NSLog(@"Auton Low");
-    int score = [autonLow.titleLabel.text intValue];
+    int score = [autonLowButton.titleLabel.text intValue];
     score++;
 //    currentTeam.autonScore.lowBaskets = [NSNumber numberWithInt:score];
 //    [autonLow setTitle:[NSString stringWithFormat:@"%d", [currentTeam.autonScore.lowBaskets intValue]] forState:UIControlStateNormal];
@@ -694,8 +727,8 @@
         blueScore.text = [NSString stringWithFormat:@"%d", [currentMatch.blueScore intValue]];
     }
     
-//    [teamNumber setTitle:[NSString stringWithFormat:@"%d", [currentTeam.teamInfo.number intValue]] forState:UIControlStateNormal];
-//    teamName.text = currentTeam.teamInfo.name;
+   [teamNumber setTitle:[NSString stringWithFormat:@"%d", [currentTeam.team.number intValue]] forState:UIControlStateNormal];
+    teamName.text = currentTeam.team.name;
     driverRating.value =  [currentTeam.driverRating floatValue];
 //    if ([currentTeam.teleOpScore.crossesHump intValue] == 0) [crossesHump setOn:NO animated:YES];
 //    else [crossesHump setOn:YES animated:YES];
@@ -865,6 +898,30 @@
     }
 }
 
+- (void)retrieveSettings {
+    NSError *error;
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"SettingsData" inManagedObjectContext:managedObjectContext];
+    [fetchRequest setEntity:entity];
+    NSArray *settingsRecord = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    if(!settingsRecord) {
+        NSLog(@"Karma disruption error");
+        settings = Nil;
+    }
+    else {
+        if([settingsRecord count] == 0) {  // No Settings Exists
+            NSLog(@"Karma disruption error");
+            settings = Nil;
+        }
+        else {
+            settings = [settingsRecord objectAtIndex:0];
+        }
+    }
+    
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     switch (interfaceOrientation) {
@@ -907,7 +964,9 @@
         NSSortDescriptor *typeDescriptor = [[NSSortDescriptor alloc] initWithKey:@"matchType" ascending:YES];
         NSSortDescriptor *numberDescriptor = [[NSSortDescriptor alloc] initWithKey:@"number" ascending:YES];
         NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:typeDescriptor, numberDescriptor, nil];
-        
+        // Add the search for tournament name
+        NSPredicate *pred = [NSPredicate predicateWithFormat:@"tournament CONTAINS %@", settings.tournament.name];
+        [fetchRequest setPredicate:pred];
         [fetchRequest setSortDescriptors:sortDescriptors];
         
         // Edit the section name key path and cache name if appropriate.

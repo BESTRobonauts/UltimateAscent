@@ -2,13 +2,12 @@
 //  MatchData.m
 //  UltimateAscent
 //
-//  Created by FRC on 1/30/13.
+//  Created by FRC on 2/2/13.
 //  Copyright (c) 2013 FRC. All rights reserved.
 //
 
 #import "MatchData.h"
 #import "TeamScore.h"
-#import "TournamentData.h"
 
 
 @implementation MatchData
@@ -18,7 +17,7 @@
 @dynamic matchType;
 @dynamic number;
 @dynamic redScore;
-@dynamic score;
 @dynamic tournament;
+@dynamic score;
 
 @end
