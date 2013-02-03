@@ -209,20 +209,20 @@
 }
 
 -(IBAction) useCamera: (id)sender
-{
+{   NSLog(@"Take photo");
     if ([UIImagePickerController isSourceTypeAvailable:
          UIImagePickerControllerSourceTypeCamera])
     {
         UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
         imagePicker.delegate = self;
         imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-        //        imagePicker.mediaTypes = [NSArray arrayWithObjects:
-        //                                  (NSString *) kUTTypeImage,
-        //                                  nil];
-        //        imagePicker.allowsEditing = NO;
+        //          imagePicker.mediaTypes = [NSArray arrayWithObjects:
+        //                                    (NSString *) kUTTypeImage,
+        //                                    nil];
+                  imagePicker.allowsEditing = NO;
         [self presentModalViewController:imagePicker
                                 animated:YES];
-        //        newMedia = YES;
+         //         newMedia = YES;
     }
 }
 
