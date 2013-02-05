@@ -12,8 +12,10 @@
 @class MatchData;
 @class TeamScore;
 
-@interface TeamDetailViewController : UIViewController <UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPopoverControllerDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface TeamDetailViewController : UIViewController <UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPopoverControllerDelegate, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate>
 
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, retain) TeamData *team;
 @property (nonatomic, retain) IBOutlet UILabel *numberLabel;
 @property (nonatomic, retain) IBOutlet UITextField *nameTextField;
