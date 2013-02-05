@@ -8,11 +8,12 @@
 
 #import "TeamDetailViewController.h"
 #import "TeamData.h"
-//#import "TeamScore.h"
+#import "TeamScore.h"
 #import "MatchData.h"
-//#import "SpecificGameData.h"
+#import "DataManager.h"
 
 @implementation TeamDetailViewController
+@synthesize managedObjectContext, fetchedResultsController;
 @synthesize team;
 @synthesize numberLabel, nameTextField, notesTextField;
 @synthesize brakes, stinger, moding, orientation;
@@ -55,6 +56,32 @@
 - (void)viewDidLoad
 {
     NSLog(@"Team Detail");
+    NSLog(@"Team List viewDidLoad");
+    NSError *error = nil;
+    if (!managedObjectContext) {
+        DataManager *dataManager = [DataManager new];
+        managedObjectContext = [dataManager managedObjectContext];
+    }
+    
+  /*  [self retrieveSettings];
+    if (settings) {
+        self.title =  [NSString stringWithFormat:@"%@ Team List", settings.tournament.name];
+    }
+    else {
+        self.title = @"Team List";
+    }*/
+  
+  //  if (![[self fetchedResultsController] performFetch:&error]) {
+        /*
+         Replace this implementation with code to handle the error appropriately.
+         abort() causes the application to generate a crash log and terminate. 
+         You should not use this function in a shipping application, 
+         although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+         */
+       // NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+       // abort();
+   // }		
+
     numberLabel.font = [UIFont fontWithName:@"Helvetica" size:24.0];
     [self SetTextBoxDefaults:nameTextField];
     [self SetTextBoxDefaults:notesTextField];
@@ -113,7 +140,7 @@
     photoPath = [NSHomeDirectory() stringByAppendingPathComponent:path];
     [self getPhoto];
     dataChange = NO;
-//    NSLog(@"Showing team = %@", team);
+    NSLog(@"Showing team = %@", team);
 }
 
 -(void)setSegments {
@@ -327,57 +354,57 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-   /* int x = [team.matchScore count];
+    int x = [team.match count];
 //    NSLog(@"Matchscore count = %d", x);
-    return x; */
+    return x; 
 }
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-  /*  NSArray* objectsArray = [team.matchScore allObjects];
+    NSArray* objectsArray = [team.match allObjects];
     TeamScore *score = [objectsArray objectAtIndex:indexPath.row];
-    MatchData *match = [self getMatchData:score]; */
-//    NSLog(@"Match Notes = %@", score.notes);
-//    TeamData *info = [fetchedResultsController objectAtIndexPath:indexPath];
-    // Configure the cell...
-    // Set a background for the cell
-//    UIImageView *tableBackground = [[UIImageView alloc] initWithFrame:cell.frame];
-//    UIImage *image = [UIImage imageNamed:@"Blue Fade.gif"];
-//    tableBackground.image = image;
-//    cell.backgroundView = imageView;
+    MatchData *match = [self getMatchData:score]; 
+    NSLog(@"Match Notes = %@", score.notes);
+    TeamData *info = [fetchedResultsController objectAtIndexPath:indexPath];
+       // Configure the cell...
+       // Set a background for the cell
+     // UIImageView *tableBackground = [[UIImageView alloc] initWithFrame:cell.frame];
+     // UIImage *image = [UIImage imageNamed:@"Blue Fade.gif"];
+     // tableBackground.image = image;
+    //  cell.backgroundView = imageView; Change Varable Name "soon" 
     
 	UILabel *matchNumber = (UILabel *)[cell viewWithTag:10];
-//	matchNumber.text = [NSString stringWithFormat:@"%d", [match.number intValue]];
-//	numberLabel.text = [NSString stringWithFormat:@"%d", [info.number intValue]];
+	matchNumber.text = [NSString stringWithFormat:@"%d", [match.number intValue]];
+        numberLabel.text = [NSString stringWithFormat:@"%d", [info.number intValue]];
 
     
 	UILabel *typeLabel = (UILabel *)[cell viewWithTag:20];
-  //  typeLabel.text = [match.matchType substringToIndex:4];
+        typeLabel.text = [match.matchType substringToIndex:4];
 
-// int autonPoints = [score.autonScore.highBaskets intValue]*6 + [score.autonScore.midBaskets intValue]*5 + [score.autonScore.lowBaskets intValue]*4;
+    int autonPoints = [score.autonHigh intValue]*6 + [score.autonMid intValue]*5 + [score.autonLow intValue]*4;
 	UILabel *autonLabel = (UILabel *)[cell viewWithTag:30];
-//	autonLabel.text = [NSString stringWithFormat:@"%d", autonPoints];
+	autonLabel.text = [NSString stringWithFormat:@"%d", autonPoints];
 
-// int teleOpPoints = [score.teleOpScore.highBaskets intValue]*3 + [score.teleOpScore.midBaskets intValue]*2 + [score.teleOpScore.lowBaskets intValue];
+    int teleOpPoints = [score.teleOpHigh intValue]*3 + [score.teleOpMid intValue]*2 + [score.teleOpLow intValue];
 	UILabel *teleOpLabel = (UILabel *)[cell viewWithTag:40];
-//	teleOpLabel.text = [NSString stringWithFormat:@"%d", teleOpPoints];
+        teleOpLabel.text = [NSString stringWithFormat:@"%d", teleOpPoints];
 
 
-/*    int basketsMade = [score.autonScore.highBaskets intValue] + [score.autonScore.midBaskets intValue] + [score.autonScore.lowBaskets intValue];
-    int totalBaskets = basketsMade + [score.autonScore.missedBaskets intValue];
+    int basketsMade = [score.autonHigh intValue] + [score.autonMid intValue] + [score.autonLow intValue];
+    int totalBaskets = basketsMade + [score.autonMissed intValue];
     int autonAccuracy;
-    if (totalBaskets) autonAccuracy = 100 * basketsMade / (basketsMade + [score.autonScore.missedBaskets intValue]);
+    if (totalBaskets) autonAccuracy = 100 * basketsMade / (basketsMade + [score.autonMissed intValue]);
     else autonAccuracy = 0;
     UILabel *autonAccLabel = (UILabel *)[cell viewWithTag:50];
 	autonAccLabel.text = [NSString stringWithFormat:@"%d%%", autonAccuracy];
 
-    basketsMade = [score.teleOpScore.highBaskets intValue] + [score.teleOpScore.midBaskets intValue] + [score.teleOpScore.lowBaskets intValue];
-    totalBaskets = basketsMade + [score.teleOpScore.missedBaskets intValue];
+    basketsMade = [score.teleOpHigh intValue] + [score.teleOpMid intValue] + [score.teleOpLow intValue];
+    totalBaskets = basketsMade + [score.teleOpMissed intValue];
     int teleOpAccuracy;
-    if (totalBaskets) teleOpAccuracy = 100 * basketsMade / (basketsMade + [score.teleOpScore.missedBaskets intValue]);
+    if (totalBaskets) teleOpAccuracy = 100 * basketsMade / (basketsMade + [score.teleOpMissed intValue]);
     else teleOpAccuracy = 0;
     
 	UILabel *teleOpAccLabel = (UILabel *)[cell viewWithTag:60];
-	teleOpAccLabel.text = [NSString stringWithFormat:@"%d%%", teleOpAccuracy]; */
+	teleOpAccLabel.text = [NSString stringWithFormat:@"%d%%", teleOpAccuracy]; 
 
 }
 
@@ -392,14 +419,14 @@
 }
 
 -(MatchData *)getMatchData: (TeamScore *) teamScore {
-   /* if (teamScore.red1) return teamScore.red1;
+/*  if (teamScore.red1) return teamScore.red1;
     if (teamScore.red2) return teamScore.red2;
     if (teamScore.red3) return teamScore.red3;
     if (teamScore.blue1) return teamScore.blue1;
     if (teamScore.blue2) return teamScore.blue2;
-    if (teamScore.blue3) return teamScore.blue3;
+    if (teamScore.blue3) return teamScore.blue3; */
     
-    return nil; */
+    return nil; 
 }
 
 - (void)viewDidUnload
@@ -425,5 +452,101 @@
 -(void)SetTextBoxDefaults:(UITextField *)currentTextField {
     currentTextField.font = [UIFont fontWithName:@"Helvetica" size:24.0];
 }
+
+#pragma mark -
+#pragma mark Match Data Management
+
+- (NSFetchedResultsController *)fetchedResultsController {
+    // Set up the fetched results controller if needed.
+    if (fetchedResultsController == nil) {
+        // Create the fetch request for the entity.
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        // Edit the entity name as appropriate.
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"TeamData" inManagedObjectContext:managedObjectContext];
+        [fetchRequest setEntity:entity];
+        
+        // Edit the sort key as appropriate.
+        NSSortDescriptor *numberDescriptor = [[NSSortDescriptor alloc] initWithKey:@"match.number" ascending:YES];
+        NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:numberDescriptor, nil];
+        // Add the search for tournament name
+        NSPredicate *numPred = [NSPredicate predicateWithFormat:@"number = %@", team.number];
+      //  NSPredicate *pred = [NSPredicate predicateWithFormat:@"ANY tournament = %@", settings.tournament];
+     //   [fetchRequest setPredicate:numPred];
+        
+     //   [fetchRequest setSortDescriptors:sortDescriptors];
+        [fetchRequest setFetchBatchSize:20];
+        
+        // Edit the section name key path and cache name if appropriate.
+        // nil for section name key path means "no sections".
+        NSFetchedResultsController *aFetchedResultsController = 
+        [[NSFetchedResultsController alloc] 
+         initWithFetchRequest:fetchRequest 
+         managedObjectContext:managedObjectContext 
+         sectionNameKeyPath:nil 
+         cacheName:@"Root"];
+        aFetchedResultsController.delegate = self;
+        self.fetchedResultsController = aFetchedResultsController;
+        
+    }
+    
+	return fetchedResultsController;
+}    
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    // The fetch controller is about to start sending change notifications, so prepare the table view for updates.
+    [self.matchInfo beginUpdates];
+}
+
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
+    
+    UITableView *tableView = self.matchInfo;
+    
+    switch(type) {
+            
+        case NSFetchedResultsChangeInsert:
+            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            NSLog(@"NSFetchedResultsChangeUpdate");
+            dataChange = YES;
+            [self configureCell:[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            break;
+            
+        case NSFetchedResultsChangeMove:
+            [tableView deleteRowsAtIndexPaths:[NSArray
+                                               arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [tableView insertRowsAtIndexPaths:[NSArray
+                                               arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
+    
+    switch(type) {
+            
+        case NSFetchedResultsChangeInsert:
+            [self.matchInfo insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [self.matchInfo deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    // The fetch controller has sent all current change notifications, so tell the table view to process all updates.
+    [self.matchInfo endUpdates];
+}
+
 
 @end
