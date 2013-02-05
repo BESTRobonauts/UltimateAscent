@@ -604,56 +604,56 @@
 -(void)teleOpMiss {
     int score = [teleOpMissButton.titleLabel.text intValue];
     score++;
-//    currentTeam.teleOpScore.missedBaskets = [NSNumber numberWithInt:score];
-//    [teleOpMiss setTitle:[NSString stringWithFormat:@"%d", [currentTeam.teleOpScore.missedBaskets intValue]] forState:UIControlStateNormal];
+    currentTeam.teleOpMissed = [NSNumber numberWithInt:score];
+    [teleOpMissButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.teleOpMissed intValue]] forState:UIControlStateNormal];
     dataChange = YES;
 }
 
 -(void)teleOpHigh {
     int score = [teleOpHighButton.titleLabel.text intValue];
     score++;
-//    currentTeam.teleOpScore.highBaskets = [NSNumber numberWithInt:score];
-//    [teleOpHigh setTitle:[NSString stringWithFormat:@"%d", [currentTeam.teleOpScore.highBaskets intValue]] forState:UIControlStateNormal];
+    currentTeam.teleOpHigh = [NSNumber numberWithInt:score];
+    [teleOpHighButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.teleOpHigh intValue]] forState:UIControlStateNormal];
     dataChange = YES;
 }
 
 -(void)teleOpMedium {
     int score = [teleOpMediumButton.titleLabel.text intValue];
     score++;
-//    currentTeam.teleOpScore.midBaskets = [NSNumber numberWithInt:score];
-//    [teleOpMedium setTitle:[NSString stringWithFormat:@"%d", [currentTeam.teleOpScore.midBaskets intValue]] forState:UIControlStateNormal];
+    currentTeam.teleOpMid = [NSNumber numberWithInt:score];
+    [teleOpMediumButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.teleOpMid intValue]] forState:UIControlStateNormal];
     dataChange = YES;
 }
 
 -(void)teleOpLow {
     int score = [teleOpLowButton.titleLabel.text intValue];
     score++;
-//    currentTeam.teleOpScore.lowBaskets = [NSNumber numberWithInt:score];
-//    [teleOpLow setTitle:[NSString stringWithFormat:@"%d", [currentTeam.teleOpScore.lowBaskets intValue]] forState:UIControlStateNormal];
+    currentTeam.teleOpLow = [NSNumber numberWithInt:score];
+    [teleOpLowButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.teleOpLow intValue]] forState:UIControlStateNormal];
     dataChange = YES;
 }
 
 -(void)autonMiss {
     int score = [autonMissButton.titleLabel.text intValue];
     score++;
-//    currentTeam.autonScore.missedBaskets = [NSNumber numberWithInt:score];
-//    [autonMiss setTitle:[NSString stringWithFormat:@"%d", [currentTeam.autonScore.missedBaskets intValue]] forState:UIControlStateNormal];
+    currentTeam.autonMissed = [NSNumber numberWithInt:score];
+    [autonMissButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.autonMissed intValue]] forState:UIControlStateNormal];
     dataChange = YES;
 }
 
 -(void)autonHigh {
     int score = [autonHighButton.titleLabel.text intValue];
     score++;
-//    currentTeam.autonScore.highBaskets = [NSNumber numberWithInt:score];
-//    [autonHigh setTitle:[NSString stringWithFormat:@"%d", [currentTeam.autonScore.highBaskets intValue]] forState:UIControlStateNormal];
+    currentTeam.autonHigh = [NSNumber numberWithInt:score];
+    [autonHighButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.autonHigh intValue]] forState:UIControlStateNormal];
     dataChange = YES;
 }
 
 -(void)autonMedium {
     int score = [autonMediumButton.titleLabel.text intValue];
     score++;
-//    currentTeam.autonScore.midBaskets = [NSNumber numberWithInt:score];
-//    [autonMedium setTitle:[NSString stringWithFormat:@"%d", [currentTeam.autonScore.midBaskets intValue]] forState:UIControlStateNormal];
+    currentTeam.autonMid = [NSNumber numberWithInt:score];
+    [autonMediumButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.autonMid intValue]] forState:UIControlStateNormal];
     dataChange = YES;
 }
 
@@ -661,8 +661,8 @@
     NSLog(@"Auton Low");
     int score = [autonLowButton.titleLabel.text intValue];
     score++;
-//    currentTeam.autonScore.lowBaskets = [NSNumber numberWithInt:score];
-//    [autonLow setTitle:[NSString stringWithFormat:@"%d", [currentTeam.autonScore.lowBaskets intValue]] forState:UIControlStateNormal];
+    currentTeam.autonLow = [NSNumber numberWithInt:score];
+    [autonLowButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.autonLow intValue]] forState:UIControlStateNormal];
     dataChange = YES;
 }
 
@@ -674,7 +674,7 @@
     
     if (button == teamEdit) {
         TeamDetailViewController *detailViewController = [segue destinationViewController];
-//        detailViewController.team = currentTeam.teamInfo;
+        detailViewController.team = currentTeam.team;
     }
     else {
         MatchDetailViewController *detailViewController = [segue destinationViewController];
@@ -739,20 +739,21 @@
 /*
     if ([currentTeam.endGameScore.modedRamp intValue] == 0) [modedRamp setOn:NO animated:YES];
     else [modedRamp setOn:YES animated:YES];
+*/
     notes.text = currentTeam.notes;
     [alliance setTitle:[allianceList objectAtIndex:currentTeamIndex] forState:UIControlStateNormal];
 
 //    startingPosition.text =  [NSString stringWithFormat:@"%d", [currentTeam.startingPosition intValue]];
-        
     
-    [teleOpMiss setTitle:[NSString stringWithFormat:@"%d", [currentTeam.teleOpScore.missedBaskets intValue]] forState:UIControlStateNormal];
-    [teleOpHigh setTitle:[NSString stringWithFormat:@"%d", [currentTeam.teleOpScore.highBaskets intValue]] forState:UIControlStateNormal];
-    [teleOpMedium setTitle:[NSString stringWithFormat:@"%d", [currentTeam.teleOpScore.midBaskets intValue]] forState:UIControlStateNormal];
-    [teleOpLow setTitle:[NSString stringWithFormat:@"%d", [currentTeam.teleOpScore.lowBaskets intValue]] forState:UIControlStateNormal];
-    [autonMiss setTitle:[NSString stringWithFormat:@"%d", [currentTeam.autonScore.missedBaskets intValue]] forState:UIControlStateNormal];
-    [autonHigh setTitle:[NSString stringWithFormat:@"%d", [currentTeam.autonScore.highBaskets intValue]] forState:UIControlStateNormal];
-    [autonMedium setTitle:[NSString stringWithFormat:@"%d", [currentTeam.autonScore.midBaskets intValue]] forState:UIControlStateNormal];
-    [autonLow setTitle:[NSString stringWithFormat:@"%d", [currentTeam.autonScore.lowBaskets intValue]] forState:UIControlStateNormal];
+    [teleOpMissButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.teleOpMissed intValue]] forState:UIControlStateNormal];
+    [teleOpHighButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.teleOpHigh intValue]] forState:UIControlStateNormal];
+    [teleOpMediumButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.teleOpMid intValue]] forState:UIControlStateNormal];
+    [teleOpLowButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.teleOpLow intValue]] forState:UIControlStateNormal];
+    [autonMissButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.autonMissed intValue]] forState:UIControlStateNormal];
+    [autonHighButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.autonHigh intValue]] forState:UIControlStateNormal];
+    [autonMediumButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.autonMid intValue]] forState:UIControlStateNormal];
+    [autonLowButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.autonLow intValue]] forState:UIControlStateNormal];
+/*
     // NSLog(@"Load the Picture");
     fieldDrawingPath = [baseDrawingPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%d", [currentTeam.teamInfo.number intValue]]];
     
