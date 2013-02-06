@@ -174,7 +174,7 @@
 
     NSMutableArray *itemArray = [NSMutableArray arrayWithObjects: @"None", @"One", @"Two", @"Three", nil];
     balanced = [[UISegmentedControl alloc] initWithItems:itemArray];
-    balanced.frame = CGRectMake(540, 441, 207, 44);
+    balanced.frame = CGRectMake(816, 575, 207, 44);
     [balanced addTarget:self action:@selector(setBalanceSegment:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:balanced];
     
@@ -683,6 +683,7 @@
 }
 
 -(void)setTeamList {
+    NSSortDescriptor *allianceDescriptor = [[NSSortDescriptor alloc] initWithKey:@"score.alliance" ascending:YES];
     if (teamList == nil) {
         self.teamList = [NSMutableArray array];
 //        [teamList addObject:[NSString stringWithFormat:@"%d", [currentMatch.red1.teamInfo.number intValue]]];
@@ -927,16 +928,16 @@
 {
     switch (interfaceOrientation) {
         case UIInterfaceOrientationPortrait:
-            return YES;
+            return NO;
             break;
         case UIInterfaceOrientationLandscapeLeft:
-            return NO;
+            return YES;
             break;
         case UIInterfaceOrientationLandscapeRight:
-            return NO;
+            return YES;
             break;
             case UIInterfaceOrientationPortraitUpsideDown:
-            return YES;
+            return NO;
             break;
             
         default:
