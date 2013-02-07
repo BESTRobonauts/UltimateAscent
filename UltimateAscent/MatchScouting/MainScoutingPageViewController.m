@@ -1,6 +1,6 @@
 //
 //  MainScoutingPageViewController.m
-//  ReboundRumble
+//  UltimateAscent
 //
 //  Created by Kris Pettinger on 7/15/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
@@ -775,14 +775,14 @@
             [fieldImage setImage:[UIImage imageWithContentsOfFile:path]];
         }
         else {
-            [fieldImage setImage:[UIImage imageNamed:@"ReboundRumbleField.png"]];
+            [fieldImage setImage:[UIImage imageNamed:@"2013_field.png"]];
             NSLog(@"Error reading field drawing file %@", fieldDrawingFile);
         }
         autonMode = NO;
     }
     else {
         // NSLog(@"Field Drawing= %@", currentTeam.fieldDrawing);
-        [fieldImage setImage:[UIImage imageNamed:@"ReboundRumbleField.png"]];
+        [fieldImage setImage:[UIImage imageNamed:@"2013_field.png"]];
         NSString *match;
         if ([currentMatch.number intValue] < 10) {
             match = [NSString stringWithFormat:@"M%c%@", [currentMatch.matchType characterAtIndex:0], [NSString stringWithFormat:@"00%d", [currentMatch.number intValue]]];
@@ -802,7 +802,7 @@
         // Since no field drawing exists, we guess that the user wants to start in auton mode
         autonMode = YES;
         fieldDrawingFile = [NSString stringWithFormat:@"%@_%@.png", match, team];
-        [fieldImage setImage:[UIImage imageNamed:@"ReboundRumbleField.png"]];
+        [fieldImage setImage:[UIImage imageNamed:@"2013_field.png"]];
     }
     [self autonModeSettings:autonMode];
 }
@@ -915,11 +915,14 @@
         green = 190.0/255.0;
         blue = 0.0/255.0;        
         [autonModeButton setBackgroundImage:[UIImage imageNamed:@"Auton Red.jpg"] forState:UIControlStateNormal];
+        [autonModeButton setTitle:@"Auton" forState:UIControlStateNormal];
     }
     else {
         red = 0.0/255.0;
         green = 0.0/255.0;
         blue = 0.0/255.0;        
+        [autonModeButton setBackgroundImage:[UIImage imageNamed:@"TeleOp Blue.jpg"] forState:UIControlStateNormal];
+        [autonModeButton setTitle:@"TeleOp" forState:UIControlStateNormal];
     }
     
 }
@@ -935,7 +938,29 @@
                 else {
                     [self teleOpHigh];
                 }
+            } else if (i == 1) {
+                if (autonMode) {
+                    [self autonMiss];
+                }
+                else {
+                    [self teleOpMiss];
+                }
+            } else if (i == 2) {
+                if (autonMode) {
+                    [self autonMedium];
+                }
+                else {
+                    [self teleOpMedium];
+                }
+            } else if (i == 3) {
+                if (autonMode) {
+                    [self autonLow];
+                }
+                else {
+                    [self teleOpLow];
+                }
             }
+        
             NSLog(@"score selection = %@", [scoreList objectAtIndex:i]);
             break;
         }
