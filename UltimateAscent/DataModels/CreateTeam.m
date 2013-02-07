@@ -54,19 +54,24 @@
         TeamData *team = [NSEntityDescription insertNewObjectForEntityForName:@"TeamData"
                                                            inManagedObjectContext:managedObjectContext];        
         switch ([data count]) {
-            case 8:
+            case 5:
                 team.history = [data objectAtIndex: 4];
-            case 7:
+            case 4:
                  team.notes = [data objectAtIndex: 3];
+/*
             case 6:
                 number = [NSNumber numberWithInt:[[data objectAtIndex:4] intValue]];
-                team.down = number;
+                team.intakeInverted = number;
             case 5:
                 number = [NSNumber numberWithInt:[[data objectAtIndex:3] intValue]];
-                team.intake = number;
+                team.intakeFloor = number;
+            case 5:
+                number = [NSNumber numberWithInt:[[data objectAtIndex:3] intValue]];
+                team.intakeStation = number;
             case 4:
                 number = [NSNumber numberWithInt:[[data objectAtIndex:2] intValue]];
-                team.climb = number;
+                team.climbType = number;
+ */
             case 3:
                 tournament = [data objectAtIndex: 2];
                 tournamentRecord = [self getTournamentRecord:tournament];
@@ -148,9 +153,10 @@
 -(void)setTeamDefaults:(TeamData *)blankTeam {
     blankTeam.number = [NSNumber numberWithInt:0];
     blankTeam.name = @"";
-    blankTeam.climb = [NSNumber numberWithInt:-1];
-    blankTeam.intake = [NSNumber numberWithInt:-1];
-    blankTeam.down = [NSNumber numberWithInt:0];
+    blankTeam.climbType = [NSNumber numberWithInt:-1];
+    blankTeam.intakeFloor = [NSNumber numberWithInt:-1];
+    blankTeam.intakeStation = [NSNumber numberWithInt:-1];
+    blankTeam.intakeInverted = [NSNumber numberWithInt:-1];
     blankTeam.notes = @"";
     blankTeam.history = @"";
     blankTeam.saved = [NSNumber numberWithInt:0];

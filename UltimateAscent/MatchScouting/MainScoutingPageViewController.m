@@ -82,7 +82,7 @@
 @synthesize fieldDrawingPath;
 @synthesize baseDrawingPath;
 @synthesize fieldDrawingFile;
-@synthesize fieldDrawingChange;// Team Picker
+@synthesize fieldDrawingChange;
 @synthesize scoreList;
 @synthesize scorePicker;
 @synthesize scorePickerPopover;
@@ -216,7 +216,7 @@
     currentMatch = [fetchedResultsController objectAtIndexPath:matchIndex];
     NSLog(@"Match = %@, Type = %@, Tournament = %@", currentMatch.number, currentMatch.matchType, currentMatch.tournament);
     NSLog(@"Settings = %@", settings.tournament.name);
-    baseDrawingPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Library/FieldDrawings/"];
+    baseDrawingPath = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"Library/FieldDrawings/%@", settings.tournament.directory]];
     // NSLog(@"Field Drawing Path = %@", baseDrawingPath);
     dataChange = NO;
     fieldDrawingChange = NO;
@@ -261,15 +261,15 @@
             }
         }
         NSString *path;
-/*        if (!currentTeam.fieldDrawing) {
+        if (!currentTeam.fieldDrawing) {
             currentTeam.fieldDrawing = fieldDrawingFile;
-            // Set the data change flag force the save of the fieldDrawing file name
+            // Set the data change flag to force the save of the fieldDrawing file name
             dataChange = YES;
         }
         path = [fieldDrawingPath stringByAppendingPathComponent:currentTeam.fieldDrawing];
         [UIImagePNGRepresentation(fieldImage.image) writeToFile:path atomically:YES];
         // NSLog(@"Drawing path = %@", fieldDrawingFile);
-        fieldDrawingChange = NO;*/
+        fieldDrawingChange = NO;
     }
     if (dataChange) {
         currentTeam.saved = [NSNumber numberWithInt:1];
@@ -763,12 +763,12 @@
     [autonHighButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.autonHigh intValue]] forState:UIControlStateNormal];
     [autonMediumButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.autonMid intValue]] forState:UIControlStateNormal];
     [autonLowButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.autonLow intValue]] forState:UIControlStateNormal];
-/*
+
     // NSLog(@"Load the Picture");
-    fieldDrawingPath = [baseDrawingPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%d", [currentTeam.teamInfo.number intValue]]];
+    fieldDrawingPath = [baseDrawingPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%d", [currentTeam.team.number intValue]]];
     
     // Check the database to see if this team and match have a drawing already
-   if (currentTeam.fieldDrawing) {
+    if (currentTeam.fieldDrawing) {
         // Load file, set file name to the name read, and load it as image
         // NSLog(@"Field Drawing= %@", currentTeam.fieldDrawing);
         fieldDrawingFile = currentTeam.fieldDrawing;
@@ -794,16 +794,16 @@
             match = [NSString stringWithFormat:@"M%c%@", [currentMatch.matchType characterAtIndex:0], [NSString stringWithFormat:@"%d", [currentMatch.number intValue]]];
         }
         NSString *team;
-        if ([currentTeam.teamInfo.number intValue] < 100) {
-            team = [NSString stringWithFormat:@"T%@", [NSString stringWithFormat:@"00%d", [currentTeam.teamInfo.number intValue]]];
-        } else if ( [currentTeam.teamInfo.number intValue] < 1000) {
-            team = [NSString stringWithFormat:@"T%@", [NSString stringWithFormat:@"0%d", [currentTeam.teamInfo.number intValue]]];
+        if ([currentTeam.team.number intValue] < 100) {
+            team = [NSString stringWithFormat:@"T%@", [NSString stringWithFormat:@"00%d", [currentTeam.team.number intValue]]];
+        } else if ( [currentTeam.team.number intValue] < 1000) {
+            team = [NSString stringWithFormat:@"T%@", [NSString stringWithFormat:@"0%d", [currentTeam.team.number intValue]]];
         } else {
-            team = [NSString stringWithFormat:@"T%@", [NSString stringWithFormat:@"%d", [currentTeam.teamInfo.number intValue]]];
+            team = [NSString stringWithFormat:@"T%@", [NSString stringWithFormat:@"%d", [currentTeam.team.number intValue]]];
         }
         fieldDrawingFile = [NSString stringWithFormat:@"%@_%@.png", match, team];
         [fieldImage setImage:[UIImage imageNamed:@"ReboundRumbleField.png"]];
-    } */
+    } 
 }
 
 -(TeamScore *)GetTeam:(NSUInteger)currentTeamIndex {

@@ -15,7 +15,7 @@
 @implementation TeamDetailViewController
 @synthesize team;
 @synthesize numberLabel, nameTextField, notesTextField;
-@synthesize brakes, stinger, moding, orientation;
+@synthesize stationIntake, floorIntake, invertDisks, orientation;
 @synthesize driveTrainTextField;
 @synthesize imageView, choosePhotoBtn, takePhotoBtn;
 @synthesize popoverController;
@@ -109,7 +109,7 @@
     nameTextField.text = team.name;
     historyLabel.text = team.history;
     notesTextField.text = team.notes;
-  //  driveTrainTextField.text = team.drivetrain;
+    driveTrainTextField.text = team.driveTrainNotes;
     [self setSegments];
     NSString *path = [NSString stringWithFormat:@"Library/RobotPhotos/%@", [NSString stringWithFormat:@"%d", [team.number intValue]]];
     photoPath = [NSHomeDirectory() stringByAppendingPathComponent:path];
@@ -120,16 +120,16 @@
 
 -(void)setSegments {
   /*  int value = [team.orientation intValue];
-    orientation.selectedSegmentIndex = value;
+    orientation.selectedSegmentIndex = value; */
 
-    value = [team.brakes intValue];
-    brakes.selectedSegmentIndex = value;
+    int value = [team.intakeStation intValue];
+    stationIntake.selectedSegmentIndex = value; 
 
-    value = [team.balance intValue];
-    stinger.selectedSegmentIndex = value;
+    value = [team.intakeFloor intValue];
+    floorIntake.selectedSegmentIndex = value;
 
-    value = [team.moding intValue];
-    moding.selectedSegmentIndex = value;    */
+    value = [team.intakeInverted intValue];
+    invertDisks.selectedSegmentIndex = value;
 }
 
 -(void)getSelection:(id) sender {
@@ -137,53 +137,49 @@
     NSNumber *current;
     current = [NSNumber numberWithInt:segmentedControl.selectedSegmentIndex];
 
-   /* if (segmentedControl == brakes) {
-            team.brakes = current;
+    if (segmentedControl == stationIntake) {
+            team.intakeStation = current;
     }
-    else if (segmentedControl == stinger) {
-        team.balance = current;
+    else if (segmentedControl == floorIntake) {
+        team.intakeFloor = current;
     }
-    else if (segmentedControl == moding) {
-        team.moding = current;
+
+    else if (segmentedControl == invertDisks) {
+        team.intakeInverted = current;
     }
+    /*
     else if (segmentedControl == orientation) {
         team.orientation = current;
-    }
-    dataChange = YES; */
+    } */
+    dataChange = YES;
 }
 
 -(void)createSegments {
 
     NSMutableArray *itemArray = [NSMutableArray arrayWithObjects: @"No", @"Yes", nil];
-    brakes = [[UISegmentedControl alloc] initWithItems:itemArray];
-    brakes.frame = CGRectMake(620, 305, 140, 44);
-    [brakes addTarget:self action:@selector(getSelection:) forControlEvents:UIControlEventTouchDown];
-    [self.view addSubview:brakes];
+    stationIntake = [[UISegmentedControl alloc] initWithItems:itemArray];
+    stationIntake.frame = CGRectMake(620, 305, 140, 44);
+    [stationIntake addTarget:self action:@selector(getSelection:) forControlEvents:UIControlEventValueChanged];
+    [self.view addSubview:stationIntake];
     
-    [itemArray replaceObjectAtIndex:0 withObject:@"None"];
-    [itemArray replaceObjectAtIndex:1 withObject:@"Stinger"];
-    [itemArray addObject:@"Other"];
-    stinger = [[UISegmentedControl alloc] initWithItems:itemArray];
-    stinger.frame = CGRectMake(396, 305, 210, 44);
-    [stinger addTarget:self action:@selector(getSelection:) forControlEvents:UIControlEventValueChanged];
-    [self.view addSubview:stinger];
+    floorIntake = [[UISegmentedControl alloc] initWithItems:itemArray];
+    floorIntake.frame = CGRectMake(396, 305, 140, 44);
+    [floorIntake addTarget:self action:@selector(getSelection:) forControlEvents:UIControlEventValueChanged];
+    [self.view addSubview:floorIntake];
+
+    invertDisks = [[UISegmentedControl alloc] initWithItems:itemArray];
+    invertDisks.frame = CGRectMake(436, 393, 140, 44);
+    [invertDisks addTarget:self action:@selector(getSelection:) forControlEvents:UIControlEventValueChanged];
+    [self.view addSubview:invertDisks];
 
     [itemArray replaceObjectAtIndex:0 withObject:@"Long"];
     [itemArray replaceObjectAtIndex:1 withObject:@"Wide"];
-    [itemArray replaceObjectAtIndex:2 withObject:@"Square"];
+    [itemArray addObject:@"Square"];
     [itemArray addObject:@"Other"];
     orientation = [[UISegmentedControl alloc] initWithItems:itemArray];
     orientation.frame = CGRectMake(436, 146, 280, 44);
     [orientation addTarget:self action:@selector(getSelection:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:orientation];
-
-    [itemArray replaceObjectAtIndex:0 withObject:@"Rams"];
-    [itemArray replaceObjectAtIndex:1 withObject:@"Slap"];
-    [itemArray replaceObjectAtIndex:2 withObject:@"None"];
-    moding = [[UISegmentedControl alloc] initWithItems:itemArray];
-    moding.frame = CGRectMake(436, 393, 280, 44);
-    [moding addTarget:self action:@selector(getSelection:) forControlEvents:UIControlEventValueChanged];
-    [self.view addSubview:moding];
 
 }
 
@@ -199,9 +195,9 @@
 	else if (textField == notesTextField) {
 		team.notes = notesTextField.text;
 	}
-	/* else if (textField == driveTrainTextField) {
-		team.drivetrain = driveTrainTextField.text;
-	} */
+	else if (textField == driveTrainTextField) {
+		team.driveTrainNotes = driveTrainTextField.text;
+	}
 	return YES;
 }
 

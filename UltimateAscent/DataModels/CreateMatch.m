@@ -261,9 +261,10 @@
     blankTeam.name = @"";
     blankTeam.saved = [NSNumber numberWithInt:0];
     blankTeam.number = [NSNumber numberWithInt:0];
-    blankTeam.climb = [NSNumber numberWithInt:-1];
-    blankTeam.intake = [NSNumber numberWithInt:-1];
-    blankTeam.down = [NSNumber numberWithInt:0];
+    blankTeam.climbType = [NSNumber numberWithInt:-1];
+    blankTeam.intakeFloor = [NSNumber numberWithInt:-1];
+    blankTeam.intakeStation = [NSNumber numberWithInt:-1];
+    blankTeam.intakeInverted = [NSNumber numberWithInt:-1];
     blankTeam.notes = @"";
 }
 

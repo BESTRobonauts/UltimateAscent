@@ -140,8 +140,8 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Orientation" lineBreakMode="tailTruncation" minimumFontSize="10" id="Fu7-2f-2tc">
-                                <rect key="frame" x="509" y="115" width="135" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Climber Type" lineBreakMode="tailTruncation" minimumFontSize="10" id="Fu7-2f-2tc">
+                                <rect key="frame" x="509" y="115" width="150" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <color key="textColor" red="1" green="0.74509803921568629" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -160,22 +160,22 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Stinger Balance" lineBreakMode="tailTruncation" minimumFontSize="10" id="RRs-cP-Wkz">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Floor Intake" lineBreakMode="tailTruncation" minimumFontSize="10" id="RRs-cP-Wkz">
                                 <rect key="frame" x="405" y="274" width="179" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="24"/>
                                 <color key="textColor" red="1" green="0.74509803919999995" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Brakes" lineBreakMode="tailTruncation" minimumFontSize="10" id="wuH-O3-UWh">
-                                <rect key="frame" x="629" y="274" width="103" height="27"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Station Intake" lineBreakMode="tailTruncation" minimumFontSize="10" id="wuH-O3-UWh">
+                                <rect key="frame" x="592" y="274" width="141" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="24"/>
                                 <color key="textColor" red="1" green="0.74509803919999995" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Moding" lineBreakMode="tailTruncation" minimumFontSize="10" id="dIn-4H-xXP">
-                                <rect key="frame" x="533" y="362" width="87" height="27"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Handle Inverted Disks" lineBreakMode="tailTruncation" minimumFontSize="10" id="dIn-4H-xXP">
+                                <rect key="frame" x="441" y="362" width="246" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="24"/>
                                 <color key="textColor" red="1" green="0.74509803919999995" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -527,7 +527,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="scoreButtons:" destination="WBb-6A-oWA" eventType="touchUpInside" id="qEx-fm-qA9"/>
+                                    <action selector="scoreButtons:" destination="WBb-6A-oWA" eventType="touchUpInside" id="NyS-lQ-ind"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Oor-gF-fxZ">
@@ -643,7 +643,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="scoreButtons:" destination="WBb-6A-oWA" eventType="touchUpInside" id="ow0-ei-4qu"/>
+                                    <action selector="scoreButtons:" destination="WBb-6A-oWA" eventType="touchUpInside" id="aPZ-40-mNg"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="6GV-Xs-z6L" userLabel="Button - TeleOp Medium">
@@ -673,7 +673,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="scoreButtons:" destination="WBb-6A-oWA" eventType="touchUpInside" id="OVN-ZI-8zW"/>
+                                    <action selector="scoreButtons:" destination="WBb-6A-oWA" eventType="touchUpInside" id="zgq-Yx-YsU"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MZR-J3-hgL" userLabel="Button - TeleOp Low">
@@ -703,7 +703,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="scoreButtons:" destination="WBb-6A-oWA" eventType="touchUpInside" id="C9z-Na-ce3"/>
+                                    <action selector="scoreButtons:" destination="WBb-6A-oWA" eventType="touchUpInside" id="zp8-HS-hDa"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="TmH-ak-QdU" userLabel="Button - Team">
@@ -880,8 +880,8 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Something" lineBreakMode="tailTruncation" minimumFontSize="10" id="ZQK-Kd-BeR">
-                                <rect key="frame" x="30" y="538" width="145" height="22"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Defensive Rating" lineBreakMode="tailTruncation" minimumFontSize="10" id="ZQK-Kd-BeR">
+                                <rect key="frame" x="30" y="538" width="168" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="18"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -1013,7 +1013,12 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
                         <outlet property="alliance" destination="9Nb-zq-gJk" id="4mI-UA-DrI"/>
+                        <outlet property="autonHighButton" destination="xNq-1T-IuA" id="MbT-XU-SLt"/>
+                        <outlet property="autonLowButton" destination="5r3-Vh-c0v" id="hKu-ie-hdt"/>
+                        <outlet property="autonMediumButton" destination="DG0-z6-bFN" id="lfr-Gy-5Ke"/>
+                        <outlet property="autonMissButton" destination="sLc-p8-GyK" id="3nx-Nb-IQc"/>
                         <outlet property="blueScore" destination="ev0-ho-TeF" id="j3L-FU-yE3"/>
+                        <outlet property="driverRating" destination="e3M-4Q-lW8" id="gCb-Jx-b4A"/>
                         <outlet property="fieldImage" destination="RvX-YB-hOX" id="EsN-pr-Sra"/>
                         <outlet property="imageContainer" destination="6Qn-p6-4MN" id="dpe-Lz-yBU"/>
                         <outlet property="matchNumber" destination="dZc-4T-78p" id="mEw-cB-T3v"/>

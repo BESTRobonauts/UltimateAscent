@@ -21,9 +21,9 @@
 @property (nonatomic, retain) IBOutlet UITextField *notesTextField;
 @property (nonatomic, retain) IBOutlet UITextField *driveTrainTextField;
 @property (nonatomic, retain) IBOutlet UIImageView *imageView;
-@property (nonatomic, retain) UISegmentedControl *brakes;
-@property (nonatomic, retain) UISegmentedControl *stinger;
-@property (nonatomic, retain) UISegmentedControl *moding;
+@property (nonatomic, retain) UISegmentedControl *stationIntake;
+@property (nonatomic, retain) UISegmentedControl *floorIntake;
+@property (nonatomic, retain) UISegmentedControl *invertDisks;
 @property (nonatomic, retain) UISegmentedControl *orientation;
 @property (nonatomic, retain) IBOutlet UIButton *choosePhotoBtn;
 @property (nonatomic, retain) IBOutlet UIButton *takePhotoBtn;
