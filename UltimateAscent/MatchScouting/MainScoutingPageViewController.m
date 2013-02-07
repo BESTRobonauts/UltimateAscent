@@ -86,7 +86,8 @@
 @synthesize scoreList;
 @synthesize scorePicker;
 @synthesize scorePickerPopover;
-
+@synthesize autonMode;
+@synthesize autonModeButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -189,10 +190,6 @@
     [self SetButtonDefaults:teamEdit];
     [teamEdit setTitle:@"Edit Team Info" forState:UIControlStateNormal];
 
-
-    red = 0.0/255.0;
-    green = 0.0/255.0;
-    blue = 0.0/255.0;
     brush = 3.0;
     opacity = 1.0;
     [super viewDidLoad];
@@ -781,6 +778,7 @@
             [fieldImage setImage:[UIImage imageNamed:@"ReboundRumbleField.png"]];
             NSLog(@"Error reading field drawing file %@", fieldDrawingFile);
         }
+        autonMode = NO;
     }
     else {
         // NSLog(@"Field Drawing= %@", currentTeam.fieldDrawing);
@@ -801,9 +799,12 @@
         } else {
             team = [NSString stringWithFormat:@"T%@", [NSString stringWithFormat:@"%d", [currentTeam.team.number intValue]]];
         }
+        // Since no field drawing exists, we guess that the user wants to start in auton mode
+        autonMode = YES;
         fieldDrawingFile = [NSString stringWithFormat:@"%@_%@.png", match, team];
         [fieldImage setImage:[UIImage imageNamed:@"ReboundRumbleField.png"]];
-    } 
+    }
+    [self autonModeSettings:autonMode];
 }
 
 -(TeamScore *)GetTeam:(NSUInteger)currentTeamIndex {
@@ -898,11 +899,43 @@
     //    UIGraphicsEndImageContext();
 }
 
+-(IBAction)autonModeChange: (id)sender {
+    if (autonMode) {
+        autonMode = NO;
+    }
+    else {
+        autonMode = YES;
+    }
+    [self autonModeSettings:autonMode];
+}
+
+-(void) autonModeSettings:(BOOL) mode {
+    if (mode) { // Auton Mode
+        red = 255.0/255.0;
+        green = 190.0/255.0;
+        blue = 0.0/255.0;        
+        [autonModeButton setBackgroundImage:[UIImage imageNamed:@"Auton Red.jpg"] forState:UIControlStateNormal];
+    }
+    else {
+        red = 0.0/255.0;
+        green = 0.0/255.0;
+        blue = 0.0/255.0;        
+    }
+    
+}
+
 - (void)scoreSelected:(NSString *)newScore {
     [self.scorePickerPopover dismissPopoverAnimated:YES];
-    
     for (int i = 0 ; i < [scoreList count] ; i++) {
         if ([newScore isEqualToString:[scoreList objectAtIndex:i]]) {
+            if (i == 0) {
+                if (autonMode) {
+                    [self autonHigh];
+                }
+                else {
+                    [self teleOpHigh];
+                }
+            }
             NSLog(@"score selection = %@", [scoreList objectAtIndex:i]);
             break;
         }

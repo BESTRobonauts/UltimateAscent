@@ -10,6 +10,8 @@
 		21528C9816AA215800CF7E8E /* CreateMatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 21528C9516AA215800CF7E8E /* CreateMatch.m */; };
 		21EBC7D716B358D000CBFDFD /* TeamDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21EBC7D616B358D000CBFDFD /* TeamDetailViewController.m */; };
 		21F72D6016A78135000B99AB /* TeamListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F72D5F16A78135000B99AB /* TeamListViewController.m */; };
+		2F13802C16C4583C000B9EFD /* Auton Red.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2F13802B16C4583C000B9EFD /* Auton Red.jpg */; };
+		2F13802F16C45846000B9EFD /* TeleOp Blue.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 2F13802E16C45846000B9EFD /* TeleOp Blue.pdf */; };
 		2F17D54816BA092B00DC81C1 /* TournamentList.csv in Resources */ = {isa = PBXBuildFile; fileRef = 2F17D54716BA092B00DC81C1 /* TournamentList.csv */; };
 		2F30EABC16A0EB4F0026B258 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F30EABB16A0EB4F0026B258 /* UIKit.framework */; };
 		2F30EABE16A0EB4F0026B258 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F30EABD16A0EB4F0026B258 /* Foundation.framework */; };
@@ -72,6 +74,8 @@
 		21EBC7D616B358D000CBFDFD /* TeamDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TeamDetailViewController.m; path = TeamScouting/TeamDetailViewController.m; sourceTree = "<group>"; };
 		21F72D5E16A78135000B99AB /* TeamListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TeamListViewController.h; path = TeamScouting/TeamListViewController.h; sourceTree = "<group>"; };
 		21F72D5F16A78135000B99AB /* TeamListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TeamListViewController.m; path = TeamScouting/TeamListViewController.m; sourceTree = "<group>"; };
+		2F13802B16C4583C000B9EFD /* Auton Red.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Auton Red.jpg"; path = "Resources/Auton Red.jpg"; sourceTree = "<group>"; };
+		2F13802E16C45846000B9EFD /* TeleOp Blue.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "TeleOp Blue.pdf"; path = "Resources/TeleOp Blue.pdf"; sourceTree = "<group>"; };
 		2F17D54716BA092B00DC81C1 /* TournamentList.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TournamentList.csv; path = Resources/TournamentList.csv; sourceTree = "<group>"; };
 		2F30EAB716A0EB4F0026B258 /* UltimateAscent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UltimateAscent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F30EABB16A0EB4F0026B258 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -310,6 +314,8 @@
 		2F30EAE316A0F66F0026B258 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2F13802E16C45846000B9EFD /* TeleOp Blue.pdf */,
+				2F13802B16C4583C000B9EFD /* Auton Red.jpg */,
 				2FC18EE816A2083500D42251 /* TeamList.csv */,
 				2FC18EE016A2083500D42251 /* MatchList.csv */,
 				2FC18EE116A2083500D42251 /* MatchResults.csv */,
@@ -431,6 +437,8 @@
 				2F6AE6F016AD93D1005A24C5 /* 2013_logo.png in Resources */,
 				2F17D54816BA092B00DC81C1 /* TournamentList.csv in Resources */,
 				2F4E01F016BA10C80092DC86 /* Settings.csv in Resources */,
+				2F13802C16C4583C000B9EFD /* Auton Red.jpg in Resources */,
+				2F13802F16C45846000B9EFD /* TeleOp Blue.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

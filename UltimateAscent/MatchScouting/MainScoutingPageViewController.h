@@ -55,36 +55,34 @@
 // Match Scores
 @property (nonatomic, retain) IBOutlet UILabel *teamName;
 @property (nonatomic, retain) IBOutlet UISlider *driverRating;
--(IBAction)updateDriverRating:(id) sender;
 @property (nonatomic, retain) IBOutlet UISwitch *crossesHump;
--(IBAction)toggleForCrossesHump: (id) sender;  
 @property (nonatomic, retain) IBOutlet UISwitch *coopBalance;
--(IBAction)toggleForCoopBalance: (id) sender;  
 @property (nonatomic, retain) IBOutlet UISwitch *modedRamp;
--(void)setBalanceSegment: (id) sender;
 @property (nonatomic, retain) UISegmentedControl *balanced;
--(IBAction)toggleForRampModing: (id) sender;  
 @property (nonatomic, retain) IBOutlet UITextField *notes;
+-(IBAction)updateDriverRating:(id) sender;
+-(IBAction)toggleForCrossesHump: (id) sender;
+-(IBAction)toggleForCoopBalance: (id) sender;
+-(void)setBalanceSegment: (id) sender;
+-(IBAction)toggleForRampModing: (id) sender;
 
 
 -(IBAction)scoreButtons: (id)sender;
-
-
 @property (nonatomic, retain) IBOutlet UIButton *teleOpMissButton;
--(void)teleOpMiss;
 @property (nonatomic, retain) IBOutlet UIButton *teleOpHighButton;
--(void)teleOpHigh;
 @property (nonatomic, retain) IBOutlet UIButton *teleOpMediumButton;
--(void)teleOpMedium;
 @property (nonatomic, retain) IBOutlet UIButton *teleOpLowButton;
--(void)teleOpLow;
 @property (nonatomic, retain) IBOutlet UIButton *autonMissButton;
--(void)autonMiss;
 @property (nonatomic, retain) IBOutlet UIButton *autonHighButton;
--(void)autonHigh;
 @property (nonatomic, retain) IBOutlet UIButton *autonMediumButton;
--(void)autonMedium;
 @property (nonatomic, retain) IBOutlet UIButton *autonLowButton;
+-(void)teleOpMiss;
+-(void)teleOpHigh;
+-(void)teleOpMedium;
+-(void)teleOpLow;
+-(void)autonMiss;
+-(void)autonHigh;
+-(void)autonMedium;
 -(void)autonLow;
 
 // Overall Match Scores
@@ -141,5 +139,9 @@
 @property (nonatomic, retain) NSMutableArray *scoreList;
 @property (nonatomic, retain) RecordScorePickerController *scorePicker;
 @property (nonatomic, retain) UIPopoverController *scorePickerPopover;
+@property (nonatomic, assign) BOOL autonMode;
+@property (nonatomic, retain) IBOutlet UIButton *autonModeButton;
+-(IBAction)autonModeChange: (id)sender;
+-(void) autonModeSettings:(BOOL) mode;
 
 @end
