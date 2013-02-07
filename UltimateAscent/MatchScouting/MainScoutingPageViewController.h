@@ -38,6 +38,7 @@
 @property (nonatomic, assign) NSUInteger teamIndex;
 @property (nonatomic, retain) MatchData *currentMatch;
 @property (nonatomic, retain) TeamScore *currentTeam;
+@property (nonatomic, retain) NSArray *teamData;
 @property (nonatomic, assign) BOOL dataChange;
 @property (nonatomic, assign) NSString *storePath;
 @property (nonatomic, retain) NSFileManager *fileManager;
@@ -52,7 +53,7 @@
 - (void)retrieveSettings;
 
 // Match Scores
-@property (nonatomic, retain) IBOutlet UITextField *teamName;
+@property (nonatomic, retain) IBOutlet UILabel *teamName;
 @property (nonatomic, retain) IBOutlet UISlider *driverRating;
 -(IBAction)updateDriverRating:(id) sender;
 @property (nonatomic, retain) IBOutlet UISwitch *crossesHump;

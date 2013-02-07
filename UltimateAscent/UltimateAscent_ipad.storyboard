@@ -1,11 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.0" toolsVersion="1938" systemVersion="10K549" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="C3f-kE-sTi">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2844" systemVersion="12C2034" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="C3f-kE-sTi">
     <dependencies>
         <deployment version="1280" identifier="iOS"/>
         <development version="4200" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="933"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1930"/>
     </dependencies>
     <scenes>
+        <!--Splash Page View Controller - Root View Controller-->
         <scene sceneID="ol3-RZ-ij7">
             <objects>
                 <viewController id="7nm-2U-oN4" customClass="SplashPageViewController" sceneMemberID="viewController">
@@ -89,6 +90,7 @@
             </objects>
             <point key="canvasLocation" x="-998" y="-400"/>
         </scene>
+        <!--Team Detail View Controller-->
         <scene sceneID="8wv-c1-IJE">
             <objects>
                 <viewController id="K9C-dP-fHg" customClass="TeamDetailViewController" sceneMemberID="viewController">
@@ -308,6 +310,7 @@
             </objects>
             <point key="canvasLocation" x="1026" y="-1660"/>
         </scene>
+        <!--Team List View Controller-->
         <scene sceneID="POy-92-07b">
             <objects>
                 <tableViewController id="sfH-IK-sHV" customClass="TeamListViewController" sceneMemberID="viewController">
@@ -384,6 +387,7 @@
             </objects>
             <point key="canvasLocation" x="50" y="-1660"/>
         </scene>
+        <!--Set Up Page View Controller-->
         <scene sceneID="pDI-Wp-1eW">
             <objects>
                 <viewController id="jO0-sC-Asm" customClass="SetUpPageViewController" sceneMemberID="viewController">
@@ -464,6 +468,7 @@
             </objects>
             <point key="canvasLocation" x="-756" y="864"/>
         </scene>
+        <!--Main Scouting Page View Controller-->
         <scene sceneID="O3r-km-jjh">
             <objects>
                 <viewController id="WBb-6A-oWA" customClass="MainScoutingPageViewController" sceneMemberID="viewController">
@@ -555,12 +560,6 @@
                                     <action selector="NextButton" destination="WBb-6A-oWA" eventType="touchUpInside" id="MGU-gW-wcY"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="coA-C5-D9T" userLabel="Text Field - Team Name">
-                                <rect key="frame" x="693" y="24" width="176" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Auton" lineBreakMode="tailTruncation" minimumFontSize="10" id="8fa-rD-0dR">
                                 <rect key="frame" x="893" y="65" width="49" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -568,7 +567,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="TeleOp" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" minimumFontSize="10" id="XNc-Nb-u2Z">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="TeleOp" lineBreakMode="tailTruncation" minimumFontSize="10" adjustsFontSizeToFit="NO" id="XNc-Nb-u2Z">
                                 <rect key="frame" x="954" y="65" width="61" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="18"/>
@@ -718,6 +717,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="TeamSelectionChanged:" destination="WBb-6A-oWA" eventType="touchUpInside" id="mgd-4b-m49"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9Nb-zq-gJk" userLabel="Button - Alliance">
                                 <rect key="frame" x="463" y="22" width="117" height="31"/>
@@ -995,6 +997,14 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xcI-CG-2jD" userLabel="Label - Team Name">
+                                <rect key="frame" x="693" y="24" width="176" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.74509803919999995" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -1013,7 +1023,8 @@
                         <outlet property="prevMatch" destination="Oor-gF-fxZ" id="Ilk-ft-yrn"/>
                         <outlet property="redScore" destination="fhb-g7-wyq" id="ToW-sU-Jq9"/>
                         <outlet property="teamEdit" destination="mls-ys-0eb" id="vF3-bz-GiS"/>
-                        <outlet property="teamName" destination="coA-C5-D9T" id="Z3X-Xx-c3a"/>
+                        <outlet property="teamName" destination="xcI-CG-2jD" id="O4q-Wz-egw"/>
+                        <outlet property="teamNumber" destination="TmH-ak-QdU" id="zM6-fG-VAO"/>
                         <outlet property="teleOpHighButton" destination="vL6-Ag-PVU" id="pWf-Mz-JKz"/>
                         <outlet property="teleOpLowButton" destination="MZR-J3-hgL" id="3iL-9w-RzI"/>
                         <outlet property="teleOpMediumButton" destination="6GV-Xs-z6L" id="sOQ-ey-22a"/>
@@ -1024,6 +1035,7 @@
             </objects>
             <point key="canvasLocation" x="92" y="-544"/>
         </scene>
+        <!--Table View Controller-->
         <scene sceneID="jEF-Lz-5ra">
             <objects>
                 <tableViewController id="WfL-ic-UhD" sceneMemberID="viewController">
@@ -1118,6 +1130,7 @@
             </objects>
             <point key="canvasLocation" x="504" y="923"/>
         </scene>
+        <!--Download Page View Controller-->
         <scene sceneID="etA-7t-4Bv">
             <objects>
                 <viewController id="4ra-8V-FJ1" customClass="DownloadPageViewController" sceneMemberID="viewController">
@@ -1167,6 +1180,7 @@
             </objects>
             <point key="canvasLocation" x="-1880" y="916"/>
         </scene>
+        <!--Navigation Controller-->
         <scene sceneID="PvB-tc-fQH">
             <objects>
                 <navigationController id="C3f-kE-sTi" sceneMemberID="viewController">
@@ -1232,7 +1246,7 @@
                 <relationship kind="outlet" name="prevMatch" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="redScore" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="teamEdit" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="teamName" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="teamName" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="teamNumber" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="teleOpHighButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="teleOpLowButton" candidateClass="UIButton"/>

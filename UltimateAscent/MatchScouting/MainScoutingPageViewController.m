@@ -26,6 +26,7 @@
 @synthesize settings;
 @synthesize currentMatch;
 @synthesize currentTeam;
+@synthesize teamData;
 @synthesize dataChange;
 @synthesize delegate;
 @synthesize storePath;
@@ -152,11 +153,11 @@
         teamIndex = [[[csvContent objectAtIndex:0] objectAtIndex:2] intValue];
     }
     
+    teamName.font = [UIFont fontWithName:@"Helvetica" size:24.0];
     [self SetButtonDefaults:prevMatch];
     [self SetButtonDefaults:nextMatch];
     [self SetTextBoxDefaults:matchNumber];
     [self SetButtonDefaults:matchType];
-    [self SetTextBoxDefaults:teamName];
     [self SetButtonDefaults:teamNumber];
     [self SetButtonDefaults:teleOpMissButton];
     [self SetButtonDefaults:teleOpHighButton];
@@ -215,11 +216,11 @@
     currentMatch = [fetchedResultsController objectAtIndexPath:matchIndex];
     NSLog(@"Match = %@, Type = %@, Tournament = %@", currentMatch.number, currentMatch.matchType, currentMatch.tournament);
     NSLog(@"Settings = %@", settings.tournament.name);
-    [self setTeamList];
     baseDrawingPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Library/FieldDrawings/"];
     // NSLog(@"Field Drawing Path = %@", baseDrawingPath);
     dataChange = NO;
     fieldDrawingChange = NO;
+    [self setTeamList];
     [self ShowTeam:teamIndex];
 }    
 
@@ -587,7 +588,7 @@
     } else if (PressedButton == teleOpHighButton) {
         [self teleOpHigh];
     } else if (PressedButton == teleOpMediumButton) {
-    [self teleOpMedium];
+        [self teleOpMedium];
     } else if (PressedButton == teleOpLowButton) {
         [self teleOpLow];
     } else if (PressedButton == autonMissButton) {
@@ -683,29 +684,37 @@
 }
 
 -(void)setTeamList {
-    NSSortDescriptor *allianceDescriptor = [[NSSortDescriptor alloc] initWithKey:@"score.alliance" ascending:YES];
+    TeamScore *score;
+    NSSortDescriptor *allianceSort = [NSSortDescriptor sortDescriptorWithKey:@"alliance" ascending:YES];
+    teamData = [[currentMatch.score allObjects] sortedArrayUsingDescriptors:[NSArray arrayWithObject:allianceSort]];
+
     if (teamList == nil) {
         self.teamList = [NSMutableArray array];
-//        [teamList addObject:[NSString stringWithFormat:@"%d", [currentMatch.red1.teamInfo.number intValue]]];
-//        [teamList addObject:[NSString stringWithFormat:@"%d", [currentMatch.red2.teamInfo.number intValue]]];
-//        [teamList addObject:[NSString stringWithFormat:@"%d", [currentMatch.red3.teamInfo.number intValue]]];
-//        [teamList addObject:[NSString stringWithFormat:@"%d", [currentMatch.blue1.teamInfo.number intValue]]];
-//        [teamList addObject:[NSString stringWithFormat:@"%d", [currentMatch.blue2.teamInfo.number intValue]]];
-//        [teamList addObject:[NSString stringWithFormat:@"%d", [currentMatch.blue3.teamInfo.number intValue]]];
+        // Reds
+        for (int i = 3; i < 6; i++) {
+            score = [teamData objectAtIndex:i];
+            [teamList addObject:[NSString stringWithFormat:@"%d", [score.team.number intValue]]];
+        }
+        // Blues
+        for (int i = 0; i < 3; i++) {
+            score = [teamData objectAtIndex:i];
+            [teamList addObject:[NSString stringWithFormat:@"%d", [score.team.number intValue]]];
+        }
+
     }
     else {
-//        [teamList replaceObjectAtIndex:0
-//                            withObject:[NSString stringWithFormat:@"%d", [currentMatch.red1.teamInfo.number intValue]]];
-//        [teamList replaceObjectAtIndex:1
-//                            withObject:[NSString stringWithFormat:@"%d", [currentMatch.red2.teamInfo.number intValue]]];
-//        [teamList replaceObjectAtIndex:2
-//                            withObject:[NSString stringWithFormat:@"%d", [currentMatch.red3.teamInfo.number intValue]]];
-//        [teamList replaceObjectAtIndex:3
-//                            withObject:[NSString stringWithFormat:@"%d", [currentMatch.blue1.teamInfo.number intValue]]];
-//        [teamList replaceObjectAtIndex:4
-//                            withObject:[NSString stringWithFormat:@"%d", [currentMatch.blue2.teamInfo.number intValue]]];
-//        [teamList replaceObjectAtIndex:5
-//                            withObject:[NSString stringWithFormat:@"%d", [currentMatch.blue3.teamInfo.number intValue]]];
+        // Reds
+        for (int i = 3; i < 6; i++) {
+            score = [teamData objectAtIndex:i];
+            [teamList replaceObjectAtIndex:(i-3)
+                           withObject:[NSString stringWithFormat:@"%d", [score.team.number intValue]]];
+        }
+        // Blues
+       for (int i = 0; i < 3; i++) {
+            score = [teamData objectAtIndex:i];
+            [teamList replaceObjectAtIndex:(i+3)
+                            withObject:[NSString stringWithFormat:@"%d", [score.team.number intValue]]];
+        }
     }
     
 }
@@ -798,13 +807,13 @@
 }
 
 -(TeamScore *)GetTeam:(NSUInteger)currentTeamIndex {
-    switch (currentTeamIndex) {/*
-        case 0: return currentMatch.red1;
-        case 1: return currentMatch.red2;
-        case 2: return currentMatch.red3;
-        case 3: return currentMatch.blue1;
-        case 4: return currentMatch.blue2;
-        case 5: return currentMatch.blue3;*/
+    switch (currentTeamIndex) {
+        case 0: return [teamData objectAtIndex:3];  // Red 1
+        case 1: return [teamData objectAtIndex:4];  // Red 2
+        case 2: return [teamData objectAtIndex:5];  // Red 3
+        case 3: return [teamData objectAtIndex:0];  // Blue 1
+        case 4: return [teamData objectAtIndex:1];  // Blue 2
+        case 5: return [teamData objectAtIndex:2];  // Blue 3
     }    
     return nil;
 }
@@ -860,6 +869,8 @@
     }
     if(!mouseSwiped) {
         if (scorePicker == nil) {
+            self.scorePicker = [[RecordScorePickerController alloc]
+                                initWithStyle:UITableViewStylePlain];
             scorePicker.delegate = self;
             scorePicker.scoreChoices = scoreList;
             self.scorePickerPopover = [[UIPopoverController alloc]
