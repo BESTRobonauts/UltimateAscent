@@ -174,7 +174,7 @@
 
     NSMutableArray *itemArray = [NSMutableArray arrayWithObjects: @"None", @"One", @"Two", @"Three", nil];
     balanced = [[UISegmentedControl alloc] initWithItems:itemArray];
-    balanced.frame = CGRectMake(816, 575, 207, 44);
+    balanced.frame = CGRectMake(738, 600, 207, 44);
     [balanced addTarget:self action:@selector(setBalanceSegment:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:balanced];
     
@@ -924,7 +924,7 @@
     
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+/*- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     switch (interfaceOrientation) {
         case UIInterfaceOrientationPortrait:
@@ -934,7 +934,7 @@
             return YES;
             break;
         case UIInterfaceOrientationLandscapeRight:
-            return YES;
+            return NO;
             break;
             case UIInterfaceOrientationPortraitUpsideDown:
             return NO;
@@ -943,6 +943,15 @@
         default:
             break;
     }
+} */
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation
+{
+    if ((orientation == UIInterfaceOrientationPortrait) ||
+        (orientation == UIInterfaceOrientationLandscapeLeft))
+        return YES;
+    
+    return NO;
 }
 
 -(void)SetTextBoxDefaults:(UITextField *)currentTextField {
