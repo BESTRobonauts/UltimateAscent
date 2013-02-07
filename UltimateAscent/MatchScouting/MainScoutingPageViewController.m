@@ -860,8 +860,6 @@
     }
     if(!mouseSwiped) {
         if (scorePicker == nil) {
-            self.scorePicker = [[RecordScorePickerController alloc]
-                                   initWithStyle:UITableViewStylePlain];
             scorePicker.delegate = self;
             scorePicker.scoreChoices = scoreList;
             self.scorePickerPopover = [[UIPopoverController alloc]
@@ -924,35 +922,9 @@
     
 }
 
-/*- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    switch (interfaceOrientation) {
-        case UIInterfaceOrientationPortrait:
-            return NO;
-            break;
-        case UIInterfaceOrientationLandscapeLeft:
-            return YES;
-            break;
-        case UIInterfaceOrientationLandscapeRight:
-            return NO;
-            break;
-            case UIInterfaceOrientationPortraitUpsideDown:
-            return NO;
-            break;
-            
-        default:
-            break;
-    }
-} */
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orientation
-{
-    if ((orientation == UIInterfaceOrientationPortrait) ||
-        (orientation == UIInterfaceOrientationLandscapeLeft))
-        return YES;
-    
-    return NO;
-}
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{   return UIInterfaceOrientationIsLandscape(interfaceOrientation);
+   }
 
 -(void)SetTextBoxDefaults:(UITextField *)currentTextField {
     currentTextField.font = [UIFont fontWithName:@"Helvetica" size:24.0];
