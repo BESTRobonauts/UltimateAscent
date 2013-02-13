@@ -86,8 +86,8 @@
 @synthesize scoreList;
 @synthesize scorePicker;
 @synthesize scorePickerPopover;
-@synthesize autonMode;
-@synthesize autonModeButton;
+@synthesize drawMode;
+@synthesize drawModeButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -778,7 +778,7 @@
             [fieldImage setImage:[UIImage imageNamed:@"2013_field.png"]];
             NSLog(@"Error reading field drawing file %@", fieldDrawingFile);
         }
-        autonMode = NO;
+        drawMode = DrawLock;
     }
     else {
         // NSLog(@"Field Drawing= %@", currentTeam.fieldDrawing);
@@ -800,11 +800,11 @@
             team = [NSString stringWithFormat:@"T%@", [NSString stringWithFormat:@"%d", [currentTeam.team.number intValue]]];
         }
         // Since no field drawing exists, we guess that the user wants to start in auton mode
-        autonMode = YES;
+        drawMode = DrawOff;
         fieldDrawingFile = [NSString stringWithFormat:@"%@_%@.png", match, team];
         [fieldImage setImage:[UIImage imageNamed:@"2013_field.png"]];
     }
-    [self autonModeSettings:autonMode];
+    [self drawModeSettings:drawMode];
 }
 
 -(TeamScore *)GetTeam:(NSUInteger)currentTeamIndex {
@@ -825,10 +825,7 @@
     mouseSwiped = NO;
     UITouch *touch = [touches anyObject];
     lastPoint = [touch locationInView:imageContainer];
-    if ([touch view] != fieldImage) {
-        // NSLog(@"touchesBegan not imageView");
-        return;
-    }
+    if ([touch view] != fieldImage) return;
     fieldDrawingChange = YES;
 }
 
@@ -837,14 +834,11 @@
 //    NSLog(@"touchesMoved");
     mouseSwiped = YES;
     UITouch *touch = [touches anyObject];
-    if ([touch view] != fieldImage) {
-        // NSLog(@"touchesMoved not imageView");
-        return;
-    }
+    if ([touch view] != fieldImage) return;
     
-    CGPoint currentPoint = [touch locationInView: imageContainer];
-    UIGraphicsBeginImageContext(imageContainer.frame.size);
-    [self.fieldImage.image drawInRect:CGRectMake(0, 0, imageContainer.frame.size.width, imageContainer.frame.size.height)];
+    CGPoint currentPoint = [touch locationInView: fieldImage];
+    UIGraphicsBeginImageContext(fieldImage.frame.size);
+    [self.fieldImage.image drawInRect:CGRectMake(0, 0, fieldImage.frame.size.width, fieldImage.frame.size.height)];
     CGContextMoveToPoint(UIGraphicsGetCurrentContext(), lastPoint.x, lastPoint.y);
     CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), currentPoint.x, currentPoint.y);
     CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
@@ -864,10 +858,7 @@
     
     // NSLog(@"touchesEnded");
     UITouch *touch = [touches anyObject];
-    if ([touch view] != fieldImage) {
-        // NSLog(@"touchesEnded not imageView");
-        return;
-    }
+    if ([touch view] != fieldImage) return;
     if(!mouseSwiped) {
         if (scorePicker == nil) {
             self.scorePicker = [[RecordScorePickerController alloc]
@@ -888,30 +879,56 @@
     //    UIGraphicsEndImageContext();
 }
 
--(IBAction)autonModeChange: (id)sender {
-    if (autonMode) {
-        autonMode = NO;
+-(IBAction)drawModeChange: (id)sender {
+    switch (drawMode) {
+        case DrawOff:
+            drawMode = DrawAuton;
+            break;
+        case DrawAuton:
+            drawMode = DrawTeleop;
+            break;
+        case DrawTeleop:
+            drawMode = DrawOff;
+            break;
+        case DrawLock:
+            NSLog(@"Do something undecided.");
+            break;
+        default:
+            NSLog(@"Bad things have happened in drawModeChange");
     }
-    else {
-        autonMode = YES;
-    }
-    [self autonModeSettings:autonMode];
+    [self drawModeSettings:drawMode];
 }
 
--(void) autonModeSettings:(BOOL) mode {
-    if (mode) { // Auton Mode
-        red = 255.0/255.0;
-        green = 190.0/255.0;
-        blue = 0.0/255.0;        
-        [autonModeButton setBackgroundImage:[UIImage imageNamed:@"Auton Red.jpg"] forState:UIControlStateNormal];
-        [autonModeButton setTitle:@"Auton" forState:UIControlStateNormal];
-    }
-    else {
-        red = 0.0/255.0;
-        green = 0.0/255.0;
-        blue = 0.0/255.0;        
-        [autonModeButton setBackgroundImage:[UIImage imageNamed:@"TeleOp Blue.jpg"] forState:UIControlStateNormal];
-        [autonModeButton setTitle:@"TeleOp" forState:UIControlStateNormal];
+-(void) drawModeSettings:(DrawingMode) mode {
+    switch (mode) {
+        case DrawOff:
+            [drawModeButton setBackgroundImage:[UIImage imageNamed:@"Small White Button.jpg"] forState:UIControlStateNormal];
+            [drawModeButton setTitle:@"Off" forState:UIControlStateNormal];
+            [drawModeButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            break;
+        case DrawAuton:
+            red = 255.0/255.0;
+            green = 190.0/255.0;
+            blue = 0.0/255.0;
+            [drawModeButton setBackgroundImage:[UIImage imageNamed:@"Small Green Button.jpg"] forState:UIControlStateNormal];
+            [drawModeButton setTitle:@"Auton" forState:UIControlStateNormal];
+            [drawModeButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            break;
+        case DrawTeleop:
+            red = 0.0/255.0;
+            green = 0.0/255.0;
+            blue = 0.0/255.0;
+            [drawModeButton setBackgroundImage:[UIImage imageNamed:@"Small Blue Button.jpg"] forState:UIControlStateNormal];
+            [drawModeButton setTitle:@"TeleOp" forState:UIControlStateNormal];
+            [drawModeButton setTitleColor:[UIColor colorWithRed:255.0 green:190.0 blue:0 alpha:1.0] forState:UIControlStateNormal];
+            break;
+        case DrawLock:
+            [drawModeButton setBackgroundImage:[UIImage imageNamed:@"Small Red Button.jpg"] forState:UIControlStateNormal];
+            [drawModeButton setTitle:@"Locked" forState:UIControlStateNormal];
+            [drawModeButton setTitleColor:[UIColor colorWithRed:255.0 green:190.0 blue:0 alpha:1.0] forState:UIControlStateNormal];
+            break;
+        default:
+            break;
     }
     
 }
@@ -923,38 +940,37 @@
         if ([newScore isEqualToString:[scoreList objectAtIndex:i]]) {
             if (i == 0) {
                 marker = @"H";
-                if (autonMode) {
+                if (drawMode == DrawAuton) {
                     [self autonHigh];
                 }
-                else {
+                else if (drawMode == DrawTeleop) {
                     [self teleOpHigh];
                 }
             } else if (i == 1) {
                 marker = @"X";
-                if (autonMode) {
+                if (drawMode == DrawAuton) {
                     [self autonMiss];
                 }
-                else {
+                else if (drawMode == DrawTeleop) {
                     [self teleOpMiss];
                 }
             } else if (i == 2) {
                 marker = @"M";
-                if (autonMode) {
+                if (drawMode == DrawAuton) {
                     [self autonMedium];
                 }
-                else {
+                else if (drawMode == DrawTeleop) {
                     [self teleOpMedium];
                 }
             } else if (i == 3) {
                 marker = @"L";
-                if (autonMode) {
+                if (drawMode == DrawAuton) {
                     [self autonLow];
                 }
-                else {
+                else if (drawMode == DrawTeleop) {
                     [self teleOpLow];
                 }
             }
-        
             NSLog(@"score selection = %@", [scoreList objectAtIndex:i]);
             break;
         }

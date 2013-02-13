@@ -130,6 +130,14 @@
 -(void)CheckDataStatus;
 
 // Match Drawing
+typedef enum {
+	DrawOff,
+	DrawAuton,
+	DrawTeleop,
+    DrawLock,
+} DrawingMode;
+
+
 @property (nonatomic, retain) NSString *baseDrawingPath;
 @property (nonatomic, retain) NSString *fieldDrawingPath;
 @property (nonatomic, retain) NSString *fieldDrawingFile;
@@ -139,9 +147,9 @@
 @property (nonatomic, retain) NSMutableArray *scoreList;
 @property (nonatomic, retain) RecordScorePickerController *scorePicker;
 @property (nonatomic, retain) UIPopoverController *scorePickerPopover;
-@property (nonatomic, assign) BOOL autonMode;
-@property (nonatomic, retain) IBOutlet UIButton *autonModeButton;
--(IBAction)autonModeChange: (id)sender;
--(void) autonModeSettings:(BOOL) mode;
+@property (nonatomic, assign) DrawingMode drawMode;
+@property (nonatomic, retain) IBOutlet UIButton *drawModeButton;
+-(IBAction)drawModeChange: (id)sender;
+-(void) autonModeSettings:(DrawingMode) mode;
 
 @end

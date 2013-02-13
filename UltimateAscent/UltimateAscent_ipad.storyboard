@@ -926,7 +926,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="autonModeChange:" destination="WBb-6A-oWA" eventType="touchUpInside" id="w2e-eF-cGo"/>
+                                    <action selector="drawModeChange:" destination="WBb-6A-oWA" eventType="touchUpInside" id="hwH-bc-Ykt"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Rwh-gX-nO1">
@@ -941,13 +941,6 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="TeleOp Shoot" lineBreakMode="tailTruncation" minimumFontSize="10" id="LB2-ri-x1y">
-                                <rect key="frame" x="502" y="493" width="105" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Defense" lineBreakMode="tailTruncation" minimumFontSize="10" id="9o6-MH-Dpi">
                                 <rect key="frame" x="637" y="493" width="64" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1006,8 +999,8 @@
                         <outlet property="autonLowButton" destination="5r3-Vh-c0v" id="hKu-ie-hdt"/>
                         <outlet property="autonMediumButton" destination="DG0-z6-bFN" id="lfr-Gy-5Ke"/>
                         <outlet property="autonMissButton" destination="sLc-p8-GyK" id="3nx-Nb-IQc"/>
-                        <outlet property="autonModeButton" destination="kd3-Al-5aW" id="4Ah-bc-NSV"/>
                         <outlet property="blueScore" destination="ev0-ho-TeF" id="j3L-FU-yE3"/>
+                        <outlet property="drawModeButton" destination="kd3-Al-5aW" id="E1w-tJ-j01"/>
                         <outlet property="driverRating" destination="e3M-4Q-lW8" id="gCb-Jx-b4A"/>
                         <outlet property="fieldImage" destination="RvX-YB-hOX" id="EsN-pr-Sra"/>
                         <outlet property="imageContainer" destination="6Qn-p6-4MN" id="dpe-Lz-yBU"/>
@@ -1216,7 +1209,7 @@
                 <relationship kind="action" name="NextButton"/>
                 <relationship kind="action" name="PrevButton"/>
                 <relationship kind="action" name="TeamSelectionChanged:"/>
-                <relationship kind="action" name="autonModeChange:"/>
+                <relationship kind="action" name="drawModeChange:"/>
                 <relationship kind="action" name="scoreButtons:"/>
                 <relationship kind="action" name="toggleForCoopBalance:"/>
                 <relationship kind="action" name="toggleForCrossesHump:"/>
@@ -1227,10 +1220,10 @@
                 <relationship kind="outlet" name="autonLowButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="autonMediumButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="autonMissButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="autonModeButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="blueScore" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="coopBalance" candidateClass="UISwitch"/>
                 <relationship kind="outlet" name="crossesHump" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="drawModeButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="driverRating" candidateClass="UISlider"/>
                 <relationship kind="outlet" name="fieldImage" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="imageContainer" candidateClass="UIView"/>
