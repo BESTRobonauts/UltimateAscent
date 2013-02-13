@@ -877,18 +877,7 @@
             self.scorePickerPopover = [[UIPopoverController alloc]
                                        initWithContentViewController:scorePicker];
         }
-        [self.scorePickerPopover presentPopoverFromRect:CGRectMake(lastPoint.x-50, lastPoint.y, 1.0, 1.0) inView:imageContainer permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-        UIGraphicsBeginImageContext(imageContainer.frame.size);
-        [self.fieldImage.image drawInRect:CGRectMake(0, 0, imageContainer.frame.size.width, imageContainer.frame.size.height)];
-        CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
-        CGContextSetLineWidth(UIGraphicsGetCurrentContext(), brush);
-        CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), red, green, blue, opacity);
-        CGContextMoveToPoint(UIGraphicsGetCurrentContext(), lastPoint.x, lastPoint.y);
-        CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), lastPoint.x, lastPoint.y);
-        CGContextStrokePath(UIGraphicsGetCurrentContext());
-        CGContextFlush(UIGraphicsGetCurrentContext());
-        self.fieldImage.image = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
+        [self.scorePickerPopover presentPopoverFromRect:CGRectMake(lastPoint.x-50, lastPoint.y, 1.0, 1.0) inView:fieldImage permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     }
     
     //    UIGraphicsBeginImageContext(self.fieldImage.frame.size);
@@ -929,9 +918,11 @@
 
 - (void)scoreSelected:(NSString *)newScore {
     [self.scorePickerPopover dismissPopoverAnimated:YES];
+    NSString *marker;
     for (int i = 0 ; i < [scoreList count] ; i++) {
         if ([newScore isEqualToString:[scoreList objectAtIndex:i]]) {
             if (i == 0) {
+                marker = @"H";
                 if (autonMode) {
                     [self autonHigh];
                 }
@@ -939,6 +930,7 @@
                     [self teleOpHigh];
                 }
             } else if (i == 1) {
+                marker = @"X";
                 if (autonMode) {
                     [self autonMiss];
                 }
@@ -946,6 +938,7 @@
                     [self teleOpMiss];
                 }
             } else if (i == 2) {
+                marker = @"M";
                 if (autonMode) {
                     [self autonMedium];
                 }
@@ -953,6 +946,7 @@
                     [self teleOpMedium];
                 }
             } else if (i == 3) {
+                marker = @"L";
                 if (autonMode) {
                     [self autonLow];
                 }
@@ -965,6 +959,27 @@
             break;
         }
     }
+    NSLog(@"Marker = %@", marker);
+    UIGraphicsBeginImageContext(fieldImage.frame.size);
+    [self.fieldImage.image drawInRect:CGRectMake(0, 0, fieldImage.frame.size.width, fieldImage.frame.size.height)];
+    CGContextRef myContext = UIGraphicsGetCurrentContext();
+    CGContextSetLineCap(myContext, kCGLineCapRound);
+    CGContextSetLineWidth(myContext, 1);
+    CGContextSetRGBStrokeColor(myContext, red, green, blue, opacity);
+    CGContextSelectFont (myContext,
+                         "Helvetica",
+                         12,
+                         kCGEncodingMacRoman);
+    CGContextSetCharacterSpacing (myContext, 1);
+    CGContextSetTextDrawingMode (myContext, kCGTextFillStroke);
+    CGContextSetTextMatrix(myContext, CGAffineTransformMake(1.0,0.0, 0.0, -1.0, 0.0, 0.0));
+
+    CGContextShowTextAtPoint (myContext, lastPoint.x, lastPoint.y, [marker UTF8String], marker.length);
+    CGContextStrokePath(UIGraphicsGetCurrentContext());
+    CGContextFlush(UIGraphicsGetCurrentContext());
+    self.fieldImage.image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+
 }
 
 - (void)retrieveSettings {
