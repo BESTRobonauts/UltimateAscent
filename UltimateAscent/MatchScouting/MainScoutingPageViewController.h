@@ -149,7 +149,8 @@ typedef enum {
 @property (nonatomic, retain) UIPopoverController *scorePickerPopover;
 @property (nonatomic, assign) DrawingMode drawMode;
 @property (nonatomic, retain) IBOutlet UIButton *drawModeButton;
+- (CGPoint)calculatePopOverLocation:(CGPoint)location;
 -(IBAction)drawModeChange: (id)sender;
--(void) autonModeSettings:(DrawingMode) mode;
+-(void) drawModeSettings:(DrawingMode) mode;
 
 @end

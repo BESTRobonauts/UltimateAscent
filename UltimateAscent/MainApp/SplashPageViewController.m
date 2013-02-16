@@ -11,7 +11,7 @@
 @implementation SplashPageViewController
 @synthesize mainLogo;
 @synthesize pictureCaption;
-@synthesize teamScoutingButton, matchSetUpButton, matchScoutingButton;
+@synthesize teamScoutingButton, matchSetUpButton, matchScoutingButton, matchAnalysisButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -52,12 +52,15 @@
     // Set Font and Text for Team Scouting Button
     [teamScoutingButton setTitle:@"Team/Pit Scouting" forState:UIControlStateNormal];
     teamScoutingButton.titleLabel.font = [UIFont fontWithName:@"Nasalization" size:36.0];
-    // Set Font and Text for Match Set Up Button
-    [matchSetUpButton setTitle:@"Data In/Data Out" forState:UIControlStateNormal];
+    // Set Font and Text for Tournament Set Up Button
+    [matchSetUpButton setTitle:@"Before and after" forState:UIControlStateNormal];
     matchSetUpButton.titleLabel.font = [UIFont fontWithName:@"Nasalization" size:36.0];
-    // Set Font and Text for Match Set Up Button
+    // Set Font and Text for Match Scouting Up Button
     [matchScoutingButton setTitle:@"Match Scouting" forState:UIControlStateNormal];
     matchScoutingButton.titleLabel.font = [UIFont fontWithName:@"Nasalization" size:36.0];
+    // Set Font and Text for Match Analysis Button
+    [matchAnalysisButton setTitle:@"Match Analysis" forState:UIControlStateNormal];
+    matchAnalysisButton.titleLabel.font = [UIFont fontWithName:@"Nasalization" size:36.0];
     self.title = @"Ultimate Ascent";
     [super viewDidLoad];
 }

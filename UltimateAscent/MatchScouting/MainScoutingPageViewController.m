@@ -185,7 +185,7 @@
     [self SetButtonDefaults:alliance];
     allianceList = [[NSMutableArray alloc] initWithObjects:@"Red 1", @"Red 2", @"Red 3", @"Blue 1", @"Blue 2", @"Blue 3", nil];
     matchTypeList = [[NSMutableArray alloc] initWithObjects:@"Practice", @"Seeding", @"Elimination", @"Other", @"Testing", nil];
-    scoreList = [[NSMutableArray alloc] initWithObjects:@"High", @"Missed", @"Medium", @"Low", nil];
+    scoreList = [[NSMutableArray alloc] initWithObjects:@"Medium", @"High", @"Missed", @"Low", nil];
 
     [self SetButtonDefaults:teamEdit];
     [teamEdit setTitle:@"Edit Team Info" forState:UIControlStateNormal];
@@ -868,6 +868,7 @@
             self.scorePickerPopover = [[UIPopoverController alloc]
                                        initWithContentViewController:scorePicker];
         }
+        CGPoint popPoint = [self calculatePopOverLocation:lastPoint];
         [self.scorePickerPopover presentPopoverFromRect:CGRectMake(lastPoint.x-50, lastPoint.y, 1.0, 1.0) inView:fieldImage permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     }
     
@@ -877,6 +878,26 @@
     //   self.fieldImage.image = UIGraphicsGetImageFromCurrentImageContext();
     //    self.tempDrawImage.image = nil;
     //    UIGraphicsEndImageContext();
+}
+
+-(CGPoint)calculatePopOverLocation:(CGPoint)location; {
+    CGPoint popPoint;
+    popPoint = location;
+    if (location.x <= 98) {
+        NSLog(@"On the left edge");
+        popPoint.x = -22;
+    }
+    else if (location.x < 670) {
+        NSLog(@"In the middle");
+        popPoint.x = location.x-55;
+    } else {
+        NSLog(@"On the right edge");
+        popPoint.x = 627;
+    }
+    
+    popPoint.y = location.y+10;
+    
+    return popPoint;
 }
 
 -(IBAction)drawModeChange: (id)sender {
@@ -905,6 +926,7 @@
             [drawModeButton setBackgroundImage:[UIImage imageNamed:@"Small White Button.jpg"] forState:UIControlStateNormal];
             [drawModeButton setTitle:@"Off" forState:UIControlStateNormal];
             [drawModeButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            fieldImage.userInteractionEnabled = FALSE;
             break;
         case DrawAuton:
             red = 255.0/255.0;
@@ -913,6 +935,7 @@
             [drawModeButton setBackgroundImage:[UIImage imageNamed:@"Small Green Button.jpg"] forState:UIControlStateNormal];
             [drawModeButton setTitle:@"Auton" forState:UIControlStateNormal];
             [drawModeButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            fieldImage.userInteractionEnabled = TRUE;
             break;
         case DrawTeleop:
             red = 0.0/255.0;
@@ -921,11 +944,14 @@
             [drawModeButton setBackgroundImage:[UIImage imageNamed:@"Small Blue Button.jpg"] forState:UIControlStateNormal];
             [drawModeButton setTitle:@"TeleOp" forState:UIControlStateNormal];
             [drawModeButton setTitleColor:[UIColor colorWithRed:255.0 green:190.0 blue:0 alpha:1.0] forState:UIControlStateNormal];
+            fieldImage.userInteractionEnabled = TRUE;
             break;
         case DrawLock:
+            //////////////////// Add an unlocking function
             [drawModeButton setBackgroundImage:[UIImage imageNamed:@"Small Red Button.jpg"] forState:UIControlStateNormal];
             [drawModeButton setTitle:@"Locked" forState:UIControlStateNormal];
             [drawModeButton setTitleColor:[UIColor colorWithRed:255.0 green:190.0 blue:0 alpha:1.0] forState:UIControlStateNormal];
+            fieldImage.userInteractionEnabled = FALSE;
             break;
         default:
             break;
@@ -934,43 +960,51 @@
 }
 
 - (void)scoreSelected:(NSString *)newScore {
-    [self.scorePickerPopover dismissPopoverAnimated:YES];
+ //   [self.scorePickerPopover dismissPopoverAnimated:YES];
     NSString *marker;
     for (int i = 0 ; i < [scoreList count] ; i++) {
         if ([newScore isEqualToString:[scoreList objectAtIndex:i]]) {
-            if (i == 0) {
-                marker = @"H";
-                if (drawMode == DrawAuton) {
-                    [self autonHigh];
-                }
-                else if (drawMode == DrawTeleop) {
-                    [self teleOpHigh];
-                }
-            } else if (i == 1) {
-                marker = @"X";
-                if (drawMode == DrawAuton) {
-                    [self autonMiss];
-                }
-                else if (drawMode == DrawTeleop) {
-                    [self teleOpMiss];
-                }
-            } else if (i == 2) {
-                marker = @"M";
-                if (drawMode == DrawAuton) {
-                    [self autonMedium];
-                }
-                else if (drawMode == DrawTeleop) {
-                    [self teleOpMedium];
-                }
-            } else if (i == 3) {
-                marker = @"L";
-                if (drawMode == DrawAuton) {
-                    [self autonLow];
-                }
-                else if (drawMode == DrawTeleop) {
-                    [self teleOpLow];
-                }
+            switch (i) {
+                case 0:
+                    marker = @"M";
+                    if (drawMode == DrawAuton) {
+                        [self autonMedium];
+                    }
+                    else if (drawMode == DrawTeleop) {
+                        [self teleOpMedium];
+                    }
+                    break;
+                case 1:
+                    marker = @"H";
+                    if (drawMode == DrawAuton) {
+                        [self autonHigh];
+                    }
+                    else if (drawMode == DrawTeleop) {
+                        [self teleOpHigh];
+                    }
+                    break;
+                case 2:
+                    marker = @"X";
+                    if (drawMode == DrawAuton) {
+                        [self autonMiss];
+                    }
+                    else if (drawMode == DrawTeleop) {
+                        [self teleOpMiss];
+                    }
+                    break;
+                case 3:
+                    marker = @"L";
+                    if (drawMode == DrawAuton) {
+                        [self autonLow];
+                    }
+                    else if (drawMode == DrawTeleop) {
+                        [self teleOpLow];
+                    }
+                    break;
+                default:
+                    break;
             }
+            
             NSLog(@"score selection = %@", [scoreList objectAtIndex:i]);
             break;
         }

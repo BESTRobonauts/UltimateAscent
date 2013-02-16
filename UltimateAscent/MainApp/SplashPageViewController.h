@@ -15,5 +15,6 @@
     @property (nonatomic, retain) IBOutlet UIButton *teamScoutingButton;
     @property (nonatomic, retain) IBOutlet UIButton *matchSetUpButton;
     @property (nonatomic, retain) IBOutlet UIButton *matchScoutingButton;
+    @property (nonatomic, retain) IBOutlet UIButton *matchAnalysisButton;
 
 @end

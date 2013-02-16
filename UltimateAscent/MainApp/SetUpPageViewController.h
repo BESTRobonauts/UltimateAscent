@@ -12,6 +12,7 @@
 @property (nonatomic, retain) IBOutlet UIImageView *mainLogo;
 @property (nonatomic, retain) IBOutlet UILabel *pictureCaption;
 @property (nonatomic, retain) IBOutlet UIButton *matchSetUpButton;
+@property (nonatomic, retain) IBOutlet UIButton *tournamentSetUpButton;
 @property (nonatomic, retain) IBOutlet UIButton *importDataButton;
 @property (nonatomic, retain) IBOutlet UIButton *exportDataButton;
 

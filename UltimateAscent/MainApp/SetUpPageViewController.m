@@ -10,7 +10,7 @@
 
 @implementation SetUpPageViewController
 @synthesize mainLogo;
-@synthesize matchSetUpButton, importDataButton, exportDataButton;
+@synthesize tournamentSetUpButton, matchSetUpButton, importDataButton, exportDataButton;
 @synthesize pictureCaption;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -49,12 +49,19 @@
     // Display the Label for the Picture
     pictureCaption.font = [UIFont fontWithName:@"Nasalization" size:24.0];
     pictureCaption.text = @"Just Hangin' Out";
+ 
+    // Set Font and Text for Tournament Set-Up Button
+    [tournamentSetUpButton setTitle:@"Tournament" forState:UIControlStateNormal];
+    tournamentSetUpButton.titleLabel.font = [UIFont fontWithName:@"Nasalization" size:36.0];
+
     // Set Font and Text for Match Set-Up Button
-    [matchSetUpButton setTitle:@"Match Set-Up" forState:UIControlStateNormal];
+    [matchSetUpButton setTitle:@"Match List" forState:UIControlStateNormal];
     matchSetUpButton.titleLabel.font = [UIFont fontWithName:@"Nasalization" size:36.0];
+
     // Set Font and Text for Import Data Button
     [importDataButton setTitle:@"Import Data" forState:UIControlStateNormal];
     importDataButton.titleLabel.font = [UIFont fontWithName:@"Nasalization" size:36.0];
+
     // Set Font and Text for Export Data Button
     [exportDataButton setTitle:@"Export Data" forState:UIControlStateNormal];
     exportDataButton.titleLabel.font = [UIFont fontWithName:@"Nasalization" size:36.0];
