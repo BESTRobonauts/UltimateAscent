@@ -1,18 +1,18 @@
 //
-//  MasonPageViewController.m
+//  RossPageViewController.m
 //  UltimateAscent
 //
 //  Created by FRC on 2/15/13.
 //  Copyright (c) 2013 FRC. All rights reserved.
 //
 
-#import "MasonPageViewController.h"
+#import "RossPageViewController.h"
 
-@interface MasonPageViewController ()
+@interface RossPageViewController ()
 
 @end
 
-@implementation MasonPageViewController
+@implementation RossPageViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

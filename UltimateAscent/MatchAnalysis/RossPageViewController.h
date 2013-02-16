@@ -1,5 +1,5 @@
 //
-//  MasonPageViewController.h
+//  RossPageViewController.h
 //  UltimateAscent
 //
 //  Created by FRC on 2/15/13.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MasonPageViewController : UIViewController
+@interface RossPageViewController : UIViewController
 
 @end
