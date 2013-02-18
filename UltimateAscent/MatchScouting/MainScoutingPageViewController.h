@@ -20,7 +20,7 @@
 @class TeamScore;
 @class SettingsData;
 
-@interface MainScoutingPageViewController : UIViewController <NSFetchedResultsControllerDelegate, UITextFieldDelegate, AlliancePickerDelegate, MatchTypePickerDelegate, TeamPickerDelegate, RecordScorePickerDelegate> {
+@interface MainScoutingPageViewController : UIViewController <NSFetchedResultsControllerDelegate, UITextFieldDelegate, AlliancePickerDelegate, MatchTypePickerDelegate, TeamPickerDelegate, RecordScorePickerDelegate, UIAlertViewDelegate> {
     
     CGPoint lastPoint;
     CGFloat red;
@@ -46,6 +46,8 @@
 // Match Control
 @property (nonatomic, retain) IBOutlet UIButton *prevMatch;
 @property (nonatomic, retain) IBOutlet UIButton *nextMatch;
+@property (nonatomic, strong) UIAlertView *overridePrompt;
+@property (nonatomic, assign) BOOL passCodeMatch;
 -(IBAction)PrevButton;
 -(IBAction)NextButton;
 -(NSUInteger)GetNextSection:(NSUInteger) currentSection;
@@ -60,6 +62,8 @@
 @property (nonatomic, retain) IBOutlet UISwitch *modedRamp;
 @property (nonatomic, retain) UISegmentedControl *balanced;
 @property (nonatomic, retain) IBOutlet UITextField *notes;
+@property (nonatomic, retain) IBOutlet UIButton *matchResetButton;
+-(IBAction)matchReset:(id) sender;
 -(IBAction)updateDriverRating:(id) sender;
 -(IBAction)toggleForCrossesHump: (id) sender;
 -(IBAction)toggleForCoopBalance: (id) sender;
@@ -76,6 +80,10 @@
 @property (nonatomic, retain) IBOutlet UIButton *autonHighButton;
 @property (nonatomic, retain) IBOutlet UIButton *autonMediumButton;
 @property (nonatomic, retain) IBOutlet UIButton *autonLowButton;
+@property (nonatomic, retain) IBOutlet UIButton *pyramidGoalsButton;
+@property (nonatomic, retain) IBOutlet UIButton *passesButton;
+@property (nonatomic, retain) IBOutlet UIButton *blocksButton;
+@property (nonatomic, retain) IBOutlet UIButton *pickupsButton;
 -(void)teleOpMiss;
 -(void)teleOpHigh;
 -(void)teleOpMedium;
@@ -84,6 +92,10 @@
 -(void)autonHigh;
 -(void)autonMedium;
 -(void)autonLow;
+-(void)pyramidGoals;
+-(void)blockedShots;
+-(void)passesMade;
+-(void)pickupsMade;
 
 // Overall Match Scores
 @property (nonatomic, retain) IBOutlet UITextField *redScore;
@@ -122,7 +134,8 @@
 
 // Make It Look Good
 -(void)SetTextBoxDefaults:(UITextField *)textField;
--(void)SetButtonDefaults:(UIButton *)currentButton;
+-(void)SetBigButtonDefaults:(UIButton *)currentButton;
+-(void)SetSmallButtonDefaults:(UIButton *)currentButton;
 // Data Handling
 -(void)ShowTeam:(NSUInteger)currentTeamIndex;
 -(TeamScore *)GetTeam:(NSUInteger)currentTeamIndex;
@@ -134,6 +147,7 @@ typedef enum {
 	DrawOff,
 	DrawAuton,
 	DrawTeleop,
+    DrawDefense,
     DrawLock,
 } DrawingMode;
 
@@ -151,6 +165,6 @@ typedef enum {
 @property (nonatomic, retain) IBOutlet UIButton *drawModeButton;
 - (CGPoint)calculatePopOverLocation:(CGPoint)location;
 -(IBAction)drawModeChange: (id)sender;
--(void) drawModeSettings:(DrawingMode) mode;
-
+-(void)drawModeSettings:(DrawingMode) mode;
+-(void)checkOverrideCode:(NSString *)msg;
 @end

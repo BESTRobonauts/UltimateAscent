@@ -2,7 +2,7 @@
 //  TeamScore.m
 //  UltimateAscent
 //
-//  Created by FRC on 2/7/13.
+//  Created by FRC on 2/17/13.
 //  Copyright (c) 2013 FRC. All rights reserved.
 //
 
@@ -19,19 +19,23 @@
 @dynamic autonLow;
 @dynamic autonMid;
 @dynamic autonMissed;
+@dynamic climbLevel;
+@dynamic climbSuccess;
+@dynamic climbTimer;
+@dynamic defenseRating;
 @dynamic driverRating;
-@dynamic notes;
-@dynamic saved;
 @dynamic fieldDrawing;
+@dynamic notes;
+@dynamic otherRating;
+@dynamic saved;
 @dynamic teleOpHigh;
 @dynamic teleOpLow;
 @dynamic teleOpMid;
 @dynamic teleOpMissed;
-@dynamic defenseRating;
-@dynamic otherRating;
-@dynamic climbLevel;
-@dynamic climbSuccess;
-@dynamic climbTimer;
+@dynamic pyramid;
+@dynamic passes;
+@dynamic blocks;
+@dynamic pickups;
 @dynamic match;
 @dynamic team;
 @dynamic tournament;

@@ -70,11 +70,18 @@
 @synthesize autonHighButton;
 @synthesize autonMediumButton;
 @synthesize autonLowButton;
+@synthesize pyramidGoalsButton;
+@synthesize blocksButton;
+@synthesize passesButton;
+@synthesize pickupsButton;
+@synthesize matchResetButton;
 
 // Other Stuff
 @synthesize redScore;
 @synthesize blueScore;
 @synthesize teamEdit;
+@synthesize overridePrompt;
+@synthesize passCodeMatch;
 
 // Field Drawing
 @synthesize imageContainer;
@@ -155,21 +162,26 @@
     }
     
     teamName.font = [UIFont fontWithName:@"Helvetica" size:24.0];
-    [self SetButtonDefaults:prevMatch];
-    [self SetButtonDefaults:nextMatch];
+    [self SetBigButtonDefaults:prevMatch];
+    [self SetBigButtonDefaults:nextMatch];
     [self SetTextBoxDefaults:matchNumber];
-    [self SetButtonDefaults:matchType];
-    [self SetButtonDefaults:teamNumber];
-    [self SetButtonDefaults:teleOpMissButton];
-    [self SetButtonDefaults:teleOpHighButton];
-    [self SetButtonDefaults:teleOpMediumButton];
-    [self SetButtonDefaults:teleOpLowButton];
-    [self SetButtonDefaults:autonMissButton];
-    [self SetButtonDefaults:autonHighButton];
-    [self SetButtonDefaults:autonMediumButton];
-    [self SetButtonDefaults:autonLowButton];
+    [self SetBigButtonDefaults:matchType];
+    [self SetBigButtonDefaults:teamNumber];
+    [self SetBigButtonDefaults:teleOpMissButton];
+    [self SetBigButtonDefaults:teleOpHighButton];
+    [self SetBigButtonDefaults:teleOpMediumButton];
+    [self SetBigButtonDefaults:teleOpLowButton];
+    [self SetBigButtonDefaults:autonMissButton];
+    [self SetBigButtonDefaults:autonHighButton];
+    [self SetBigButtonDefaults:autonMediumButton];
+    [self SetBigButtonDefaults:autonLowButton];
+    [self SetBigButtonDefaults:pyramidGoalsButton];
+    [self SetBigButtonDefaults:passesButton];
+    [self SetBigButtonDefaults:blocksButton];
+    [self SetBigButtonDefaults:pickupsButton];
     [self SetTextBoxDefaults:redScore];
     [self SetTextBoxDefaults:blueScore];
+    matchResetButton.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:15.0];
 
     driverRating.maximumValue = 5.0;
     driverRating.continuous = NO;
@@ -182,12 +194,12 @@
     
     [self SetTextBoxDefaults:notes];
 
-    [self SetButtonDefaults:alliance];
+    [self SetBigButtonDefaults:alliance];
     allianceList = [[NSMutableArray alloc] initWithObjects:@"Red 1", @"Red 2", @"Red 3", @"Blue 1", @"Blue 2", @"Blue 3", nil];
     matchTypeList = [[NSMutableArray alloc] initWithObjects:@"Practice", @"Seeding", @"Elimination", @"Other", @"Testing", nil];
-    scoreList = [[NSMutableArray alloc] initWithObjects:@"Medium", @"High", @"Missed", @"Low", nil];
+    scoreList = [[NSMutableArray alloc] initWithObjects:@"Medium", @"High", @"Missed", @"Low", @"Pyramid", nil];
 
-    [self SetButtonDefaults:teamEdit];
+    [self SetBigButtonDefaults:teamEdit];
     [teamEdit setTitle:@"Edit Team Info" forState:UIControlStateNormal];
 
     brush = 3.0;
@@ -664,6 +676,15 @@
     dataChange = YES;
 }
 
+-(void)pyramidGoals {
+    NSLog(@"Pyramid Goals");
+    int score = [pyramidGoalsButton.titleLabel.text intValue];
+    score++;
+    currentTeam.pyramid = [NSNumber numberWithInt:score];
+    [pyramidGoalsButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.pyramid intValue]] forState:UIControlStateNormal];
+    dataChange = YES;
+}
+
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     UIButton *button = (UIButton *)sender;
@@ -711,9 +732,8 @@
             score = [teamData objectAtIndex:i];
             [teamList replaceObjectAtIndex:(i+3)
                             withObject:[NSString stringWithFormat:@"%d", [score.team.number intValue]]];
-        }
+       }
     }
-    
 }
 
 -(void)ShowTeam:(NSUInteger)currentTeamIndex {
@@ -760,6 +780,10 @@
     [autonHighButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.autonHigh intValue]] forState:UIControlStateNormal];
     [autonMediumButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.autonMid intValue]] forState:UIControlStateNormal];
     [autonLowButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.autonLow intValue]] forState:UIControlStateNormal];
+    [pyramidGoalsButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.pyramid intValue]] forState:UIControlStateNormal];
+    [blocksButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.blocks intValue]] forState:UIControlStateNormal];
+    [passesButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.passes intValue]] forState:UIControlStateNormal];
+    [pickupsButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.pickups intValue]] forState:UIControlStateNormal];
 
     // NSLog(@"Load the Picture");
     fieldDrawingPath = [baseDrawingPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%d", [currentTeam.team.number intValue]]];
@@ -869,7 +893,7 @@
                                        initWithContentViewController:scorePicker];
         }
         CGPoint popPoint = [self calculatePopOverLocation:lastPoint];
-        [self.scorePickerPopover presentPopoverFromRect:CGRectMake(lastPoint.x-50, lastPoint.y, 1.0, 1.0) inView:fieldImage permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        [self.scorePickerPopover presentPopoverFromRect:CGRectMake(popPoint.x, popPoint.y, 1.0, 1.0) inView:fieldImage permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     }
     
     //    UIGraphicsBeginImageContext(self.fieldImage.frame.size);
@@ -909,10 +933,18 @@
             drawMode = DrawTeleop;
             break;
         case DrawTeleop:
+            drawMode = DrawDefense;
+            break;
+        case DrawDefense:
             drawMode = DrawOff;
             break;
         case DrawLock:
             NSLog(@"Do something undecided.");
+            [self checkOverrideCode:@"Enter override code to unlock"];
+            NSLog(@"Back in drawmodechange");
+            if (passCodeMatch) {
+                drawMode = DrawOff;
+            }
             break;
         default:
             NSLog(@"Bad things have happened in drawModeChange");
@@ -946,8 +978,16 @@
             [drawModeButton setTitleColor:[UIColor colorWithRed:255.0 green:190.0 blue:0 alpha:1.0] forState:UIControlStateNormal];
             fieldImage.userInteractionEnabled = TRUE;
             break;
+        case DrawDefense:
+            red = 255.0/255.0;
+            green = 0.0/255.0;
+            blue = 0.0/255.0;
+            [drawModeButton setBackgroundImage:[UIImage imageNamed:@"Small Grey Button.jpg"] forState:UIControlStateNormal];
+            [drawModeButton setTitle:@"Defense" forState:UIControlStateNormal];
+            [drawModeButton setTitleColor:[UIColor colorWithRed:255.0 green:190.0 blue:0 alpha:1.0] forState:UIControlStateNormal];
+            fieldImage.userInteractionEnabled = TRUE;
+            break;
         case DrawLock:
-            //////////////////// Add an unlocking function
             [drawModeButton setBackgroundImage:[UIImage imageNamed:@"Small Red Button.jpg"] forState:UIControlStateNormal];
             [drawModeButton setTitle:@"Locked" forState:UIControlStateNormal];
             [drawModeButton setTitleColor:[UIColor colorWithRed:255.0 green:190.0 blue:0 alpha:1.0] forState:UIControlStateNormal];
@@ -960,7 +1000,7 @@
 }
 
 - (void)scoreSelected:(NSString *)newScore {
- //   [self.scorePickerPopover dismissPopoverAnimated:YES];
+    [self.scorePickerPopover dismissPopoverAnimated:YES];
     NSString *marker;
     for (int i = 0 ; i < [scoreList count] ; i++) {
         if ([newScore isEqualToString:[scoreList objectAtIndex:i]]) {
@@ -1001,6 +1041,10 @@
                         [self teleOpLow];
                     }
                     break;
+                case 4:
+                    marker = @"G";
+                    [self pyramidGoals];
+                    break;
                 default:
                     break;
             }
@@ -1018,7 +1062,7 @@
     CGContextSetRGBStrokeColor(myContext, red, green, blue, opacity);
     CGContextSelectFont (myContext,
                          "Helvetica",
-                         12,
+                         14,
                          kCGEncodingMacRoman);
     CGContextSetCharacterSpacing (myContext, 1);
     CGContextSetTextDrawingMode (myContext, kCGTextFillStroke);
@@ -1030,6 +1074,81 @@
     self.fieldImage.image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
 
+}
+
+-(void)checkOverrideCode:(NSString *)msg {
+    NSLog(@"Check override %@", msg);
+    overridePrompt = [[UIAlertView alloc] initWithTitle:@"Please be sure you really want to do this."
+                                                     message:msg
+                                                    delegate:self
+                                           cancelButtonTitle:@"Cancel"
+                                           otherButtonTitles:@"Enter", nil];
+    [overridePrompt setAlertViewStyle:UIAlertViewStyleSecureTextInput];
+    [overridePrompt show];
+    return;
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+
+    if([title isEqualToString:@"Enter"]) {
+        passCodeMatch = NO;
+        UITextField *passCode = [alertView textFieldAtIndex:0];
+        if (alertView == overridePrompt) {
+            if ([passCode.text isEqualToString:settings.overrideCode]) {
+                passCodeMatch = TRUE;
+            }
+            NSLog(@"overridePrompt ");
+            NSLog(@"Check override passCodeMatch %d", passCodeMatch);
+        }
+    }
+}
+
+- (BOOL)alertViewShouldEnableFirstOtherButton:(UIAlertView *)alertView
+{
+    NSString *passCode = [[alertView textFieldAtIndex:0] text];
+    if (alertView == overridePrompt) {
+        NSLog(@"alertViewShouldEnableFirstOtherButton passCodeMatch %d", passCodeMatch);
+        if ([passCode isEqualToString:settings.overrideCode]) {
+            passCodeMatch = TRUE;
+            return TRUE;
+        }
+        else {
+            passCodeMatch = FALSE;
+            return FALSE;
+        }
+    }
+}
+
+-(IBAction)matchReset:(id) sender {
+    NSLog(@"matchReset");
+    // Check passcode
+    // Different message for saved, locked, synced
+    currentMatch.redScore = [NSNumber numberWithInt:-1];
+    currentMatch.blueScore = [NSNumber numberWithInt:-1];
+    currentTeam.autonHigh = [NSNumber numberWithInt:0];
+    currentTeam.autonMid = [NSNumber numberWithInt:0];
+    currentTeam.autonLow = [NSNumber numberWithInt:0];
+    currentTeam.autonMissed = [NSNumber numberWithInt:0];
+    currentTeam.teleOpHigh = [NSNumber numberWithInt:0];
+    currentTeam.teleOpMid = [NSNumber numberWithInt:0];
+    currentTeam.teleOpLow = [NSNumber numberWithInt:0];
+    currentTeam.teleOpMissed = [NSNumber numberWithInt:0];
+    currentTeam.pyramid = [NSNumber numberWithInt:0];
+    currentTeam.passes = [NSNumber numberWithInt:0];
+    currentTeam.blocks = [NSNumber numberWithInt:0];
+    currentTeam.pickups = [NSNumber numberWithInt:0];
+    currentTeam.driverRating = [NSNumber numberWithInt:0];
+    currentTeam.notes = @"";
+    currentTeam.saved = [NSNumber numberWithInt:0];
+    currentTeam.fieldDrawing = nil;
+    currentTeam.defenseRating = [NSNumber numberWithInt:0];
+    currentTeam.climbLevel = [NSNumber numberWithInt:0];
+    currentTeam.climbSuccess = [NSNumber numberWithInt:-1];
+    currentTeam.climbTimer = [NSNumber numberWithFloat:0.0];
+
+    [self ShowTeam:teamIndex];
 }
 
 - (void)retrieveSettings {
@@ -1064,8 +1183,12 @@
     currentTextField.font = [UIFont fontWithName:@"Helvetica" size:24.0];
 }
 
--(void)SetButtonDefaults:(UIButton *)currentButton {
+-(void)SetBigButtonDefaults:(UIButton *)currentButton {
     currentButton.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:24.0];
+}
+
+-(void)SetSmallButtonDefaults:(UIButton *)currentButton {
+    currentButton.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:15.0];
 }
 
 - (NSFetchedResultsController *)fetchedResultsController {

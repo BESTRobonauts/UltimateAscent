@@ -111,7 +111,7 @@
             <objects>
                 <viewController id="K9C-dP-fHg" customClass="TeamDetailViewController" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="r5n-HK-0iK">
-                        <rect key="frame" x="0.0" y="64" width="1024" height="704"/>
+                        <rect key="frame" x="0.0" y="64" width="768" height="960"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="PKs-zy-zRX">
@@ -244,15 +244,15 @@
                                 </connections>
                             </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ngp-qv-W04">
-                                <rect key="frame" x="20" y="554" width="994" height="144"/>
+                                <rect key="frame" x="20" y="554" width="738" height="400"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MatchSchedule" id="V3g-t9-bYp">
-                                        <rect key="frame" x="0.0" y="22" width="994" height="44"/>
+                                        <rect key="frame" x="0.0" y="22" width="738" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="994" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="738" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="10" contentMode="left" text="Stuff 1" lineBreakMode="tailTruncation" minimumFontSize="10" id="Ek7-h6-KmF">
@@ -310,7 +310,6 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.47058823529411764" alpha="1" colorSpace="calibratedRGB"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <navigationItem key="navigationItem" id="gXh-DS-kco"/>
                     <connections>
@@ -546,7 +545,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Missed" lineBreakMode="tailTruncation" minimumFontSize="10" id="EDN-6q-ffL" userLabel="Label - TeleOp Missed">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Missed" lineBreakMode="tailTruncation" minimumFontSize="10" id="EDN-6q-ffL" userLabel="Label - Auton Missed">
                                 <rect key="frame" x="891" y="291" width="47" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="18"/>
@@ -563,7 +562,7 @@
                                     <outlet property="delegate" destination="WBb-6A-oWA" id="tCw-6u-Sln"/>
                                 </connections>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="AtJ-gy-1QW" userLabel="Button - TeleOp Missed">
+                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="AtJ-gy-1QW" userLabel="Button - TeleOp Missed">
                                 <rect key="frame" x="954" y="319" width="60" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
@@ -574,11 +573,8 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <action selector="scoreButtons:" destination="WBb-6A-oWA" eventType="touchUpInside" id="0py-ZO-spP"/>
-                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="sLc-p8-GyK" userLabel="Button - TeleOp Missed">
+                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="sLc-p8-GyK" userLabel="Button - Auton Missed">
                                 <rect key="frame" x="884" y="319" width="60" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
@@ -589,9 +585,30 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <action selector="scoreButtons:" destination="WBb-6A-oWA" eventType="touchUpInside" id="NyS-lQ-ind"/>
-                                </connections>
+                            </button>
+                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2bS-kZ-9mp" userLabel="Button - Pyramid Goals">
+                                <rect key="frame" x="884" y="378" width="60" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
+                                <state key="normal" title="Pyr">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="OHc-sI-dw6" userLabel="Button - Passes">
+                                <rect key="frame" x="954" y="378" width="60" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
+                                <state key="normal" title="Pass">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Oor-gF-fxZ">
                                 <rect key="frame" x="20" y="21" width="120" height="35"/>
@@ -644,7 +661,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="High" lineBreakMode="tailTruncation" minimumFontSize="10" id="PHV-fv-y1A" userLabel="Label - TeleOp High">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="High" lineBreakMode="tailTruncation" minimumFontSize="10" id="PHV-fv-y1A" userLabel="Label - Auton High">
                                 <rect key="frame" x="898" y="95" width="33" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="18"/>
@@ -658,7 +675,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Medium" lineBreakMode="tailTruncation" minimumFontSize="10" id="8hI-Cd-LNF" userLabel="Label - TeleOp Medium">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Medium" lineBreakMode="tailTruncation" minimumFontSize="10" id="8hI-Cd-LNF" userLabel="Label - Auton Medium">
                                 <rect key="frame" x="887" y="161" width="55" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="18"/>
@@ -672,14 +689,14 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Low" lineBreakMode="tailTruncation" minimumFontSize="10" id="fLW-Mv-vbS" userLabel="Label - TeleOp Low">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Low" lineBreakMode="tailTruncation" minimumFontSize="10" id="fLW-Mv-vbS" userLabel="Label - Auton Low">
                                 <rect key="frame" x="901" y="224" width="26" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="18"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="vL6-Ag-PVU" userLabel="Button - TeleOp High">
+                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="vL6-Ag-PVU" userLabel="Button - TeleOp High">
                                 <rect key="frame" x="954" y="120" width="60" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
@@ -690,11 +707,8 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <action selector="scoreButtons:" destination="WBb-6A-oWA" eventType="touchUpInside" id="rS3-Hb-vvO"/>
-                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="xNq-1T-IuA" userLabel="Button - TeleOp High">
+                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="xNq-1T-IuA" userLabel="Button - Auton High">
                                 <rect key="frame" x="884" y="121" width="60" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
@@ -705,11 +719,8 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <action selector="scoreButtons:" destination="WBb-6A-oWA" eventType="touchUpInside" id="aPZ-40-mNg"/>
-                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="6GV-Xs-z6L" userLabel="Button - TeleOp Medium">
+                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="6GV-Xs-z6L" userLabel="Button - TeleOp Medium">
                                 <rect key="frame" x="954" y="184" width="60" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
@@ -720,11 +731,8 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <action selector="scoreButtons:" destination="WBb-6A-oWA" eventType="touchUpInside" id="wwM-O1-B45"/>
-                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="DG0-z6-bFN" userLabel="Button - TeleOp Medium">
+                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="DG0-z6-bFN" userLabel="Button - Auton Medium">
                                 <rect key="frame" x="886" y="184" width="60" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
@@ -735,11 +743,8 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <action selector="scoreButtons:" destination="WBb-6A-oWA" eventType="touchUpInside" id="zgq-Yx-YsU"/>
-                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MZR-J3-hgL" userLabel="Button - TeleOp Low">
+                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MZR-J3-hgL" userLabel="Button - TeleOp Low">
                                 <rect key="frame" x="954" y="250" width="60" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
@@ -750,11 +755,8 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <action selector="scoreButtons:" destination="WBb-6A-oWA" eventType="touchUpInside" id="kPR-Lb-15e"/>
-                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="5r3-Vh-c0v" userLabel="Button - TeleOp Low">
+                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="5r3-Vh-c0v" userLabel="Button - Auton Low">
                                 <rect key="frame" x="884" y="250" width="60" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
@@ -765,9 +767,6 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <action selector="scoreButtons:" destination="WBb-6A-oWA" eventType="touchUpInside" id="zp8-HS-hDa"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="TmH-ak-QdU" userLabel="Button - Team">
                                 <rect key="frame" x="594" y="23" width="83" height="31"/>
@@ -815,38 +814,27 @@
                                 </connections>
                             </button>
                             <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="O0t-kh-R9G" userLabel="Switch - Hump">
-                                <rect key="frame" x="911" y="475" width="79" height="27"/>
+                                <rect key="frame" x="825" y="502" width="79" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </switch>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Attemped Balance" lineBreakMode="tailTruncation" minimumFontSize="10" id="TAc-Cy-dvA">
-                                <rect key="frame" x="879" y="505" width="143" height="22"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Attemped Climb" lineBreakMode="tailTruncation" minimumFontSize="10" id="TAc-Cy-dvA">
+                                <rect key="frame" x="674" y="537" width="143" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="18"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="rc1-Nw-uOb" userLabel="Switch - Balance">
-                                <rect key="frame" x="911" y="531" width="79" height="27"/>
+                                <rect key="frame" x="825" y="532" width="79" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </switch>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Crossed Hump" lineBreakMode="tailTruncation" minimumFontSize="10" id="lro-8z-PPz">
-                                <rect key="frame" x="888" y="446" width="124" height="22"/>
+                                <rect key="frame" x="674" y="507" width="124" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="18"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Something" lineBreakMode="tailTruncation" minimumFontSize="10" id="X8V-GO-RPe">
-                                <rect key="frame" x="907" y="384" width="86" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="18"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </label>
-                            <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="dBC-wV-g0c" userLabel="Switch - Ramp">
-                                <rect key="frame" x="911" y="414" width="79" height="27"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </switch>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Driver Rating" lineBreakMode="tailTruncation" minimumFontSize="10" id="Y5O-Bu-GDq">
                                 <rect key="frame" x="30" y="584" width="145" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -904,7 +892,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Climb Level" lineBreakMode="tailTruncation" minimumFontSize="10" id="wNz-0f-ygV">
-                                <rect key="frame" x="788" y="575" width="106" height="22"/>
+                                <rect key="frame" x="832" y="572" width="106" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="18"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -968,7 +956,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="FyF-MW-EnU">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="FyF-MW-EnU" userLabel="Button - Timer">
                                 <rect key="frame" x="312" y="517" width="72" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -980,7 +968,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="kd3-Al-5aW" userLabel="Button - Auton Mode">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="kd3-Al-5aW" userLabel="Button - Draw Mode">
                                 <rect key="frame" x="409" y="517" width="72" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -995,56 +983,6 @@
                                     <action selector="drawModeChange:" destination="WBb-6A-oWA" eventType="touchUpInside" id="hwH-bc-Ykt"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Rwh-gX-nO1">
-                                <rect key="frame" x="518" y="517" width="72" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Defense" lineBreakMode="tailTruncation" minimumFontSize="10" id="9o6-MH-Dpi">
-                                <rect key="frame" x="637" y="493" width="64" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="NV0-yS-LCa">
-                                <rect key="frame" x="633" y="517" width="72" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ZY0-2f-wy6">
-                                <rect key="frame" x="741" y="517" width="72" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Endgame" lineBreakMode="tailTruncation" minimumFontSize="10" id="rTb-5e-K9n">
-                                <rect key="frame" x="741" y="493" width="73" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xcI-CG-2jD" userLabel="Label - Team Name">
                                 <rect key="frame" x="693" y="24" width="176" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1052,6 +990,73 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="0vi-Wt-2J4" userLabel="Button - Match Reset">
+                                <rect key="frame" x="312" y="570" width="99" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Match Reset">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="matchReset:" destination="WBb-6A-oWA" eventType="touchUpInside" id="Z7X-n8-PFV"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Pyramid" lineBreakMode="tailTruncation" minimumFontSize="10" id="MPC-OW-Bh9" userLabel="Label - TeleOp Missed">
+                                <rect key="frame" x="886" y="358" width="56" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="18"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </label>
+                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Adk-kb-Eym">
+                                <rect key="frame" x="884" y="439" width="60" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
+                                <state key="normal" title="Blocks">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Blocks" lineBreakMode="tailTruncation" minimumFontSize="10" id="jXw-TI-TuZ">
+                                <rect key="frame" x="889" y="415" width="56" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </label>
+                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Aq0-5U-4Qc" userLabel="Button - PickUps">
+                                <rect key="frame" x="951" y="439" width="60" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
+                                <state key="normal" title="Picks">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="PickUp" lineBreakMode="tailTruncation" minimumFontSize="10" id="vPg-JU-Syf" userLabel="Label - PickUps">
+                                <rect key="frame" x="958" y="415" width="55" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Passes" lineBreakMode="tailTruncation" minimumFontSize="10" id="dcx-sv-6hz">
+                                <rect key="frame" x="959" y="357" width="60" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.74509803919999995" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -1065,16 +1070,21 @@
                         <outlet property="autonLowButton" destination="5r3-Vh-c0v" id="hKu-ie-hdt"/>
                         <outlet property="autonMediumButton" destination="DG0-z6-bFN" id="lfr-Gy-5Ke"/>
                         <outlet property="autonMissButton" destination="sLc-p8-GyK" id="3nx-Nb-IQc"/>
+                        <outlet property="blocksButton" destination="Adk-kb-Eym" id="xT8-ln-Wzw"/>
                         <outlet property="blueScore" destination="ev0-ho-TeF" id="j3L-FU-yE3"/>
                         <outlet property="drawModeButton" destination="kd3-Al-5aW" id="E1w-tJ-j01"/>
                         <outlet property="driverRating" destination="e3M-4Q-lW8" id="gCb-Jx-b4A"/>
                         <outlet property="fieldImage" destination="RvX-YB-hOX" id="EsN-pr-Sra"/>
                         <outlet property="imageContainer" destination="6Qn-p6-4MN" id="dpe-Lz-yBU"/>
                         <outlet property="matchNumber" destination="dZc-4T-78p" id="mEw-cB-T3v"/>
+                        <outlet property="matchResetButton" destination="0vi-Wt-2J4" id="pJD-I4-iMd"/>
                         <outlet property="matchType" destination="jmp-Mx-xGA" id="8af-fE-2Br"/>
                         <outlet property="nextMatch" destination="cNM-Sg-kpV" id="ROc-QP-7ZS"/>
                         <outlet property="notes" destination="qX6-ZB-Ecp" id="FA7-sg-V6e"/>
+                        <outlet property="passesButton" destination="OHc-sI-dw6" id="Ueo-Ku-ANu"/>
+                        <outlet property="pickupsButton" destination="Aq0-5U-4Qc" id="dU8-qA-y6x"/>
                         <outlet property="prevMatch" destination="Oor-gF-fxZ" id="Ilk-ft-yrn"/>
+                        <outlet property="pyramidGoalsButton" destination="2bS-kZ-9mp" id="n2k-NA-Pzl"/>
                         <outlet property="redScore" destination="fhb-g7-wyq" id="ToW-sU-Jq9"/>
                         <outlet property="teamEdit" destination="mls-ys-0eb" id="vF3-bz-GiS"/>
                         <outlet property="teamName" destination="xcI-CG-2jD" id="O4q-Wz-egw"/>
@@ -1089,16 +1099,16 @@
             </objects>
             <point key="canvasLocation" x="-620" y="-480"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Match List View Controller-->
         <scene sceneID="jEF-Lz-5ra">
             <objects>
-                <tableViewController id="WfL-ic-UhD" sceneMemberID="viewController">
+                <tableViewController id="WfL-ic-UhD" customClass="MatchListViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="CYL-zv-bu0">
                         <rect key="frame" x="0.0" y="64" width="768" height="960"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" id="p0J-9a-oHr">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="MatchList" id="p0J-9a-oHr">
                                 <rect key="frame" x="0.0" y="22" width="768" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -1256,113 +1266,12 @@
         <image name="button_robonaut_gold.png" width="518" height="194"/>
         <image name="photo.JPG" width="640" height="478"/>
     </resources>
-    <classes>
-        <class className="DownloadPageViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DownloadPageViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="exportTapped:"/>
-                <relationship kind="outlet" name="exportMatchData" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="exportTeamData" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="mainLogo" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="MainScoutingPageViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainScoutingPageViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="AllianceSelectionChanged:"/>
-                <relationship kind="action" name="MatchNumberChanged"/>
-                <relationship kind="action" name="MatchTypeSelectionChanged:"/>
-                <relationship kind="action" name="NextButton"/>
-                <relationship kind="action" name="PrevButton"/>
-                <relationship kind="action" name="TeamSelectionChanged:"/>
-                <relationship kind="action" name="drawModeChange:"/>
-                <relationship kind="action" name="scoreButtons:"/>
-                <relationship kind="action" name="toggleForCoopBalance:"/>
-                <relationship kind="action" name="toggleForCrossesHump:"/>
-                <relationship kind="action" name="toggleForRampModing:"/>
-                <relationship kind="action" name="updateDriverRating:"/>
-                <relationship kind="outlet" name="alliance" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="autonHighButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="autonLowButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="autonMediumButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="autonMissButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="blueScore" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="coopBalance" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="crossesHump" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="drawModeButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="driverRating" candidateClass="UISlider"/>
-                <relationship kind="outlet" name="fieldImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="imageContainer" candidateClass="UIView"/>
-                <relationship kind="outlet" name="matchNumber" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="matchType" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="modedRamp" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="nextMatch" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="notes" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="prevMatch" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="redScore" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="teamEdit" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="teamName" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="teamNumber" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="teleOpHighButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="teleOpLowButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="teleOpMediumButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="teleOpMissButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="MatchAnalysisViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MatchAnalysisViewController.h"/>
-        </class>
-        <class className="SetUpPageViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SetUpPageViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="exportDataButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="importDataButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="mainLogo" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="matchSetUpButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="pictureCaption" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="tournamentSetUpButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="SplashPageViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SplashPageViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="mainLogo" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="matchAnalysisButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="matchScoutingButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="matchSetUpButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="pictureCaption" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="teamScoutingButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="TeamDetailViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TeamDetailViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="useCamera:"/>
-                <relationship kind="action" name="useCameraRoll:"/>
-                <relationship kind="outlet" name="choosePhotoBtn" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="driveTrainTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="historyLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="matchInfo" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="nameTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="notesTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="numberLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="takePhotoBtn" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="TeamListViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TeamListViewController.h"/>
-        </class>
-        <class className="TournamentViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TournamentViewController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="wk0-5M-M2j"/>
+        <segue reference="iyT-jd-3j5"/>
     </inferredMetricsTieBreakers>
 </document>

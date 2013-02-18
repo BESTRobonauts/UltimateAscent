@@ -9,8 +9,10 @@
         <relationship name="score" optional="YES" toMany="YES" maxCount="6" deletionRule="Cascade" destinationEntity="TeamScore" inverseName="match" inverseEntity="TeamScore" syncable="YES"/>
     </entity>
     <entity name="SettingsData" representedClassName="SettingsData" syncable="YES">
+        <attribute name="adminCode" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="master" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="mode" attributeType="String" defaultValueString="Test" syncable="YES"/>
+        <attribute name="overrideCode" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="tournament" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="TournamentData" inverseName="settings" inverseEntity="TournamentData" syncable="YES"/>
     </entity>
     <entity name="TeamData" representedClassName="TeamData" syncable="YES">
@@ -33,6 +35,7 @@
         <attribute name="autonLow" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="2000" defaultValueString="0" syncable="YES"/>
         <attribute name="autonMid" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="2000" defaultValueString="0" syncable="YES"/>
         <attribute name="autonMissed" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="2000" defaultValueString="0" syncable="YES"/>
+        <attribute name="blocks" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="2000" defaultValueString="0" syncable="YES"/>
         <attribute name="climbLevel" optional="YES" attributeType="Integer 16" maxValueString="3" defaultValueString="0" syncable="YES"/>
         <attribute name="climbSuccess" optional="YES" attributeType="Integer 16" minValueString="-1" maxValueString="1" defaultValueString="-1" syncable="YES"/>
         <attribute name="climbTimer" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
@@ -41,6 +44,9 @@
         <attribute name="fieldDrawing" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="notes" optional="YES" attributeType="String" minValueString="0" maxValueString="500" syncable="YES"/>
         <attribute name="otherRating" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="5" defaultValueString="0" syncable="YES"/>
+        <attribute name="passes" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="2000" defaultValueString="0" syncable="YES"/>
+        <attribute name="pickups" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="2000" defaultValueString="0" syncable="YES"/>
+        <attribute name="pyramid" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="2000" defaultValueString="0" syncable="YES"/>
         <attribute name="saved" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="teleOpHigh" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="2000" defaultValueString="0" syncable="YES"/>
         <attribute name="teleOpLow" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="2000" defaultValueString="0" syncable="YES"/>
@@ -59,9 +65,9 @@
     </entity>
     <elements>
         <element name="MatchData" positionX="27" positionY="33" width="128" height="135"/>
-        <element name="SettingsData" positionX="18" positionY="-144" width="128" height="90"/>
+        <element name="SettingsData" positionX="18" positionY="-144" width="128" height="120"/>
         <element name="TeamData" positionX="432" positionY="24" width="128" height="225"/>
-        <element name="TeamScore" positionX="207" positionY="-180" width="128" height="360"/>
+        <element name="TeamScore" positionX="207" positionY="-180" width="128" height="420"/>
         <element name="TournamentData" positionX="205" positionY="152" width="128" height="120"/>
     </elements>
 </model>

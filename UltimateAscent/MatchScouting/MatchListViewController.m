@@ -12,10 +12,14 @@
 #import "TeamData.h"
 #import "TeamScore.h"
 #import "DataManager.h"
-
+#import "SettingsData.h"
+#import "TournamentData.h"
 
 @implementation MatchListViewController
 @synthesize managedObjectContext, fetchedResultsController;
+@synthesize settings;
+@synthesize teamData;
+@synthesize teamOrder;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -42,6 +46,13 @@
     if (!managedObjectContext) {
         DataManager *dataManager = [DataManager new];
         managedObjectContext = [dataManager managedObjectContext];
+    }
+    [self retrieveSettings];
+    if (settings) {
+        self.title =  [NSString stringWithFormat:@"%@ Match List", settings.tournament.name];
+    }
+    else {
+        self.title = @"Match List";
     }
     if (![[self fetchedResultsController] performFetch:&error]) {
         /*
@@ -75,7 +86,6 @@
     NSIndexPath *matchIndex = [NSIndexPath indexPathForRow:0 inSection:0];
 
     MatchData *matchData = [fetchedResultsController objectAtIndexPath:matchIndex];
-//    self.title = [NSString stringWithFormat:@"%@ %@", matchData.tournament, @"Match List"];
     [super viewWillAppear:animated];
 }
 
@@ -98,6 +108,41 @@
 {
     // Return YES for supported orientations
 	return YES;
+}
+
+-(void)setTeamList:(MatchData *)match {
+    TeamScore *score;
+    NSSortDescriptor *allianceSort = [NSSortDescriptor sortDescriptorWithKey:@"alliance" ascending:YES];
+    teamData = [[match.score allObjects] sortedArrayUsingDescriptors:[NSArray arrayWithObject:allianceSort]];
+
+    if (teamOrder == nil) {
+        teamOrder = [NSMutableArray array];
+        // Reds
+        for (int i = 3; i < 6; i++) {
+            score = [teamData objectAtIndex:i];
+            [teamOrder addObject:[NSString stringWithFormat:@"%d", [score.team.number intValue]]];
+        }
+        // Blues
+        for (int i = 0; i < 3; i++) {
+            score = [teamData objectAtIndex:i];
+            [teamOrder addObject:[NSString stringWithFormat:@"%d", [score.team.number intValue]]];
+        }
+        
+    }
+    else {
+        // Reds
+        for (int i = 3; i < 6; i++) {
+            score = [teamData objectAtIndex:i];
+            [teamOrder replaceObjectAtIndex:(i-3)
+                                withObject:[NSString stringWithFormat:@"%d", [score.team.number intValue]]];
+        }
+        // Blues
+        for (int i = 0; i < 3; i++) {
+            score = [teamData objectAtIndex:i];
+            [teamOrder replaceObjectAtIndex:(i+3)
+                                withObject:[NSString stringWithFormat:@"%d", [score.team.number intValue]]];
+        }
+    }
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -142,27 +187,28 @@
     UIImage *image = [UIImage imageNamed:@"Gold Fade.gif"];
     imageView.image = image;
     cell.backgroundView = imageView;
+    [self setTeamList:info];
     
 	UILabel *numberLabel = (UILabel *)[cell viewWithTag:10];
 	numberLabel.text = [NSString stringWithFormat:@"%d", [info.number intValue]];
     
 	UILabel *red1Label = (UILabel *)[cell viewWithTag:20];
-//    red1Label.text = [NSString stringWithFormat:@"%d", [info.red1.teamInfo.number intValue]];
+    red1Label.text = [NSString stringWithFormat:@"%d", [[teamOrder objectAtIndex:0] intValue]];
 
     UILabel *red2Label = (UILabel *)[cell viewWithTag:30];
-//    red2Label.text = [NSString stringWithFormat:@"%d", [info.red2.teamInfo.number intValue]];
+    red2Label.text = [NSString stringWithFormat:@"%d", [[teamOrder objectAtIndex:1] intValue]];
 
 	UILabel *red3Label = (UILabel *)[cell viewWithTag:40];
-//    red3Label.text = [NSString stringWithFormat:@"%d", [info.red3.teamInfo.number intValue]];
+    red3Label.text = [NSString stringWithFormat:@"%d", [[teamOrder objectAtIndex:2] intValue]];
 
 	UILabel *blue1Label = (UILabel *)[cell viewWithTag:50];
-//    blue1Label.text = [NSString stringWithFormat:@"%d", [info.blue1.teamInfo.number intValue]];
+    blue1Label.text = [NSString stringWithFormat:@"%d", [[teamOrder objectAtIndex:3] intValue]];
 
 	UILabel *blue2Label = (UILabel *)[cell viewWithTag:60];
-//    blue2Label.text = [NSString stringWithFormat:@"%d", [info.blue2.teamInfo.number intValue]];
+    blue2Label.text = [NSString stringWithFormat:@"%d", [[teamOrder objectAtIndex:4] intValue]];
 
 	UILabel *blue3Label = (UILabel *)[cell viewWithTag:70];
-//    blue3Label.text = [NSString stringWithFormat:@"%d", [info.blue3.teamInfo.number intValue]];
+    blue3Label.text = [NSString stringWithFormat:@"%d", [[teamOrder objectAtIndex:5] intValue]];
 
 	UILabel *redScoreLabel = (UILabel *)[cell viewWithTag:80];
     redScoreLabel.text = [NSString stringWithFormat:@"%d", [info.redScore intValue]];
@@ -229,6 +275,30 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
+}
+
+- (void)retrieveSettings {
+    NSError *error;
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"SettingsData" inManagedObjectContext:managedObjectContext];
+    [fetchRequest setEntity:entity];
+    NSArray *settingsRecord = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    if(!settingsRecord) {
+        NSLog(@"Karma disruption error");
+        settings = Nil;
+    }
+    else {
+        if([settingsRecord count] == 0) {  // No Settings Exists
+            NSLog(@"Karma disruption error");
+            settings = Nil;
+        }
+        else {
+            settings = [settingsRecord objectAtIndex:0];
+        }
+    }
+    
 }
 
 #pragma mark -

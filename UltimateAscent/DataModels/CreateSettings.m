@@ -15,6 +15,9 @@
 /*
     1   Mode
     2   Display Tournament
+    3   Master iPad
+    4   Admin Code
+    5   Override Code
  */
 
 @implementation CreateSettings
@@ -22,7 +25,6 @@
 
 -(AddRecordResults)createSettingsFromFile:(NSMutableArray *)headers dataFields:(NSMutableArray *)data {
     SettingsData *settings;
-    NSString *mode;
     NSString *tournament;
     NSError *error;
     
@@ -32,12 +34,7 @@
         DataManager *dataManager = [DataManager new];
         managedObjectContext = [dataManager managedObjectContext];
     }
-    
-    mode = [data objectAtIndex: 0];
-    tournament = [data objectAtIndex: 1];
-    
-    NSLog(@"createSettingsFromFile:Mode = %@", mode);
-    
+     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription
                                    entityForName:@"SettingsData" inManagedObjectContext:managedObjectContext];
@@ -50,16 +47,28 @@
     else {
         if([settingsRecord count] == 0) {  // No Settings Exists
             settings = [NSEntityDescription insertNewObjectForEntityForName:@"SettingsData"
-                                                                       inManagedObjectContext:managedObjectContext];
+                                                        inManagedObjectContext:managedObjectContext];
          }
         else {
             settings = [settingsRecord objectAtIndex:0];
         }
     }
 
+    switch ([data count]) {
+        case 5:
+            settings.overrideCode = [data objectAtIndex: 4];
+        case 4:
+            settings.adminCode = [data objectAtIndex: 3];
+        case 3:
+            settings.master = [NSNumber numberWithInt:[[data objectAtIndex:2] intValue]];
+        case 2:
+            tournament = [data objectAtIndex: 1];
+        case 1:
+            settings.mode = [data objectAtIndex: 0];
+    }
+    NSLog(@"createSettingsFromFile:Settings = %@", settings);
+            
     // Some day add a check for valid modes. Currently only Test and Tournament are valid.
-    settings.mode = mode;
-
 
     // Need to add something to properly "release" the tournament relationship if it already exists
     entity = [NSEntityDescription
