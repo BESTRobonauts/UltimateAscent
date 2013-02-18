@@ -31,9 +31,15 @@
 @synthesize delegate;
 @synthesize storePath;
 @synthesize fileManager;
-// Match Control Buttons 
+
+// Match Control Buttons
 @synthesize prevMatch;
 @synthesize nextMatch;
+
+// User Access Control
+@synthesize overrideMode;
+@synthesize alertPrompt;
+@synthesize alertPromptPopover;
 
 // Alliance Picker
 @synthesize alliance;
@@ -80,8 +86,6 @@
 @synthesize redScore;
 @synthesize blueScore;
 @synthesize teamEdit;
-@synthesize overridePrompt;
-@synthesize passCodeMatch;
 
 // Field Drawing
 @synthesize imageContainer;
@@ -161,6 +165,7 @@
         teamIndex = [[[csvContent objectAtIndex:0] objectAtIndex:2] intValue];
     }
     
+    overrideMode = NoOverride;
     teamName.font = [UIFont fontWithName:@"Helvetica" size:24.0];
     [self SetBigButtonDefaults:prevMatch];
     [self SetBigButtonDefaults:nextMatch];
@@ -223,8 +228,8 @@
     
     NSIndexPath *matchIndex = [NSIndexPath indexPathForRow:rowIndex inSection:sectionIndex];
     currentMatch = [fetchedResultsController objectAtIndexPath:matchIndex];
-    NSLog(@"Match = %@, Type = %@, Tournament = %@", currentMatch.number, currentMatch.matchType, currentMatch.tournament);
-    NSLog(@"Settings = %@", settings.tournament.name);
+    // NSLog(@"Match = %@, Type = %@, Tournament = %@", currentMatch.number, currentMatch.matchType, currentMatch.tournament);
+    // NSLog(@"Settings = %@", settings.tournament.name);
     baseDrawingPath = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"Library/FieldDrawings/%@", settings.tournament.directory]];
     // NSLog(@"Field Drawing Path = %@", baseDrawingPath);
     dataChange = NO;
@@ -940,11 +945,8 @@
             break;
         case DrawLock:
             NSLog(@"Do something undecided.");
-            [self checkOverrideCode:@"Enter override code to unlock"];
-            NSLog(@"Back in drawmodechange");
-            if (passCodeMatch) {
-                drawMode = DrawOff;
-            }
+            overrideMode = OverrideDrawLock;
+            [self checkOverrideCode:drawModeButton];
             break;
         default:
             NSLog(@"Bad things have happened in drawModeChange");
@@ -1076,49 +1078,36 @@
 
 }
 
--(void)checkOverrideCode:(NSString *)msg {
-    NSLog(@"Check override %@", msg);
-    overridePrompt = [[UIAlertView alloc] initWithTitle:@"Please be sure you really want to do this."
-                                                     message:msg
-                                                    delegate:self
-                                           cancelButtonTitle:@"Cancel"
-                                           otherButtonTitles:@"Enter", nil];
-    [overridePrompt setAlertViewStyle:UIAlertViewStyleSecureTextInput];
-    [overridePrompt show];
+-(void)checkOverrideCode:(UIButton *)button {
+    NSLog(@"Check override");
+    if (alertPrompt == nil) {
+        self.alertPrompt = [[AlertPromptViewController alloc] initWithNibName:nil bundle:nil];
+        alertPrompt.delegate = self;
+        alertPrompt.titleText = @"Enter Override Code";
+        alertPrompt.msgText = @"Please be sure you really want to do this.";
+        self.alertPromptPopover = [[UIPopoverController alloc]
+                                   initWithContentViewController:alertPrompt];
+    }
+    [self.alertPromptPopover presentPopoverFromRect:button.bounds inView:button permittedArrowDirections:UIPopoverArrowDirectionLeft animated:YES];
+    
     return;
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
-
-    if([title isEqualToString:@"Enter"]) {
-        passCodeMatch = NO;
-        UITextField *passCode = [alertView textFieldAtIndex:0];
-        if (alertView == overridePrompt) {
-            if ([passCode.text isEqualToString:settings.overrideCode]) {
-                passCodeMatch = TRUE;
+- (void)passCodeResult:(NSString *)passCodeAttempt {
+    [self.alertPromptPopover dismissPopoverAnimated:YES];
+    switch (overrideMode) {
+        case OverrideDrawLock:
+            if ([passCodeAttempt isEqualToString:settings.overrideCode]) {
+                NSLog(@"alertView Delegate password matched");
+                drawMode = DrawOff;
+                [self drawModeSettings:drawMode];
             }
-            NSLog(@"overridePrompt ");
-            NSLog(@"Check override passCodeMatch %d", passCodeMatch);
-        }
+            break;
+            
+        default:
+            break;
     }
-}
-
-- (BOOL)alertViewShouldEnableFirstOtherButton:(UIAlertView *)alertView
-{
-    NSString *passCode = [[alertView textFieldAtIndex:0] text];
-    if (alertView == overridePrompt) {
-        NSLog(@"alertViewShouldEnableFirstOtherButton passCodeMatch %d", passCodeMatch);
-        if ([passCode isEqualToString:settings.overrideCode]) {
-            passCodeMatch = TRUE;
-            return TRUE;
-        }
-        else {
-            passCodeMatch = FALSE;
-            return FALSE;
-        }
-    }
+    overrideMode = NoOverride;
 }
 
 -(IBAction)matchReset:(id) sender {

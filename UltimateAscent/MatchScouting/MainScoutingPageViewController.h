@@ -11,6 +11,7 @@
 #import "MatchTypePickerController.h"
 #import "TeamPickerController.h"
 #import "RecordScorePickerController.h"
+#import "AlertPromptViewController.h"
 
 @protocol MainScoutingPageDelegate
 - (void)scoutingPageStatus:(NSUInteger)sectionIndex forRow:(NSUInteger)rowIndex forTeam:(NSUInteger)teamIndex;
@@ -20,7 +21,7 @@
 @class TeamScore;
 @class SettingsData;
 
-@interface MainScoutingPageViewController : UIViewController <NSFetchedResultsControllerDelegate, UITextFieldDelegate, AlliancePickerDelegate, MatchTypePickerDelegate, TeamPickerDelegate, RecordScorePickerDelegate, UIAlertViewDelegate> {
+@interface MainScoutingPageViewController : UIViewController <NSFetchedResultsControllerDelegate, UITextFieldDelegate, AlliancePickerDelegate, MatchTypePickerDelegate, TeamPickerDelegate, RecordScorePickerDelegate, AlertPromptDelegate> {
     
     CGPoint lastPoint;
     CGFloat red;
@@ -46,8 +47,17 @@
 // Match Control
 @property (nonatomic, retain) IBOutlet UIButton *prevMatch;
 @property (nonatomic, retain) IBOutlet UIButton *nextMatch;
-@property (nonatomic, strong) UIAlertView *overridePrompt;
-@property (nonatomic, assign) BOOL passCodeMatch;
+
+// User Access Control
+typedef enum {
+    NoOverride,
+	OverrideDrawLock,
+} OverrideMode;
+
+@property (nonatomic, retain) AlertPromptViewController *alertPrompt;
+@property (nonatomic, retain) UIPopoverController *alertPromptPopover;
+@property (nonatomic, assign) OverrideMode overrideMode;
+
 -(IBAction)PrevButton;
 -(IBAction)NextButton;
 -(NSUInteger)GetNextSection:(NSUInteger) currentSection;
@@ -166,5 +176,5 @@ typedef enum {
 - (CGPoint)calculatePopOverLocation:(CGPoint)location;
 -(IBAction)drawModeChange: (id)sender;
 -(void)drawModeSettings:(DrawingMode) mode;
--(void)checkOverrideCode:(NSString *)msg;
+-(void)checkOverrideCode:(UIButton *)button;
 @end
