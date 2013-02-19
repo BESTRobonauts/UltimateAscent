@@ -13,14 +13,19 @@
 #import "TeamScore.h"
 #import "TournamentData.h"
 #import "CreateTeam.h"
+#include "MatchTypeDictionary.h"
 
-@implementation CreateMatch
+@implementation CreateMatch {
+    MatchTypeDictionary *matchDictionary;
+}
+
 @synthesize managedObjectContext;
+
 
 -(AddRecordResults)createMatchFromFile:(NSMutableArray *)headers dataFields:(NSMutableArray *)data {
     NSNumber *matchNumber;
     NSString *type;
-    
+
     if (![data count]) return DB_ERROR;
     
     if (!managedObjectContext) {
@@ -131,7 +136,15 @@
     
     MatchData *match = [NSEntityDescription insertNewObjectForEntityForName:@"MatchData" 
                                                      inManagedObjectContext:managedObjectContext];        
+    matchDictionary = [[MatchTypeDictionary alloc] init];
+/*
+    NSString *thing = [matchDictionary getMatchTypeString:[NSNumber numberWithInt:Seeding]];
+    NSLog(@"thing = %@", thing);
+    //  NSInteger *other = [matchDictionary getMatchTypeEnum:@"Elimination"];
+    NSLog(@"other = %@", [matchDictionary getMatchTypeEnum:@"Elimination"]);
+  */
     match.matchType = matchType;
+    match.matchTypeSection = [matchDictionary getMatchTypeEnum:matchType];
     match.number = number;
     
     [match addScoreObject:[self CreateScore:red1 forAlliance:@"Red 1"]];
@@ -143,7 +156,7 @@
     match.tournament = tournament;
     match.redScore = redScore;
     match.blueScore = blueScore;
-    NSLog(@"Adding New Match = %@, Tournament = %@, Type = %@", match.number, match.tournament, match.matchType);
+//    NSLog(@"Adding New Match = %@, Tournament = %@, Type = %@, Section = %@", match.number, match.tournament, match.matchType, match.matchTypeSection);
 //  NSLog(@" Tournament = %@", match.tournament);
 //  NSLog(@"   Team Score = %@", match.score);
 }

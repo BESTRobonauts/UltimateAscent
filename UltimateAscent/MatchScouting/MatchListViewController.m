@@ -314,7 +314,7 @@
         [fetchRequest setEntity:entity];
         
         // Edit the sort key as appropriate.
-        NSSortDescriptor *typeDescriptor = [[NSSortDescriptor alloc] initWithKey:@"matchType" ascending:YES];
+        NSSortDescriptor *typeDescriptor = [[NSSortDescriptor alloc] initWithKey:@"matchTypeSection" ascending:YES];
         NSSortDescriptor *numberDescriptor = [[NSSortDescriptor alloc] initWithKey:@"number" ascending:YES];
         NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:typeDescriptor, numberDescriptor, nil];
         
@@ -327,7 +327,7 @@
         [[NSFetchedResultsController alloc] 
          initWithFetchRequest:fetchRequest 
          managedObjectContext:managedObjectContext 
-         sectionNameKeyPath:@"matchType"
+         sectionNameKeyPath:@"matchTypeSection"
          cacheName:@"Root"];
         aFetchedResultsController.delegate = self;
         self.fetchedResultsController = aFetchedResultsController;

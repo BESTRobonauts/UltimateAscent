@@ -52,6 +52,7 @@
 typedef enum {
     NoOverride,
 	OverrideDrawLock,
+    OverrideMatchReset,
 } OverrideMode;
 
 @property (nonatomic, retain) AlertPromptViewController *alertPrompt;
@@ -73,7 +74,8 @@ typedef enum {
 @property (nonatomic, retain) UISegmentedControl *balanced;
 @property (nonatomic, retain) IBOutlet UITextField *notes;
 @property (nonatomic, retain) IBOutlet UIButton *matchResetButton;
--(IBAction)matchReset:(id) sender;
+-(IBAction)matchResetRequest:(id) sender;
+-(void)matchReset;
 -(IBAction)updateDriverRating:(id) sender;
 -(IBAction)toggleForCrossesHump: (id) sender;
 -(IBAction)toggleForCoopBalance: (id) sender;

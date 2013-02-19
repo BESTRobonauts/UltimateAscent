@@ -944,7 +944,6 @@
             drawMode = DrawOff;
             break;
         case DrawLock:
-            NSLog(@"Do something undecided.");
             overrideMode = OverrideDrawLock;
             [self checkOverrideCode:drawModeButton];
             break;
@@ -1098,9 +1097,14 @@
     switch (overrideMode) {
         case OverrideDrawLock:
             if ([passCodeAttempt isEqualToString:settings.overrideCode]) {
-                NSLog(@"alertView Delegate password matched");
                 drawMode = DrawOff;
                 [self drawModeSettings:drawMode];
+            }
+            break;
+            
+        case OverrideMatchReset:
+            if ([passCodeAttempt isEqualToString:settings.overrideCode]) {
+                [self matchReset];
             }
             break;
             
@@ -1110,10 +1114,14 @@
     overrideMode = NoOverride;
 }
 
--(IBAction)matchReset:(id) sender {
+-(IBAction)matchResetRequest:(id) sender {
     NSLog(@"matchReset");
-    // Check passcode
+    overrideMode = OverrideMatchReset;
+    [self checkOverrideCode:matchResetButton];
     // Different message for saved, locked, synced
+ }
+
+-(void)matchReset {
     currentMatch.redScore = [NSNumber numberWithInt:-1];
     currentMatch.blueScore = [NSNumber numberWithInt:-1];
     currentTeam.autonHigh = [NSNumber numberWithInt:0];
@@ -1136,9 +1144,10 @@
     currentTeam.climbLevel = [NSNumber numberWithInt:0];
     currentTeam.climbSuccess = [NSNumber numberWithInt:-1];
     currentTeam.climbTimer = [NSNumber numberWithFloat:0.0];
-
-    [self ShowTeam:teamIndex];
+    
+    [self ShowTeam:teamIndex];   
 }
+
 
 - (void)retrieveSettings {
     NSError *error;

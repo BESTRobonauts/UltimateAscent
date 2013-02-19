@@ -37,7 +37,6 @@
 		2F8864A216B76DAB00867385 /* LoadCSVData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F8864A116B76DAB00867385 /* LoadCSVData.m */; };
 		2F89E66516C42ECC003CB1A8 /* TeamData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F89E66416C42ECC003CB1A8 /* TeamData.m */; };
 		2F8F8B9E16A24D8C00D3B176 /* CreateTeam.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F8F8B9D16A24D8C00D3B176 /* CreateTeam.m */; };
-		2F92A7C416C41324009A87E5 /* MatchData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F92A7C316C41324009A87E5 /* MatchData.m */; };
 		2FB3A4B816CEC05000E895E5 /* TournamentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB3A4B716CEC05000E895E5 /* TournamentViewController.m */; };
 		2FB3A4C116CEC17C00E895E5 /* MatchAnalysisViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB3A4C016CEC17C00E895E5 /* MatchAnalysisViewController.m */; };
 		2FB3A4C416CF043800E895E5 /* MasonPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB3A4C316CF043800E895E5 /* MasonPageViewController.m */; };
@@ -70,6 +69,8 @@
 		2FCE54FD16CC29AB00884191 /* Small Green Button.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2FCE54FC16CC29AB00884191 /* Small Green Button.jpg */; };
 		2FCE54FF16CC29B600884191 /* Small White Button.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2FCE54FE16CC29B600884191 /* Small White Button.jpg */; };
 		2FFAE1B416D29B9600B180F9 /* AlertPromptViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FFAE1B316D29B9600B180F9 /* AlertPromptViewController.m */; };
+		2FFAE1BB16D3235600B180F9 /* MatchTypeDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FFAE1BA16D3235600B180F9 /* MatchTypeDictionary.m */; };
+		2FFAE1BE16D3BBC800B180F9 /* MatchData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FFAE1BD16D3BBC800B180F9 /* MatchData.m */; };
 		2FFD94EB16D16BF0007052EA /* SettingsData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FFD94EA16D16BF0007052EA /* SettingsData.m */; };
 		2FFD94FA16D1AC5F007052EA /* Small Grey Button.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2FFD94F916D1AC5F007052EA /* Small Grey Button.jpg */; };
 		2FFD94FC16D1ACA1007052EA /* robonauts app banner.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2FFD94FB16D1ACA1007052EA /* robonauts app banner.jpg */; };
@@ -124,8 +125,6 @@
 		2F89E66416C42ECC003CB1A8 /* TeamData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TeamData.m; path = DataModels/TeamData.m; sourceTree = "<group>"; };
 		2F8F8B9C16A24D8C00D3B176 /* CreateTeam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CreateTeam.h; path = DataModels/CreateTeam.h; sourceTree = "<group>"; };
 		2F8F8B9D16A24D8C00D3B176 /* CreateTeam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CreateTeam.m; path = DataModels/CreateTeam.m; sourceTree = "<group>"; };
-		2F92A7C216C41324009A87E5 /* MatchData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MatchData.h; path = DataModels/MatchData.h; sourceTree = "<group>"; };
-		2F92A7C316C41324009A87E5 /* MatchData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MatchData.m; path = DataModels/MatchData.m; sourceTree = "<group>"; };
 		2FB3A4B616CEC05000E895E5 /* TournamentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TournamentViewController.h; path = SetUp/TournamentViewController.h; sourceTree = "<group>"; };
 		2FB3A4B716CEC05000E895E5 /* TournamentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TournamentViewController.m; path = SetUp/TournamentViewController.m; sourceTree = "<group>"; };
 		2FB3A4BF16CEC17C00E895E5 /* MatchAnalysisViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MatchAnalysisViewController.h; path = MatchAnalysis/MatchAnalysisViewController.h; sourceTree = "<group>"; };
@@ -172,6 +171,10 @@
 		2FCE54FE16CC29B600884191 /* Small White Button.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Small White Button.jpg"; path = "Resources/Small White Button.jpg"; sourceTree = "<group>"; };
 		2FFAE1B216D29B9600B180F9 /* AlertPromptViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlertPromptViewController.h; path = Utilities/AlertPromptViewController.h; sourceTree = "<group>"; };
 		2FFAE1B316D29B9600B180F9 /* AlertPromptViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AlertPromptViewController.m; path = Utilities/AlertPromptViewController.m; sourceTree = "<group>"; };
+		2FFAE1B916D3235600B180F9 /* MatchTypeDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MatchTypeDictionary.h; path = Utilities/MatchTypeDictionary.h; sourceTree = "<group>"; };
+		2FFAE1BA16D3235600B180F9 /* MatchTypeDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MatchTypeDictionary.m; path = Utilities/MatchTypeDictionary.m; sourceTree = "<group>"; };
+		2FFAE1BC16D3BBC800B180F9 /* MatchData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MatchData.h; path = DataModels/MatchData.h; sourceTree = "<group>"; };
+		2FFAE1BD16D3BBC800B180F9 /* MatchData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MatchData.m; path = DataModels/MatchData.m; sourceTree = "<group>"; };
 		2FFD94E916D16BF0007052EA /* SettingsData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsData.h; path = DataModels/SettingsData.h; sourceTree = "<group>"; };
 		2FFD94EA16D16BF0007052EA /* SettingsData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsData.m; path = DataModels/SettingsData.m; sourceTree = "<group>"; };
 		2FFD94F916D1AC5F007052EA /* Small Grey Button.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Small Grey Button.jpg"; path = "Resources/Small Grey Button.jpg"; sourceTree = "<group>"; };
@@ -302,12 +305,12 @@
 				2F89E66316C42ECC003CB1A8 /* TeamData.h */,
 				2F89E66416C42ECC003CB1A8 /* TeamData.m */,
 				2F88648416B75EF600867385 /* UltimateAscent.xcdatamodeld */,
+				2FFAE1BC16D3BBC800B180F9 /* MatchData.h */,
+				2FFAE1BD16D3BBC800B180F9 /* MatchData.m */,
 				2FFD94FD16D1B260007052EA /* TeamScore.h */,
 				2FFD94FE16D1B261007052EA /* TeamScore.m */,
 				2FFD94E916D16BF0007052EA /* SettingsData.h */,
 				2FFD94EA16D16BF0007052EA /* SettingsData.m */,
-				2F92A7C216C41324009A87E5 /* MatchData.h */,
-				2F92A7C316C41324009A87E5 /* MatchData.m */,
 				2F4C500016BCB2C4004E0059 /* TournamentData.h */,
 				2F4C500116BCB2C4004E0059 /* TournamentData.m */,
 				21528C9416AA215800CF7E8E /* CreateMatch.h */,
@@ -418,6 +421,8 @@
 			children = (
 				2FFAE1B216D29B9600B180F9 /* AlertPromptViewController.h */,
 				2FFAE1B316D29B9600B180F9 /* AlertPromptViewController.m */,
+				2FFAE1B916D3235600B180F9 /* MatchTypeDictionary.h */,
+				2FFAE1BA16D3235600B180F9 /* MatchTypeDictionary.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -537,7 +542,6 @@
 				2F4E01EB16BA103E0092DC86 /* CreateTournament.m in Sources */,
 				2F4E01EE16BA10560092DC86 /* CreateSettings.m in Sources */,
 				2F4C500216BCB2C5004E0059 /* TournamentData.m in Sources */,
-				2F92A7C416C41324009A87E5 /* MatchData.m in Sources */,
 				2F89E66516C42ECC003CB1A8 /* TeamData.m in Sources */,
 				2FB3A4B816CEC05000E895E5 /* TournamentViewController.m in Sources */,
 				2FB3A4C116CEC17C00E895E5 /* MatchAnalysisViewController.m in Sources */,
@@ -546,6 +550,8 @@
 				2FFD94EB16D16BF0007052EA /* SettingsData.m in Sources */,
 				2FFD94FF16D1B261007052EA /* TeamScore.m in Sources */,
 				2FFAE1B416D29B9600B180F9 /* AlertPromptViewController.m in Sources */,
+				2FFAE1BB16D3235600B180F9 /* MatchTypeDictionary.m in Sources */,
+				2FFAE1BE16D3BBC800B180F9 /* MatchData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

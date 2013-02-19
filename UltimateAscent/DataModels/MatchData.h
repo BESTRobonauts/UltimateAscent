@@ -2,7 +2,7 @@
 //  MatchData.h
 //  UltimateAscent
 //
-//  Created by FRC on 2/7/13.
+//  Created by FRC on 2/19/13.
 //  Copyright (c) 2013 FRC. All rights reserved.
 //
 
@@ -18,6 +18,7 @@
 @property (nonatomic, retain) NSNumber * number;
 @property (nonatomic, retain) NSNumber * redScore;
 @property (nonatomic, retain) NSString * tournament;
+@property (nonatomic, retain) NSNumber * matchTypeSection;
 @property (nonatomic, retain) NSSet *score;
 @end
 
