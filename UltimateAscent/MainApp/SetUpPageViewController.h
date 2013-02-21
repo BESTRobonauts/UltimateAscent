@@ -15,5 +15,6 @@
 @property (nonatomic, retain) IBOutlet UIButton *tournamentSetUpButton;
 @property (nonatomic, retain) IBOutlet UIButton *importDataButton;
 @property (nonatomic, retain) IBOutlet UIButton *exportDataButton;
+@property (nonatomic, retain) IBOutlet UIImageView *splashPicture;
 
 @end

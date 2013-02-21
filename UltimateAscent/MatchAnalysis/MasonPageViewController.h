@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@class MatchData;
+
 @interface MasonPageViewController : UIViewController
+@property (nonatomic, retain) MatchData *currentMatch;
+@property (nonatomic, retain) IBOutlet UIButton *prevMatch;
+@property (nonatomic, retain) IBOutlet UITextField *matchNumber;
+
+// Make It Look Good
+-(void)SetTextBoxDefaults:(UITextField *)textField;
+-(void)SetBigButtonDefaults:(UIButton *)currentButton;
+-(void)SetSmallButtonDefaults:(UIButton *)currentButton;
 
 @end

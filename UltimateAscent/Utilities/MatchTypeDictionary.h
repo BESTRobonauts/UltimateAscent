@@ -11,4 +11,5 @@
 @interface MatchTypeDictionary : NSObject
 -(NSString *)getMatchTypeString:(id) key;
 -(id)getMatchTypeEnum:(NSString *) value;
+-(NSArray *)getMatchTypes;
 @end

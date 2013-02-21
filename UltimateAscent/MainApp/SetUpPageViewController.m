@@ -11,7 +11,7 @@
 @implementation SetUpPageViewController
 @synthesize mainLogo;
 @synthesize tournamentSetUpButton, matchSetUpButton, importDataButton, exportDataButton;
-@synthesize pictureCaption;
+@synthesize splashPicture, pictureCaption;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -79,7 +79,33 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
+    switch (interfaceOrientation) {
+        case UIInterfaceOrientationPortrait:
+        case UIInterfaceOrientationPortraitUpsideDown:
+            mainLogo.frame = CGRectMake(-20, 0, 285, 960);
+            [mainLogo setImage:[UIImage imageNamed:@"robonauts app banner.jpg"]];
+            tournamentSetUpButton.frame = CGRectMake(325, 125, 400, 68);
+            matchSetUpButton.frame = CGRectMake(325, 225, 400, 68);
+            importDataButton.frame = CGRectMake(325, 325, 400, 68);
+            exportDataButton.frame = CGRectMake(325, 425, 400, 68);
+            splashPicture.frame = CGRectMake(293, 563, 468, 330);
+            pictureCaption.frame = CGRectMake(293, 901, 468, 39);
+            break;
+        case UIInterfaceOrientationLandscapeLeft:
+        case UIInterfaceOrientationLandscapeRight:
+            mainLogo.frame = CGRectMake(0, -60, 1024, 255);
+            [mainLogo setImage:[UIImage imageNamed:@"robonauts app banner original.jpg"]];
+            tournamentSetUpButton.frame = CGRectMake(550, 225, 400, 68);
+            matchSetUpButton.frame = CGRectMake(550, 325, 400, 68);
+            importDataButton.frame = CGRectMake(550, 425, 400, 68);
+            exportDataButton.frame = CGRectMake(550, 525, 400, 68);
+            splashPicture.frame = CGRectMake(50, 243, 468, 330);
+            pictureCaption.frame = CGRectMake(50, 581, 468, 39);
+            break;
+        default:
+            break;
+    }
+   // Return YES for supported orientations
 	return YES;
 }
 

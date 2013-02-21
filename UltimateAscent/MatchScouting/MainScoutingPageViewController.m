@@ -1170,7 +1170,6 @@
             settings = [settingsRecord objectAtIndex:0];
         }
     }
-    
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

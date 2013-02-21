@@ -71,6 +71,7 @@
 		2FFAE1B416D29B9600B180F9 /* AlertPromptViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FFAE1B316D29B9600B180F9 /* AlertPromptViewController.m */; };
 		2FFAE1BB16D3235600B180F9 /* MatchTypeDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FFAE1BA16D3235600B180F9 /* MatchTypeDictionary.m */; };
 		2FFAE1BE16D3BBC800B180F9 /* MatchData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FFAE1BD16D3BBC800B180F9 /* MatchData.m */; };
+		2FFAE1C816D51BDD00B180F9 /* robonauts app banner original.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2FFAE1C716D51BDD00B180F9 /* robonauts app banner original.jpg */; };
 		2FFD94EB16D16BF0007052EA /* SettingsData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FFD94EA16D16BF0007052EA /* SettingsData.m */; };
 		2FFD94FA16D1AC5F007052EA /* Small Grey Button.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2FFD94F916D1AC5F007052EA /* Small Grey Button.jpg */; };
 		2FFD94FC16D1ACA1007052EA /* robonauts app banner.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2FFD94FB16D1ACA1007052EA /* robonauts app banner.jpg */; };
@@ -175,6 +176,7 @@
 		2FFAE1BA16D3235600B180F9 /* MatchTypeDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MatchTypeDictionary.m; path = Utilities/MatchTypeDictionary.m; sourceTree = "<group>"; };
 		2FFAE1BC16D3BBC800B180F9 /* MatchData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MatchData.h; path = DataModels/MatchData.h; sourceTree = "<group>"; };
 		2FFAE1BD16D3BBC800B180F9 /* MatchData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MatchData.m; path = DataModels/MatchData.m; sourceTree = "<group>"; };
+		2FFAE1C716D51BDD00B180F9 /* robonauts app banner original.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "robonauts app banner original.jpg"; path = "Resources/robonauts app banner original.jpg"; sourceTree = "<group>"; };
 		2FFD94E916D16BF0007052EA /* SettingsData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsData.h; path = DataModels/SettingsData.h; sourceTree = "<group>"; };
 		2FFD94EA16D16BF0007052EA /* SettingsData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsData.m; path = DataModels/SettingsData.m; sourceTree = "<group>"; };
 		2FFD94F916D1AC5F007052EA /* Small Grey Button.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Small Grey Button.jpg"; path = "Resources/Small Grey Button.jpg"; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 		2F30EAE316A0F66F0026B258 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2FFAE1C716D51BDD00B180F9 /* robonauts app banner original.jpg */,
 				2FFD94FB16D1ACA1007052EA /* robonauts app banner.jpg */,
 				2FFD94F916D1AC5F007052EA /* Small Grey Button.jpg */,
 				2FCE54F816CC271A00884191 /* Small Blue Button.jpg */,
@@ -509,6 +512,7 @@
 				2FCE54FF16CC29B600884191 /* Small White Button.jpg in Resources */,
 				2FFD94FA16D1AC5F007052EA /* Small Grey Button.jpg in Resources */,
 				2FFD94FC16D1ACA1007052EA /* robonauts app banner.jpg in Resources */,
+				2FFAE1C816D51BDD00B180F9 /* robonauts app banner original.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,7 +11,7 @@
 @implementation SplashPageViewController
 @synthesize mainLogo;
 @synthesize pictureCaption;
-@synthesize teamScoutingButton, matchSetUpButton, matchScoutingButton, matchAnalysisButton;
+@synthesize teamScoutingButton, matchSetUpButton, matchScoutingButton, matchAnalysisButton, splashPicture;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -59,7 +59,7 @@
     [matchScoutingButton setTitle:@"Match Scouting" forState:UIControlStateNormal];
     matchScoutingButton.titleLabel.font = [UIFont fontWithName:@"Nasalization" size:36.0];
     // Set Font and Text for Match Analysis Button
-    [matchAnalysisButton setTitle:@"Match Analysis" forState:UIControlStateNormal];
+    [matchAnalysisButton setTitle:@"Match analysis" forState:UIControlStateNormal];
     matchAnalysisButton.titleLabel.font = [UIFont fontWithName:@"Nasalization" size:36.0];
     self.title = @"Ultimate Ascent";
     [super viewDidLoad];
@@ -79,6 +79,32 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
+    switch (interfaceOrientation) {
+        case UIInterfaceOrientationPortrait:
+        case UIInterfaceOrientationPortraitUpsideDown:
+            mainLogo.frame = CGRectMake(0, 0, 285, 960);
+            [mainLogo setImage:[UIImage imageNamed:@"robonauts app banner.jpg"]];
+            teamScoutingButton.frame = CGRectMake(325, 125, 400, 68);
+            matchSetUpButton.frame = CGRectMake(325, 225, 400, 68);
+            matchScoutingButton.frame = CGRectMake(325, 325, 400, 68);
+            matchAnalysisButton.frame = CGRectMake(325, 425, 400, 68);
+            splashPicture.frame = CGRectMake(293, 563, 468, 330);
+            pictureCaption.frame = CGRectMake(293, 901, 468, 39);
+            break;
+        case UIInterfaceOrientationLandscapeLeft:
+        case UIInterfaceOrientationLandscapeRight:
+            mainLogo.frame = CGRectMake(0, -50, 1024, 285);
+            [mainLogo setImage:[UIImage imageNamed:@"robonauts app banner original.jpg"]];
+            teamScoutingButton.frame = CGRectMake(550, 215, 400, 68);
+            matchSetUpButton.frame = CGRectMake(550, 315, 400, 68);
+            matchScoutingButton.frame = CGRectMake(550, 415, 400, 68);
+            matchAnalysisButton.frame = CGRectMake(550, 515, 400, 68);
+            splashPicture.frame = CGRectMake(50, 233, 468, 330);
+            pictureCaption.frame = CGRectMake(50, 571, 468, 39);
+            break;
+        default:
+            break;
+    }
     // Return YES for supported orientations
 	return YES;
 }

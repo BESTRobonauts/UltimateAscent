@@ -10,6 +10,7 @@
 
 @interface MatchTypeDictionary () {
     NSDictionary *dictionary;
+    NSArray *objects;
 }
 
 @end
@@ -24,7 +25,7 @@
                          [NSNumber numberWithInt:Other],
                          nil];
                          
-        NSArray *objects = [NSArray arrayWithObjects:@"Practice", @"Seeding", @"Elimination", @"Testing", @"Other", nil];
+        objects = [NSArray arrayWithObjects:@"Practice", @"Seeding", @"Elimination", @"Testing", @"Other", nil];
 
         dictionary = [NSDictionary dictionaryWithObjects:objects forKeys:keys];
 	}
@@ -39,6 +40,11 @@
     NSArray *temp = [dictionary allKeysForObject:value];
     NSNumber *val = [temp objectAtIndex:0];
     return val;
+}
+
+-(NSArray *)getMatchTypes {
+    return objects;
+
 }
 
 @end

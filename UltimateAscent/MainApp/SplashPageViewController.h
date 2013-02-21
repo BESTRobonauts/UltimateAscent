@@ -16,5 +16,5 @@
     @property (nonatomic, retain) IBOutlet UIButton *matchSetUpButton;
     @property (nonatomic, retain) IBOutlet UIButton *matchScoutingButton;
     @property (nonatomic, retain) IBOutlet UIButton *matchAnalysisButton;
-
+    @property (nonatomic, retain) IBOutlet UIImageView *splashPicture;
 @end
