@@ -11,6 +11,7 @@
 #import "MatchTypePickerController.h"
 #import "TeamPickerController.h"
 #import "RecordScorePickerController.h"
+#import "DefensePickerController.h"
 #import "AlertPromptViewController.h"
 
 @protocol MainScoutingPageDelegate
@@ -21,7 +22,7 @@
 @class TeamScore;
 @class SettingsData;
 
-@interface MainScoutingPageViewController : UIViewController <NSFetchedResultsControllerDelegate, UITextFieldDelegate, AlliancePickerDelegate, MatchTypePickerDelegate, TeamPickerDelegate, RecordScorePickerDelegate, AlertPromptDelegate> {
+@interface MainScoutingPageViewController : UIViewController <NSFetchedResultsControllerDelegate, UITextFieldDelegate, AlliancePickerDelegate, MatchTypePickerDelegate, TeamPickerDelegate, RecordScorePickerDelegate, DefensePickerDelegate, AlertPromptDelegate> {
     
     CGPoint lastPoint;
     CGFloat red;
@@ -173,9 +174,14 @@ typedef enum {
 @property (nonatomic, retain) NSMutableArray *scoreList;
 @property (nonatomic, retain) RecordScorePickerController *scorePicker;
 @property (nonatomic, retain) UIPopoverController *scorePickerPopover;
+@property (nonatomic, retain) NSMutableArray *defenseList;
+@property (nonatomic, retain) DefensePickerController *defensePicker;
+@property (nonatomic, retain) UIPopoverController *defensePickerPopover;
+@property (nonatomic, assign) int popCounter;
 @property (nonatomic, assign) DrawingMode drawMode;
 @property (nonatomic, retain) IBOutlet UIButton *drawModeButton;
-- (CGPoint)calculatePopOverLocation:(CGPoint)location;
+- (CGPoint)scorePopOverLocation:(CGPoint)location;
+- (CGPoint)defensePopOverLocation:(CGPoint)location;
 -(IBAction)drawModeChange: (id)sender;
 -(void)drawModeSettings:(DrawingMode) mode;
 -(void)checkOverrideCode:(UIButton *)button;

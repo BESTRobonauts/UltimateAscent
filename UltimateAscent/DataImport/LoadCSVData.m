@@ -18,7 +18,7 @@
 @implementation LoadCSVData
 
 -(void)loadCSVDataFromBundle {
-    NSLog(@"loadCSVDataFromBundle");
+    // NSLog(@"loadCSVDataFromBundle");
 
     DataManager *dataManager = [DataManager new];
     BOOL loadDataFromBundle = [dataManager databaseExists];
@@ -37,7 +37,7 @@
         [self loadMatchFile:filePath];
 
         filePath = [[NSBundle mainBundle] pathForResource:@"MatchResults" ofType:@"csv"];  
-//        [self loadMatchResults:filePath];
+        [self loadMatchResults:filePath];
     }
  
 }
@@ -61,7 +61,7 @@
         CreateTournament *tournament = [CreateTournament new];
         int c;
         for (c = 1; c < [csvContent count]; c++) {
-            NSLog(@"loadTournamentFile:Tournament = %@", [[csvContent objectAtIndex: c] objectAtIndex:0]);
+            // NSLog(@"loadTournamentFile:Tournament = %@", [[csvContent objectAtIndex: c] objectAtIndex:0]);
             AddRecordResults results = [tournament createTournamentFromFile:[csvContent objectAtIndex: 0] dataFields:[csvContent objectAtIndex: c]];
             if (results != DB_ADDED) {
                 NSLog(@"Check database - Tournament Add Code %d", results);
@@ -79,7 +79,7 @@
         CreateSettings *settings = [CreateSettings new];
         int c;
         for (c = 1; c < [csvContent count]; c++) {
-            NSLog(@"loadSettingsFile:Mode = %@", [[csvContent objectAtIndex: c] objectAtIndex:0]);
+            // NSLog(@"loadSettingsFile:Mode = %@", [[csvContent objectAtIndex: c] objectAtIndex:0]);
             AddRecordResults results = [settings createSettingsFromFile:[csvContent objectAtIndex: 0] dataFields:[csvContent objectAtIndex: c]];
             if (results != DB_ADDED) {
                 NSLog(@"Check database - Settings Add Code %d", results);
@@ -97,7 +97,7 @@
         CreateTeam *team = [CreateTeam new];
         int c;
         for (c = 1; c < [csvContent count]; c++) {
-            NSLog(@"loadTeamFile:TeamNumber = %@", [[csvContent objectAtIndex: c] objectAtIndex:0]);
+            // NSLog(@"loadTeamFile:TeamNumber = %@", [[csvContent objectAtIndex: c] objectAtIndex:0]);
             AddRecordResults results = [team createTeamFromFile:[csvContent objectAtIndex: 0] dataFields:[csvContent objectAtIndex: c]];
             if (results != DB_ADDED) {
                 NSLog(@"Check database - Team Add Code %d", results);
@@ -133,7 +133,7 @@
         CreateMatch *match = [CreateMatch new];
         int c;
         for (c = 1; c < [csvContent count]; c++) {
-            //            NSLog(@"Match = %@", [csvContent objectAtIndex: c]);
+            // NSLog(@"Match = %@", [csvContent objectAtIndex: c]);
             AddRecordResults results = [match addMatchResultsFromFile:[csvContent objectAtIndex: 0] dataFields:[csvContent objectAtIndex: c]];
             if (results != DB_ADDED) {
                 NSLog(@"Check database - Match Results Code %d", results);

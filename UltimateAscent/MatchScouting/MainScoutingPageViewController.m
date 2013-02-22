@@ -97,6 +97,10 @@
 @synthesize scoreList;
 @synthesize scorePicker;
 @synthesize scorePickerPopover;
+@synthesize defenseList;
+@synthesize defensePicker;
+@synthesize defensePickerPopover;
+@synthesize popCounter;
 @synthesize drawMode;
 @synthesize drawModeButton;
 
@@ -203,6 +207,7 @@
     allianceList = [[NSMutableArray alloc] initWithObjects:@"Red 1", @"Red 2", @"Red 3", @"Blue 1", @"Blue 2", @"Blue 3", nil];
     matchTypeList = [[NSMutableArray alloc] initWithObjects:@"Practice", @"Seeding", @"Elimination", @"Other", @"Testing", nil];
     scoreList = [[NSMutableArray alloc] initWithObjects:@"Medium", @"High", @"Missed", @"Low", @"Pyramid", nil];
+    defenseList = [[NSMutableArray alloc] initWithObjects:@"Passed", @"Blocked", nil];
 
     [self SetBigButtonDefaults:teamEdit];
     [teamEdit setTitle:@"Edit Team Info" forState:UIControlStateNormal];
@@ -673,7 +678,7 @@
 }
 
 -(void)autonLow {
-    NSLog(@"Auton Low");
+    // NSLog(@"Auton Low");
     int score = [autonLowButton.titleLabel.text intValue];
     score++;
     currentTeam.autonLow = [NSNumber numberWithInt:score];
@@ -682,11 +687,29 @@
 }
 
 -(void)pyramidGoals {
-    NSLog(@"Pyramid Goals");
+    // NSLog(@"Pyramid Goals");
     int score = [pyramidGoalsButton.titleLabel.text intValue];
     score++;
     currentTeam.pyramid = [NSNumber numberWithInt:score];
     [pyramidGoalsButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.pyramid intValue]] forState:UIControlStateNormal];
+    dataChange = YES;
+}
+
+-(void)passesMade {
+    // NSLog(@"Passes Made");
+    int score = [passesButton.titleLabel.text intValue];
+    score++;
+    currentTeam.passes = [NSNumber numberWithInt:score];
+    [passesButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.passes intValue]] forState:UIControlStateNormal];
+    dataChange = YES;
+}
+
+-(void)blockedShots {
+    // NSLog(@"Blocked Shots");
+    int score = [blocksButton.titleLabel.text intValue];
+    score++;
+    currentTeam.blocks = [NSNumber numberWithInt:score];
+    [blocksButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.blocks intValue]] forState:UIControlStateNormal];
     dataChange = YES;
 }
 
@@ -889,16 +912,31 @@
     UITouch *touch = [touches anyObject];
     if ([touch view] != fieldImage) return;
     if(!mouseSwiped) {
-        if (scorePicker == nil) {
-            self.scorePicker = [[RecordScorePickerController alloc]
-                                initWithStyle:UITableViewStylePlain];
-            scorePicker.delegate = self;
-            scorePicker.scoreChoices = scoreList;
-            self.scorePickerPopover = [[UIPopoverController alloc]
-                                       initWithContentViewController:scorePicker];
+        popCounter = 0;
+        if (drawMode == DrawDefense) {
+            if (defensePicker == nil) {
+                self.defensePicker = [[DefensePickerController alloc]
+                                    initWithStyle:UITableViewStylePlain];
+                defensePicker.delegate = self;
+                defensePicker.defenseChoices = defenseList;
+                self.defensePickerPopover = [[UIPopoverController alloc]
+                                           initWithContentViewController:defensePicker];
+            }
+            CGPoint popPoint = [self defensePopOverLocation:lastPoint];
+            [self.defensePickerPopover presentPopoverFromRect:CGRectMake(popPoint.x, popPoint.y, 1.0, 1.0) inView:fieldImage permittedArrowDirections:UIPopoverArrowDirectionLeft animated:YES];
         }
-        CGPoint popPoint = [self calculatePopOverLocation:lastPoint];
-        [self.scorePickerPopover presentPopoverFromRect:CGRectMake(popPoint.x, popPoint.y, 1.0, 1.0) inView:fieldImage permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        else {
+            if (scorePicker == nil) {
+                self.scorePicker = [[RecordScorePickerController alloc]
+                                    initWithStyle:UITableViewStylePlain];
+                scorePicker.delegate = self;
+                scorePicker.scoreChoices = scoreList;
+                self.scorePickerPopover = [[UIPopoverController alloc]
+                                           initWithContentViewController:scorePicker];
+            }
+            CGPoint popPoint = [self scorePopOverLocation:lastPoint];
+            [self.scorePickerPopover presentPopoverFromRect:CGRectMake(popPoint.x, popPoint.y, 1.0, 1.0) inView:fieldImage permittedArrowDirections:UIPopoverArrowDirectionLeft animated:YES];
+        }
     }
     
     //    UIGraphicsBeginImageContext(self.fieldImage.frame.size);
@@ -909,22 +947,42 @@
     //    UIGraphicsEndImageContext();
 }
 
--(CGPoint)calculatePopOverLocation:(CGPoint)location; {
+-(CGPoint)scorePopOverLocation:(CGPoint)location; {
+    CGPoint popPoint;
+    popPoint = location;
+    if (location.x <= 98) {
+        // NSLog(@"On the left edge");
+        popPoint.x = -22;
+    }
+    else if (location.x < 740) {
+        // NSLog(@"In the middle");
+        popPoint.x = location.x-55;
+    } else {
+        // NSLog(@"On the right edge");
+        popPoint.x = 705;
+    }
+    
+    popPoint.y = location.y+10;
+    
+    return popPoint;
+}
+
+-(CGPoint)defensePopOverLocation:(CGPoint)location; {
     CGPoint popPoint;
     popPoint = location;
     if (location.x <= 98) {
         NSLog(@"On the left edge");
         popPoint.x = -22;
     }
-    else if (location.x < 670) {
+    else if (location.x < 750) {
         NSLog(@"In the middle");
         popPoint.x = location.x-55;
     } else {
         NSLog(@"On the right edge");
-        popPoint.x = 627;
+        popPoint.x = 714;
     }
     
-    popPoint.y = location.y+10;
+    popPoint.y = location.y+20;
     
     return popPoint;
 }
@@ -1001,8 +1059,12 @@
 }
 
 - (void)scoreSelected:(NSString *)newScore {
-    [self.scorePickerPopover dismissPopoverAnimated:YES];
+ //   [self.scorePickerPopover dismissPopoverAnimated:YES];
     NSString *marker;
+    CGPoint textPoint;
+    popCounter++;
+    textPoint.x = lastPoint.x;
+    textPoint.y = lastPoint.y + popCounter*12;
     for (int i = 0 ; i < [scoreList count] ; i++) {
         if ([newScore isEqualToString:[scoreList objectAtIndex:i]]) {
             switch (i) {
@@ -1050,11 +1112,11 @@
                     break;
             }
             
-            NSLog(@"score selection = %@", [scoreList objectAtIndex:i]);
+            // NSLog(@"score selection = %@", [scoreList objectAtIndex:i]);
             break;
         }
     }
-    NSLog(@"Marker = %@", marker);
+    // NSLog(@"Marker = %@", marker);
     UIGraphicsBeginImageContext(fieldImage.frame.size);
     [self.fieldImage.image drawInRect:CGRectMake(0, 0, fieldImage.frame.size.width, fieldImage.frame.size.height)];
     CGContextRef myContext = UIGraphicsGetCurrentContext();
@@ -1069,12 +1131,61 @@
     CGContextSetTextDrawingMode (myContext, kCGTextFillStroke);
     CGContextSetTextMatrix(myContext, CGAffineTransformMake(1.0,0.0, 0.0, -1.0, 0.0, 0.0));
 
-    CGContextShowTextAtPoint (myContext, lastPoint.x, lastPoint.y, [marker UTF8String], marker.length);
+    CGContextShowTextAtPoint (myContext, textPoint.x, textPoint.y, [marker UTF8String], marker.length);
     CGContextStrokePath(UIGraphicsGetCurrentContext());
     CGContextFlush(UIGraphicsGetCurrentContext());
     self.fieldImage.image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
 
+}
+
+- (void)defenseSelected:(NSString *)newDefense {
+//    [self.defensePickerPopover dismissPopoverAnimated:YES];
+    NSString *marker;
+    CGPoint textPoint;
+    popCounter++;
+    textPoint.x = lastPoint.x;
+    textPoint.y = lastPoint.y + popCounter*12;
+    for (int i = 0 ; i < [defenseList count] ; i++) {
+        if ([newDefense isEqualToString:[defenseList objectAtIndex:i]]) {
+            switch (i) {
+                case 0:
+                    marker = @"P";
+                    [self passesMade];
+                    break;
+                case 1:
+                    marker = @"B";
+                    [self blockedShots];
+                    break;
+                default:
+                    break;
+            }
+            
+            // NSLog(@"defense selection = %@", [defenseList objectAtIndex:i]);
+            break;
+        }
+    }
+    // NSLog(@"Marker = %@", marker);
+    UIGraphicsBeginImageContext(fieldImage.frame.size);
+    [self.fieldImage.image drawInRect:CGRectMake(0, 0, fieldImage.frame.size.width, fieldImage.frame.size.height)];
+    CGContextRef myContext = UIGraphicsGetCurrentContext();
+    CGContextSetLineCap(myContext, kCGLineCapRound);
+    CGContextSetLineWidth(myContext, 1);
+    CGContextSetRGBStrokeColor(myContext, red, green, blue, opacity);
+    CGContextSelectFont (myContext,
+                         "Helvetica",
+                         14,
+                         kCGEncodingMacRoman);
+    CGContextSetCharacterSpacing (myContext, 1);
+    CGContextSetTextDrawingMode (myContext, kCGTextFillStroke);
+    CGContextSetTextMatrix(myContext, CGAffineTransformMake(1.0,0.0, 0.0, -1.0, 0.0, 0.0));
+    
+    CGContextShowTextAtPoint (myContext, textPoint.x, textPoint.y, [marker UTF8String], marker.length);
+    CGContextStrokePath(UIGraphicsGetCurrentContext());
+    CGContextFlush(UIGraphicsGetCurrentContext());
+    self.fieldImage.image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
 }
 
 -(void)checkOverrideCode:(UIButton *)button {

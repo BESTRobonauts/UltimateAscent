@@ -41,7 +41,7 @@
     }
 
     teamNumber = [NSNumber numberWithInt:[[data objectAtIndex: 0] intValue]];
-    NSLog(@"createTeamFromFile:Team Number = %@", teamNumber);
+    // NSLog(@"createTeamFromFile:Team Number = %@", teamNumber);
     TeamData *team = [self GetTeam:teamNumber];
     if (team) {
         NSLog(@"createTeamFromFile:Team %@ already exists", teamNumber);
@@ -52,7 +52,8 @@
         NSNumber *number;
         TournamentData *tournamentRecord;
         TeamData *team = [NSEntityDescription insertNewObjectForEntityForName:@"TeamData"
-                                                           inManagedObjectContext:managedObjectContext];        
+                                                           inManagedObjectContext:managedObjectContext];
+        [self setTeamDefaults:team];
         switch ([data count]) {
             case 5:
                 team.history = [data objectAtIndex: 4];
@@ -81,7 +82,7 @@
             case 1:
                 team.number = teamNumber;
         }
-        NSLog(@"Added Team Record %@", team);
+        // NSLog(@"Added Team Record %@", team);
         NSError *error;
         if (![managedObjectContext save:&error]) {
             NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
@@ -94,7 +95,7 @@
 -(TeamData *)GetTeam:(NSNumber *)teamNumber {
     TeamData *team;
 
-    NSLog(@"Searching for team = %@", teamNumber);
+    // NSLog(@"Searching for team = %@", teamNumber);
     NSError *error;
     if (!managedObjectContext) {
         DataManager *dataManager = [DataManager new];
@@ -115,7 +116,7 @@
     else {
         if([teamData count] > 0) {  // Team Exists
             team = [teamData objectAtIndex:0];
-            NSLog(@"Team %@ exists", team.number);
+            // NSLog(@"Team %@ exists", team.number);
             return team;
         }
         else {
@@ -143,7 +144,7 @@
     else {
         if([tournamentData count] > 0) {  // Tournament Exists
             TournamentData *tournamentRecord = [tournamentData objectAtIndex:0];
-            NSLog(@"Tournament %@ exists", tournamentRecord.name);
+            // NSLog(@"Tournament %@ exists", tournamentRecord.name);
             return tournamentRecord;
         }
         else return Nil;
@@ -157,6 +158,7 @@
     blankTeam.intakeFloor = [NSNumber numberWithInt:-1];
     blankTeam.intakeStation = [NSNumber numberWithInt:-1];
     blankTeam.intakeInverted = [NSNumber numberWithInt:-1];
+    blankTeam.driveTrainNotes = @"";
     blankTeam.notes = @"";
     blankTeam.history = @"";
     blankTeam.saved = [NSNumber numberWithInt:0];

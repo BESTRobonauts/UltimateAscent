@@ -10,13 +10,17 @@
 #import <MessageUI/MessageUI.h>
 @class MatchData;
 @class TeamScore;
+@class SettingsData;
 
 @interface DownloadPageViewController : UIViewController <UIActionSheetDelegate, MFMailComposeViewControllerDelegate>
-@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, retain) IBOutlet UIButton *exportTeamData;
-@property (nonatomic, retain) IBOutlet UIButton *exportMatchData;
-@property (nonatomic, retain) IBOutlet UIImageView *mainLogo;
-@property (nonatomic, retain) NSString *exportPath;
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong) SettingsData *settings;
+@property (nonatomic, strong) IBOutlet UIImageView *mainLogo;
+@property (nonatomic, strong) IBOutlet UIImageView *splashPicture;
+@property (nonatomic, strong) IBOutlet UILabel *pictureCaption;
+@property (nonatomic, strong) IBOutlet UIButton *exportTeamData;
+@property (nonatomic, strong) IBOutlet UIButton *exportMatchData;
+@property (nonatomic, strong) NSString *exportPath;
 
 -(IBAction)exportTapped:(id)sender;
 -(void)emailTeamData;
@@ -24,4 +28,6 @@
 -(NSString *)buildMatchCSVOutput:(TeamScore *)teamScore;
 -(NSString *)applicationDocumentsDirectory;
 -(void)buildEmail:(NSString *)filePath attach:(NSString *)emailFile subject:(NSString *)emailSubject;
+-(void)retrieveSettings;
+
 @end

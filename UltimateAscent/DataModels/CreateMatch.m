@@ -35,7 +35,7 @@
     
     matchNumber = [NSNumber numberWithInt:[[data objectAtIndex: 0] intValue]];
     type = [data objectAtIndex:7];
-    NSLog(@"createMatchFromFile:Match Number = %@", matchNumber);
+    // NSLog(@"createMatchFromFile:Match Number = %@", matchNumber);
     MatchData *match = [self GetMatch:matchNumber forMatchType:type];
     if (match) {
         // NSLog(@"createMatchFromFile:Match %@ %@ already exists", matchNumber, type);
@@ -66,7 +66,7 @@
 -(AddRecordResults)addMatchResultsFromFile:(NSMutableArray *)headers dataFields:(NSMutableArray *)data {
     NSNumber *matchNumber;
     NSString *type;
-    NSNumber *teamNumber;
+    int teamNumber;
 // DO NOT LEAVE THIS FUNCTION LIKE THIS    
     if (![data count]) return DB_ERROR;
     
@@ -80,44 +80,36 @@
     // NSLog(@"createMatchFromFile:Match Number = %@", matchNumber);
     MatchData *match = [self GetMatch:matchNumber forMatchType:type];
     if (match) {
-/*
-        NSLog(@"team list: %@, %@, %@, %@, %@, %@", match.red1.teamInfo.number, 
-              match.red2.teamInfo.number,
-              match.red3.teamInfo.number,
-              match.blue1.teamInfo.number,
-              match.blue2.teamInfo.number,
-              match.blue3.teamInfo.number); 
- */
-      //TeamScore *teamScore;
-        teamNumber = [NSNumber numberWithInt:[[data objectAtIndex: 1] intValue]];
-        /*  if ([teamNumber intValue] == [match.red1.teamInfo.number intValue]) teamScore = match.red1;
-        else if ([teamNumber intValue] == [match.red2.teamInfo.number intValue]) teamScore = match.red2;
-        else if ([teamNumber intValue] == [match.red3.teamInfo.number intValue]) teamScore = match.red3;
-        else if ([teamNumber intValue] == [match.blue1.teamInfo.number intValue]) teamScore = match.blue1;
-        else if ([teamNumber intValue] == [match.blue2.teamInfo.number intValue]) teamScore = match.blue2;
-        else if ([teamNumber intValue] == [match.blue3.teamInfo.number intValue]) teamScore = match.blue3;
-//        NSLog(@"team = %@", teamScore);
-        teamScore.autonScore.missedBaskets = [NSNumber numberWithInt:[[data objectAtIndex: 2] intValue]];
-        teamScore.autonScore.lowBaskets = [NSNumber numberWithInt:[[data objectAtIndex: 3] intValue]];
-        teamScore.autonScore.midBaskets = [NSNumber numberWithInt:[[data objectAtIndex: 4] intValue]];
-        teamScore.autonScore.highBaskets = [NSNumber numberWithInt:[[data objectAtIndex: 5] intValue]];
-        teamScore.teleOpScore.missedBaskets = [NSNumber numberWithInt:[[data objectAtIndex: 6] intValue]];
-        teamScore.teleOpScore.lowBaskets = [NSNumber numberWithInt:[[data objectAtIndex: 7] intValue]];
-        teamScore.teleOpScore.midBaskets = [NSNumber numberWithInt:[[data objectAtIndex: 8] intValue]];
-        teamScore.teleOpScore.highBaskets = [NSNumber numberWithInt:[[data objectAtIndex: 9] intValue]];
-        teamScore.teleOpScore.crossesHump = [NSNumber numberWithInt:[[data objectAtIndex: 10] intValue]];
-        teamScore.driverRating = [NSNumber numberWithInt:[[data objectAtIndex: 11] intValue]];
-        teamScore.endGameScore.modedRamp = [NSNumber numberWithInt:[[data objectAtIndex: 12] intValue]];
-        teamScore.endGameScore.coopRamp = [NSNumber numberWithInt:[[data objectAtIndex: 13] intValue]];
-        teamScore.endGameScore.balanced = [NSNumber numberWithInt:[[data objectAtIndex: 14] intValue]];
-        teamScore.notes = [data objectAtIndex: 15];
-//        NSLog(@"team = %@", teamScore);
+        teamNumber = [[data objectAtIndex: 1] intValue];
+
+        NSArray *teamScores = [match.score allObjects];
+        TeamScore *score;
+        //NSLog(@"Team Number = %d", teamNumber);
+        for (int i=0; i<[teamScores count]; i++) {
+            score = [teamScores objectAtIndex:i];
+            //NSLog(@"Record Number = %d", [score.team.number intValue]);
+            if (teamNumber == [score.team.number intValue]) {
+                score.autonMissed = [NSNumber numberWithInt:[[data objectAtIndex: 2] intValue]];
+                score.autonLow = [NSNumber numberWithInt:[[data objectAtIndex: 3] intValue]];
+                score.autonMid = [NSNumber numberWithInt:[[data objectAtIndex: 4] intValue]];
+                score.autonHigh = [NSNumber numberWithInt:[[data objectAtIndex: 5] intValue]];
+                score.teleOpMissed = [NSNumber numberWithInt:[[data objectAtIndex: 6] intValue]];
+                score.teleOpLow = [NSNumber numberWithInt:[[data objectAtIndex: 7] intValue]];
+                score.teleOpMid = [NSNumber numberWithInt:[[data objectAtIndex: 8] intValue]];
+                score.teleOpHigh = [NSNumber numberWithInt:[[data objectAtIndex: 9] intValue]];
+                score.driverRating = [NSNumber numberWithInt:[[data objectAtIndex: 11] intValue]];
+                score.climbSuccess = [NSNumber numberWithInt:[[data objectAtIndex: 12] intValue]];
+                score.climbLevel = [NSNumber numberWithInt:[[data objectAtIndex: 14] intValue]];
+                score.notes = [data objectAtIndex: 15];
+                break;
+            }
+        }
         NSError *error;
         if (![managedObjectContext save:&error]) {
             NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
             return DB_ERROR;
         }
-        else return DB_ADDED;*/
+        else return DB_ADDED;
     }
     return DB_ADDED;
 } 

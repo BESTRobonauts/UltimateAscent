@@ -19,7 +19,7 @@
 @property (nonatomic, retain) NSArray *teamData;
 @property (nonatomic, retain) NSMutableArray *teamOrder;
 
-- (void)retrieveSettings;
+-(void)retrieveSettings;
 -(void)setTeamList:(MatchData *)match;
 
 @end

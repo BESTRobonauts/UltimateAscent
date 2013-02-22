@@ -319,6 +319,9 @@
         NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:typeDescriptor, numberDescriptor, nil];
         
         [fetchRequest setSortDescriptors:sortDescriptors];
+        // Add the search for tournament name
+        NSPredicate *pred = [NSPredicate predicateWithFormat:@"tournament CONTAINS %@", settings.tournament.name];
+        [fetchRequest setPredicate:pred];
         [fetchRequest setFetchBatchSize:20];
         
         // Edit the section name key path and cache name if appropriate.

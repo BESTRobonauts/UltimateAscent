@@ -30,10 +30,10 @@
     }
     
     name = [data objectAtIndex: 0];
-    NSLog(@"createTournamentFromFile:Tournament = %@", name);
+    // NSLog(@"createTournamentFromFile:Tournament = %@", name);
     TournamentData *tournament = [self GetTournament:name];
     if (tournament) {
-        NSLog(@"createTournamentFromFile:Tournament %@ already exists", tournament);
+        //NSLog(@"createTournamentFromFile:Tournament %@ already exists", tournament);
         return DB_MATCHED;
     }
     else {
@@ -45,7 +45,7 @@
             case 1:
                 tournament.name = name;
         }
-        NSLog(@"Added Tournament Record %@", tournament);
+        //NSLog(@"Added Tournament Record %@", tournament);
         NSError *error;
         if (![managedObjectContext save:&error]) {
             NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
@@ -58,7 +58,7 @@
 -(TournamentData *)GetTournament:(NSString *)name {
     TournamentData *tournament;
     
-    NSLog(@"Searching for tournament = %@", name);
+    // NSLog(@"Searching for tournament = %@", name);
     NSError *error;
     if (!managedObjectContext) {
         DataManager *dataManager = [DataManager new];
@@ -79,7 +79,7 @@
     else {
         if([tournamentData count] > 0) {  // Tournament Exists
             tournament = [tournamentData objectAtIndex:0];
-            NSLog(@"Tournament %@ exists", tournament.name);
+            // NSLog(@"Tournament %@ exists", tournament.name);
             return tournament;
         }
         else {

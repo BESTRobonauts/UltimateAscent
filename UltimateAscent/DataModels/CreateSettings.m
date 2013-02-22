@@ -66,7 +66,7 @@
         case 1:
             settings.mode = [data objectAtIndex: 0];
     }
-    NSLog(@"createSettingsFromFile:Settings = %@", settings);
+    // NSLog(@"createSettingsFromFile:Settings = %@", settings);
             
     // Some day add a check for valid modes. Currently only Test and Tournament are valid.
 
@@ -88,7 +88,7 @@
     }
     else {
         TournamentData *tournamentRecord = [tournamentData objectAtIndex:0];
-        NSLog(@"Tournament %@ exists", tournamentRecord.name);
+        // NSLog(@"Tournament %@ exists", tournamentRecord.name);
         settings.tournament = tournamentRecord;
     }
     if (![managedObjectContext save:&error]) {
