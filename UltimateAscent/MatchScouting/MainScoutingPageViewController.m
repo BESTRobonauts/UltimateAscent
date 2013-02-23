@@ -101,6 +101,7 @@
 @synthesize defensePicker;
 @synthesize defensePickerPopover;
 @synthesize popCounter;
+@synthesize currentPoint;
 @synthesize drawMode;
 @synthesize drawModeButton;
 
@@ -191,6 +192,8 @@
     [self SetTextBoxDefaults:redScore];
     [self SetTextBoxDefaults:blueScore];
     matchResetButton.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:15.0];
+    [self SetBigButtonDefaults:teamEdit];
+    [teamEdit setTitle:@"Edit Team Info" forState:UIControlStateNormal];
 
     driverRating.maximumValue = 5.0;
     driverRating.continuous = NO;
@@ -206,11 +209,19 @@
     [self SetBigButtonDefaults:alliance];
     allianceList = [[NSMutableArray alloc] initWithObjects:@"Red 1", @"Red 2", @"Red 3", @"Blue 1", @"Blue 2", @"Blue 3", nil];
     matchTypeList = [[NSMutableArray alloc] initWithObjects:@"Practice", @"Seeding", @"Elimination", @"Other", @"Testing", nil];
+
+    // Drawing Stuff
     scoreList = [[NSMutableArray alloc] initWithObjects:@"Medium", @"High", @"Missed", @"Low", @"Pyramid", nil];
     defenseList = [[NSMutableArray alloc] initWithObjects:@"Passed", @"Blocked", nil];
+    UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(diskPickUp:)];
+    [fieldImage addGestureRecognizer:longPressGesture];
+    
+    UITapGestureRecognizer *tapPressGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scoreDisk:)];
+    [fieldImage addGestureRecognizer:tapPressGesture];
+    
+    UIPanGestureRecognizer *drawGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(drawPath:)];
+    [fieldImage addGestureRecognizer:drawGesture];
 
-    [self SetBigButtonDefaults:teamEdit];
-    [teamEdit setTitle:@"Edit Team Info" forState:UIControlStateNormal];
 
     brush = 3.0;
     opacity = 1.0;
@@ -713,6 +724,16 @@
     dataChange = YES;
 }
 
+-(void)pickupsMade {
+    // NSLog(@"PickUps");
+    int score = [pickupsButton.titleLabel.text intValue];
+    score++;
+    currentTeam.pickups = [NSNumber numberWithInt:score];
+    [pickupsButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.pickups intValue]] forState:UIControlStateNormal];
+    dataChange = YES;
+
+}
+
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     UIButton *button = (UIButton *)sender;
@@ -871,82 +892,73 @@
     return nil;
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    
-    // NSLog(@"touchesBegan");
-    mouseSwiped = NO;
-    UITouch *touch = [touches anyObject];
-    lastPoint = [touch locationInView:imageContainer];
-    if ([touch view] != fieldImage) return;
+-(void)diskPickUp:(UILongPressGestureRecognizer *)gestureRecognizer {
     fieldDrawingChange = YES;
-}
-
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    
-//    NSLog(@"touchesMoved");
-    mouseSwiped = YES;
-    UITouch *touch = [touches anyObject];
-    if ([touch view] != fieldImage) return;
-    
-    CGPoint currentPoint = [touch locationInView: fieldImage];
-    UIGraphicsBeginImageContext(fieldImage.frame.size);
-    [self.fieldImage.image drawInRect:CGRectMake(0, 0, fieldImage.frame.size.width, fieldImage.frame.size.height)];
-    CGContextMoveToPoint(UIGraphicsGetCurrentContext(), lastPoint.x, lastPoint.y);
-    CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), currentPoint.x, currentPoint.y);
-    CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
-    CGContextSetLineWidth(UIGraphicsGetCurrentContext(), brush );
-    CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), red, green, blue, 1.0);
-    CGContextSetBlendMode(UIGraphicsGetCurrentContext(),kCGBlendModeNormal);
-    
-    CGContextStrokePath(UIGraphicsGetCurrentContext());
-    self.fieldImage.image = UIGraphicsGetImageFromCurrentImageContext();
-    [self.fieldImage setAlpha:opacity];
-    UIGraphicsEndImageContext();
-    
-    lastPoint = currentPoint;
-}
-
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    
-    // NSLog(@"touchesEnded");
-    UITouch *touch = [touches anyObject];
-    if ([touch view] != fieldImage) return;
-    if(!mouseSwiped) {
-        popCounter = 0;
-        if (drawMode == DrawDefense) {
-            if (defensePicker == nil) {
-                self.defensePicker = [[DefensePickerController alloc]
-                                    initWithStyle:UITableViewStylePlain];
-                defensePicker.delegate = self;
-                defensePicker.defenseChoices = defenseList;
-                self.defensePickerPopover = [[UIPopoverController alloc]
-                                           initWithContentViewController:defensePicker];
-            }
-            CGPoint popPoint = [self defensePopOverLocation:lastPoint];
-            [self.defensePickerPopover presentPopoverFromRect:CGRectMake(popPoint.x, popPoint.y, 1.0, 1.0) inView:fieldImage permittedArrowDirections:UIPopoverArrowDirectionLeft animated:YES];
-        }
-        else {
-            if (scorePicker == nil) {
-                self.scorePicker = [[RecordScorePickerController alloc]
-                                    initWithStyle:UITableViewStylePlain];
-                scorePicker.delegate = self;
-                scorePicker.scoreChoices = scoreList;
-                self.scorePickerPopover = [[UIPopoverController alloc]
-                                           initWithContentViewController:scorePicker];
-            }
-            CGPoint popPoint = [self scorePopOverLocation:lastPoint];
-            [self.scorePickerPopover presentPopoverFromRect:CGRectMake(popPoint.x, popPoint.y, 1.0, 1.0) inView:fieldImage permittedArrowDirections:UIPopoverArrowDirectionLeft animated:YES];
-        }
+    if ([gestureRecognizer state] == UIGestureRecognizerStateBegan) {
+        NSString *marker = @"O";
+        NSLog(@"diskPickUp");
+        currentPoint = [gestureRecognizer locationInView:fieldImage];
+        [self drawText:marker location:currentPoint];
+        [self pickupsMade];
     }
-    
-    //    UIGraphicsBeginImageContext(self.fieldImage.frame.size);
-    //    [self.fieldImage.image drawInRect:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) blendMode:kCGBlendModeNormal alpha:1.0];
-    //    [self.tempDrawImage.image drawInRect:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) blendMode:kCGBlendModeNormal alpha:opacity];
-    //   self.fieldImage.image = UIGraphicsGetImageFromCurrentImageContext();
-    //    self.tempDrawImage.image = nil;
-    //    UIGraphicsEndImageContext();
 }
 
+-(void)scoreDisk:(UITapGestureRecognizer *)gestureRecognizer {
+    fieldDrawingChange = YES;
+    currentPoint = [gestureRecognizer locationInView:fieldImage];
+    NSLog(@"scoreDisk point = %f %f", currentPoint.x, currentPoint.y);
+    popCounter = 0;
+    if (drawMode == DrawDefense) {
+        if (defensePicker == nil) {
+            self.defensePicker = [[DefensePickerController alloc]
+                                  initWithStyle:UITableViewStylePlain];
+            defensePicker.delegate = self;
+            defensePicker.defenseChoices = defenseList;
+            self.defensePickerPopover = [[UIPopoverController alloc]
+                                         initWithContentViewController:defensePicker];
+        }
+        CGPoint popPoint = [self defensePopOverLocation:currentPoint];
+        [self.defensePickerPopover presentPopoverFromRect:CGRectMake(popPoint.x, popPoint.y, 1.0, 1.0) inView:fieldImage permittedArrowDirections:UIPopoverArrowDirectionLeft animated:YES];
+    }
+    else {
+        if (scorePicker == nil) {
+            self.scorePicker = [[RecordScorePickerController alloc]
+                                initWithStyle:UITableViewStylePlain];
+            scorePicker.delegate = self;
+            scorePicker.scoreChoices = scoreList;
+            self.scorePickerPopover = [[UIPopoverController alloc]
+                                       initWithContentViewController:scorePicker];
+        }
+        CGPoint popPoint = [self scorePopOverLocation:currentPoint];
+        [self.scorePickerPopover presentPopoverFromRect:CGRectMake(popPoint.x, popPoint.y, 1.0, 1.0) inView:fieldImage permittedArrowDirections:UIPopoverArrowDirectionLeft animated:YES];
+    }
+}
+
+-(void)drawPath:(UIPanGestureRecognizer *)gestureRecognizer {
+    fieldDrawingChange = YES;
+    if ([gestureRecognizer state] == UIGestureRecognizerStateBegan) {
+        NSLog(@"drawPath Began");
+        lastPoint = [gestureRecognizer locationInView:fieldImage];
+    }
+    else {
+        currentPoint = [gestureRecognizer locationInView: fieldImage];
+        NSLog(@"current point = %lf, %lf", currentPoint.x, currentPoint.y);
+        UIGraphicsBeginImageContext(fieldImage.frame.size);
+        [self.fieldImage.image drawInRect:CGRectMake(0, 0, fieldImage.frame.size.width, fieldImage.frame.size.height)];
+        CGContextMoveToPoint(UIGraphicsGetCurrentContext(), lastPoint.x, lastPoint.y);
+        CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), currentPoint.x, currentPoint.y);
+        CGContextSetLineCap(UIGraphicsGetCurrentContext(), kCGLineCapRound);
+        CGContextSetLineWidth(UIGraphicsGetCurrentContext(), brush );
+        CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), red, green, blue, 1.0);
+        CGContextSetBlendMode(UIGraphicsGetCurrentContext(),kCGBlendModeNormal);
+        
+        CGContextStrokePath(UIGraphicsGetCurrentContext());
+        self.fieldImage.image = UIGraphicsGetImageFromCurrentImageContext();
+        [self.fieldImage setAlpha:opacity];
+        UIGraphicsEndImageContext();        
+        lastPoint = currentPoint;
+    }
+}
 -(CGPoint)scorePopOverLocation:(CGPoint)location; {
     CGPoint popPoint;
     popPoint = location;
@@ -999,7 +1011,7 @@
             drawMode = DrawDefense;
             break;
         case DrawDefense:
-            drawMode = DrawOff;
+            drawMode = DrawTeleop;
             break;
         case DrawLock:
             overrideMode = OverrideDrawLock;
@@ -1062,9 +1074,10 @@
  //   [self.scorePickerPopover dismissPopoverAnimated:YES];
     NSString *marker;
     CGPoint textPoint;
+    textPoint.x = currentPoint.x;
+    textPoint.y = currentPoint.y + popCounter*16;
+    NSLog(@"Text Point = %f %f", textPoint.x, textPoint.y);
     popCounter++;
-    textPoint.x = lastPoint.x;
-    textPoint.y = lastPoint.y + popCounter*12;
     for (int i = 0 ; i < [scoreList count] ; i++) {
         if ([newScore isEqualToString:[scoreList objectAtIndex:i]]) {
             switch (i) {
@@ -1116,36 +1129,16 @@
             break;
         }
     }
-    // NSLog(@"Marker = %@", marker);
-    UIGraphicsBeginImageContext(fieldImage.frame.size);
-    [self.fieldImage.image drawInRect:CGRectMake(0, 0, fieldImage.frame.size.width, fieldImage.frame.size.height)];
-    CGContextRef myContext = UIGraphicsGetCurrentContext();
-    CGContextSetLineCap(myContext, kCGLineCapRound);
-    CGContextSetLineWidth(myContext, 1);
-    CGContextSetRGBStrokeColor(myContext, red, green, blue, opacity);
-    CGContextSelectFont (myContext,
-                         "Helvetica",
-                         14,
-                         kCGEncodingMacRoman);
-    CGContextSetCharacterSpacing (myContext, 1);
-    CGContextSetTextDrawingMode (myContext, kCGTextFillStroke);
-    CGContextSetTextMatrix(myContext, CGAffineTransformMake(1.0,0.0, 0.0, -1.0, 0.0, 0.0));
-
-    CGContextShowTextAtPoint (myContext, textPoint.x, textPoint.y, [marker UTF8String], marker.length);
-    CGContextStrokePath(UIGraphicsGetCurrentContext());
-    CGContextFlush(UIGraphicsGetCurrentContext());
-    self.fieldImage.image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-
+    [self drawText:marker location:textPoint];
 }
 
 - (void)defenseSelected:(NSString *)newDefense {
 //    [self.defensePickerPopover dismissPopoverAnimated:YES];
     NSString *marker;
     CGPoint textPoint;
+    textPoint.x = currentPoint.x;
+    textPoint.y = currentPoint.y + popCounter*16;
     popCounter++;
-    textPoint.x = lastPoint.x;
-    textPoint.y = lastPoint.y + popCounter*12;
     for (int i = 0 ; i < [defenseList count] ; i++) {
         if ([newDefense isEqualToString:[defenseList objectAtIndex:i]]) {
             switch (i) {
@@ -1165,7 +1158,10 @@
             break;
         }
     }
-    // NSLog(@"Marker = %@", marker);
+    [self drawText:marker location:textPoint];
+ }
+
+-(void)drawText:(NSString *) marker location:(CGPoint) point {
     UIGraphicsBeginImageContext(fieldImage.frame.size);
     [self.fieldImage.image drawInRect:CGRectMake(0, 0, fieldImage.frame.size.width, fieldImage.frame.size.height)];
     CGContextRef myContext = UIGraphicsGetCurrentContext();
@@ -1174,15 +1170,15 @@
     CGContextSetRGBStrokeColor(myContext, red, green, blue, opacity);
     CGContextSelectFont (myContext,
                          "Helvetica",
-                         14,
+                         16,
                          kCGEncodingMacRoman);
     CGContextSetCharacterSpacing (myContext, 1);
     CGContextSetTextDrawingMode (myContext, kCGTextFillStroke);
     CGContextSetTextMatrix(myContext, CGAffineTransformMake(1.0,0.0, 0.0, -1.0, 0.0, 0.0));
     
-    CGContextShowTextAtPoint (myContext, textPoint.x, textPoint.y, [marker UTF8String], marker.length);
-    CGContextStrokePath(UIGraphicsGetCurrentContext());
+    CGContextShowTextAtPoint (myContext, point.x, point.y, [marker UTF8String], marker.length);
     CGContextFlush(UIGraphicsGetCurrentContext());
+    CGContextStrokePath(UIGraphicsGetCurrentContext());
     self.fieldImage.image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     

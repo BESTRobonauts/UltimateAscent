@@ -178,10 +178,15 @@ typedef enum {
 @property (nonatomic, retain) DefensePickerController *defensePicker;
 @property (nonatomic, retain) UIPopoverController *defensePickerPopover;
 @property (nonatomic, assign) int popCounter;
+@property (nonatomic, assign) CGPoint currentPoint;
 @property (nonatomic, assign) DrawingMode drawMode;
 @property (nonatomic, retain) IBOutlet UIButton *drawModeButton;
-- (CGPoint)scorePopOverLocation:(CGPoint)location;
-- (CGPoint)defensePopOverLocation:(CGPoint)location;
+-(void)diskPickUp:(UILongPressGestureRecognizer *)gestureRecognizer;
+-(void)scoreDisk:(UITapGestureRecognizer *)gestureRecognizer;
+-(void)drawPath:(UIPanGestureRecognizer *)gestureRecognizer;
+-(void)drawText:(NSString *) marker location:(CGPoint) point;
+-(CGPoint)scorePopOverLocation:(CGPoint)location;
+-(CGPoint)defensePopOverLocation:(CGPoint)location;
 -(IBAction)drawModeChange: (id)sender;
 -(void)drawModeSettings:(DrawingMode) mode;
 -(void)checkOverrideCode:(UIButton *)button;

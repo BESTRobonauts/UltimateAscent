@@ -70,8 +70,6 @@
 }
 
 - (void) viewWillAppear:(BOOL)animated {
-    NSLog(@"view will appear %d", [UIApplication sharedApplication].statusBarOrientation);
-//    [UIApplication sharedApplication].statusBarOrientation = UIInterfaceOrientationPortrait;
 }
     
 - (void)viewDidUnload
@@ -81,14 +79,9 @@
     // e.g. self.myOutlet = nil;
 }
 
-- (void)viewWillLayoutSubviews {
-    NSLog(@"viewwilllayout %d", [UIApplication sharedApplication].statusBarOrientation);
-}
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    NSLog(@"autorotate %d", [UIApplication sharedApplication].statusBarOrientation);
-   switch (interfaceOrientation) {
+    switch (interfaceOrientation) {
         case UIInterfaceOrientationPortrait:
         case UIInterfaceOrientationPortraitUpsideDown:
             mainLogo.frame = CGRectMake(-20, 0, 285, 960);

@@ -18,6 +18,7 @@
 @property (nonatomic, retain) SettingsData *settings;
 @property (nonatomic, retain) NSArray *teamData;
 @property (nonatomic, retain) NSMutableArray *teamOrder;
+@property (nonatomic, retain) UIView *headerView;
 
 -(void)retrieveSettings;
 -(void)setTeamList:(MatchData *)match;
