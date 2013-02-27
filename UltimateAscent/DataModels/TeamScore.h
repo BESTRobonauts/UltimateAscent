@@ -2,7 +2,7 @@
 //  TeamScore.h
 //  UltimateAscent
 //
-//  Created by FRC on 2/17/13.
+//  Created by FRC on 2/26/13.
 //  Copyright (c) 2013 FRC. All rights reserved.
 //
 
@@ -18,23 +18,28 @@
 @property (nonatomic, retain) NSNumber * autonLow;
 @property (nonatomic, retain) NSNumber * autonMid;
 @property (nonatomic, retain) NSNumber * autonMissed;
+@property (nonatomic, retain) NSNumber * autonShotsMade;
+@property (nonatomic, retain) NSNumber * blocks;
 @property (nonatomic, retain) NSNumber * climbLevel;
-@property (nonatomic, retain) NSNumber * climbSuccess;
+@property (nonatomic, retain) NSNumber * climbAttempt;
 @property (nonatomic, retain) NSNumber * climbTimer;
 @property (nonatomic, retain) NSNumber * defenseRating;
 @property (nonatomic, retain) NSNumber * driverRating;
 @property (nonatomic, retain) NSString * fieldDrawing;
+@property (nonatomic, retain) NSNumber * floorPickUp;
 @property (nonatomic, retain) NSString * notes;
 @property (nonatomic, retain) NSNumber * otherRating;
+@property (nonatomic, retain) NSNumber * passes;
+@property (nonatomic, retain) NSNumber * pyramid;
 @property (nonatomic, retain) NSNumber * saved;
 @property (nonatomic, retain) NSNumber * teleOpHigh;
 @property (nonatomic, retain) NSNumber * teleOpLow;
 @property (nonatomic, retain) NSNumber * teleOpMid;
 @property (nonatomic, retain) NSNumber * teleOpMissed;
-@property (nonatomic, retain) NSNumber * pyramid;
-@property (nonatomic, retain) NSNumber * passes;
-@property (nonatomic, retain) NSNumber * blocks;
-@property (nonatomic, retain) NSNumber * pickups;
+@property (nonatomic, retain) NSNumber * teleOpShots;
+@property (nonatomic, retain) NSNumber * totalAutonShots;
+@property (nonatomic, retain) NSNumber * totalTeleOpShots;
+@property (nonatomic, retain) NSNumber * wallPickUp;
 @property (nonatomic, retain) MatchData *match;
 @property (nonatomic, retain) TeamData *team;
 @property (nonatomic, retain) TournamentData *tournament;

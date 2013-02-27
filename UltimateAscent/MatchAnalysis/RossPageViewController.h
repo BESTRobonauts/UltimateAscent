@@ -31,7 +31,8 @@
 -(IBAction)PrevButton;
 -(IBAction)OurNextButton;
 -(IBAction)OurPrevButton;
--(IBAction)NextButton;-(NSUInteger)GetNextSection:(NSUInteger) currentSection;
+-(IBAction)NextButton;
+-(NSUInteger)GetNextSection:(NSUInteger) currentSection;
 -(NSUInteger)GetPreviousSection:(NSUInteger) currentSection;
 
 // Match Number
@@ -48,6 +49,16 @@
 // Overall Match Scores
 @property (nonatomic, retain) IBOutlet UITextField *redScore;
 @property (nonatomic, retain) IBOutlet UITextField *blueScore;
+
+// Team Data
+@property (nonatomic, retain) NSArray *teamData;
+@property (nonatomic, retain) NSMutableArray *teamOrder;
+@property (nonatomic, retain) IBOutlet UIButton *red1;
+@property (nonatomic, retain) IBOutlet UIButton *red2;
+@property (nonatomic, retain) IBOutlet UIButton *red3;
+@property (nonatomic, retain) IBOutlet UIButton *blue1;
+@property (nonatomic, retain) IBOutlet UIButton *blue2;
+@property (nonatomic, retain) IBOutlet UIButton *blue3;
 
 // Data Handling
 -(void)ShowMatch:(NSIndexPath *)currentMatchIndex;

@@ -63,10 +63,9 @@
 // Match Score
 @synthesize teamName;
 @synthesize driverRating;
-@synthesize crossesHump;
-@synthesize coopBalance;
-@synthesize balanced;
-@synthesize modedRamp;
+@synthesize defenseRating;
+@synthesize climbLevel;
+@synthesize attemptedClimb;
 @synthesize notes;
 @synthesize teleOpMissButton;
 @synthesize teleOpHighButton;
@@ -79,7 +78,8 @@
 @synthesize pyramidGoalsButton;
 @synthesize blocksButton;
 @synthesize passesButton;
-@synthesize pickupsButton;
+@synthesize wallPickUpsButton;
+@synthesize floorPickUpsButton;
 @synthesize matchResetButton;
 
 // Other Stuff
@@ -188,7 +188,8 @@
     [self SetBigButtonDefaults:pyramidGoalsButton];
     [self SetBigButtonDefaults:passesButton];
     [self SetBigButtonDefaults:blocksButton];
-    [self SetBigButtonDefaults:pickupsButton];
+    [self SetBigButtonDefaults:wallPickUpsButton];
+    [self SetBigButtonDefaults:floorPickUpsButton];
     [self SetTextBoxDefaults:redScore];
     [self SetTextBoxDefaults:blueScore];
     matchResetButton.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:15.0];
@@ -197,12 +198,14 @@
 
     driverRating.maximumValue = 5.0;
     driverRating.continuous = NO;
+    defenseRating.maximumValue = 5.0;
+    defenseRating.continuous = NO;
 
     NSMutableArray *itemArray = [NSMutableArray arrayWithObjects: @"None", @"One", @"Two", @"Three", nil];
-    balanced = [[UISegmentedControl alloc] initWithItems:itemArray];
-    balanced.frame = CGRectMake(738, 600, 207, 44);
-    [balanced addTarget:self action:@selector(setBalanceSegment:) forControlEvents:UIControlEventValueChanged];
-    [self.view addSubview:balanced];
+    climbLevel = [[UISegmentedControl alloc] initWithItems:itemArray];
+    climbLevel.frame = CGRectMake(738, 600, 207, 44);
+    [climbLevel addTarget:self action:@selector(setClimbSegment:) forControlEvents:UIControlEventValueChanged];
+    [self.view addSubview:climbLevel];
     
     [self SetTextBoxDefaults:notes];
 
@@ -213,10 +216,13 @@
     // Drawing Stuff
     scoreList = [[NSMutableArray alloc] initWithObjects:@"Medium", @"High", @"Missed", @"Low", @"Pyramid", nil];
     defenseList = [[NSMutableArray alloc] initWithObjects:@"Passed", @"Blocked", nil];
-    UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(diskPickUp:)];
-    [fieldImage addGestureRecognizer:longPressGesture];
+    UITapGestureRecognizer *doubleTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(floorDiskPickUp:)];
+    doubleTapGestureRecognizer.numberOfTapsRequired = 2;
+    [fieldImage addGestureRecognizer:doubleTapGestureRecognizer];
     
     UITapGestureRecognizer *tapPressGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scoreDisk:)];
+    tapPressGesture.numberOfTapsRequired = 1;
+    [tapPressGesture requireGestureRecognizerToFail: doubleTapGestureRecognizer];
     [fieldImage addGestureRecognizer:tapPressGesture];
     
     UIPanGestureRecognizer *drawGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(drawPath:)];
@@ -556,56 +562,34 @@
     currentTeam.DriverRating = [NSNumber numberWithInt:driverRating.value];
 }
 
--(IBAction)toggleForCrossesHump: (id) sender {
+- (IBAction) updateDefenseRating:(id) sender
+{
+    defenseRating.value = roundf(defenseRating.value);
+    dataChange = YES;
+    currentTeam.defenseRating = [NSNumber numberWithInt:defenseRating.value];
+}
+
+-(IBAction)toggleForClimbAttempt: (id) sender {
     [UIView beginAnimations:nil context:NULL];  
     [UIView setAnimationDuration: 0.3];  
     dataChange = YES;
-    if ([crossesHump isOn]) {
-//        currentTeam.teleOpScore.crossesHump = [NSNumber numberWithInt:1];
+    if ([attemptedClimb isOn]) {
+        currentTeam.climbAttempt = [NSNumber numberWithInt:1];
     }
     else {
-//        currentTeam.teleOpScore.crossesHump = [NSNumber numberWithInt:0];
-    }  
-    
+        currentTeam.climbAttempt = [NSNumber numberWithInt:0];
+    }
     [UIView commitAnimations];  
     
 }
 
--(IBAction)toggleForCoopBalance: (id) sender {
-    [UIView beginAnimations:nil context:NULL];  
-    [UIView setAnimationDuration: 0.3];  
-    dataChange = YES;
-    if ([coopBalance isOn]) {
-//        currentTeam.endGameScore.coopRamp = [NSNumber numberWithInt:1];
-    }
-    else {
-//        currentTeam.endGameScore.coopRamp = [NSNumber numberWithInt:0];
-    }  
-    
-    [UIView commitAnimations];  
-}
-
--(IBAction)toggleForRampModing:(id) sender {
-    [UIView beginAnimations:nil context:NULL];  
-    [UIView setAnimationDuration: 0.3];  
-    dataChange = YES;
-    if ([modedRamp isOn]) {
-//        currentTeam.endGameScore.modedRamp = [NSNumber numberWithInt:1];
-    }
-    else {
-//        currentTeam.endGameScore.modedRamp = [NSNumber numberWithInt:0];
-    }  
-    
-    [UIView commitAnimations];      
-}
-
-- (void) setBalanceSegment:(id)sender{
+- (void) setClimbSegment:(id)sender{
     UISegmentedControl *segmentedControl = (UISegmentedControl *)sender;
     dataChange = YES;
-//    currentTeam.endGameScore.balanced = [NSNumber numberWithInt:segmentedControl.selectedSegmentIndex];
+    currentTeam.climbLevel = [NSNumber numberWithInt:segmentedControl.selectedSegmentIndex];
     if (segmentedControl.selectedSegmentIndex) {
-//        currentTeam.endGameScore.coopRamp = [NSNumber numberWithInt:1];
-        [coopBalance setOn:YES animated:YES];
+        currentTeam.climbAttempt = [NSNumber numberWithInt:1];
+        [attemptedClimb setOn:YES animated:YES];
     }
 }
 
@@ -633,6 +617,12 @@
 }
 
 -(void)teleOpMiss {
+    // Update the number of shots taken
+    int total = [currentTeam.totalTeleOpShots intValue];
+    total++;
+    currentTeam.totalTeleOpShots = [NSNumber numberWithInt:total];
+    
+    // Update the number of missed shots
     int score = [teleOpMissButton.titleLabel.text intValue];
     score++;
     currentTeam.teleOpMissed = [NSNumber numberWithInt:score];
@@ -641,6 +631,17 @@
 }
 
 -(void)teleOpHigh {
+    // Update the number of shots taken
+    int total = [currentTeam.totalTeleOpShots intValue];
+    total++;
+    currentTeam.totalTeleOpShots = [NSNumber numberWithInt:total];
+    
+    // Update the number of shots made
+    total = [currentTeam.teleOpShots intValue];
+    total++;
+    currentTeam.teleOpShots = [NSNumber numberWithInt:total];
+    
+    // Update the number of high shots
     int score = [teleOpHighButton.titleLabel.text intValue];
     score++;
     currentTeam.teleOpHigh = [NSNumber numberWithInt:score];
@@ -649,6 +650,17 @@
 }
 
 -(void)teleOpMedium {
+    // Update the number of shots taken
+    int total = [currentTeam.totalTeleOpShots intValue];
+    total++;
+    currentTeam.totalTeleOpShots = [NSNumber numberWithInt:total];
+    
+    // Update the number of shots made
+    total = [currentTeam.teleOpShots intValue];
+    total++;
+    currentTeam.teleOpShots = [NSNumber numberWithInt:total];
+    
+    // Update the number of medium shots
     int score = [teleOpMediumButton.titleLabel.text intValue];
     score++;
     currentTeam.teleOpMid = [NSNumber numberWithInt:score];
@@ -657,6 +669,17 @@
 }
 
 -(void)teleOpLow {
+    // Update the number of shots taken
+    int total = [currentTeam.totalTeleOpShots intValue];
+    total++;
+    currentTeam.totalTeleOpShots = [NSNumber numberWithInt:total];
+    
+    // Update the number of shots made
+    total = [currentTeam.teleOpShots intValue];
+    total++;
+    currentTeam.teleOpShots = [NSNumber numberWithInt:total];
+    
+    // Update the number of high shots
     int score = [teleOpLowButton.titleLabel.text intValue];
     score++;
     currentTeam.teleOpLow = [NSNumber numberWithInt:score];
@@ -665,6 +688,12 @@
 }
 
 -(void)autonMiss {
+    // Update the number of shots taken
+    int total = [currentTeam.totalAutonShots intValue];
+    total++;
+    currentTeam.totalAutonShots = [NSNumber numberWithInt:total];
+
+    // Update the number of missed shots 
     int score = [autonMissButton.titleLabel.text intValue];
     score++;
     currentTeam.autonMissed = [NSNumber numberWithInt:score];
@@ -673,6 +702,17 @@
 }
 
 -(void)autonHigh {
+    // Update the number of shots taken
+    int total = [currentTeam.totalAutonShots intValue];
+    total++;
+    currentTeam.totalAutonShots = [NSNumber numberWithInt:total];
+    
+    // Update the number of shots made
+    total = [currentTeam.autonShotsMade intValue];
+    total++;
+    currentTeam.autonShotsMade = [NSNumber numberWithInt:total];
+
+    // Update the number of high shots
     int score = [autonHighButton.titleLabel.text intValue];
     score++;
     currentTeam.autonHigh = [NSNumber numberWithInt:score];
@@ -681,6 +721,17 @@
 }
 
 -(void)autonMedium {
+    // Update the number of shots taken
+    int total = [currentTeam.totalAutonShots intValue];
+    total++;
+    currentTeam.totalAutonShots = [NSNumber numberWithInt:total];
+    
+    // Update the number of shots made
+    total = [currentTeam.autonShotsMade intValue];
+    total++;
+    currentTeam.autonShotsMade = [NSNumber numberWithInt:total];
+    
+    // Update the number of medium shots
     int score = [autonMediumButton.titleLabel.text intValue];
     score++;
     currentTeam.autonMid = [NSNumber numberWithInt:score];
@@ -689,6 +740,17 @@
 }
 
 -(void)autonLow {
+    // Update the number of shots taken
+    int total = [currentTeam.totalAutonShots intValue];
+    total++;
+    currentTeam.totalAutonShots = [NSNumber numberWithInt:total];
+    
+    // Update the number of shots made
+    total = [currentTeam.autonShotsMade intValue];
+    total++;
+    currentTeam.autonShotsMade = [NSNumber numberWithInt:total];
+    
+    // Update the number of Low shots
     // NSLog(@"Auton Low");
     int score = [autonLowButton.titleLabel.text intValue];
     score++;
@@ -724,14 +786,22 @@
     dataChange = YES;
 }
 
--(void)pickupsMade {
+-(void)wallPickUpsMade {
     // NSLog(@"PickUps");
-    int score = [pickupsButton.titleLabel.text intValue];
+    int score = [wallPickUpsButton.titleLabel.text intValue];
     score++;
-    currentTeam.pickups = [NSNumber numberWithInt:score];
-    [pickupsButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.pickups intValue]] forState:UIControlStateNormal];
+    currentTeam.wallPickUp = [NSNumber numberWithInt:score];
+    [wallPickUpsButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.wallPickUp intValue]] forState:UIControlStateNormal];
     dataChange = YES;
+}
 
+-(void)floorPickUpsMade {
+    // NSLog(@"PickUps");
+    int score = [floorPickUpsButton.titleLabel.text intValue];
+    score++;
+    currentTeam.floorPickUp = [NSNumber numberWithInt:score];
+    [floorPickUpsButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.floorPickUp intValue]] forState:UIControlStateNormal];
+    dataChange = YES;
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -806,20 +876,14 @@
    [teamNumber setTitle:[NSString stringWithFormat:@"%d", [currentTeam.team.number intValue]] forState:UIControlStateNormal];
     teamName.text = currentTeam.team.name;
     driverRating.value =  [currentTeam.driverRating floatValue];
-//    if ([currentTeam.teleOpScore.crossesHump intValue] == 0) [crossesHump setOn:NO animated:YES];
-//    else [crossesHump setOn:YES animated:YES];
+    defenseRating.value =  [currentTeam.defenseRating floatValue];
+    if ([currentTeam.climbAttempt intValue] == 0) [attemptedClimb setOn:NO animated:YES];
+    else [attemptedClimb setOn:YES animated:YES];
     
-//    if ([currentTeam.endGameScore.coopRamp intValue] == 0) [coopBalance setOn:NO animated:YES];
-//    else [coopBalance setOn:YES animated:YES];
-//    balanced.selectedSegmentIndex = [currentTeam.endGameScore.balanced intValue];
-/*
-    if ([currentTeam.endGameScore.modedRamp intValue] == 0) [modedRamp setOn:NO animated:YES];
-    else [modedRamp setOn:YES animated:YES];
-*/
+    climbLevel.selectedSegmentIndex = [currentTeam.climbLevel intValue];
+
     notes.text = currentTeam.notes;
     [alliance setTitle:[allianceList objectAtIndex:currentTeamIndex] forState:UIControlStateNormal];
-
-//    startingPosition.text =  [NSString stringWithFormat:@"%d", [currentTeam.startingPosition intValue]];
     
     [teleOpMissButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.teleOpMissed intValue]] forState:UIControlStateNormal];
     [teleOpHighButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.teleOpHigh intValue]] forState:UIControlStateNormal];
@@ -832,7 +896,8 @@
     [pyramidGoalsButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.pyramid intValue]] forState:UIControlStateNormal];
     [blocksButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.blocks intValue]] forState:UIControlStateNormal];
     [passesButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.passes intValue]] forState:UIControlStateNormal];
-    [pickupsButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.pickups intValue]] forState:UIControlStateNormal];
+    [wallPickUpsButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.wallPickUp intValue]] forState:UIControlStateNormal];
+    [floorPickUpsButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.floorPickUp intValue]] forState:UIControlStateNormal];
 
     // NSLog(@"Load the Picture");
     fieldDrawingPath = [baseDrawingPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%d", [currentTeam.team.number intValue]]];
@@ -892,15 +957,13 @@
     return nil;
 }
 
--(void)diskPickUp:(UILongPressGestureRecognizer *)gestureRecognizer {
+-(void)floorDiskPickUp:(UITapGestureRecognizer *)gestureRecognizer {
     fieldDrawingChange = YES;
-    if ([gestureRecognizer state] == UIGestureRecognizerStateBegan) {
-        NSString *marker = @"O";
-        NSLog(@"diskPickUp");
-        currentPoint = [gestureRecognizer locationInView:fieldImage];
-        [self drawText:marker location:currentPoint];
-        [self pickupsMade];
-    }
+    // NSLog(@"floorDiskPickUp");
+    NSString *marker = @"O";
+    currentPoint = [gestureRecognizer locationInView:fieldImage];
+    [self drawText:marker location:currentPoint];
+    [self floorPickUpsMade];
 }
 
 -(void)scoreDisk:(UITapGestureRecognizer *)gestureRecognizer {
@@ -1235,21 +1298,26 @@
     currentTeam.autonMid = [NSNumber numberWithInt:0];
     currentTeam.autonLow = [NSNumber numberWithInt:0];
     currentTeam.autonMissed = [NSNumber numberWithInt:0];
+    currentTeam.autonShotsMade = [NSNumber numberWithInt:0];
+    currentTeam.totalAutonShots = [NSNumber numberWithInt:0];
     currentTeam.teleOpHigh = [NSNumber numberWithInt:0];
     currentTeam.teleOpMid = [NSNumber numberWithInt:0];
     currentTeam.teleOpLow = [NSNumber numberWithInt:0];
     currentTeam.teleOpMissed = [NSNumber numberWithInt:0];
+    currentTeam.teleOpShots = [NSNumber numberWithInt:0];
+    currentTeam.totalTeleOpShots = [NSNumber numberWithInt:0];
     currentTeam.pyramid = [NSNumber numberWithInt:0];
     currentTeam.passes = [NSNumber numberWithInt:0];
     currentTeam.blocks = [NSNumber numberWithInt:0];
-    currentTeam.pickups = [NSNumber numberWithInt:0];
+    currentTeam.wallPickUp = [NSNumber numberWithInt:0];
+    currentTeam.floorPickUp = [NSNumber numberWithInt:0];
     currentTeam.driverRating = [NSNumber numberWithInt:0];
     currentTeam.notes = @"";
     currentTeam.saved = [NSNumber numberWithInt:0];
     currentTeam.fieldDrawing = nil;
     currentTeam.defenseRating = [NSNumber numberWithInt:0];
     currentTeam.climbLevel = [NSNumber numberWithInt:0];
-    currentTeam.climbSuccess = [NSNumber numberWithInt:-1];
+    currentTeam.climbAttempt = [NSNumber numberWithInt:-1];
     currentTeam.climbTimer = [NSNumber numberWithFloat:0.0];
     
     [self ShowTeam:teamIndex];   

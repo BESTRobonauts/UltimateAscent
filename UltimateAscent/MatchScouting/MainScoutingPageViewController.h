@@ -69,19 +69,17 @@ typedef enum {
 // Match Scores
 @property (nonatomic, retain) IBOutlet UILabel *teamName;
 @property (nonatomic, retain) IBOutlet UISlider *driverRating;
-@property (nonatomic, retain) IBOutlet UISwitch *crossesHump;
-@property (nonatomic, retain) IBOutlet UISwitch *coopBalance;
-@property (nonatomic, retain) IBOutlet UISwitch *modedRamp;
-@property (nonatomic, retain) UISegmentedControl *balanced;
+@property (nonatomic, retain) IBOutlet UISlider *defenseRating;
+@property (nonatomic, retain) IBOutlet UISwitch *attemptedClimb;
+@property (nonatomic, retain) UISegmentedControl *climbLevel;
 @property (nonatomic, retain) IBOutlet UITextField *notes;
 @property (nonatomic, retain) IBOutlet UIButton *matchResetButton;
 -(IBAction)matchResetRequest:(id) sender;
 -(void)matchReset;
 -(IBAction)updateDriverRating:(id) sender;
--(IBAction)toggleForCrossesHump: (id) sender;
--(IBAction)toggleForCoopBalance: (id) sender;
--(void)setBalanceSegment: (id) sender;
--(IBAction)toggleForRampModing: (id) sender;
+-(IBAction)updateDefenseRating: (id) sender;
+-(IBAction)toggleForClimbAttempt: (id) sender;
+-(void)setClimbSegment: (id) sender;
 
 
 -(IBAction)scoreButtons: (id)sender;
@@ -96,7 +94,8 @@ typedef enum {
 @property (nonatomic, retain) IBOutlet UIButton *pyramidGoalsButton;
 @property (nonatomic, retain) IBOutlet UIButton *passesButton;
 @property (nonatomic, retain) IBOutlet UIButton *blocksButton;
-@property (nonatomic, retain) IBOutlet UIButton *pickupsButton;
+@property (nonatomic, retain) IBOutlet UIButton *wallPickUpsButton;
+@property (nonatomic, retain) IBOutlet UIButton *floorPickUpsButton;
 -(void)teleOpMiss;
 -(void)teleOpHigh;
 -(void)teleOpMedium;
@@ -108,7 +107,8 @@ typedef enum {
 -(void)pyramidGoals;
 -(void)blockedShots;
 -(void)passesMade;
--(void)pickupsMade;
+-(void)wallPickUpsMade;
+-(void)floorPickUpsMade;
 
 // Overall Match Scores
 @property (nonatomic, retain) IBOutlet UITextField *redScore;
@@ -164,7 +164,6 @@ typedef enum {
     DrawLock,
 } DrawingMode;
 
-
 @property (nonatomic, retain) NSString *baseDrawingPath;
 @property (nonatomic, retain) NSString *fieldDrawingPath;
 @property (nonatomic, retain) NSString *fieldDrawingFile;
@@ -181,7 +180,7 @@ typedef enum {
 @property (nonatomic, assign) CGPoint currentPoint;
 @property (nonatomic, assign) DrawingMode drawMode;
 @property (nonatomic, retain) IBOutlet UIButton *drawModeButton;
--(void)diskPickUp:(UILongPressGestureRecognizer *)gestureRecognizer;
+-(void)floorDiskPickUp:(UITapGestureRecognizer *)gestureRecognizer;
 -(void)scoreDisk:(UITapGestureRecognizer *)gestureRecognizer;
 -(void)drawPath:(UIPanGestureRecognizer *)gestureRecognizer;
 -(void)drawText:(NSString *) marker location:(CGPoint) point;

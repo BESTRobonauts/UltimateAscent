@@ -109,7 +109,7 @@
     nameTextField.text = team.name;
     historyLabel.text = team.history;
     notesTextField.text = team.notes;
-    driveTrainTextField.text = team.driveTrainNotes;
+//    driveTrainTextField.text = team.driveTrainNotes;
     [self setSegments];
     NSString *path = [NSString stringWithFormat:@"Library/RobotPhotos/%@", [NSString stringWithFormat:@"%d", [team.number intValue]]];
     photoPath = [NSHomeDirectory() stringByAppendingPathComponent:path];
@@ -122,14 +122,14 @@
   /*  int value = [team.orientation intValue];
     orientation.selectedSegmentIndex = value; */
 
-    int value = [team.intakeStation intValue];
-    stationIntake.selectedSegmentIndex = value; 
+//    int value = [team.intakeStation intValue];
+//    stationIntake.selectedSegmentIndex = value;
 
-    value = [team.intakeFloor intValue];
-    floorIntake.selectedSegmentIndex = value;
+//    value = [team.intakeFloor intValue];
+//    floorIntake.selectedSegmentIndex = value;
 
-    value = [team.intakeInverted intValue];
-    invertDisks.selectedSegmentIndex = value;
+//    value = [team.intakeInverted intValue];
+//    invertDisks.selectedSegmentIndex = value;
 }
 
 -(void)getSelection:(id) sender {
@@ -138,14 +138,14 @@
     current = [NSNumber numberWithInt:segmentedControl.selectedSegmentIndex];
 
     if (segmentedControl == stationIntake) {
-            team.intakeStation = current;
+//            team.intakeStation = current;
     }
     else if (segmentedControl == floorIntake) {
-        team.intakeFloor = current;
+//        team.intakeFloor = current;
     }
 
     else if (segmentedControl == invertDisks) {
-        team.intakeInverted = current;
+//        team.intakeInverted = current;
     }
     /*
     else if (segmentedControl == orientation) {
@@ -196,7 +196,7 @@
 		team.notes = notesTextField.text;
 	}
 	else if (textField == driveTrainTextField) {
-		team.driveTrainNotes = driveTrainTextField.text;
+//		team.driveTrainNotes = driveTrainTextField.text;
 	}
 	return YES;
 }

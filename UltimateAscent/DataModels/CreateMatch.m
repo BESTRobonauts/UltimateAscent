@@ -84,6 +84,7 @@
 
         NSArray *teamScores = [match.score allObjects];
         TeamScore *score;
+        int basketsMade, totalBaskets;
         //NSLog(@"Team Number = %d", teamNumber);
         for (int i=0; i<[teamScores count]; i++) {
             score = [teamScores objectAtIndex:i];
@@ -93,12 +94,25 @@
                 score.autonLow = [NSNumber numberWithInt:[[data objectAtIndex: 3] intValue]];
                 score.autonMid = [NSNumber numberWithInt:[[data objectAtIndex: 4] intValue]];
                 score.autonHigh = [NSNumber numberWithInt:[[data objectAtIndex: 5] intValue]];
+ // Temp to get stuff added to new database
+                basketsMade = [score.autonHigh intValue] + [score.autonMid intValue] + [score.autonLow intValue];
+                totalBaskets = basketsMade + [score.autonMissed intValue];
+                score.autonShotsMade = [NSNumber numberWithInt:basketsMade];
+                score.totalAutonShots = [NSNumber numberWithInt:totalBaskets];
+ 
                 score.teleOpMissed = [NSNumber numberWithInt:[[data objectAtIndex: 6] intValue]];
                 score.teleOpLow = [NSNumber numberWithInt:[[data objectAtIndex: 7] intValue]];
                 score.teleOpMid = [NSNumber numberWithInt:[[data objectAtIndex: 8] intValue]];
                 score.teleOpHigh = [NSNumber numberWithInt:[[data objectAtIndex: 9] intValue]];
+// Temp to get stuff added to new database
+                basketsMade = [score.teleOpHigh intValue] + [score.teleOpMid intValue] + [score.teleOpLow intValue];
+                totalBaskets = basketsMade + [score.teleOpMissed intValue];
+                score.teleOpShots = [NSNumber numberWithInt:basketsMade];
+                score.totalTeleOpShots = [NSNumber numberWithInt:totalBaskets];
+                
+
                 score.driverRating = [NSNumber numberWithInt:[[data objectAtIndex: 11] intValue]];
-                score.climbSuccess = [NSNumber numberWithInt:[[data objectAtIndex: 12] intValue]];
+                score.climbAttempt = [NSNumber numberWithInt:[[data objectAtIndex: 12] intValue]];
                 score.climbLevel = [NSNumber numberWithInt:[[data objectAtIndex: 14] intValue]];
                 score.notes = [data objectAtIndex: 15];
                 break;
@@ -262,15 +276,21 @@
 }
 
 -(void)setTeamDefaults:(TeamData *)blankTeam {
-//    blankTeam.drivetrain = @"";
-    blankTeam.name = @"";
-    blankTeam.saved = [NSNumber numberWithInt:0];
     blankTeam.number = [NSNumber numberWithInt:0];
-    blankTeam.climbType = [NSNumber numberWithInt:-1];
-    blankTeam.intakeFloor = [NSNumber numberWithInt:-1];
-    blankTeam.intakeStation = [NSNumber numberWithInt:-1];
-    blankTeam.intakeInverted = [NSNumber numberWithInt:-1];
+    blankTeam.name = @"";
+    blankTeam.climbLevel = [NSNumber numberWithInt:-1];
+    blankTeam.driveTrainType = [NSNumber numberWithInt:-1];
+    blankTeam.history = @"";
+    blankTeam.intake = [NSNumber numberWithInt:-1];
+    blankTeam.climbSpeed = [NSNumber numberWithFloat:0.0];
     blankTeam.notes = @"";
+    blankTeam.wheelDiameter = [NSNumber numberWithFloat:0.0];
+    blankTeam.cims = [NSNumber numberWithInt:0];
+    blankTeam.minHeight = [NSNumber numberWithFloat:0.0];
+    blankTeam.maxHeight = [NSNumber numberWithFloat:0.0];
+    blankTeam.shooterHeight = [NSNumber numberWithFloat:0.0];
+    blankTeam.pyramidDump = [NSNumber numberWithInt:-1];
+    blankTeam.saved = [NSNumber numberWithInt:0];
 }
 
 @end

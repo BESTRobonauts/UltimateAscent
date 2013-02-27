@@ -154,13 +154,18 @@
 -(void)setTeamDefaults:(TeamData *)blankTeam {
     blankTeam.number = [NSNumber numberWithInt:0];
     blankTeam.name = @"";
-    blankTeam.climbType = [NSNumber numberWithInt:-1];
-    blankTeam.intakeFloor = [NSNumber numberWithInt:-1];
-    blankTeam.intakeStation = [NSNumber numberWithInt:-1];
-    blankTeam.intakeInverted = [NSNumber numberWithInt:-1];
-    blankTeam.driveTrainNotes = @"";
-    blankTeam.notes = @"";
+    blankTeam.climbLevel = [NSNumber numberWithInt:-1];
+    blankTeam.driveTrainType = [NSNumber numberWithInt:-1];
     blankTeam.history = @"";
+    blankTeam.intake = [NSNumber numberWithInt:-1];
+    blankTeam.climbSpeed = [NSNumber numberWithFloat:0.0];
+    blankTeam.notes = @"";
+    blankTeam.wheelDiameter = [NSNumber numberWithFloat:0.0];
+    blankTeam.cims = [NSNumber numberWithInt:0];
+    blankTeam.minHeight = [NSNumber numberWithFloat:0.0];
+    blankTeam.maxHeight = [NSNumber numberWithFloat:0.0];
+    blankTeam.shooterHeight = [NSNumber numberWithFloat:0.0];
+    blankTeam.pyramidDump = [NSNumber numberWithInt:-1];
     blankTeam.saved = [NSNumber numberWithInt:0];
 }
 

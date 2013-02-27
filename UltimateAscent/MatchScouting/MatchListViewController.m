@@ -345,7 +345,6 @@
             settings = [settingsRecord objectAtIndex:0];
         }
     }
-    
 }
 
 #pragma mark -

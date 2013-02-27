@@ -116,10 +116,10 @@
             int c;
             for (c = 0; c < [teamData count]; c++) {
                 team = [teamData objectAtIndex:c];
-                csvString = [csvString stringByAppendingFormat:@"\n%@, %@, %@, %@, %@, %@%@%@%@", team.number, team.name, team.climbType, team.intakeFloor, team.intakeInverted, team.intakeStation,
-                             ([team.driveTrainNotes isEqualToString:@""] ? @"," : [NSString stringWithFormat:@",\"%@\"", team.driveTrainNotes]),
-                             ([team.notes isEqualToString:@""] ? @"," : [NSString stringWithFormat:@",\"%@\"", team.notes]),
-                             ([team.history isEqualToString:@""] ? @"," : [NSString stringWithFormat:@",\"%@\"", team.history])];
+//                csvString = [csvString stringByAppendingFormat:@"\n%@, %@, %@, %@, %@, %@%@%@%@", team.number, team.name, team.climbType, team.intakeFloor, team.intakeInverted, team.intakeStation,
+//                             ([team.driveTrainNotes isEqualToString:@""] ? @"," : [NSString stringWithFormat:@",\"%@\"", team.driveTrainNotes]),
+//                             ([team.notes isEqualToString:@""] ? @"," : [NSString stringWithFormat:@",\"%@\"", team.notes]),
+//                             ([team.history isEqualToString:@""] ? @"," : [NSString stringWithFormat:@",\"%@\"", team.history])];
             }
             csvString = [csvString stringByAppendingString:@"\n"];
             // NSLog(@"csvString = %@", csvString);
@@ -241,7 +241,7 @@
     NSString *csvDataString;
 
     if (teamScore) {
-        csvDataString = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@",
+ /*       csvDataString = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@",
                 teamScore.alliance,
                 teamScore.team.number,
                 teamScore.saved,
@@ -262,7 +262,7 @@
                 teamScore.passes,
                 teamScore.blocks,
                 teamScore.pickups,
-                (teamScore.notes == nil) ? @"," : [NSString stringWithFormat:@",\"%@\"", teamScore.notes]];
+                (teamScore.notes == nil) ? @"," : [NSString stringWithFormat:@",\"%@\"", teamScore.notes]]; */
         
         // NSLog(@"csvDataString = %@", csvDataString);
     }

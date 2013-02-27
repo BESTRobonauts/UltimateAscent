@@ -2,7 +2,7 @@
 //  TeamData.m
 //  UltimateAscent
 //
-//  Created by FRC on 2/7/13.
+//  Created by FRC on 2/25/13.
 //  Copyright (c) 2013 FRC. All rights reserved.
 //
 
@@ -13,16 +13,21 @@
 
 @implementation TeamData
 
-@dynamic climbType;
+@dynamic climbLevel;
+@dynamic driveTrainType;
 @dynamic history;
-@dynamic intakeFloor;
-@dynamic intakeInverted;
-@dynamic intakeStation;
+@dynamic intake;
+@dynamic climbSpeed;
 @dynamic name;
 @dynamic notes;
 @dynamic number;
 @dynamic saved;
-@dynamic driveTrainNotes;
+@dynamic wheelDiameter;
+@dynamic cims;
+@dynamic minHeight;
+@dynamic maxHeight;
+@dynamic shooterHeight;
+@dynamic pyramidDump;
 @dynamic match;
 @dynamic tournament;
 

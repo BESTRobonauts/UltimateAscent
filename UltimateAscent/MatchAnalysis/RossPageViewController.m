@@ -13,7 +13,7 @@
 #import "TeamScore.h"
 #import "TeamData.h"
 #import "DataManager.h"
-#include "MatchTypeDictionary.h"
+#import "MatchTypeDictionary.h"
 #import "MasonPageViewController.h"
 
 @interface RossPageViewController ()
@@ -45,6 +45,16 @@
 @synthesize matchTypeList;
 @synthesize matchTypePicker;
 @synthesize matchTypePickerPopover;
+
+// Team Data
+@synthesize teamData;
+@synthesize teamOrder;
+@synthesize red1;
+@synthesize red2;
+@synthesize red3;
+@synthesize blue1;
+@synthesize blue2;
+@synthesize blue3;
 
 // Other Stuff
 @synthesize redScore;
@@ -97,8 +107,69 @@
     matchDictionary = [[MatchTypeDictionary alloc] init];
     matchTypeList = [[matchDictionary getMatchTypes] copy];
 
-//    [self setTeamList];
     [self ShowMatch:matchIndex];
+}
+
+-(IBAction)PrevButton {
+    if (rowIndex > 0) rowIndex--;
+    else {
+        sectionIndex = [self GetPreviousSection:sectionIndex];
+        rowIndex =  [[[[fetchedResultsController sections] objectAtIndex:sectionIndex] objects] count]-1;
+    }
+    
+    NSIndexPath *matchIndex = [NSIndexPath indexPathForRow:rowIndex inSection:sectionIndex];
+    
+    [self ShowMatch:matchIndex];
+}
+
+-(IBAction)NextButton {
+    int nrows;
+    nrows =  [[[[fetchedResultsController sections] objectAtIndex:sectionIndex] objects] count];
+    if (rowIndex < (nrows-1)) rowIndex++;
+    else {
+        rowIndex = 0;
+        sectionIndex = [self GetNextSection:sectionIndex];
+    }
+    NSIndexPath *matchIndex = [NSIndexPath indexPathForRow:rowIndex inSection:sectionIndex];
+    
+    [self ShowMatch:matchIndex];
+}
+
+-(NSUInteger)GetNextSection:(NSUInteger) currentSection {
+    //    NSLog(@"GetNextSection");
+    NSUInteger newSection;
+    switch (currentSection) {
+        case Practice: newSection=Seeding;
+            break;
+        case Seeding: newSection=Elimination;
+            break;
+        case Elimination: newSection=Practice;
+            break;
+        case Other: newSection=Testing;
+            break;
+        case Testing: newSection=Other;
+            break;
+    }
+    return newSection;
+}
+
+// Move through the rounds
+-(NSUInteger)GetPreviousSection:(NSUInteger) currentSection {
+    //    NSLog(@"GetPreviousSection");
+    NSUInteger newSection;
+    switch (currentSection) {
+        case Practice: newSection=Testing; 
+            break;
+        case Seeding: newSection=Practice;  
+            break;
+        case Elimination: newSection=Seeding; 
+            break;
+        case Other: newSection=Testing; 
+            break;
+        case Testing: newSection=Other; 
+            break;
+    }
+    return newSection;
 }
 
 -(IBAction)MatchTypeSelectionChanged:(id)sender {
@@ -126,20 +197,22 @@
     }
     rowIndex = 0;
     NSIndexPath *matchIndex = [NSIndexPath indexPathForRow:rowIndex inSection:sectionIndex];
-    currentMatch = [fetchedResultsController objectAtIndexPath:matchIndex];
     [self ShowMatch:matchIndex];
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {    
-    MasonPageViewController *masonPageViewController = [segue destinationViewController];
-    masonPageViewController.currentMatch = currentMatch;
+    [segue.destinationViewController setCurrentMatch:currentMatch];
+    NSLog(@"Fix this &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+    [segue.destinationViewController setCurrentTeam:[[currentMatch.score allObjects] objectAtIndex:0]];
+    NSLog(@"Directory = %@", settings.tournament.directory);
+    [segue.destinationViewController setDrawDirectory:settings.tournament.directory];
 }
 
 -(void)ShowMatch:(NSIndexPath *)currentMatchIndex { 
     
     currentMatch = [fetchedResultsController objectAtIndexPath:currentMatchIndex];
-    NSLog(@"match = %@", currentMatch);
+    [self setTeamList:currentMatch];
     
     [matchType setTitle:currentMatch.matchType forState:UIControlStateNormal];
     matchNumber.text = [NSString stringWithFormat:@"%d", [currentMatch.number intValue]];
@@ -156,7 +229,21 @@
         blueScore.text = [NSString stringWithFormat:@"%d", [currentMatch.blueScore intValue]];
     }
     
-//    [teamNumber setTitle:[NSString stringWithFormat:@"%d", [currentTeam.team.number intValue]] forState:UIControlStateNormal];
+    TeamData *team = [teamOrder objectAtIndex:0];
+    [red1 setTitle:[NSString stringWithFormat:@"%d",[team.number intValue]] forState:UIControlStateNormal];
+    team = [teamOrder objectAtIndex:1];
+    [red2 setTitle:[NSString stringWithFormat:@"%d",[team.number intValue]] forState:UIControlStateNormal];
+    team = [teamOrder objectAtIndex:2];
+    [red3 setTitle:[NSString stringWithFormat:@"%d",[team.number intValue]] forState:UIControlStateNormal];
+    team = [teamOrder objectAtIndex:3];
+    [blue1 setTitle:[NSString stringWithFormat:@"%d",[team.number intValue]] forState:UIControlStateNormal];
+    team = [teamOrder objectAtIndex:4];
+    [blue2 setTitle:[NSString stringWithFormat:@"%d",[team.number intValue]] forState:UIControlStateNormal];
+    team = [teamOrder objectAtIndex:5];
+    [blue3 setTitle:[NSString stringWithFormat:@"%d",[team.number intValue]] forState:UIControlStateNormal];
+    
+
+    //    [teamNumber setTitle:[NSString stringWithFormat:@"%d", [currentTeam.team.number intValue]] forState:UIControlStateNormal];
 //    teamName.text = currentTeam.team.name;
 
                                                   /*
@@ -214,6 +301,42 @@
     }
     [self drawModeSettings:drawMode]; */
 }
+
+-(void)setTeamList:(MatchData *)match {
+    TeamScore *score;
+    NSSortDescriptor *allianceSort = [NSSortDescriptor sortDescriptorWithKey:@"alliance" ascending:YES];
+    teamData = [[match.score allObjects] sortedArrayUsingDescriptors:[NSArray arrayWithObject:allianceSort]];
+    
+    if (teamOrder == nil) {
+        teamOrder = [NSMutableArray array];
+        // Reds
+        for (int i = 3; i < 6; i++) {
+            score = [teamData objectAtIndex:i];
+            [teamOrder addObject:score.team];
+        }
+        // Blues
+        for (int i = 0; i < 3; i++) {
+            score = [teamData objectAtIndex:i];
+            [teamOrder addObject:score.team];
+        }
+        
+    }
+    else {
+        // Reds
+        for (int i = 3; i < 6; i++) {
+            score = [teamData objectAtIndex:i];
+            [teamOrder replaceObjectAtIndex:(i-3)
+                                 withObject:score.team];
+        }
+        // Blues
+        for (int i = 0; i < 3; i++) {
+            score = [teamData objectAtIndex:i];
+            [teamOrder replaceObjectAtIndex:(i+3)
+                                 withObject:score.team];
+        }
+    }
+}
+
 
 -(void)SetTextBoxDefaults:(UITextField *)currentTextField {
     currentTextField.font = [UIFont fontWithName:@"Helvetica" size:24.0];

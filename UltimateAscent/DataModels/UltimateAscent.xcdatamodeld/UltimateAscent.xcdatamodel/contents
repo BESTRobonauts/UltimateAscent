@@ -17,16 +17,21 @@
         <relationship name="tournament" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="TournamentData" inverseName="settings" inverseEntity="TournamentData" syncable="YES"/>
     </entity>
     <entity name="TeamData" representedClassName="TeamData" syncable="YES">
-        <attribute name="climbType" optional="YES" attributeType="Integer 16" minValueString="-1" maxValueString="2" defaultValueString="-1" syncable="YES"/>
-        <attribute name="driveTrainNotes" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cims" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="climbLevel" optional="YES" attributeType="Integer 16" minValueString="-1" maxValueString="2" defaultValueString="-1" syncable="YES"/>
+        <attribute name="climbSpeed" optional="YES" attributeType="Float" syncable="YES"/>
+        <attribute name="driveTrainType" optional="YES" attributeType="Integer 16" minValueString="-1" maxValueString="4" defaultValueString="-1" syncable="YES"/>
         <attribute name="history" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="intakeFloor" optional="YES" attributeType="Integer 16" minValueString="-1" maxValueString="1" defaultValueString="-1" syncable="YES"/>
-        <attribute name="intakeInverted" optional="YES" attributeType="Integer 16" minValueString="-1" maxValueString="1" defaultValueString="-1" syncable="YES"/>
-        <attribute name="intakeStation" optional="YES" attributeType="Integer 16" minValueString="-1" maxValueString="1" defaultValueString="-1" syncable="YES"/>
+        <attribute name="intake" optional="YES" attributeType="Integer 16" minValueString="-1" maxValueString="3" defaultValueString="-1" syncable="YES"/>
+        <attribute name="maxHeight" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="minHeight" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" maxValueString="50" syncable="YES"/>
         <attribute name="notes" optional="YES" attributeType="String" maxValueString="1000" syncable="YES"/>
         <attribute name="number" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="pyramidDump" optional="YES" attributeType="Integer 16" minValueString="-1" maxValueString="1" defaultValueString="-1" syncable="YES"/>
         <attribute name="saved" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="shooterHeight" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="wheelDiameter" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <relationship name="match" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TeamScore" inverseName="team" inverseEntity="TeamScore" syncable="YES"/>
         <relationship name="tournament" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TournamentData" inverseName="teams" inverseEntity="TournamentData" syncable="YES"/>
     </entity>
@@ -36,23 +41,28 @@
         <attribute name="autonLow" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="2000" defaultValueString="0" syncable="YES"/>
         <attribute name="autonMid" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="2000" defaultValueString="0" syncable="YES"/>
         <attribute name="autonMissed" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="2000" defaultValueString="0" syncable="YES"/>
+        <attribute name="autonShotsMade" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="blocks" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="2000" defaultValueString="0" syncable="YES"/>
+        <attribute name="climbAttempt" optional="YES" attributeType="Integer 16" minValueString="-1" maxValueString="1" defaultValueString="-1" syncable="YES"/>
         <attribute name="climbLevel" optional="YES" attributeType="Integer 16" maxValueString="3" defaultValueString="0" syncable="YES"/>
-        <attribute name="climbSuccess" optional="YES" attributeType="Integer 16" minValueString="-1" maxValueString="1" defaultValueString="-1" syncable="YES"/>
         <attribute name="climbTimer" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="defenseRating" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="5" defaultValueString="0" syncable="YES"/>
         <attribute name="driverRating" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="5" defaultValueString="0" syncable="YES"/>
         <attribute name="fieldDrawing" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="floorPickUp" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="2000" defaultValueString="0" syncable="YES"/>
         <attribute name="notes" optional="YES" attributeType="String" minValueString="0" maxValueString="500" syncable="YES"/>
         <attribute name="otherRating" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="5" defaultValueString="0" syncable="YES"/>
         <attribute name="passes" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="2000" defaultValueString="0" syncable="YES"/>
-        <attribute name="pickups" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="2000" defaultValueString="0" syncable="YES"/>
         <attribute name="pyramid" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="2000" defaultValueString="0" syncable="YES"/>
         <attribute name="saved" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="teleOpHigh" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="2000" defaultValueString="0" syncable="YES"/>
         <attribute name="teleOpLow" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="2000" defaultValueString="0" syncable="YES"/>
         <attribute name="teleOpMid" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="2000" defaultValueString="0" syncable="YES"/>
         <attribute name="teleOpMissed" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="2000" defaultValueString="0" syncable="YES"/>
+        <attribute name="teleOpShots" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="totalAutonShots" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="totalTeleOpShots" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="wallPickUp" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="match" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MatchData" inverseName="score" inverseEntity="MatchData" syncable="YES"/>
         <relationship name="team" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="TeamData" inverseName="match" inverseEntity="TeamData" syncable="YES"/>
         <relationship name="tournament" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="TournamentData" inverseName="score" inverseEntity="TournamentData" syncable="YES"/>
@@ -67,8 +77,8 @@
     <elements>
         <element name="MatchData" positionX="27" positionY="33" width="128" height="150"/>
         <element name="SettingsData" positionX="18" positionY="-144" width="128" height="120"/>
-        <element name="TeamData" positionX="432" positionY="24" width="128" height="225"/>
-        <element name="TeamScore" positionX="207" positionY="-180" width="128" height="420"/>
+        <element name="TeamData" positionX="432" positionY="24" width="128" height="300"/>
+        <element name="TeamScore" positionX="207" positionY="-180" width="128" height="495"/>
         <element name="TournamentData" positionX="205" positionY="152" width="128" height="120"/>
     </elements>
 </model>
