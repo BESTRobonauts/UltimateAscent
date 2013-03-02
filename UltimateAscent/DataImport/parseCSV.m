@@ -58,7 +58,7 @@ static char *cstrstr(const char *haystack, const char needle) {
 				    withString:@"\"" 
 				       options:0
 				         range:NSMakeRange(0, [tempString length])];
-	return [NSString stringWithString: tempString];
+	return [NSString stringWithString: [tempString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]];
 }
 
 -(id)init {

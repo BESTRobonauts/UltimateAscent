@@ -18,7 +18,7 @@
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 -(AddRecordResults)createMatchFromFile:(NSMutableArray *)headers dataFields:(NSMutableArray *)data;
 -(AddRecordResults)addMatchResultsFromFile:(NSMutableArray *)headers dataFields:(NSMutableArray *)data;
--(MatchData *)GetMatch:(NSNumber *)matchNumber forMatchType:(NSString *) type;
+-(MatchData *)GetMatch:(NSNumber *)matchNumber forMatchType:(NSString *) type forTournament:(NSString *) tournament;
 -(void)CreateMatch:(NSNumber *)number forTeam1:(NSNumber *)red1 
                                       forTeam2:(NSNumber *)red2 
                                       forTeam3:(NSNumber *)red3

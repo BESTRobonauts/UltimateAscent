@@ -43,14 +43,17 @@
     teamNumber = [NSNumber numberWithInt:[[data objectAtIndex: 0] intValue]];
     // NSLog(@"createTeamFromFile:Team Number = %@", teamNumber);
     TeamData *team = [self GetTeam:teamNumber];
+    TournamentData *tournamentRecord;
     if (team) {
         NSLog(@"createTeamFromFile:Team %@ already exists", teamNumber);
         NSLog(@"createTeamFromFile:************************************* Really need to add new tournament");
+        tournament = [data objectAtIndex: 2];
+        tournamentRecord = [self getTournamentRecord:tournament];
+        [team addTournamentObject:tournamentRecord];
+        NSLog(@"Team = %@", team);
         return DB_MATCHED;
     }
     else {
-        NSNumber *number;
-        TournamentData *tournamentRecord;
         TeamData *team = [NSEntityDescription insertNewObjectForEntityForName:@"TeamData"
                                                            inManagedObjectContext:managedObjectContext];
         [self setTeamDefaults:team];
@@ -58,7 +61,7 @@
             case 5:
                 team.history = [data objectAtIndex: 4];
             case 4:
-                 team.notes = [data objectAtIndex: 3];
+                team.notes = [data objectAtIndex: 3];
 /*
             case 6:
                 number = [NSNumber numberWithInt:[[data objectAtIndex:4] intValue]];

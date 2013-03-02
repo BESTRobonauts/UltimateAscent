@@ -25,6 +25,7 @@
 -(AddRecordResults)createMatchFromFile:(NSMutableArray *)headers dataFields:(NSMutableArray *)data {
     NSNumber *matchNumber;
     NSString *type;
+    NSString *tournament;
 
     if (![data count]) return DB_ERROR;
     
@@ -35,8 +36,9 @@
     
     matchNumber = [NSNumber numberWithInt:[[data objectAtIndex: 0] intValue]];
     type = [data objectAtIndex:7];
+    tournament = [data objectAtIndex:8];
     // NSLog(@"createMatchFromFile:Match Number = %@", matchNumber);
-    MatchData *match = [self GetMatch:matchNumber forMatchType:type];
+    MatchData *match = [self GetMatch:matchNumber forMatchType:type forTournament:tournament];
     if (match) {
         // NSLog(@"createMatchFromFile:Match %@ %@ already exists", matchNumber, type);
         return DB_MATCHED;
@@ -51,7 +53,7 @@
                      forTeam5:[data objectAtIndex: 5]   // Blue 2
                      forTeam6:[data objectAtIndex: 6]   // Blue 3
                      forMatch:[data objectAtIndex: 7]   // Match Type
-                forTournament:[data objectAtIndex: 8]   // Tournament
+                forTournament:tournament                // Tournament
                 forRedScore:[NSNumber numberWithInt:[[data objectAtIndex: 9] intValue]] 
                 forBlueScore:[NSNumber numberWithInt:[[data objectAtIndex: 10] intValue]]];
         NSError *error;
@@ -66,6 +68,7 @@
 -(AddRecordResults)addMatchResultsFromFile:(NSMutableArray *)headers dataFields:(NSMutableArray *)data {
     NSNumber *matchNumber;
     NSString *type;
+    NSString *tournament;
     int teamNumber;
 // DO NOT LEAVE THIS FUNCTION LIKE THIS    
     if (![data count]) return DB_ERROR;
@@ -78,7 +81,7 @@
     matchNumber = [NSNumber numberWithInt:[[data objectAtIndex: 0] intValue]];
     type = @"Seeding";
     // NSLog(@"createMatchFromFile:Match Number = %@", matchNumber);
-    MatchData *match = [self GetMatch:matchNumber forMatchType:type];
+    MatchData *match = [self GetMatch:matchNumber forMatchType:type forTournament:tournament];
     if (match) {
         teamNumber = [[data objectAtIndex: 1] intValue];
 
@@ -185,7 +188,7 @@
     return teamScore;
 }
 
--(MatchData *)GetMatch:(NSNumber *)matchNumber forMatchType:(NSString *) type {
+-(MatchData *)GetMatch:(NSNumber *)matchNumber forMatchType:(NSString *) type forTournament:(NSString *) tournament {
     MatchData *match;
     
 //    NSLog(@"Searching for match = %@", matchNumber);
@@ -196,7 +199,7 @@
     [fetchRequest setEntity:entity];
 
     NSPredicate *predicate = [NSPredicate predicateWithFormat:
-                              @"number == %@ AND matchType == %@", matchNumber, type];
+                              @"number == %@ AND matchType == %@ and tournament CONTAINS %@", matchNumber, type, tournament];
     [fetchRequest setPredicate:predicate];   
 
     NSArray *matchData = [managedObjectContext executeFetchRequest:fetchRequest error:&error];

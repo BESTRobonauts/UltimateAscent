@@ -7,7 +7,28 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TournamentPickerController.h"
 
-@interface TournamentViewController : UIViewController
+@class SettingsData;
+
+@interface TournamentViewController : UIViewController <TournamentPickerDelegate>
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, retain) IBOutlet UIImageView *mainLogo;
+@property (nonatomic, retain) IBOutlet UIImageView *splashPicture;
+@property (nonatomic, retain) IBOutlet UILabel *pictureCaption;
+@property (nonatomic, retain) SettingsData *settings;
+@property (nonatomic, retain) IBOutlet UIButton *allianceButton;
+@property (nonatomic, retain) IBOutlet UIButton *adminButton;
+@property (nonatomic, retain) IBOutlet UIButton *overrideButton;
+@property (nonatomic, retain) IBOutlet UIButton *modeButton;
+@property (nonatomic, retain) IBOutlet UIButton *bluetoothButton;
+
+// Tournamenr Picker
+@property (nonatomic, retain) IBOutlet UIButton *tournamentButton;
+@property (nonatomic, retain) NSMutableArray *tournamentList;
+@property (nonatomic, retain) NSArray *tournamentData;
+@property (nonatomic, retain) TournamentPickerController *tournamentPicker;
+@property (nonatomic, retain) UIPopoverController *tournamentPickerPopover;
+-(IBAction)TournamentSelectionChanged:(id)sender;
 
 @end

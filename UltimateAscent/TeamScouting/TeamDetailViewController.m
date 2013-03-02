@@ -472,9 +472,7 @@
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-	return YES;
+{   return UIInterfaceOrientationIsLandscape(interfaceOrientation);
 }
 
 -(void)SetTextBoxDefaults:(UITextField *)currentTextField {

@@ -15,9 +15,15 @@
 #import "TournamentData.h"
 #import "SettingsData.h"
 #import "DataManager.h"
+#import "MatchTypeDictionary.h"
 #import "parseCSV.h"
 
-@implementation MainScoutingPageViewController
+@implementation MainScoutingPageViewController {
+    MatchTypeDictionary *matchDictionary;
+    NSTimer *climbTimer;
+    int timerCount;
+}
+
 @synthesize managedObjectContext, fetchedResultsController;
 // Data Markers
 @synthesize rowIndex;
@@ -66,6 +72,7 @@
 @synthesize defenseRating;
 @synthesize climbLevel;
 @synthesize attemptedClimb;
+@synthesize climbTimerButton;
 @synthesize notes;
 @synthesize teleOpMissButton;
 @synthesize teleOpHighButton;
@@ -192,6 +199,7 @@
     [self SetBigButtonDefaults:floorPickUpsButton];
     [self SetTextBoxDefaults:redScore];
     [self SetTextBoxDefaults:blueScore];
+    [self SetBigButtonDefaults:climbTimerButton];
     matchResetButton.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:15.0];
     [self SetBigButtonDefaults:teamEdit];
     [teamEdit setTitle:@"Edit Team Info" forState:UIControlStateNormal];
@@ -211,7 +219,8 @@
 
     [self SetBigButtonDefaults:alliance];
     allianceList = [[NSMutableArray alloc] initWithObjects:@"Red 1", @"Red 2", @"Red 3", @"Blue 1", @"Blue 2", @"Blue 3", nil];
-    matchTypeList = [[NSMutableArray alloc] initWithObjects:@"Practice", @"Seeding", @"Elimination", @"Other", @"Testing", nil];
+    matchDictionary = [[MatchTypeDictionary alloc] init];
+    matchTypeList = [[matchDictionary getMatchTypes] copy];
 
     // Drawing Stuff
     scoreList = [[NSMutableArray alloc] initWithObjects:@"Medium", @"High", @"Missed", @"Low", @"Pyramid", nil];
@@ -248,8 +257,7 @@
 		abort();
 	}		
     
-    NSIndexPath *matchIndex = [NSIndexPath indexPathForRow:rowIndex inSection:sectionIndex];
-    currentMatch = [fetchedResultsController objectAtIndexPath:matchIndex];
+    currentMatch = [self getMatchSectionInfo:sectionIndex];
     // NSLog(@"Match = %@, Type = %@, Tournament = %@", currentMatch.number, currentMatch.matchType, currentMatch.tournament);
     // NSLog(@"Settings = %@", settings.tournament.name);
     baseDrawingPath = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"Library/FieldDrawings/%@", settings.tournament.directory]];
@@ -280,6 +288,29 @@
    [self CheckDataStatus];
     //    [delegate scoutingPageStatus:sectionIndex forRow:rowIndex forTeam:teamIndex];
 }    
+
+-(MatchData *)getMatchSectionInfo:(NSUInteger)section {
+    if ([[fetchedResultsController sections] count]) {
+//        NSInteger count = [[[fetchedResultsController sections] objectAtIndex:section] count];
+        NSInteger count = [[[[fetchedResultsController sections] objectAtIndex:section] objects] count];
+        NSLog(@"Matches in section %d", count);
+        NSIndexPath *matchIndex = [NSIndexPath indexPathForRow:rowIndex inSection:section];
+        if (count) {
+            return [fetchedResultsController objectAtIndexPath:matchIndex];
+        }
+        else {
+            return nil;
+        }
+    }
+    else return nil;
+}
+
+-(int)getNumberOfMatches:(NSUInteger)section {
+    if ([[fetchedResultsController sections] count]) {
+        return [[[[fetchedResultsController sections] objectAtIndex:sectionIndex] objects] count];
+    }
+    else return 0;
+}
 
 -(void)CheckDataStatus {
     //    NSLog(@"Check to Save");
@@ -322,12 +353,10 @@
     if (rowIndex > 0) rowIndex--;
     else {
         sectionIndex = [self GetPreviousSection:sectionIndex];
-        rowIndex =  [[[[fetchedResultsController sections] objectAtIndex:sectionIndex] objects] count]-1;
+        rowIndex =  [self getNumberOfMatches:sectionIndex]-1;
     }
     
-    NSIndexPath *matchIndex = [NSIndexPath indexPathForRow:rowIndex inSection:sectionIndex];
-    currentMatch = [fetchedResultsController objectAtIndexPath:matchIndex];
-    
+    currentMatch = [self getMatchSectionInfo:sectionIndex];    
     [self setTeamList];
     [self ShowTeam:teamIndex];
 }
@@ -335,52 +364,53 @@
 -(IBAction)NextButton {
     [self CheckDataStatus];
     int nrows;
-    nrows =  [[[[fetchedResultsController sections] objectAtIndex:sectionIndex] objects] count];
+    nrows =  [self getNumberOfMatches:sectionIndex];
     if (rowIndex < (nrows-1)) rowIndex++;
     else { 
         rowIndex = 0; 
         sectionIndex = [self GetNextSection:sectionIndex];
     }
-    NSIndexPath *matchIndex = [NSIndexPath indexPathForRow:rowIndex inSection:sectionIndex];
-    currentMatch = [fetchedResultsController objectAtIndexPath:matchIndex];
+    currentMatch = [self getMatchSectionInfo:sectionIndex];
     
     [self setTeamList];
     [self ShowTeam:teamIndex];
 }
 
+// Move through the rounds
 -(NSUInteger)GetNextSection:(NSUInteger) currentSection {
     //    NSLog(@"GetNextSection");
+    NSUInteger newSection;
     switch (currentSection) {
-        case 0: currentSection=1; // Elimination to Other
+        case Practice: newSection=Seeding;
             break;
-        case 1: currentSection=4; // Other to Testing
+        case Seeding: newSection=Elimination;
             break;
-        case 2: currentSection=3; // Practice to Seeding
+        case Elimination: newSection=Practice;
             break;
-        case 3: currentSection=0; // Seeding to Elimination
+        case Other: newSection=Testing;
             break;
-        case 4: currentSection=2; // Testing to Practice
+        case Testing: newSection=Other;
             break;
     }
-    return currentSection;
+    return newSection;
 }
 
-// Move through the rounds
 -(NSUInteger)GetPreviousSection:(NSUInteger) currentSection {
     //    NSLog(@"GetPreviousSection");
+    NSUInteger newSection;
     switch (currentSection) {
-        case 0: currentSection=3;  // Elimination to Seeding
+        case Practice: newSection=Testing;
             break;
-        case 1: currentSection=0;  // Other to Elimination
+        case Seeding: newSection=Practice;
             break;
-        case 2: currentSection=4;  // Practice to Testing
+        case Elimination: newSection=Seeding;
             break;
-        case 3: currentSection=2;  // Seeding to Practice
+        case Other: newSection=Testing;
             break;
-        case 4: currentSection=1;  // Testing to Other
+        case Testing: newSection=Other;
             break;
     }
-    return currentSection;
+    return newSection;
 }
 
 -(IBAction)AllianceSelectionChanged:(id)sender {
@@ -432,29 +462,11 @@
     
     for (int i = 0 ; i < [matchTypeList count] ; i++) {
         if ([newMatchType isEqualToString:[matchTypeList objectAtIndex:i]]) {
-            switch (i) {
-                case 0:
-                    sectionIndex = 2;
-                    break;
-                case 1:
-                    sectionIndex = 3;
-                    break;
-                case 2:
-                    sectionIndex = 0;
-                    break;
-                case 3:
-                    sectionIndex = 1;
-                    break;
-                case 4:
-                    sectionIndex = 4;
-                    break;
-            }
+            sectionIndex = i;
             break;
         }
-    }
-    rowIndex = 0;
-    NSIndexPath *matchIndex = [NSIndexPath indexPathForRow:rowIndex inSection:sectionIndex];
-    currentMatch = [fetchedResultsController objectAtIndexPath:matchIndex];
+    }    rowIndex = 0;
+    currentMatch = [self getMatchSectionInfo:sectionIndex];
     [self setTeamList];
     [self ShowTeam:teamIndex];
 }
@@ -505,9 +517,8 @@
         matchField = nmatches;
     }
     rowIndex = matchField-1;
-    NSIndexPath *matchIndex = [NSIndexPath indexPathForRow:rowIndex inSection:sectionIndex];
-    currentMatch = [fetchedResultsController objectAtIndexPath:matchIndex];
-        
+    currentMatch = [self getMatchSectionInfo:sectionIndex];
+    
     [self setTeamList];
     [self ShowTeam:teamIndex];
 }
@@ -594,6 +605,7 @@
 }
 
 // Keeping the score
+
 - (IBAction)scoreButtons:(id)sender {    
     UIButton * PressedButton = (UIButton*)sender;
     
@@ -786,13 +798,15 @@
     dataChange = YES;
 }
 
--(void)wallPickUpsMade {
+-(IBAction)wallPickUpsMade:(id) sender {
     // NSLog(@"PickUps");
-    int score = [wallPickUpsButton.titleLabel.text intValue];
-    score++;
-    currentTeam.wallPickUp = [NSNumber numberWithInt:score];
-    [wallPickUpsButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.wallPickUp intValue]] forState:UIControlStateNormal];
-    dataChange = YES;
+    if (drawMode == DrawAuton || drawMode == DrawDefense || drawMode == DrawTeleop) {
+        int score = [wallPickUpsButton.titleLabel.text intValue];
+        score++;
+        currentTeam.wallPickUp = [NSNumber numberWithInt:score];
+        [wallPickUpsButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.wallPickUp intValue]] forState:UIControlStateNormal];
+        dataChange = YES;
+    }
 }
 
 -(void)floorPickUpsMade {
@@ -802,6 +816,34 @@
     currentTeam.floorPickUp = [NSNumber numberWithInt:score];
     [floorPickUpsButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.floorPickUp intValue]] forState:UIControlStateNormal];
     dataChange = YES;
+}
+
+-(IBAction)climbTimerStart:(id)sender {
+    if (drawMode == DrawAuton || drawMode == DrawDefense || drawMode == DrawTeleop) {
+        dataChange = YES;
+        NSLog(@"Start Timer");
+        if (climbTimer == nil) {
+            climbTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                                        target:self
+                                                        selector:@selector(timerFired)
+                                                        userInfo:nil
+                                                        repeats:YES];
+        }
+        timerCount = 0;
+    }
+}
+
+-(IBAction)climbTimerStop:(id)sender {
+    if (drawMode == DrawAuton || drawMode == DrawDefense || drawMode == DrawTeleop) {
+        NSLog(@"Stop Timer %d", timerCount);
+        int newTimer = [currentTeam.climbTimer intValue] + timerCount;
+        currentTeam.climbTimer = [NSNumber numberWithInt:newTimer];
+        [climbTimerButton setTitle:[NSString stringWithFormat:@"%02d:%02d", newTimer/60, newTimer%60] forState:UIControlStateNormal];
+    }
+}
+
+- (void)timerFired {
+    timerCount++;
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -879,6 +921,12 @@
     defenseRating.value =  [currentTeam.defenseRating floatValue];
     if ([currentTeam.climbAttempt intValue] == 0) [attemptedClimb setOn:NO animated:YES];
     else [attemptedClimb setOn:YES animated:YES];
+
+    
+    double seconds = fmod([currentTeam.climbTimer floatValue], 60.0);
+    double minutes = fmod(trunc([currentTeam.climbTimer floatValue] / 60.0), 60.0);
+    [climbTimerButton setTitle:[NSString stringWithFormat:@"%02.0f:%02.0f", minutes, seconds] forState:UIControlStateNormal];
+
     
     climbLevel.selectedSegmentIndex = [currentTeam.climbLevel intValue];
 
@@ -1373,7 +1421,7 @@
         [fetchRequest setEntity:entity];
         
         // Edit the sort key as appropriate.
-        NSSortDescriptor *typeDescriptor = [[NSSortDescriptor alloc] initWithKey:@"matchType" ascending:YES];
+        NSSortDescriptor *typeDescriptor = [[NSSortDescriptor alloc] initWithKey:@"matchTypeSection" ascending:YES];
         NSSortDescriptor *numberDescriptor = [[NSSortDescriptor alloc] initWithKey:@"number" ascending:YES];
         NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:typeDescriptor, numberDescriptor, nil];
         // Add the search for tournament name
@@ -1387,7 +1435,7 @@
         [[NSFetchedResultsController alloc] 
          initWithFetchRequest:fetchRequest 
          managedObjectContext:managedObjectContext 
-         sectionNameKeyPath:@"matchType" 
+         sectionNameKeyPath:@"matchTypeSection"
          cacheName:@"Root"];
         aFetchedResultsController.delegate = self;
         self.fetchedResultsController = aFetchedResultsController;

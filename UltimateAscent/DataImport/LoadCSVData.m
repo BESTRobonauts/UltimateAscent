@@ -36,8 +36,8 @@
         filePath = [[NSBundle mainBundle] pathForResource:@"MatchList" ofType:@"csv"];  
         [self loadMatchFile:filePath];
 
-        filePath = [[NSBundle mainBundle] pathForResource:@"MatchResults" ofType:@"csv"];  
-        [self loadMatchResults:filePath];
+//        filePath = [[NSBundle mainBundle] pathForResource:@"MatchResults" ofType:@"csv"];
+//        [self loadMatchResults:filePath];
     }
  
 }
@@ -50,7 +50,7 @@
     [self loadSettingsFile:filePath];
     [self loadTeamFile:filePath];
     [self loadMatchFile:filePath];
-    [self loadMatchResults:filePath];
+//    [self loadMatchResults:filePath];
 }
 
 -(void)loadTournamentFile:(NSString *)filePath {

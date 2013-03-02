@@ -48,6 +48,8 @@
 // Match Control
 @property (nonatomic, retain) IBOutlet UIButton *prevMatch;
 @property (nonatomic, retain) IBOutlet UIButton *nextMatch;
+-(MatchData *)getMatchSectionInfo:(NSUInteger)section;
+-(int)getNumberOfMatches:(NSUInteger)section;
 
 // User Access Control
 typedef enum {
@@ -74,13 +76,16 @@ typedef enum {
 @property (nonatomic, retain) UISegmentedControl *climbLevel;
 @property (nonatomic, retain) IBOutlet UITextField *notes;
 @property (nonatomic, retain) IBOutlet UIButton *matchResetButton;
+@property (nonatomic, retain) IBOutlet UIButton *climbTimerButton;
 -(IBAction)matchResetRequest:(id) sender;
 -(void)matchReset;
 -(IBAction)updateDriverRating:(id) sender;
 -(IBAction)updateDefenseRating: (id) sender;
 -(IBAction)toggleForClimbAttempt: (id) sender;
 -(void)setClimbSegment: (id) sender;
-
+-(IBAction)climbTimerStart:(id)sender;
+-(IBAction)climbTimerStop:(id) sender;
+- (void)timerFired;
 
 -(IBAction)scoreButtons: (id)sender;
 @property (nonatomic, retain) IBOutlet UIButton *teleOpMissButton;
@@ -107,7 +112,7 @@ typedef enum {
 -(void)pyramidGoals;
 -(void)blockedShots;
 -(void)passesMade;
--(void)wallPickUpsMade;
+-(IBAction)wallPickUpsMade:(id) sender;
 -(void)floorPickUpsMade;
 
 // Overall Match Scores

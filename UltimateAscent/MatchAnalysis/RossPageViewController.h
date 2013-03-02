@@ -63,7 +63,7 @@
 // Data Handling
 -(void)ShowMatch:(NSIndexPath *)currentMatchIndex;
 -(TeamScore *)GetTeam:(NSUInteger)currentTeamIndex;
--(void)setTeamList;
+-(void)setTeamList:(MatchData *)match;
 
 // Make It Look Good
 -(void)SetTextBoxDefaults:(UITextField *)textField;

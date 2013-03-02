@@ -23,6 +23,7 @@
 		2F30EAE916A100250026B258 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F30EAE816A100250026B258 /* Default-568h@2x.png */; };
 		2F30EAEB16A100850026B258 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F30EAEA16A100850026B258 /* main.m */; };
 		2F30EAEE16A101AB0026B258 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F30EAED16A101AB0026B258 /* AppDelegate.m */; };
+		2F47E38516DFE17400609A3E /* TournamentPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F47E38416DFE17400609A3E /* TournamentPickerController.m */; };
 		2F4C500216BCB2C5004E0059 /* TournamentData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4C500116BCB2C4004E0059 /* TournamentData.m */; };
 		2F4E01EB16BA103E0092DC86 /* CreateTournament.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4E01EA16BA103E0092DC86 /* CreateTournament.m */; };
 		2F4E01EE16BA10560092DC86 /* CreateSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4E01ED16BA10560092DC86 /* CreateSettings.m */; };
@@ -103,6 +104,8 @@
 		2F30EAEA16A100850026B258 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = MainApp/main.m; sourceTree = "<group>"; };
 		2F30EAEC16A101570026B258 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = MainApp/AppDelegate.h; sourceTree = "<group>"; };
 		2F30EAED16A101AB0026B258 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = MainApp/AppDelegate.m; sourceTree = "<group>"; };
+		2F47E38316DFE17300609A3E /* TournamentPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TournamentPickerController.h; path = SetUp/TournamentPickerController.h; sourceTree = "<group>"; };
+		2F47E38416DFE17400609A3E /* TournamentPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TournamentPickerController.m; path = SetUp/TournamentPickerController.m; sourceTree = "<group>"; };
 		2F4C500016BCB2C4004E0059 /* TournamentData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TournamentData.h; path = DataModels/TournamentData.h; sourceTree = "<group>"; };
 		2F4C500116BCB2C4004E0059 /* TournamentData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TournamentData.m; path = DataModels/TournamentData.m; sourceTree = "<group>"; };
 		2F4E01E916BA103E0092DC86 /* CreateTournament.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CreateTournament.h; path = DataModels/CreateTournament.h; sourceTree = "<group>"; };
@@ -420,6 +423,8 @@
 			children = (
 				2FB3A4B616CEC05000E895E5 /* TournamentViewController.h */,
 				2FB3A4B716CEC05000E895E5 /* TournamentViewController.m */,
+				2F47E38316DFE17300609A3E /* TournamentPickerController.h */,
+				2F47E38416DFE17400609A3E /* TournamentPickerController.m */,
 			);
 			name = SetUp;
 			sourceTree = "<group>";
@@ -562,6 +567,7 @@
 				2F0E3A7516D7FB4D00A359D5 /* DefensePickerController.m in Sources */,
 				2F1D99E516DC4D9B00740C6C /* TeamData.m in Sources */,
 				2FC10A7116DD50CF0078D46F /* TeamScore.m in Sources */,
+				2F47E38516DFE17400609A3E /* TournamentPickerController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

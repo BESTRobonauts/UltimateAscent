@@ -74,25 +74,41 @@
     teamLabel.backgroundColor = [UIColor clearColor];
     [headerView addSubview:teamLabel];
 
-	UILabel *orientationLabel = [[UILabel alloc] initWithFrame:CGRectMake(145, 0, 200, 50)];
-	orientationLabel.text = @"Orientation";
-    orientationLabel.backgroundColor = [UIColor clearColor];
-    [headerView addSubview:orientationLabel];
+	UILabel *aveAutonLabel = [[UILabel alloc] initWithFrame:CGRectMake(145, 0, 200, 50)];
+	aveAutonLabel.text = @"Ave. Auton";
+    aveAutonLabel.backgroundColor = [UIColor clearColor];
+    [headerView addSubview:aveAutonLabel];
     
- 	UILabel *balanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(287, 0, 200, 50)];
-	balanceLabel.text = @"Balance";
-    balanceLabel.backgroundColor = [UIColor clearColor];
-    [headerView addSubview:balanceLabel];
+ 	UILabel *aveTeleopLabel = [[UILabel alloc] initWithFrame:CGRectMake(287, 0, 200, 50)];
+	aveTeleopLabel.text = @"Ave. TeleOp";
+    aveTeleopLabel.backgroundColor = [UIColor clearColor];
+    [headerView addSubview:aveTeleopLabel];
     
-	UILabel *modingLabel = [[UILabel alloc] initWithFrame:CGRectMake(422, 0, 200, 50)];
-	modingLabel.text = @"Moding";
-    modingLabel.backgroundColor = [UIColor clearColor];
-    [headerView addSubview:modingLabel];
+	UILabel *aveHangLabel = [[UILabel alloc] initWithFrame:CGRectMake(422, 0, 200, 50)];
+	aveHangLabel.text = @"Ave. Hang";
+    aveHangLabel.backgroundColor = [UIColor clearColor];
+    [headerView addSubview:aveHangLabel];
+    
+	UILabel *speedLabel = [[UILabel alloc] initWithFrame:CGRectMake(542, 0, 200, 50)];
+	speedLabel.text = @"Speed";
+    speedLabel.backgroundColor = [UIColor clearColor];
+    [headerView addSubview:speedLabel];
+    
+    UILabel *driveLabel = [[UILabel alloc] initWithFrame:CGRectMake(542, 0, 200, 50)];
+	driveLabel.text = @"Drive";
+    driveLabel.backgroundColor = [UIColor clearColor];
+    [headerView addSubview:driveLabel];
+    
+    UILabel *defenceLabel = [[UILabel alloc] initWithFrame:CGRectMake(542, 0, 200, 50)];
+	defenceLabel.text = @"Defence";
+    defenceLabel.backgroundColor = [UIColor clearColor];
+    [headerView addSubview:defenceLabel];
+    
+    UILabel *minHeightLabel = [[UILabel alloc] initWithFrame:CGRectMake(542, 0, 200, 50)];
+	minHeightLabel.text = @"Minimum Height";
+    minHeightLabel.backgroundColor = [UIColor clearColor];
+    [headerView addSubview:minHeightLabel];
 
-	UILabel *brakesLabel = [[UILabel alloc] initWithFrame:CGRectMake(542, 0, 200, 50)];
-	brakesLabel.text = @"Brakes";
-    brakesLabel.backgroundColor = [UIColor clearColor];
-    [headerView addSubview:brakesLabel];
     [super viewDidLoad];
 
     // Uncomment the following line to preserve selection between presentations.
