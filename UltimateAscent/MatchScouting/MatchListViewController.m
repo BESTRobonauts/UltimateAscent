@@ -66,7 +66,7 @@
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
-    
+        
     headerView = [[UIView alloc] initWithFrame:CGRectMake(0,0,768,50)];
     headerView.backgroundColor = [UIColor lightGrayColor];
     headerView.opaque = YES;
@@ -189,7 +189,7 @@
         }
     }
 }
-
+/*
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     NSIndexPath *indexPath = [ self.tableView indexPathForCell:sender];
@@ -197,7 +197,7 @@
     MatchDetailViewController *detailViewController = [segue destinationViewController];
     detailViewController.match = [fetchedResultsController objectAtIndexPath:indexPath];
 }
-
+*/
 #pragma mark - Table view data source
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {

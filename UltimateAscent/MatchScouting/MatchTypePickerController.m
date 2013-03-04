@@ -11,6 +11,7 @@
 @implementation MatchTypePickerController
 @synthesize matchTypeChoices;
 @synthesize delegate;
+@synthesize senderID = _senderID;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -112,6 +113,12 @@
     if (delegate != nil) {
         NSString *newMatchType= [matchTypeChoices objectAtIndex:indexPath.row];
         [delegate matchTypeSelected:newMatchType];
+    }
+
+    if ([_senderID isEqual: @"addMatch"]) {
+        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"cellSelected" object:nil userInfo:[NSDictionary dictionaryWithObject:[matchTypeChoices objectAtIndex:indexPath.row] forKey:@"selectedChoice"]]];
+        [[tableView cellForRowAtIndexPath:indexPath] setAccessoryType:UITableViewCellAccessoryCheckmark];
+        [[tableView cellForRowAtIndexPath:indexPath] setHighlighted:NO animated:YES];
     }
 }
 

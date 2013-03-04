@@ -15,5 +15,6 @@
 @interface MatchTypePickerController : UITableViewController
 @property (nonatomic, retain) NSMutableArray *matchTypeChoices;
 @property (nonatomic, assign) id<MatchTypePickerDelegate> delegate;
+@property (nonatomic, strong) NSString *senderID;
 
 @end

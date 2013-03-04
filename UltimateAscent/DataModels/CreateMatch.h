@@ -16,6 +16,7 @@
 
 @interface CreateMatch : NSObject
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong) TournamentData *tournamentRecord;
 -(AddRecordResults)createMatchFromFile:(NSMutableArray *)headers dataFields:(NSMutableArray *)data;
 -(AddRecordResults)addMatchResultsFromFile:(NSMutableArray *)headers dataFields:(NSMutableArray *)data;
 -(MatchData *)GetMatch:(NSNumber *)matchNumber forMatchType:(NSString *) type forTournament:(NSString *) tournament;

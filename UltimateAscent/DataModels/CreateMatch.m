@@ -20,7 +20,7 @@
 }
 
 @synthesize managedObjectContext;
-
+@synthesize tournamentRecord;
 
 -(AddRecordResults)createMatchFromFile:(NSMutableArray *)headers dataFields:(NSMutableArray *)data {
     NSNumber *matchNumber;
@@ -37,6 +37,7 @@
     matchNumber = [NSNumber numberWithInt:[[data objectAtIndex: 0] intValue]];
     type = [data objectAtIndex:7];
     tournament = [data objectAtIndex:8];
+    tournamentRecord = [self getTournamentRecord:tournament];
     // NSLog(@"createMatchFromFile:Match Number = %@", matchNumber);
     MatchData *match = [self GetMatch:matchNumber forMatchType:type forTournament:tournament];
     if (match) {
@@ -176,6 +177,7 @@
                                                          inManagedObjectContext:managedObjectContext];
     [teamScore setAlliance:alliance];
     [teamScore setTeam:[self GetTeam:teamNumber]]; // Set Relationship!!!
+    [teamScore setTournament:tournamentRecord]; // Set Relationship!!!
     // NSLog(@"   For Team = %@", teamScore.team);
 /*    if (!teamScore.teamInfo) {
         teamScore.teamInfo = [NSEntityDescription insertNewObjectForEntityForName:@"TeamData" 
