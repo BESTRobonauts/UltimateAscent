@@ -11,12 +11,14 @@
 
 @class MatchData;
 @class TeamScore;
+@class TeamData;
 @class SettingsData;
 
 @interface RossPageViewController : UIViewController <NSFetchedResultsControllerDelegate, UITextFieldDelegate, MatchTypePickerDelegate>
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain) SettingsData *settings;
+@property (nonatomic, assign) MatchType currentSectionType;
 @property (nonatomic, assign) NSUInteger sectionIndex;
 @property (nonatomic, assign) NSUInteger rowIndex;
 @property (nonatomic, assign) NSUInteger teamIndex;
@@ -32,8 +34,11 @@
 -(IBAction)OurNextButton;
 -(IBAction)OurPrevButton;
 -(IBAction)NextButton;
--(NSUInteger)GetNextSection:(NSUInteger) currentSection;
+-(NSUInteger)GetNextSection:(MatchType) currentSection;
 -(NSUInteger)GetPreviousSection:(NSUInteger) currentSection;
+-(int)getNumberOfMatches:(NSUInteger)section;
+-(MatchData *)getCurrentMatch;
+-(NSMutableArray *)getMatchTypeList;
 
 // Match Number
 @property (nonatomic, retain) IBOutlet UITextField *matchNumber;
@@ -59,11 +64,12 @@
 @property (nonatomic, retain) IBOutlet UIButton *blue1;
 @property (nonatomic, retain) IBOutlet UIButton *blue2;
 @property (nonatomic, retain) IBOutlet UIButton *blue3;
+-(TeamScore *)GetTeam:(NSUInteger)currentTeamIndex;
+
 
 // Data Handling
--(void)ShowMatch:(NSIndexPath *)currentMatchIndex;
--(TeamScore *)GetTeam:(NSUInteger)currentTeamIndex;
--(void)setTeamList:(MatchData *)match;
+-(void)ShowMatch;
+-(void)setTeamList;
 
 // Make It Look Good
 -(void)SetTextBoxDefaults:(UITextField *)textField;

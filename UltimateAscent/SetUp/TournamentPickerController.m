@@ -27,10 +27,11 @@
 
 - (void)viewDidLoad
 {
+    CGFloat height;
     [super viewDidLoad];
-
+    height = [tournamentChoices count] * 44;
     self.clearsSelectionOnViewWillAppear = YES;
-    self.contentSizeForViewInPopover = CGSizeMake(150.0, 280.0);
+    self.contentSizeForViewInPopover = CGSizeMake(250.0, height);
  }
 
 - (void)didReceiveMemoryWarning
@@ -56,7 +57,10 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
     
     // Configure the cell...
     NSString *tournament = [tournamentChoices objectAtIndex:indexPath.row];

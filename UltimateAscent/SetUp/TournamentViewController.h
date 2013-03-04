@@ -22,8 +22,8 @@
 @property (nonatomic, retain) IBOutlet UIButton *overrideButton;
 @property (nonatomic, retain) IBOutlet UIButton *modeButton;
 @property (nonatomic, retain) IBOutlet UIButton *bluetoothButton;
-
-// Tournamenr Picker
+@property (nonatomic, strong) IBOutlet UILabel *tournamentLabel;
+// Tournament Picker
 @property (nonatomic, retain) IBOutlet UIButton *tournamentButton;
 @property (nonatomic, retain) NSMutableArray *tournamentList;
 @property (nonatomic, retain) NSArray *tournamentData;

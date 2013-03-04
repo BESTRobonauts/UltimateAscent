@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1811" systemVersion="12C2034" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2057" systemVersion="12C2034" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="MatchData" representedClassName="MatchData" syncable="YES">
         <attribute name="blueScore" optional="YES" attributeType="Integer 16" maxValueString="250" defaultValueString="-1" syncable="YES"/>
         <attribute name="matchType" optional="YES" attributeType="String" maxValueString="100" defaultValueString="Seeding" syncable="YES"/>
@@ -77,7 +77,7 @@
     <elements>
         <element name="MatchData" positionX="27" positionY="33" width="128" height="150"/>
         <element name="SettingsData" positionX="18" positionY="-144" width="128" height="120"/>
-        <element name="TeamData" positionX="432" positionY="24" width="128" height="300"/>
+        <element name="TeamData" positionX="432" positionY="24" width="128" height="315"/>
         <element name="TeamScore" positionX="207" positionY="-180" width="128" height="495"/>
         <element name="TournamentData" positionX="205" positionY="152" width="128" height="120"/>
     </elements>

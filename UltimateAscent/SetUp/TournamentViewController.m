@@ -21,6 +21,7 @@
 @synthesize settings;
 // Tournament Picking
 @synthesize tournamentData;
+@synthesize tournamentLabel;
 @synthesize tournamentButton;
 @synthesize tournamentPicker;
 @synthesize tournamentList;
@@ -63,7 +64,7 @@
     [exportDataButton setTitle:@"Export Data" forState:UIControlStateNormal];
     exportDataButton.titleLabel.font = [UIFont fontWithName:@"Nasalization" size:36.0];*/
     self.title = @"iPad Set-Up Page";
-/*
+
     if (!managedObjectContext) {
         DataManager *dataManager = [DataManager new];
         managedObjectContext = [dataManager managedObjectContext];
@@ -86,12 +87,14 @@
         }
         else {
             settings = [settingsRecord objectAtIndex:0];
+            [tournamentButton setTitle:settings.tournament.name forState:UIControlStateNormal];
        }
     }
+
     // Set Font and Text for Tournament Set-Up Button
     [tournamentButton setTitle:settings.tournament.name forState:UIControlStateNormal];
-    tournamentButton.titleLabel.font = [UIFont fontWithName:@"Nasalization" size:36.0];
-  
+    tournamentButton.titleLabel.font = [UIFont fontWithName:@"Nasalization" size:18.0];
+
     entity = [NSEntityDescription entityForName:@"TournamentData" inManagedObjectContext:managedObjectContext];
     [fetchRequest setEntity:entity];
     NSSortDescriptor *tournamentSort = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
@@ -99,15 +102,18 @@
     tournamentData = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
     if(!tournamentData) {
         NSLog(@"Karma disruption error");
+        tournamentList = nil;
     }
     else {
-        if([tournamentData count] > 0) {  // Tournaments Exists
-            tournament = [tournamentData objectAtIndex:0];
-            // NSLog(@"Tournament %@ exists", tournament.name);
+        TournamentData *t;
+        self.tournamentList = [NSMutableArray array];
+        for (int i=0; i < [tournamentData count]; i++) {
+            t = [tournamentData objectAtIndex:i];
+            NSLog(@"Tournament %@ exists", t.name);
+            [tournamentList addObject:t.name];
         }
-        else {
-        }
-    }*/
+    }
+    NSLog(@"Tournament List = %@", tournamentList);
 }
 
 -(IBAction)TournamentSelectionChanged:(id)sender {
@@ -129,10 +135,16 @@
     for (int i = 0 ; i < [tournamentList count] ; i++) {
         if ([newTournament isEqualToString:[tournamentList objectAtIndex:i]]) {
             [tournamentButton setTitle:newTournament forState:UIControlStateNormal];
+            settings.tournament = [tournamentData objectAtIndex:i];
+            NSError *error;
+            if (![managedObjectContext save:&error]) {
+                NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+            }
             break;
         }
     }
 }
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     switch (interfaceOrientation) {
@@ -140,7 +152,8 @@
         case UIInterfaceOrientationPortraitUpsideDown:
             mainLogo.frame = CGRectMake(-20, 0, 285, 960);
             [mainLogo setImage:[UIImage imageNamed:@"robonauts app banner.jpg"]];
-//            tournamentSetUpButton.frame = CGRectMake(325, 125, 400, 68);
+            tournamentLabel.frame = CGRectMake(340, 85, 144, 21);
+            tournamentButton.frame = CGRectMake(530, 73, 208, 44);
 //            matchSetUpButton.frame = CGRectMake(325, 225, 400, 68);
 //            importDataButton.frame = CGRectMake(325, 325, 400, 68);
 //            exportDataButton.frame = CGRectMake(325, 425, 400, 68);
@@ -151,7 +164,8 @@
         case UIInterfaceOrientationLandscapeRight:
             mainLogo.frame = CGRectMake(0, -60, 1024, 255);
             [mainLogo setImage:[UIImage imageNamed:@"robonauts app banner original.jpg"]];
-//            tournamentSetUpButton.frame = CGRectMake(550, 225, 400, 68);
+            tournamentLabel.frame = CGRectMake(540, 255, 144, 21);
+            tournamentButton.frame = CGRectMake(730, 243, 208, 44);
 //            matchSetUpButton.frame = CGRectMake(550, 325, 400, 68);
 //            importDataButton.frame = CGRectMake(550, 425, 400, 68);
 //            exportDataButton.frame = CGRectMake(550, 525, 400, 68);
@@ -161,7 +175,7 @@
         default:
             break;
     }
-    // Return YES for supported orientations
+    // Return YES for supported orientations 
 	return YES;
 }
 

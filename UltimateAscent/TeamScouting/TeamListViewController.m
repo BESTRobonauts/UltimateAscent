@@ -211,7 +211,7 @@
     cell.backgroundView = imageView;
     
 	UILabel *numberLabel = (UILabel *)[cell viewWithTag:10];
-	numberLabel.text = [NSString stringWithFormat:@"%d", [info.number intValue]];;
+	numberLabel.text = [NSString stringWithFormat:@"%d", [info.number intValue]];
     
 	UILabel *orientationLabel = (UILabel *)[cell viewWithTag:20];
     int number = 0;//[info.orientation intValue];

@@ -11,8 +11,6 @@
 @class MatchData;
 @class TeamScore;
 @class TeamData;
-@class SpecificGameData;
-@class EndGameData;
 
 @interface MatchDetailViewController : UIViewController <UITextFieldDelegate> 
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
@@ -32,7 +30,5 @@
 
 -(TeamScore *)EditTeam:(int)teamNumber;
 -(TeamData *)GetTeam:(int)teamNumber;
--(SpecificGameData *)CreateGameData;
--(EndGameData *)CreateEndGameData;
 
 @end

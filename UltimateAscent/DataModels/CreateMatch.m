@@ -138,7 +138,7 @@
                                       forTeam4:(NSNumber *)blue1 
                                       forTeam5:(NSNumber *)blue2 
                                       forTeam6:(NSNumber *)blue3 
-                                      forMatch:(NSString *)matchType 
+                                      forMatch:(NSString *)matchType
                                       forTournament:(NSString *)tournament 
                                       forRedScore:(NSNumber *)redScore
                                       forBlueScore:(NSNumber *)blueScore {
@@ -161,17 +161,16 @@
     [match addScoreObject:[self CreateScore:red3 forAlliance:@"Red 3"]];
     [match addScoreObject:[self CreateScore:blue1 forAlliance:@"Blue 1"]];
     [match addScoreObject:[self CreateScore:blue2 forAlliance:@"Blue 2"]];
-    [match addScoreObject:[self CreateScore:blue3 forAlliance:@"Blue 3"]]; 
+    [match addScoreObject:[self CreateScore:blue3 forAlliance:@"Blue 3"]];
     match.tournament = tournament;
     match.redScore = redScore;
     match.blueScore = blueScore;
 //    NSLog(@"Adding New Match = %@, Tournament = %@, Type = %@, Section = %@", match.number, match.tournament, match.matchType, match.matchTypeSection);
 //  NSLog(@" Tournament = %@", match.tournament);
-//  NSLog(@"   Team Score = %@", match.score);
+// NSLog(@"   Team Score = %@", match.score);
 }
 
 -(TeamScore *)CreateScore:(NSNumber *)teamNumber forAlliance:(NSString *)alliance { 
-    // if ([teamNumber intValue] == 0) return 0;
 
     TeamScore *teamScore = [NSEntityDescription insertNewObjectForEntityForName:@"TeamScore"
                                                          inManagedObjectContext:managedObjectContext];
