@@ -63,6 +63,10 @@
         <attribute name="totalAutonShots" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="totalTeleOpShots" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="wallPickUp" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="wallPickUp1" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="wallPickUp2" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="wallPickUp3" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="wallPickUp4" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="match" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MatchData" inverseName="score" inverseEntity="MatchData" syncable="YES"/>
         <relationship name="team" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="TeamData" inverseName="match" inverseEntity="TeamData" syncable="YES"/>
         <relationship name="tournament" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="TournamentData" inverseName="score" inverseEntity="TournamentData" syncable="YES"/>
@@ -78,7 +82,7 @@
         <element name="MatchData" positionX="27" positionY="33" width="128" height="150"/>
         <element name="SettingsData" positionX="18" positionY="-144" width="128" height="120"/>
         <element name="TeamData" positionX="432" positionY="24" width="128" height="315"/>
-        <element name="TeamScore" positionX="207" positionY="-180" width="128" height="495"/>
+        <element name="TeamScore" positionX="198" positionY="-432" width="128" height="555"/>
         <element name="TournamentData" positionX="205" positionY="152" width="128" height="120"/>
     </elements>
 </model>

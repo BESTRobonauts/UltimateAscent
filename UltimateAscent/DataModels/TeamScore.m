@@ -2,7 +2,7 @@
 //  TeamScore.m
 //  UltimateAscent
 //
-//  Created by FRC on 2/26/13.
+//  Created by FRC on 3/5/13.
 //  Copyright (c) 2013 FRC. All rights reserved.
 //
 
@@ -21,8 +21,8 @@
 @dynamic autonMissed;
 @dynamic autonShotsMade;
 @dynamic blocks;
-@dynamic climbLevel;
 @dynamic climbAttempt;
+@dynamic climbLevel;
 @dynamic climbTimer;
 @dynamic defenseRating;
 @dynamic driverRating;
@@ -41,6 +41,10 @@
 @dynamic totalAutonShots;
 @dynamic totalTeleOpShots;
 @dynamic wallPickUp;
+@dynamic wallPickUp1;
+@dynamic wallPickUp2;
+@dynamic wallPickUp3;
+@dynamic wallPickUp4;
 @dynamic match;
 @dynamic team;
 @dynamic tournament;

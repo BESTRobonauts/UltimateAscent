@@ -74,37 +74,37 @@
     teamLabel.backgroundColor = [UIColor clearColor];
     [headerView addSubview:teamLabel];
 
-	UILabel *aveAutonLabel = [[UILabel alloc] initWithFrame:CGRectMake(145, 0, 200, 50)];
+	UILabel *aveAutonLabel = [[UILabel alloc] initWithFrame:CGRectMake(155, 0, 200, 50)];
 	aveAutonLabel.text = @"Ave. Auton";
     aveAutonLabel.backgroundColor = [UIColor clearColor];
     [headerView addSubview:aveAutonLabel];
     
- 	UILabel *aveTeleopLabel = [[UILabel alloc] initWithFrame:CGRectMake(287, 0, 200, 50)];
+ 	UILabel *aveTeleopLabel = [[UILabel alloc] initWithFrame:CGRectMake(277, 0, 200, 50)];
 	aveTeleopLabel.text = @"Ave. TeleOp";
     aveTeleopLabel.backgroundColor = [UIColor clearColor];
     [headerView addSubview:aveTeleopLabel];
     
-	UILabel *aveHangLabel = [[UILabel alloc] initWithFrame:CGRectMake(422, 0, 200, 50)];
+	UILabel *aveHangLabel = [[UILabel alloc] initWithFrame:CGRectMake(400, 0, 200, 50)];
 	aveHangLabel.text = @"Ave. Hang";
     aveHangLabel.backgroundColor = [UIColor clearColor];
     [headerView addSubview:aveHangLabel];
     
-	UILabel *speedLabel = [[UILabel alloc] initWithFrame:CGRectMake(542, 0, 200, 50)];
+	UILabel *speedLabel = [[UILabel alloc] initWithFrame:CGRectMake(525, 0, 200, 50)];
 	speedLabel.text = @"Speed";
     speedLabel.backgroundColor = [UIColor clearColor];
     [headerView addSubview:speedLabel];
     
-    UILabel *driveLabel = [[UILabel alloc] initWithFrame:CGRectMake(542, 0, 200, 50)];
+    UILabel *driveLabel = [[UILabel alloc] initWithFrame:CGRectMake(620, 0, 200, 50)];
 	driveLabel.text = @"Drive";
     driveLabel.backgroundColor = [UIColor clearColor];
     [headerView addSubview:driveLabel];
     
-    UILabel *defenceLabel = [[UILabel alloc] initWithFrame:CGRectMake(542, 0, 200, 50)];
-	defenceLabel.text = @"Defence";
-    defenceLabel.backgroundColor = [UIColor clearColor];
-    [headerView addSubview:defenceLabel];
+    UILabel *defenseLabel = [[UILabel alloc] initWithFrame:CGRectMake(699, 0, 200, 50)];
+	defenseLabel.text = @"Defense";
+    defenseLabel.backgroundColor = [UIColor clearColor];
+    [headerView addSubview:defenseLabel];
     
-    UILabel *minHeightLabel = [[UILabel alloc] initWithFrame:CGRectMake(542, 0, 200, 50)];
+    UILabel *minHeightLabel = [[UILabel alloc] initWithFrame:CGRectMake(799, 0, 200, 50)];
 	minHeightLabel.text = @"Minimum Height";
     minHeightLabel.backgroundColor = [UIColor clearColor];
     [headerView addSubview:minHeightLabel];
@@ -248,7 +248,22 @@
         case 1: brakesLabel.text = @"Yes"; break;
         default: brakesLabel.text = @""; break;
     }
+    UILabel *driveLabel = (UILabel *)[cell viewWithTag:70];
+    number = [info.driveTrainType intValue];
+    switch (number) {
+        case 0: driveLabel.text = @"Mech"; break;
+        case 1: driveLabel.text = @"Omni"; break;
+        case 2: driveLabel.text = @"Swerve"; break;
+        case 3: driveLabel.text = @"Tank"; break;
+        case 4: driveLabel.text = @"Multi"; break;
+        default: driveLabel.text = @""; break;
+    }
     
+    UILabel *defenseLabel = (UILabel *)[cell viewWithTag:80];
+
+    UILabel *heightLabel = (UILabel *)[cell viewWithTag:90];
+    heightLabel.text = [NSString stringWithFormat:@"%.1f", [info.minHeight floatValue]];
+
     UILabel *nameLabel = (UILabel *)[cell viewWithTag:60];
     nameLabel.text = info.name;
     

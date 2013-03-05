@@ -2,7 +2,7 @@
 //  TeamScore.h
 //  UltimateAscent
 //
-//  Created by FRC on 2/26/13.
+//  Created by FRC on 3/5/13.
 //  Copyright (c) 2013 FRC. All rights reserved.
 //
 
@@ -20,8 +20,8 @@
 @property (nonatomic, retain) NSNumber * autonMissed;
 @property (nonatomic, retain) NSNumber * autonShotsMade;
 @property (nonatomic, retain) NSNumber * blocks;
-@property (nonatomic, retain) NSNumber * climbLevel;
 @property (nonatomic, retain) NSNumber * climbAttempt;
+@property (nonatomic, retain) NSNumber * climbLevel;
 @property (nonatomic, retain) NSNumber * climbTimer;
 @property (nonatomic, retain) NSNumber * defenseRating;
 @property (nonatomic, retain) NSNumber * driverRating;
@@ -40,6 +40,10 @@
 @property (nonatomic, retain) NSNumber * totalAutonShots;
 @property (nonatomic, retain) NSNumber * totalTeleOpShots;
 @property (nonatomic, retain) NSNumber * wallPickUp;
+@property (nonatomic, retain) NSNumber * wallPickUp1;
+@property (nonatomic, retain) NSNumber * wallPickUp2;
+@property (nonatomic, retain) NSNumber * wallPickUp3;
+@property (nonatomic, retain) NSNumber * wallPickUp4;
 @property (nonatomic, retain) MatchData *match;
 @property (nonatomic, retain) TeamData *team;
 @property (nonatomic, retain) TournamentData *tournament;

@@ -101,6 +101,10 @@ typedef enum {
 @property (nonatomic, retain) IBOutlet UIButton *blocksButton;
 @property (nonatomic, retain) IBOutlet UIButton *wallPickUpsButton;
 @property (nonatomic, retain) IBOutlet UIButton *floorPickUpsButton;
+@property (nonatomic, retain) IBOutlet UIButton *wall1Button;
+@property (nonatomic, retain) IBOutlet UIButton *wall2Button;
+@property (nonatomic, retain) IBOutlet UIButton *wall3Button;
+@property (nonatomic, retain) IBOutlet UIButton *wall4Button;
 -(void)teleOpMiss;
 -(void)teleOpHigh;
 -(void)teleOpMedium;

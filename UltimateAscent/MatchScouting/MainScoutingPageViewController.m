@@ -86,6 +86,10 @@
 @synthesize blocksButton;
 @synthesize passesButton;
 @synthesize wallPickUpsButton;
+@synthesize wall1Button;
+@synthesize wall2Button;
+@synthesize wall3Button;
+@synthesize wall4Button;
 @synthesize floorPickUpsButton;
 @synthesize matchResetButton;
 
@@ -196,6 +200,10 @@
     [self SetBigButtonDefaults:passesButton];
     [self SetBigButtonDefaults:blocksButton];
     [self SetBigButtonDefaults:wallPickUpsButton];
+    [self SetSmallButtonDefaults:wall1Button];
+    [self SetSmallButtonDefaults:wall2Button];
+    [self SetSmallButtonDefaults:wall3Button];
+    [self SetSmallButtonDefaults:wall4Button];
     [self SetBigButtonDefaults:floorPickUpsButton];
     [self SetTextBoxDefaults:redScore];
     [self SetTextBoxDefaults:blueScore];
@@ -799,13 +807,35 @@
 }
 
 -(IBAction)wallPickUpsMade:(id) sender {
-    // NSLog(@"PickUps");
+    UIButton * PressedButton = (UIButton*)sender;
+   // NSLog(@"PickUps");
     if (drawMode == DrawAuton || drawMode == DrawDefense || drawMode == DrawTeleop) {
         int score = [wallPickUpsButton.titleLabel.text intValue];
         score++;
         currentTeam.wallPickUp = [NSNumber numberWithInt:score];
         [wallPickUpsButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.wallPickUp intValue]] forState:UIControlStateNormal];
         dataChange = YES;
+        if (PressedButton == wall1Button) {
+            score = [wall1Button.titleLabel.text intValue];
+            score++;
+            currentTeam.wallPickUp1 = [NSNumber numberWithInt:score];
+            [wall1Button setTitle:[NSString stringWithFormat:@"%d", [currentTeam.wallPickUp1 intValue]] forState:UIControlStateNormal];
+        } else if (PressedButton == wall2Button) {
+            score = [wall2Button.titleLabel.text intValue];
+            score++;
+            currentTeam.wallPickUp2 = [NSNumber numberWithInt:score];
+            [wall2Button setTitle:[NSString stringWithFormat:@"%d", [currentTeam.wallPickUp2 intValue]] forState:UIControlStateNormal];
+        } else if (PressedButton == wall3Button) {
+            score = [wall3Button.titleLabel.text intValue];
+            score++;
+            currentTeam.wallPickUp3 = [NSNumber numberWithInt:score];
+            [wall3Button setTitle:[NSString stringWithFormat:@"%d", [currentTeam.wallPickUp3 intValue]] forState:UIControlStateNormal];
+        } else if (PressedButton == wall4Button) {
+            score = [wall4Button.titleLabel.text intValue];
+            score++;
+            currentTeam.wallPickUp4 = [NSNumber numberWithInt:score];
+            [wall4Button setTitle:[NSString stringWithFormat:@"%d", [currentTeam.wallPickUp4 intValue]] forState:UIControlStateNormal];
+        }
     }
 }
 
@@ -945,6 +975,10 @@
     [blocksButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.blocks intValue]] forState:UIControlStateNormal];
     [passesButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.passes intValue]] forState:UIControlStateNormal];
     [wallPickUpsButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.wallPickUp intValue]] forState:UIControlStateNormal];
+    [wall1Button setTitle:[NSString stringWithFormat:@"%d", [currentTeam.wallPickUp1 intValue]] forState:UIControlStateNormal];
+    [wall2Button setTitle:[NSString stringWithFormat:@"%d", [currentTeam.wallPickUp2 intValue]] forState:UIControlStateNormal];
+    [wall3Button setTitle:[NSString stringWithFormat:@"%d", [currentTeam.wallPickUp3 intValue]] forState:UIControlStateNormal];
+    [wall4Button setTitle:[NSString stringWithFormat:@"%d", [currentTeam.wallPickUp4 intValue]] forState:UIControlStateNormal];
     [floorPickUpsButton setTitle:[NSString stringWithFormat:@"%d", [currentTeam.floorPickUp intValue]] forState:UIControlStateNormal];
 
     // NSLog(@"Load the Picture");
@@ -1358,6 +1392,10 @@
     currentTeam.passes = [NSNumber numberWithInt:0];
     currentTeam.blocks = [NSNumber numberWithInt:0];
     currentTeam.wallPickUp = [NSNumber numberWithInt:0];
+    currentTeam.wallPickUp1 = [NSNumber numberWithInt:0];
+    currentTeam.wallPickUp2 = [NSNumber numberWithInt:0];
+    currentTeam.wallPickUp3 = [NSNumber numberWithInt:0];
+    currentTeam.wallPickUp4 = [NSNumber numberWithInt:0];
     currentTeam.floorPickUp = [NSNumber numberWithInt:0];
     currentTeam.driverRating = [NSNumber numberWithInt:0];
     currentTeam.notes = @"";
