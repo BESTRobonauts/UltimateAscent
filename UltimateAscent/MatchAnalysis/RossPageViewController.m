@@ -137,7 +137,6 @@
     for (int i=0; i < [[fetchedResultsController sections] count]; i++) {
         sectionName = [[[fetchedResultsController sections] objectAtIndex:i] name];
         if ([sectionName intValue] == matchSection) {
-//            if ([sectionName isEqualToString:[matchDictionary getMatchTypeString:[NSNumber numberWithInt:matchSection]]]) {
             sectionIndex = i;
             break;
         }
@@ -155,7 +154,7 @@
 -(IBAction)PrevButton {
     if (rowIndex > 0) rowIndex--;
     else {
-        sectionIndex = [self GetPreviousSection:sectionIndex];
+        sectionIndex = [self GetPreviousSection:currentSectionType];
         rowIndex =  [[[[fetchedResultsController sections] objectAtIndex:sectionIndex] objects] count]-1;
     }
     [self ShowMatch];

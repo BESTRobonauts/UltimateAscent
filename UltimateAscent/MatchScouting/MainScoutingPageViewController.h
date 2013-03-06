@@ -35,6 +35,7 @@
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain) SettingsData *settings;
+@property (nonatomic, assign) MatchType currentSectionType;
 @property (nonatomic, assign) NSUInteger sectionIndex;
 @property (nonatomic, assign) NSUInteger rowIndex;
 @property (nonatomic, assign) NSUInteger teamIndex;
@@ -48,8 +49,9 @@
 // Match Control
 @property (nonatomic, retain) IBOutlet UIButton *prevMatch;
 @property (nonatomic, retain) IBOutlet UIButton *nextMatch;
--(MatchData *)getMatchSectionInfo:(NSUInteger)section;
+-(NSUInteger)getMatchSectionInfo:(MatchType)matchSection;
 -(int)getNumberOfMatches:(NSUInteger)section;
+-(MatchData *)getCurrentMatch;
 
 // User Access Control
 typedef enum {
@@ -64,7 +66,7 @@ typedef enum {
 
 -(IBAction)PrevButton;
 -(IBAction)NextButton;
--(NSUInteger)GetNextSection:(NSUInteger) currentSection;
+-(NSUInteger)GetNextSection:(MatchType) currentSection;
 -(NSUInteger)GetPreviousSection:(NSUInteger) currentSection;
 - (void)retrieveSettings;
 
@@ -133,6 +135,7 @@ typedef enum {
 @property (nonatomic, retain) MatchTypePickerController *matchTypePicker;
 @property (nonatomic, retain) UIPopoverController *matchTypePickerPopover;
 -(IBAction)MatchTypeSelectionChanged:(id)sender;
+-(NSMutableArray *)getMatchTypeList;
 
 // Alliance Picker
 @property (nonatomic, retain) IBOutlet UIButton *alliance;

@@ -20,12 +20,14 @@
 
 @implementation MainScoutingPageViewController {
     MatchTypeDictionary *matchDictionary;
+    int numberMatchTypes;
     NSTimer *climbTimer;
     int timerCount;
 }
 
 @synthesize managedObjectContext, fetchedResultsController;
 // Data Markers
+@synthesize currentSectionType;
 @synthesize rowIndex;
 @synthesize sectionIndex;
 @synthesize teamIndex;
@@ -163,24 +165,41 @@
         abort();
     }		
 
-    // Temporary method to save the data markers
-    storePath = [[self applicationDocumentsDirectory] stringByAppendingPathComponent: @"dataMarker.csv"];
-    fileManager = [NSFileManager defaultManager];
-    if (![fileManager fileExistsAtPath:storePath]) {
-        // Loading Default Data Markers
-        rowIndex = 0;
-        sectionIndex = 2;
-        teamIndex = 0;
+    // Set the list of match types
+    matchDictionary = [[MatchTypeDictionary alloc] init];    
+    matchTypeList = [self getMatchTypeList];
+    numberMatchTypes = [matchTypeList count];
+    NSLog(@"Match Type List Count = %@", matchTypeList);
+
+    // If there are no matches in any section then don't set this stuff. ShowMatch will set currentMatch to
+    // nil, printing out blank info in all the display items.
+    if (numberMatchTypes) {
+        // Temporary method to save the data markers
+        storePath = [[self applicationDocumentsDirectory] stringByAppendingPathComponent: @"dataMarker.csv"];
+        fileManager = [NSFileManager defaultManager];
+        if (![fileManager fileExistsAtPath:storePath]) {
+            // Loading Default Data Markers
+            currentSectionType = [[matchDictionary getMatchTypeEnum:[matchTypeList objectAtIndex:0]] intValue];
+            rowIndex = 0;
+            sectionIndex = [self getMatchSectionInfo:currentSectionType];
+            teamIndex = 0;
+        }
+        else {
+            CSVParser *parser = [CSVParser new];
+            [parser openFile: storePath];
+            NSMutableArray *csvContent = [parser parseFile];
+            NSLog(@"data marker = %@", csvContent);
+            rowIndex = [[[csvContent objectAtIndex:0] objectAtIndex:0] intValue];
+            teamIndex = [[[csvContent objectAtIndex:0] objectAtIndex:2] intValue];
+            currentSectionType = [[[csvContent objectAtIndex:0] objectAtIndex:1] intValue];
+            sectionIndex = [self getMatchSectionInfo:currentSectionType];
+            if (sectionIndex == -1) { // The selected match type does not exist
+                // Go back to the first section in the table
+                currentSectionType = [[matchDictionary getMatchTypeEnum:[matchTypeList objectAtIndex:0]] intValue];
+                sectionIndex = [self getMatchSectionInfo:currentSectionType];
+            }
+        }
     }
-    else {
-        CSVParser *parser = [CSVParser new];
-        [parser openFile: storePath];
-        NSMutableArray *csvContent = [parser parseFile];
-        rowIndex = [[[csvContent objectAtIndex:0] objectAtIndex:0] intValue];
-        sectionIndex = [[[csvContent objectAtIndex:0] objectAtIndex:1] intValue];
-        teamIndex = [[[csvContent objectAtIndex:0] objectAtIndex:2] intValue];
-    }
-    
     overrideMode = NoOverride;
     teamName.font = [UIFont fontWithName:@"Helvetica" size:24.0];
     [self SetBigButtonDefaults:prevMatch];
@@ -227,8 +246,6 @@
 
     [self SetBigButtonDefaults:alliance];
     allianceList = [[NSMutableArray alloc] initWithObjects:@"Red 1", @"Red 2", @"Red 3", @"Blue 1", @"Blue 2", @"Blue 3", nil];
-    matchDictionary = [[MatchTypeDictionary alloc] init];
-    matchTypeList = [[matchDictionary getMatchTypes] copy];
 
     // Drawing Stuff
     scoreList = [[NSMutableArray alloc] initWithObjects:@"Medium", @"High", @"Missed", @"Low", @"Pyramid", nil];
@@ -265,7 +282,7 @@
 		abort();
 	}		
     
-    currentMatch = [self getMatchSectionInfo:sectionIndex];
+    currentMatch = [self getCurrentMatch];
     // NSLog(@"Match = %@, Type = %@, Tournament = %@", currentMatch.number, currentMatch.matchType, currentMatch.tournament);
     // NSLog(@"Settings = %@", settings.tournament.name);
     baseDrawingPath = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"Library/FieldDrawings/%@", settings.tournament.directory]];
@@ -288,31 +305,41 @@
 //    NSLog(@"viewWillDisappear");
     NSString *dataMarkerString;
     storePath = [[self applicationDocumentsDirectory] stringByAppendingPathComponent: @"dataMarker.csv"];
-    dataMarkerString = [NSString stringWithFormat:@"%d, %d, %d\n", rowIndex, sectionIndex, teamIndex];
+    dataMarkerString = [NSString stringWithFormat:@"%d, %d, %d\n", rowIndex, currentSectionType, teamIndex];
     [dataMarkerString writeToFile:storePath 
                        atomically:YES 
                          encoding:NSUTF8StringEncoding 
                             error:nil];
    [self CheckDataStatus];
     //    [delegate scoutingPageStatus:sectionIndex forRow:rowIndex forTeam:teamIndex];
-}    
-
--(MatchData *)getMatchSectionInfo:(NSUInteger)section {
-    if ([[fetchedResultsController sections] count]) {
-//        NSInteger count = [[[fetchedResultsController sections] objectAtIndex:section] count];
-        NSInteger count = [[[[fetchedResultsController sections] objectAtIndex:section] objects] count];
-        NSLog(@"Matches in section %d", count);
-        NSIndexPath *matchIndex = [NSIndexPath indexPathForRow:rowIndex inSection:section];
-        if (count) {
-            return [fetchedResultsController objectAtIndexPath:matchIndex];
-        }
-        else {
-            return nil;
-        }
-    }
-    else return nil;
 }
 
+-(NSMutableArray *)getMatchTypeList {
+    NSMutableArray *matchTypes = [NSMutableArray array];
+    NSString *sectionName;
+    for (int i=0; i < [[fetchedResultsController sections] count]; i++) {
+        sectionName = [[[fetchedResultsController sections] objectAtIndex:i] name];
+        NSLog(@"Section = %@", sectionName);
+        NSString *str = [matchDictionary getMatchTypeString:[NSNumber numberWithInt:[sectionName intValue]]];
+        NSLog(@"Match Type = %@", str);
+        [matchTypes addObject:[matchDictionary getMatchTypeString:[NSNumber numberWithInt:[sectionName intValue]]]];
+    }
+    return matchTypes;
+}
+
+-(NSUInteger)getMatchSectionInfo:(MatchType)matchSection {
+    NSString *sectionName;
+    sectionIndex = -1;
+    // Loop for number of sections in table
+    for (int i=0; i < [[fetchedResultsController sections] count]; i++) {
+        sectionName = [[[fetchedResultsController sections] objectAtIndex:i] name];
+        if ([sectionName intValue] == matchSection) {
+            sectionIndex = i;
+            break;
+        }
+    }
+    return sectionIndex;
+}
 -(int)getNumberOfMatches:(NSUInteger)section {
     if ([[fetchedResultsController sections] count]) {
         return [[[[fetchedResultsController sections] objectAtIndex:sectionIndex] objects] count];
@@ -360,11 +387,11 @@
     [self CheckDataStatus];
     if (rowIndex > 0) rowIndex--;
     else {
-        sectionIndex = [self GetPreviousSection:sectionIndex];
+        sectionIndex = [self GetPreviousSection:currentSectionType];
         rowIndex =  [self getNumberOfMatches:sectionIndex]-1;
     }
     
-    currentMatch = [self getMatchSectionInfo:sectionIndex];    
+    currentMatch = [self getCurrentMatch];
     [self setTeamList];
     [self ShowTeam:teamIndex];
 }
@@ -376,46 +403,111 @@
     if (rowIndex < (nrows-1)) rowIndex++;
     else { 
         rowIndex = 0; 
-        sectionIndex = [self GetNextSection:sectionIndex];
+        sectionIndex = [self GetNextSection:currentSectionType];
     }
-    currentMatch = [self getMatchSectionInfo:sectionIndex];
+    currentMatch = [self getCurrentMatch];
     
     [self setTeamList];
     [self ShowTeam:teamIndex];
 }
 
 // Move through the rounds
--(NSUInteger)GetNextSection:(NSUInteger) currentSection {
+-(NSUInteger)GetNextSection:(MatchType) currentSection {
     //    NSLog(@"GetNextSection");
-    NSUInteger newSection;
+    NSUInteger nextSection;
     switch (currentSection) {
-        case Practice: newSection=Seeding;
+        case Practice:
+            currentSectionType = Seeding;
+            nextSection = [self getMatchSectionInfo:currentSectionType];
+            if (nextSection == -1) { // There are no seeding matches
+                nextSection = [self getMatchSectionInfo:currentSection];
+                currentSectionType = currentSection;
+            }
             break;
-        case Seeding: newSection=Elimination;
+        case Seeding:
+            currentSectionType = Elimination;
+            nextSection = [self getMatchSectionInfo:currentSectionType];
+            if (nextSection == -1) { // There are no Elimination matches
+                nextSection = [self getMatchSectionInfo:currentSection];
+                currentSectionType = currentSection;
+            }
             break;
-        case Elimination: newSection=Practice;
+        case Elimination:
+            currentSectionType = Practice;
+            nextSection = [self getMatchSectionInfo:currentSectionType];
+            if (nextSection == -1) { // There are no Practice matches
+                // Try seeding matches instead
+                currentSectionType = Seeding;
+                nextSection = [self getMatchSectionInfo:currentSectionType];
+                if (nextSection == -1) { // There are no seeding matches either
+                    nextSection = [self getMatchSectionInfo:currentSection];
+                    currentSectionType = currentSection;
+                }
+            }
             break;
-        case Other: newSection=Testing;
+        case Other:
+            currentSectionType = Testing;
+            nextSection = [self getMatchSectionInfo:currentSectionType];
+            if (nextSection == -1) { // There are no Test matches
+                nextSection = [self getMatchSectionInfo:currentSection];
+                currentSectionType = currentSection;
+            }
             break;
-        case Testing: newSection=Other;
+        case Testing:
+            currentSectionType = Other;
+            nextSection = [self getMatchSectionInfo:currentSectionType];
+            if (nextSection == -1) { // There are no Other matches
+                nextSection = [self getMatchSectionInfo:currentSection];
+                currentSectionType = currentSection;
+            }
             break;
     }
-    return newSection;
+    return nextSection;
 }
 
 -(NSUInteger)GetPreviousSection:(NSUInteger) currentSection {
     //    NSLog(@"GetPreviousSection");
     NSUInteger newSection;
     switch (currentSection) {
-        case Practice: newSection=Testing;
+        case Practice:
+            currentSectionType = Testing;
+            newSection = [self getMatchSectionInfo:currentSectionType];
+            if (newSection == -1) { // There are no Test matches
+                newSection = [self getMatchSectionInfo:currentSection];
+                currentSectionType = currentSection;
+            }
             break;
-        case Seeding: newSection=Practice;
+        case Seeding:
+            currentSectionType = Practice;
+            newSection = [self getMatchSectionInfo:currentSectionType];
+            if (newSection == -1) { // There are no Practice matches
+                newSection = [self getMatchSectionInfo:currentSection];
+                currentSectionType = currentSection;
+            }
             break;
-        case Elimination: newSection=Seeding;
+        case Elimination:
+            currentSectionType = Seeding;
+            newSection = [self getMatchSectionInfo:currentSectionType];
+            if (newSection == -1) { // There are no Seeding matches
+                newSection = [self getMatchSectionInfo:currentSection];
+                currentSectionType = currentSection;
+            }
             break;
-        case Other: newSection=Testing;
+        case Other:
+            currentSectionType = Testing;
+            newSection = [self getMatchSectionInfo:currentSectionType];
+            if (newSection == -1) { // There are no Test matches
+                newSection = [self getMatchSectionInfo:currentSection];
+                currentSectionType = currentSection;
+            }
             break;
-        case Testing: newSection=Other;
+        case Testing:
+            currentSectionType = Other;
+            newSection = [self getMatchSectionInfo:currentSectionType];
+            if (newSection == -1) { // There are no Other matches
+                newSection = [self getMatchSectionInfo:currentSection];
+                currentSectionType = currentSection;
+            }
             break;
     }
     return newSection;
@@ -470,11 +562,13 @@
     
     for (int i = 0 ; i < [matchTypeList count] ; i++) {
         if ([newMatchType isEqualToString:[matchTypeList objectAtIndex:i]]) {
-            sectionIndex = i;
+            currentSectionType = [[matchDictionary getMatchTypeEnum:newMatchType] intValue];
+            sectionIndex = [self getMatchSectionInfo:currentSectionType];
             break;
         }
-    }    rowIndex = 0;
-    currentMatch = [self getMatchSectionInfo:sectionIndex];
+    }
+    rowIndex = 0;
+    currentMatch = [self getCurrentMatch];
     [self setTeamList];
     [self ShowTeam:teamIndex];
 }
@@ -525,7 +619,7 @@
         matchField = nmatches;
     }
     rowIndex = matchField-1;
-    currentMatch = [self getMatchSectionInfo:sectionIndex];
+    currentMatch = [self getCurrentMatch];
     
     [self setTeamList];
     [self ShowTeam:teamIndex];
@@ -924,6 +1018,16 @@
             [teamList replaceObjectAtIndex:(i+3)
                             withObject:[NSString stringWithFormat:@"%d", [score.team.number intValue]]];
        }
+    }
+}
+
+-(MatchData *)getCurrentMatch {
+    if (numberMatchTypes == 0) {
+        return nil;
+    }
+    else {
+        NSIndexPath *matchIndex = [NSIndexPath indexPathForRow:rowIndex inSection:sectionIndex];
+        return [fetchedResultsController objectAtIndexPath:matchIndex];
     }
 }
 

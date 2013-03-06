@@ -33,9 +33,13 @@
 
 - (void)viewDidLoad
 {
+    CGFloat height;
     [super viewDidLoad];
+
+    height = [allianceChoices count] * 44;
     self.clearsSelectionOnViewWillAppear = YES;
-    self.contentSizeForViewInPopover = CGSizeMake(150.0, 280.0);
+    self.contentSizeForViewInPopover = CGSizeMake(150.0, height);
+    self.clearsSelectionOnViewWillAppear = YES;
 }
 
 - (void)viewDidUnload

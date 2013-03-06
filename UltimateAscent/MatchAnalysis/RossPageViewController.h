@@ -39,6 +39,7 @@
 -(int)getNumberOfMatches:(NSUInteger)section;
 -(MatchData *)getCurrentMatch;
 -(NSMutableArray *)getMatchTypeList;
+-(NSUInteger)getMatchSectionInfo:(MatchType)matchSection;
 
 // Match Number
 @property (nonatomic, retain) IBOutlet UITextField *matchNumber;
