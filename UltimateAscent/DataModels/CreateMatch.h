@@ -34,5 +34,15 @@
 -(TeamData *)GetTeam:(NSNumber *)teamNumber;
 -(void)setTeamDefaults:(TeamData *)blankTeam;
 -(TournamentData *)getTournamentRecord:(NSString *)tournamentName;
+-(AddRecordResults)CreateUserAddedMatch:(NSString *)number
+                               forMatch:(NSString *)matchType
+                               forTournament:(NSString *)tournament
+                               forTeam1:(NSString *)red1
+                               forTeam2:(NSString *)red2
+                               forTeam3:(NSString *)red3
+                               forTeam4:(NSString *)blue1
+                               forTeam5:(NSString *)blue2
+                               forTeam6:(NSString *)blue3;
+
 
 @end

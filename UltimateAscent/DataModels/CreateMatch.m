@@ -17,6 +17,7 @@
 
 @implementation CreateMatch {
     MatchTypeDictionary *matchDictionary;
+    NSString *teamError;
 }
 
 @synthesize managedObjectContext;
@@ -57,6 +58,60 @@
                 forTournament:tournament                // Tournament
                 forRedScore:[NSNumber numberWithInt:[[data objectAtIndex: 9] intValue]] 
                 forBlueScore:[NSNumber numberWithInt:[[data objectAtIndex: 10] intValue]]];
+        NSError *error;
+        if (![managedObjectContext save:&error]) {
+            NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+            return DB_ERROR;
+        }
+        else return DB_ADDED;
+    }
+}
+
+-(AddRecordResults)CreateUserAddedMatch:(NSString *)number
+                               forMatch:(NSString *)matchType
+                            forTournament:(NSString *)tournament
+                               forTeam1:(NSString *)red1
+                               forTeam2:(NSString *)red2
+                               forTeam3:(NSString *)red3
+                               forTeam4:(NSString *)blue1
+                               forTeam5:(NSString *)blue2
+                               forTeam6:(NSString *)blue3 {
+    
+    NSNumber *matchNumber = [NSNumber numberWithInt:[number intValue]];
+    if (!managedObjectContext) {
+        DataManager *dataManager = [DataManager new];
+        managedObjectContext = [dataManager managedObjectContext];
+    }
+    tournamentRecord = [self getTournamentRecord:tournament];
+    
+    MatchData *match = [self GetMatch:matchNumber forMatchType:matchType forTournament:tournament];
+    if (match) {
+        // NSLog(@"createMatchFromFile:Match %@ %@ already exists", matchNumber, type);
+        return DB_MATCHED;
+    }
+    else {
+        NSNumber *r1 = [NSNumber numberWithInt:[red1 intValue]];
+        NSLog(@"r1 = %@", r1);
+        [self CreateMatch:matchNumber
+                 forTeam1:[NSNumber numberWithInt:[red1 intValue]]  
+                 forTeam2:[NSNumber numberWithInt:[red2 intValue]]
+                 forTeam3:[NSNumber numberWithInt:[red3 intValue]]
+                 forTeam4:[NSNumber numberWithInt:[blue1 intValue]]
+                 forTeam5:[NSNumber numberWithInt:[blue2 intValue]]
+                 forTeam6:[NSNumber numberWithInt:[blue3 intValue]]
+                 forMatch:matchType
+            forTournament:tournament               
+              forRedScore:[NSNumber numberWithInt:-1]
+             forBlueScore:[NSNumber numberWithInt:-1]];
+        if (teamError) {
+            UIAlertView *prompt  = [[UIAlertView alloc] initWithTitle:@"Match Add Alert"
+                                                              message:teamError
+                                                             delegate:nil
+                                                    cancelButtonTitle:@"Ok"
+                                                    otherButtonTitles:nil];
+            [prompt setAlertViewStyle:UIAlertViewStyleDefault];
+            [prompt show];
+        }
         NSError *error;
         if (![managedObjectContext save:&error]) {
             NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
@@ -176,9 +231,13 @@
     TeamScore *teamScore = [NSEntityDescription insertNewObjectForEntityForName:@"TeamScore"
                                                          inManagedObjectContext:managedObjectContext];
     [teamScore setAlliance:alliance];
+    // Some day do better error checking
     [teamScore setTeam:[self GetTeam:teamNumber]]; // Set Relationship!!!
+    if (!teamScore.team && [teamNumber intValue] !=0) {
+        teamError = [NSString stringWithFormat:@"Error Adding Team: %d", [teamNumber intValue]];
+    } 
     [teamScore setTournament:tournamentRecord]; // Set Relationship!!!
-    // NSLog(@"   For Team = %@", teamScore.team);
+     // NSLog(@"   For Team = %@", teamScore.team);
 /*    if (!teamScore.teamInfo) {
         teamScore.teamInfo = [NSEntityDescription insertNewObjectForEntityForName:@"TeamData" 
                                                        inManagedObjectContext:managedObjectContext];        

@@ -9,6 +9,7 @@
 #import "MatchListViewController.h"
 #import "MatchDetailViewController.h"
 #import "MatchData.h"
+#import "CreateMatch.h"
 #import "TeamData.h"
 #import "TeamScore.h"
 #import "DataManager.h"
@@ -189,15 +190,67 @@
         }
     }
 }
-/*
+
+- (void)matchAdded:(NSMutableArray *)newMatch {
+    NSLog(@"matchAdded");
+    // Data map
+    // newMatch[0] = Match Number
+    // newMatch[1] = Match Type
+    // newMatch[2] = Red 1
+    // newMatch[3] = Red 2
+    // newMatch[4] = Red 3
+    // newMatch[5] = Blue 1
+    // newMatch[6] = Blue 2
+    // newMatch[7] = Blue 3
+    // Check to make sure a match number and type have been set
+    NSString *matchNumberString = [newMatch objectAtIndex:0];
+    NSString *matchType = [newMatch objectAtIndex:1];
+    NSLog(@"number = (%@)", matchNumberString);
+    NSLog(@"type = (%@)", [newMatch objectAtIndex:1]);
+
+    if ([matchNumberString isEqualToString:@""] || [matchType isEqualToString:@""]) {
+        NSLog(@"blank match data");
+        UIAlertView *prompt  = [[UIAlertView alloc] initWithTitle:@"Match Add Alert"
+                                                          message:@"You must have both a match number and type"
+                                                         delegate:nil
+                                                cancelButtonTitle:@"Ok"
+                                                otherButtonTitles:nil];        
+        [prompt setAlertViewStyle:UIAlertViewStyleDefault];
+        [prompt show];    
+    }
+    else {
+        NSLog(@"matchAdded: Need to add serious error checking");
+        CreateMatch *match = [CreateMatch new];
+        AddRecordResults results = [match CreateUserAddedMatch:matchNumberString
+                                                            forMatch:matchType
+                                                       forTournament:settings.tournament.name
+                                                            forTeam1:[newMatch objectAtIndex:2]
+                                                            forTeam2:[newMatch objectAtIndex:3]
+                                                            forTeam3:[newMatch objectAtIndex:4]
+                                                            forTeam4:[newMatch objectAtIndex:5]
+                                                            forTeam5:[newMatch objectAtIndex:6]
+                                                            forTeam6:[newMatch objectAtIndex:7]];
+        NSLog(@"db result = %d", results);
+    }
+}
+
+
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    /*
     NSIndexPath *indexPath = [ self.tableView indexPathForCell:sender];
     
     MatchDetailViewController *detailViewController = [segue destinationViewController];
-    detailViewController.match = [fetchedResultsController objectAtIndexPath:indexPath];
-}
-*/
+    detailViewController.match = [fetchedResultsController objectAtIndexPath:indexPath]; */
+
+    if ([segue.identifier isEqualToString:@"Add"]) {
+        NSLog(@"add");
+        UINavigationController *nv = (UINavigationController *)[segue destinationViewController];
+        AddMatchViewController *addvc = (AddMatchViewController *)nv.topViewController;
+        addvc.delegate = self;
+    }
+ }
+
 #pragma mark - Table view data source
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -415,7 +468,7 @@
             break;
             
         case NSFetchedResultsChangeUpdate:
-//            [self configureCell:[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            [self configureCell:[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
             break;
             
         case NSFetchedResultsChangeMove:
