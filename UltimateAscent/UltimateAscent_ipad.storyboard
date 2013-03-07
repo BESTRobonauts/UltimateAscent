@@ -212,7 +212,7 @@
             <objects>
                 <viewController id="jao-sa-2Tp" customClass="MasonPageViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Xya-gI-ebY">
-                        <rect key="frame" x="0.0" y="20" width="1024" height="748"/>
+                        <rect key="frame" x="0.0" y="64" width="1024" height="704"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Team" borderStyle="roundedRect" minimumFontSize="17" id="iVu-yC-PjR">
@@ -1831,7 +1831,6 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="MatchTypeSelectionChanged:" destination="WBb-6A-oWA" eventType="touchUpInside" id="4Dq-gS-iSt"/>
                                     <action selector="MatchTypeSelectionChanged:" destination="F6T-N4-qDS" eventType="touchUpInside" id="zUu-Oj-7gl"/>
                                 </connections>
                             </button>
@@ -1856,6 +1855,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="jao-sa-2Tp" kind="push" id="No8-jZ-e71"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="LaS-aD-knX" userLabel="Text Field - Red Score">
                                 <rect key="frame" x="807" y="619" width="46" height="31"/>
@@ -1919,6 +1921,18 @@
                     </view>
                     <navigationItem key="navigationItem" id="c0a-Kj-ski"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <connections>
+                        <outlet property="blue1" destination="x3h-xV-aiM" id="Mc8-Pi-ZLZ"/>
+                        <outlet property="blue2" destination="nBb-hX-SEd" id="PUr-kc-H8W"/>
+                        <outlet property="blue3" destination="Ohl-5G-Ucb" id="aSv-Hd-09j"/>
+                        <outlet property="blueScore" destination="VXQ-VK-DE3" id="Gp5-uu-RFg"/>
+                        <outlet property="matchNumber" destination="OTN-E7-ndT" id="b7A-2q-otC"/>
+                        <outlet property="matchType" destination="x3E-L7-Doh" id="YFz-CO-18d"/>
+                        <outlet property="red1" destination="blq-sV-ccJ" id="HTK-4b-qgl"/>
+                        <outlet property="red2" destination="Zu6-1i-qMp" id="ubN-Me-Qim"/>
+                        <outlet property="red3" destination="40i-e8-2rE" id="vLh-n2-frV"/>
+                        <outlet property="redScore" destination="LaS-aD-knX" id="ysM-g1-ABf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jxr-8b-C9i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
