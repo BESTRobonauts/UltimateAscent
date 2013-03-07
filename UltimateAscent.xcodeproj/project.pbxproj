@@ -64,6 +64,7 @@
 		2FC18F0D16A212CE00D42251 /* SetUpPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC18F0C16A212CE00D42251 /* SetUpPageViewController.m */; };
 		2FC18F1016A215EA00D42251 /* DownloadPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC18F0F16A215EA00D42251 /* DownloadPageViewController.m */; };
 		2FC18F1316A21AA900D42251 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC18F1216A21AA900D42251 /* DataManager.m */; };
+		2FC3B1E816E8107900DF70F4 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FC3B1E716E8107900DF70F4 /* MessageUI.framework */; };
 		2FC5D8C916C473820043F68A /* 2013_field.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FC5D8C816C473820043F68A /* 2013_field.png */; };
 		2FCE54FA16CC271A00884191 /* Small Blue Button.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2FCE54F816CC271A00884191 /* Small Blue Button.jpg */; };
 		2FCE54FB16CC271A00884191 /* Small Red Button.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2FCE54F916CC271A00884191 /* Small Red Button.jpg */; };
@@ -173,6 +174,7 @@
 		2FC18F0F16A215EA00D42251 /* DownloadPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DownloadPageViewController.m; path = DataExport/DownloadPageViewController.m; sourceTree = "<group>"; };
 		2FC18F1116A21AA900D42251 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataManager.h; path = DataManagement/DataManager.h; sourceTree = "<group>"; };
 		2FC18F1216A21AA900D42251 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataManager.m; path = DataManagement/DataManager.m; sourceTree = "<group>"; };
+		2FC3B1E716E8107900DF70F4 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		2FC5D8C816C473820043F68A /* 2013_field.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 2013_field.png; path = Resources/2013_field.png; sourceTree = "<group>"; };
 		2FCE54F816CC271A00884191 /* Small Blue Button.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Small Blue Button.jpg"; path = "Resources/Small Blue Button.jpg"; sourceTree = "<group>"; };
 		2FCE54F916CC271A00884191 /* Small Red Button.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Small Red Button.jpg"; path = "Resources/Small Red Button.jpg"; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FC3B1E816E8107900DF70F4 /* MessageUI.framework in Frameworks */,
 				2F30EABC16A0EB4F0026B258 /* UIKit.framework in Frameworks */,
 				2F30EABE16A0EB4F0026B258 /* Foundation.framework in Frameworks */,
 				2F30EAC016A0EB4F0026B258 /* CoreGraphics.framework in Frameworks */,
@@ -226,6 +229,7 @@
 		2F30EABA16A0EB4F0026B258 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2FC3B1E716E8107900DF70F4 /* MessageUI.framework */,
 				2F30EABB16A0EB4F0026B258 /* UIKit.framework */,
 				2F30EABD16A0EB4F0026B258 /* Foundation.framework */,
 				2F30EABF16A0EB4F0026B258 /* CoreGraphics.framework */,

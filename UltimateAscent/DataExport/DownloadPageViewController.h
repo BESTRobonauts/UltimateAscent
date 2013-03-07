@@ -26,8 +26,9 @@
 -(void)emailTeamData;
 -(void)emailMatchData;
 -(NSString *)buildMatchCSVOutput:(TeamScore *)teamScore;
+-(NSString *)buildDanielleMatchCSVOutput:(MatchData *)match forTeam:(TeamScore *)teamScore;
 -(NSString *)applicationDocumentsDirectory;
--(void)buildEmail:(NSString *)filePath attach:(NSString *)emailFile subject:(NSString *)emailSubject;
+-(void)buildEmail:(NSArray *)filePath attach:(NSArray *)emailFile subject:(NSString *)emailSubject;
 -(void)retrieveSettings;
 
 @end

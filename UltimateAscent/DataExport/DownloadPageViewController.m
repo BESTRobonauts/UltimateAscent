@@ -104,8 +104,8 @@
     NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:numberDescriptor, nil];
 
     [fetchRequest setSortDescriptors:sortDescriptors];
-//    NSPredicate *pred = [NSPredicate predicateWithFormat:@"saved == 1"];
-//    [fetchRequest setPredicate:pred];
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"saved == 1"];
+    [fetchRequest setPredicate:pred];
     NSArray *teamData = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
     if(!teamData) {
         NSLog(@"Karma disruption error");
@@ -141,9 +141,11 @@
 -(void)emailMatchData {
     NSString *fileDataPath = [exportPath stringByAppendingPathComponent: @"MatchData.csv"];
     NSString *fileListPath = [exportPath stringByAppendingPathComponent: @"MatchList.csv"];
+    NSString *danielleDataPath = [exportPath stringByAppendingPathComponent: @"DanielleMatchData.csv"];
     NSLog(@"export data file = %@", fileDataPath);
     NSString *csvList;
     NSString *csvData;
+    NSString *csvDanielleData;
     MatchData *match;
     NSArray *scoreData;
     NSError *error;
@@ -176,7 +178,8 @@
             TeamScore *score;
             // Output two sets of data. one is just the match list, the other is the match results
             csvList = @"Match, Red 1, Red 2, Red 3, Blue 1, Blue 2, Blue 3, Type, Tournament\n";
-            csvData = @"Tournament, Match Type, Number, Alliance, Team Number, Saved, Driver Rating, Defense Rating, Auton High, Auton Mid, Auton Low, Auton Missed, TeleOp High, TeleOp Mid, TeleOp Low, TeleOp Missed, Climb Success, Climb Level, Climb Timer, Pyramid Goals, Passes, Blocks, Floor Pickup, Wall PickUp, Notes\n";
+            csvData = @"Tournament, Match Type, Number, Alliance, Team Number, Saved, Driver Rating, Defense Rating, Auton High, Auton Mid, Auton Low, Auton Missed, TeleOp High, TeleOp Mid, TeleOp Low, TeleOp Missed, Climb Attempt, Climb Level, Climb Timer, Pyramid Goals, Passes, Blocks, Floor Pickup, Wall PickUp, Notes\n";
+            csvDanielleData = @"Team, Match #, Auton Missed, Auton Low, Auton Mid, Auton High, Auton Total, TeleOp Missed, TeleOp Low, TeleOp Mid, TeleOp High, Pyramid Goals, TeleOp Total, Passes, Blocks, Wall PickUp, Floor Pickup, Climb Attempt, Climb Success, Climb Timer, Climb Level, Driver Rating, Defense Rating, Drive Under Pyramid, Max Height, Notes\n";
             int c;
             for (c = 0; c < [matchData count]; c++) {
                 match = [matchData objectAtIndex:c];
@@ -184,42 +187,55 @@
                 scoreData = [[match.score allObjects] sortedArrayUsingDescriptors:[NSArray arrayWithObject:allianceSort]];
 
                 score = [scoreData objectAtIndex:3];
-                r1 = (score.team.number == nil) ? @"0" : [NSString stringWithFormat:@"%d", [score.team.number intValue]];
-                csvData = [csvData stringByAppendingFormat:@"\n%@, %@, %@,", match.tournament, match.matchType, match.number];
-                csvData = [csvData stringByAppendingString:[self buildMatchCSVOutput:score]];
-
+                if ([score.saved intValue]) {
+                    r1 = (score.team.number == nil) ? @"0" : [NSString stringWithFormat:@"%d", [score.team.number intValue]];
+                    csvData = [csvData stringByAppendingFormat:@"\n%@, %@, %@,", match.tournament, match.matchType, match.number];
+                    csvData = [csvData stringByAppendingString:[self buildMatchCSVOutput:score]];
+                    csvDanielleData = [csvDanielleData stringByAppendingString:[self buildDanielleMatchCSVOutput:match forTeam:score]];
+                    NSLog(@"danielle = %@", csvDanielleData);
+                }
                 score = [scoreData objectAtIndex:4];
-                r2 = (score.team.number == nil) ? @"0" : [NSString stringWithFormat:@"%d", [score.team.number intValue]];
-                csvData = [csvData stringByAppendingFormat:@"\n%@, %@, %@,", match.tournament, match.matchType, match.number];
-                csvData = [csvData stringByAppendingString:[self buildMatchCSVOutput:score]];
-
+                if ([score.saved intValue]) {
+                    r2 = (score.team.number == nil) ? @"0" : [NSString stringWithFormat:@"%d", [score.team.number intValue]];
+                    csvData = [csvData stringByAppendingFormat:@"\n%@, %@, %@,", match.tournament, match.matchType, match.number];
+                    csvData = [csvData stringByAppendingString:[self buildMatchCSVOutput:score]];
+                    csvDanielleData = [csvDanielleData stringByAppendingString:[self buildDanielleMatchCSVOutput:match forTeam:score]];
+                }
                 score = [scoreData objectAtIndex:5];
-                r3 = (score.team.number == nil) ? @"0" : [NSString stringWithFormat:@"%d", [score.team.number intValue]];
-                csvData = [csvData stringByAppendingFormat:@"\n%@, %@, %@,", match.tournament, match.matchType, match.number];
-                csvData = [csvData stringByAppendingString:[self buildMatchCSVOutput:score]];
-
+                if ([score.saved intValue]) {
+                    r3 = (score.team.number == nil) ? @"0" : [NSString stringWithFormat:@"%d", [score.team.number intValue]];
+                    csvData = [csvData stringByAppendingFormat:@"\n%@, %@, %@,", match.tournament, match.matchType, match.number];
+                    csvData = [csvData stringByAppendingString:[self buildMatchCSVOutput:score]];
+                    csvDanielleData = [csvDanielleData stringByAppendingString:[self buildDanielleMatchCSVOutput:match forTeam:score]];
+               }
                 score = [scoreData objectAtIndex:0];
-                b1 = (score.team.number == nil) ? @"0" : [NSString stringWithFormat:@"%d", [score.team.number intValue]];
-                csvData = [csvData stringByAppendingFormat:@"\n%@, %@, %@,", match.tournament, match.matchType, match.number];
-                csvData = [csvData stringByAppendingString:[self buildMatchCSVOutput:score]];
+                if ([score.saved intValue]) {
+                    b1 = (score.team.number == nil) ? @"0" : [NSString stringWithFormat:@"%d", [score.team.number intValue]];
+                    csvData = [csvData stringByAppendingFormat:@"\n%@, %@, %@,", match.tournament, match.matchType, match.number];
+                    csvData = [csvData stringByAppendingString:[self buildMatchCSVOutput:score]];
+                    csvDanielleData = [csvDanielleData stringByAppendingString:[self buildDanielleMatchCSVOutput:match forTeam:score]];
+                }
                 score = [scoreData objectAtIndex:1];
-                b2 = (score.team.number == nil) ? @"0" : [NSString stringWithFormat:@"%d", [score.team.number intValue]];
-                csvData = [csvData stringByAppendingFormat:@"\n%@, %@, %@,", match.tournament, match.matchType, match.number];
-                csvData = [csvData stringByAppendingString:[self buildMatchCSVOutput:score]];
+                if ([score.saved intValue]) {
+                    b2 = (score.team.number == nil) ? @"0" : [NSString stringWithFormat:@"%d", [score.team.number intValue]];
+                    csvData = [csvData stringByAppendingFormat:@"\n%@, %@, %@,", match.tournament, match.matchType, match.number];
+                    csvData = [csvData stringByAppendingString:[self buildMatchCSVOutput:score]];
+                    csvDanielleData = [csvDanielleData stringByAppendingString:[self buildDanielleMatchCSVOutput:match forTeam:score]];
+               }
                 score = [scoreData objectAtIndex:2];
-                b3 = (score.team.number == nil) ? @"0" : [NSString stringWithFormat:@"%d", [score.team.number intValue]];
-                csvData = [csvData stringByAppendingFormat:@"\n%@, %@, %@,", match.tournament, match.matchType, match.number];
-                csvData = [csvData stringByAppendingString:[self buildMatchCSVOutput:score]];
-
+                if ([score.saved intValue]) {
+                    b3 = (score.team.number == nil) ? @"0" : [NSString stringWithFormat:@"%d", [score.team.number intValue]];
+                    csvData = [csvData stringByAppendingFormat:@"\n%@, %@, %@,", match.tournament, match.matchType, match.number];
+                    csvData = [csvData stringByAppendingString:[self buildMatchCSVOutput:score]];
+                    csvDanielleData = [csvDanielleData stringByAppendingString:[self buildDanielleMatchCSVOutput:match forTeam:score]];
+                }
                 csvList = [csvList stringByAppendingFormat:@"\n%@,%@,%@,%@,%@,%@,%@,%@,\"%@\"", match.number, r1, r2, r3, b1, b2, b3, match.matchType, match.tournament];
 
             }
-            [csvList writeToFile:fileListPath 
+           [csvList writeToFile:fileListPath
                       atomically:YES 
                         encoding:NSUTF8StringEncoding 
                            error:nil];
-            NSString *emailSubject = @"Match List CSV File";
-//            [self buildEmail:fileListPath attach:@"Match List.csv" subject:emailSubject];
 
             csvData = [csvData stringByAppendingString:@"\n"];
             // NSLog(@"csvData = %@", csvData);
@@ -227,21 +243,66 @@
                       atomically:YES 
                         encoding:NSUTF8StringEncoding 
                            error:nil];
-            emailSubject = @"Match Data CSV File";
- //           [self buildEmail:fileDataPath attach:@"Match Data.csv" subject:emailSubject];
+            [csvDanielleData writeToFile:danielleDataPath
+                      atomically:YES
+                        encoding:NSUTF8StringEncoding
+                           error:nil];
+            NSString *emailSubject = @"Match Data CSV Files";
+            NSArray *fileList = [[NSArray alloc] initWithObjects:fileListPath, fileDataPath, danielleDataPath,nil];
+            NSArray *attachList = [[NSArray alloc] initWithObjects:@"MatchList.csv", @"MatchData.csv", @"DanielleMatch Data.csv", nil];
+ 
+            [self buildEmail:fileList attach:attachList subject:emailSubject];
         }
         else {
             NSLog(@"No match data");
         }
     }
 }
-                           
+
+-(NSString *)buildDanielleMatchCSVOutput:(MatchData *)match forTeam:(TeamScore *)teamScore {
+    NSString *csvDataString;
+    
+    if (teamScore) {
+        csvDataString = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@",
+                         teamScore.team.number,
+                         match.number,
+                         teamScore.autonMissed,
+                         teamScore.autonLow,
+                         teamScore.autonMid,
+                         teamScore.autonHigh,
+                         // Auton Total
+                         teamScore.teleOpMissed,
+                         teamScore.teleOpLow,
+                         teamScore.teleOpMid,
+                         teamScore.teleOpHigh,
+                         teamScore.pyramid,
+                         // TeleOp Total
+                         teamScore.passes,
+                         teamScore.blocks,
+                         teamScore.wallPickUp,
+                         teamScore.floorPickUp,
+                         teamScore.climbAttempt,
+                         teamScore.climbTimer,
+                         teamScore.climbLevel,
+                         teamScore.driverRating,
+                         teamScore.defenseRating,
+                         // drive under pyramid
+                         teamScore.team.maxHeight,
+                         (teamScore.notes == nil) ? @"," : [NSString stringWithFormat:@",\"%@\"", teamScore.notes]];
+    }
+    else {
+        csvDataString = @"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,";
+        // NSLog(@"csvDataString = %@", csvDataString);
+    }
+    return csvDataString;
+}
+
 -(NSString *)buildMatchCSVOutput:(TeamScore *)teamScore {
     // NSLog(@"buildMatchCSV");
     NSString *csvDataString;
 
     if (teamScore) {
- /*       csvDataString = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@",
+        csvDataString = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@",
                 teamScore.alliance,
                 teamScore.team.number,
                 teamScore.saved,
@@ -255,14 +316,15 @@
                 teamScore.teleOpMid,
                 teamScore.teleOpLow,
                 teamScore.teleOpMissed,
-                teamScore.climbSuccess,
+                teamScore.climbAttempt,
                 teamScore.climbLevel,
                 teamScore.climbTimer,
                 teamScore.pyramid,
                 teamScore.passes,
                 teamScore.blocks,
-                teamScore.pickups,
-                (teamScore.notes == nil) ? @"," : [NSString stringWithFormat:@",\"%@\"", teamScore.notes]]; */
+                teamScore.floorPickUp,
+                teamScore.wallPickUp,
+                (teamScore.notes == nil) ? @"," : [NSString stringWithFormat:@",\"%@\"", teamScore.notes]];
         
         // NSLog(@"csvDataString = %@", csvDataString);
     }
@@ -274,21 +336,24 @@
 }
 
 
--(void)buildEmail:(NSString *)filePath attach:(NSString *)emailFile subject:(NSString *)emailSubject { /*
-    NSData *reboundData = [[NSData alloc] initWithContentsOfFile:filePath];
-    if (reboundData) {
-        MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
-        [picker setSubject:emailSubject];
-        [picker addAttachmentData:reboundData mimeType:@"application/UltimateAscent" fileName:emailFile];
-        NSArray *array = [[NSArray alloc] initWithObjects:@"kpettinger@comcast.net", @"BESTRobonauts@gmail.com",nil];
-        [picker setToRecipients:array];
-        [picker setMessageBody:@"Downloaded Data from UltimateAscent" isHTML:NO];
-        [picker setMailComposeDelegate:self];
-        [self presentModalViewController:picker animated:YES];               
+-(void)buildEmail:(NSArray *)filePath attach:(NSArray *)emailFile subject:(NSString *)emailSubject {
+    MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
+    NSArray *array = [[NSArray alloc] initWithObjects:@"kpettinger@comcast.net", @"BESTRobonauts@gmail.com",nil];
+    [picker setSubject:emailSubject];
+    [picker setToRecipients:array];
+    [picker setMessageBody:@"Downloaded Data from UltimateAscent" isHTML:NO];
+    [picker setMailComposeDelegate:self];
+
+    for (int i=0; i < [filePath count]; i++) {
+        NSData *ultimateData = [[NSData alloc] initWithContentsOfFile:[filePath objectAtIndex:i]];
+        if (ultimateData) {
+            [picker addAttachmentData:ultimateData mimeType:@"application/UltimateAscent" fileName:[emailFile objectAtIndex:i]];
+        }
+        else {
+            NSLog(@"Error encoding data for email");
+        }
     }
-    else {
-        NSLog(@"Error encoding data for email");
-    }*/
+    [self presentModalViewController:picker animated:YES];
 }
 
 -(void)mailComposeController:(MFMailComposeViewController *)controller

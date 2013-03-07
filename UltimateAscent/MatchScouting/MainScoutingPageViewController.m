@@ -1123,7 +1123,6 @@
         } else {
             team = [NSString stringWithFormat:@"T%@", [NSString stringWithFormat:@"%d", [currentTeam.team.number intValue]]];
         }
-        // Since no field drawing exists, we guess that the user wants to start in auton mode
         drawMode = DrawOff;
         fieldDrawingFile = [NSString stringWithFormat:@"%@_%@.png", match, team];
         [fieldImage setImage:[UIImage imageNamed:@"2013_field.png"]];

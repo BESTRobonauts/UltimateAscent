@@ -116,6 +116,13 @@
     [self SetBigButtonDefaults:matchType];
     
     [self ShowMatch];
+    
+    // Temp stuff to show db access
+    NSArray *red1Matches = [self GetTeamMatches:0];
+    for (int i=0; i<[red1Matches count]; i++) {
+        TeamScore *matchScore = [red1Matches objectAtIndex:i];
+        NSLog(@"Tournament = %@, Team = %@, Match = %@", matchScore.tournament.name, matchScore.team.number, matchScore.match.number);
+    }
 }
 
 -(NSMutableArray *)getMatchTypeList {
@@ -424,6 +431,53 @@
     [self drawModeSettings:drawMode]; */
 }
 
+-(NSArray *)GetTeamMatches:(NSUInteger)currentTeamIndex {
+    TeamScore *score = [self GetTeam:currentTeamIndex];
+    NSLog(@"team number = %@", score.team.number);
+    NSArray* objectsArray = [score.team.match allObjects];
+/*    switch (currentTeamIndex) {
+        case 0:
+            teamNumber = [teamOrder objectAtIndex:currentTeamIndex];  // Red 1
+            break;
+        case 1:
+            teamNumber = [teamData objectAtIndex:4];  // Red 2
+            break;
+        case 2:
+            teamNumber = [teamData objectAtIndex:5];  // Red 3
+            break;
+        case 3:
+            teamNumber = [teamData objectAtIndex:0];  // Blue 1
+            break;
+        case 4:
+            teamNumber = [teamData objectAtIndex:1];  // Blue 2
+            break;
+        case 5:
+            teamNumber = [teamData objectAtIndex:2];  // Blue 3
+            break;
+        default:
+            teamNumber = nil;
+    }
+    NSError *error;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"TeamData" inManagedObjectContext:managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    // Edit the sort key as appropriate.
+//    NSSortDescriptor *typeDescriptor = [[NSSortDescriptor alloc] initWithKey:@"matchTypeSection" ascending:YES];
+//    NSSortDescriptor *numberDescriptor = [[NSSortDescriptor alloc] initWithKey:@"number" ascending:YES];
+//    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:typeDescriptor, numberDescriptor, nil];
+    
+    // Add the search for tournament name
+//    NSPredicate *pred = [NSPredicate predicateWithFormat:@"tournament CONTAINS %@", settings.tournament.name];
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"number is %@", [teamNumber intValue]];
+    [fetchRequest setPredicate:pred];
+//    [fetchRequest setSortDescriptors:sortDescriptors];
+    NSArray *teamMatches = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    */
+    return objectsArray;
+}
+
 -(TeamScore *)GetTeam:(NSUInteger)currentTeamIndex {
     switch (currentTeamIndex) {
         case 0: return [teamData objectAtIndex:3];  // Red 1
@@ -435,7 +489,6 @@
     }
     return nil;
 }
-
 
 -(void)setTeamList {
     TeamScore *score;

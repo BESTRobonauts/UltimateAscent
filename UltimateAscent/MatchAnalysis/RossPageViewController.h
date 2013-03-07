@@ -66,6 +66,7 @@
 @property (nonatomic, retain) IBOutlet UIButton *blue2;
 @property (nonatomic, retain) IBOutlet UIButton *blue3;
 -(TeamScore *)GetTeam:(NSUInteger)currentTeamIndex;
+-(NSArray *)GetTeamMatches:(NSUInteger)currentTeamIndex;
 
 
 // Data Handling

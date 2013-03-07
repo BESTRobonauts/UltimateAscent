@@ -284,10 +284,15 @@
 }
 
 -(void)getPhoto {
-    NSString  *jpgPath = [photoPath stringByAppendingPathComponent:@"/Test.jpg"];
-    
-    [imageView setImage:[UIImage imageWithContentsOfFile:jpgPath]];
-    imageView.contentMode = UIViewContentModeScaleAspectFit;
+    NSError *fileError = nil;
+    NSArray *dirList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:photoPath error:&fileError];
+    NSLog(@"dir list = %@", dirList);
+    int dirCount = [dirList count];
+    if (dirCount) {
+        NSString  *jpgPath = [photoPath stringByAppendingPathComponent:[dirList objectAtIndex:(dirCount-1)]];
+        [imageView setImage:[UIImage imageWithContentsOfFile:jpgPath]];
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
+    }
 }
 
 - (IBAction) useCameraRoll: (id)sender
@@ -338,31 +343,43 @@
             return;
         }
     }
-    
     // Create paths to output images
+    NSString *number;
+    if ([team.number intValue] < 100) {
+        number = [NSString stringWithFormat:@"T%@", [NSString stringWithFormat:@"00%d", [team.number intValue]]];
+    } else if ( [team.number intValue] < 1000) {
+        number = [NSString stringWithFormat:@"T%@", [NSString stringWithFormat:@"0%d", [team.number intValue]]];
+    } else {
+        number = [NSString stringWithFormat:@"T%@", [NSString stringWithFormat:@"%d", [team.number intValue]]];
+    }
     //    NSString  *imgName = [NSString stringWithFormat:@"%d", [team.number intValue], @"img001"];
-    NSString  *pngPath = [photoPath stringByAppendingPathComponent:@"/Test.png"];
-    NSString  *jpgPath = [photoPath stringByAppendingPathComponent:@"/Test.jpg"];
-    
+//    NSString  *pngPath = [photoPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_img001.png", number]];
+    NSString  *jpgPath;
+    NSError *fileError;
+    NSArray *dirList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:photoPath error:&fileError];
+    NSLog(@"dir list = %@", dirList);
+    int dirCount = [dirList count];
+    if (dirCount) {
+        if (dirCount < 10) {
+            jpgPath = [photoPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_img00%d.jpg", number, dirCount+1]];
+        } else if (dirCount < 100) {
+            jpgPath = [photoPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_img0%d.jpg", number, dirCount+1]];
+        }
+        else {
+            jpgPath = [photoPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_img%d.jpg", number, dirCount+1]];
+        }
+    }
+    else {
+        jpgPath = [photoPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_img001.jpg", number]];
+    }
+    // NSLog(@"jpgPath = %@", jpgPath);
     // Write a UIImage to JPEG with minimum compression (best quality)
     // The value 'image' must be a UIImage object
     // The value '1.0' represents image compression quality as value from 0.0 to 1.0
     [UIImageJPEGRepresentation(image, 1.0) writeToFile:jpgPath atomically:YES];
     
     // Write image to PNG
-    [UIImagePNGRepresentation(image) writeToFile:pngPath atomically:YES];
-    
-    // Let's check to see if files were successfully written...
-    
-    // Create file manager
-    NSError *error;
-    NSFileManager *fileMgr = [NSFileManager defaultManager];
-    
-    // Point to Document directory
-    NSString *documentsDirectory = photoPath;
-    
-    // Write out the contents of home directory to console
-//    NSLog(@"Library directory: %@", [fileMgr contentsOfDirectoryAtPath:documentsDirectory error:&error]);
+ //   [UIImagePNGRepresentation(image) writeToFile:pngPath atomically:YES];
 }
 
 #pragma mark - Table view data source
