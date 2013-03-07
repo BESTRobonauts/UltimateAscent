@@ -13,7 +13,6 @@
 		2F0E3A7516D7FB4D00A359D5 /* DefensePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F0E3A7416D7FB4D00A359D5 /* DefensePickerController.m */; };
 		2F17D54816BA092B00DC81C1 /* TournamentList.csv in Resources */ = {isa = PBXBuildFile; fileRef = 2F17D54716BA092B00DC81C1 /* TournamentList.csv */; };
 		2F1D99E516DC4D9B00740C6C /* TeamData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F1D99E216DC4D9B00740C6C /* TeamData.m */; };
-		2F2AA26016E6323B00F9C0E3 /* TeamScore.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2AA25F16E6323B00F9C0E3 /* TeamScore.m */; };
 		2F30EABC16A0EB4F0026B258 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F30EABB16A0EB4F0026B258 /* UIKit.framework */; };
 		2F30EABE16A0EB4F0026B258 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F30EABD16A0EB4F0026B258 /* Foundation.framework */; };
 		2F30EAC016A0EB4F0026B258 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F30EABF16A0EB4F0026B258 /* CoreGraphics.framework */; };
@@ -53,14 +52,11 @@
 		2FC18EEC16A2083500D42251 /* cell_robonaut_gold.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FC18EDA16A2083500D42251 /* cell_robonaut_gold.png */; };
 		2FC18EED16A2083500D42251 /* dataMarker.csv in Resources */ = {isa = PBXBuildFile; fileRef = 2FC18EDB16A2083500D42251 /* dataMarker.csv */; };
 		2FC18EF116A2083500D42251 /* Gold Fade.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2FC18EDF16A2083500D42251 /* Gold Fade.gif */; };
-		2FC18EF216A2083500D42251 /* MatchList.csv in Resources */ = {isa = PBXBuildFile; fileRef = 2FC18EE016A2083500D42251 /* MatchList.csv */; };
-		2FC18EF316A2083500D42251 /* MatchResults.csv in Resources */ = {isa = PBXBuildFile; fileRef = 2FC18EE116A2083500D42251 /* MatchResults.csv */; };
 		2FC18EF416A2083500D42251 /* nasalization rg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FC18EE216A2083500D42251 /* nasalization rg.ttf */; };
 		2FC18EF516A2083500D42251 /* photo.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 2FC18EE316A2083500D42251 /* photo.JPG */; };
 		2FC18EF616A2083500D42251 /* R Big Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FC18EE416A2083500D42251 /* R Big Icon.png */; };
 		2FC18EF716A2083500D42251 /* R Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FC18EE516A2083500D42251 /* R Icon.png */; };
 		2FC18EF916A2083500D42251 /* robonauts button.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FC18EE716A2083500D42251 /* robonauts button.png */; };
-		2FC18EFA16A2083500D42251 /* TeamList.csv in Resources */ = {isa = PBXBuildFile; fileRef = 2FC18EE816A2083500D42251 /* TeamList.csv */; };
 		2FC18F0D16A212CE00D42251 /* SetUpPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC18F0C16A212CE00D42251 /* SetUpPageViewController.m */; };
 		2FC18F1016A215EA00D42251 /* DownloadPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC18F0F16A215EA00D42251 /* DownloadPageViewController.m */; };
 		2FC18F1316A21AA900D42251 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC18F1216A21AA900D42251 /* DataManager.m */; };
@@ -70,6 +66,10 @@
 		2FCE54FB16CC271A00884191 /* Small Red Button.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2FCE54F916CC271A00884191 /* Small Red Button.jpg */; };
 		2FCE54FD16CC29AB00884191 /* Small Green Button.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2FCE54FC16CC29AB00884191 /* Small Green Button.jpg */; };
 		2FCE54FF16CC29B600884191 /* Small White Button.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2FCE54FE16CC29B600884191 /* Small White Button.jpg */; };
+		2FD7E9E716E8C3540075533C /* TeamList.csv in Resources */ = {isa = PBXBuildFile; fileRef = 2FD7E9E616E8C3540075533C /* TeamList.csv */; };
+		2FD7E9E916E8DA130075533C /* MatchList.csv in Resources */ = {isa = PBXBuildFile; fileRef = 2FD7E9E816E8DA130075533C /* MatchList.csv */; };
+		2FD7E9EB16E8DAA90075533C /* MatchResults.csv in Resources */ = {isa = PBXBuildFile; fileRef = 2FD7E9EA16E8DAA90075533C /* MatchResults.csv */; };
+		2FD7E9EE16E8EA5C0075533C /* TeamScore.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FD7E9ED16E8EA5C0075533C /* TeamScore.m */; };
 		2FFAE1B416D29B9600B180F9 /* AlertPromptViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FFAE1B316D29B9600B180F9 /* AlertPromptViewController.m */; };
 		2FFAE1BB16D3235600B180F9 /* MatchTypeDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FFAE1BA16D3235600B180F9 /* MatchTypeDictionary.m */; };
 		2FFAE1BE16D3BBC800B180F9 /* MatchData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FFAE1BD16D3BBC800B180F9 /* MatchData.m */; };
@@ -91,8 +91,6 @@
 		2F17D54716BA092B00DC81C1 /* TournamentList.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TournamentList.csv; path = Resources/TournamentList.csv; sourceTree = "<group>"; };
 		2F1D99E116DC4D9B00740C6C /* TeamData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TeamData.h; path = DataModels/TeamData.h; sourceTree = "<group>"; };
 		2F1D99E216DC4D9B00740C6C /* TeamData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TeamData.m; path = DataModels/TeamData.m; sourceTree = "<group>"; };
-		2F2AA25E16E6323B00F9C0E3 /* TeamScore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TeamScore.h; path = DataModels/TeamScore.h; sourceTree = "<group>"; };
-		2F2AA25F16E6323B00F9C0E3 /* TeamScore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TeamScore.m; path = DataModels/TeamScore.m; sourceTree = "<group>"; };
 		2F30EAB716A0EB4F0026B258 /* UltimateAscent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UltimateAscent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F30EABB16A0EB4F0026B258 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2F30EABD16A0EB4F0026B258 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -160,14 +158,11 @@
 		2FC18EDD16A2083500D42251 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Resources/Default.png; sourceTree = "<group>"; };
 		2FC18EDE16A2083500D42251 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "Resources/Default@2x.png"; sourceTree = "<group>"; };
 		2FC18EDF16A2083500D42251 /* Gold Fade.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "Gold Fade.gif"; path = "Resources/Gold Fade.gif"; sourceTree = "<group>"; };
-		2FC18EE016A2083500D42251 /* MatchList.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = MatchList.csv; path = Resources/MatchList.csv; sourceTree = "<group>"; };
-		2FC18EE116A2083500D42251 /* MatchResults.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = MatchResults.csv; path = Resources/MatchResults.csv; sourceTree = "<group>"; };
 		2FC18EE216A2083500D42251 /* nasalization rg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "nasalization rg.ttf"; path = "Resources/nasalization rg.ttf"; sourceTree = "<group>"; };
 		2FC18EE316A2083500D42251 /* photo.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = photo.JPG; path = Resources/photo.JPG; sourceTree = "<group>"; };
 		2FC18EE416A2083500D42251 /* R Big Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "R Big Icon.png"; path = "Resources/R Big Icon.png"; sourceTree = "<group>"; };
 		2FC18EE516A2083500D42251 /* R Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "R Icon.png"; path = "Resources/R Icon.png"; sourceTree = "<group>"; };
 		2FC18EE716A2083500D42251 /* robonauts button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "robonauts button.png"; path = "Resources/robonauts button.png"; sourceTree = "<group>"; };
-		2FC18EE816A2083500D42251 /* TeamList.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TeamList.csv; path = Resources/TeamList.csv; sourceTree = "<group>"; };
 		2FC18F0B16A212CE00D42251 /* SetUpPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SetUpPageViewController.h; path = MainApp/SetUpPageViewController.h; sourceTree = "<group>"; };
 		2FC18F0C16A212CE00D42251 /* SetUpPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SetUpPageViewController.m; path = MainApp/SetUpPageViewController.m; sourceTree = "<group>"; };
 		2FC18F0E16A215EA00D42251 /* DownloadPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DownloadPageViewController.h; path = DataExport/DownloadPageViewController.h; sourceTree = "<group>"; };
@@ -180,6 +175,11 @@
 		2FCE54F916CC271A00884191 /* Small Red Button.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Small Red Button.jpg"; path = "Resources/Small Red Button.jpg"; sourceTree = "<group>"; };
 		2FCE54FC16CC29AB00884191 /* Small Green Button.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Small Green Button.jpg"; path = "Resources/Small Green Button.jpg"; sourceTree = "<group>"; };
 		2FCE54FE16CC29B600884191 /* Small White Button.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Small White Button.jpg"; path = "Resources/Small White Button.jpg"; sourceTree = "<group>"; };
+		2FD7E9E616E8C3540075533C /* TeamList.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TeamList.csv; path = Resources/TeamList.csv; sourceTree = "<group>"; };
+		2FD7E9E816E8DA130075533C /* MatchList.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = MatchList.csv; path = Resources/MatchList.csv; sourceTree = "<group>"; };
+		2FD7E9EA16E8DAA90075533C /* MatchResults.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = MatchResults.csv; path = Resources/MatchResults.csv; sourceTree = "<group>"; };
+		2FD7E9EC16E8EA5C0075533C /* TeamScore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TeamScore.h; path = DataModels/TeamScore.h; sourceTree = "<group>"; };
+		2FD7E9ED16E8EA5C0075533C /* TeamScore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TeamScore.m; path = DataModels/TeamScore.m; sourceTree = "<group>"; };
 		2FFAE1B216D29B9600B180F9 /* AlertPromptViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlertPromptViewController.h; path = Utilities/AlertPromptViewController.h; sourceTree = "<group>"; };
 		2FFAE1B316D29B9600B180F9 /* AlertPromptViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AlertPromptViewController.m; path = Utilities/AlertPromptViewController.m; sourceTree = "<group>"; };
 		2FFAE1B916D3235600B180F9 /* MatchTypeDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MatchTypeDictionary.h; path = Utilities/MatchTypeDictionary.h; sourceTree = "<group>"; };
@@ -319,14 +319,14 @@
 				21528C9416AA215800CF7E8E /* CreateMatch.h */,
 				21528C9516AA215800CF7E8E /* CreateMatch.m */,
 				2F4E01E916BA103E0092DC86 /* CreateTournament.h */,
-				2F4E01EA16BA103E0092DC86 /* CreateTournament.m */,
 				2F4E01EC16BA10560092DC86 /* CreateSettings.h */,
 				2F4E01ED16BA10560092DC86 /* CreateSettings.m */,
+				2F4E01EA16BA103E0092DC86 /* CreateTournament.m */,
 				2F8F8B9C16A24D8C00D3B176 /* CreateTeam.h */,
 				2F8F8B9D16A24D8C00D3B176 /* CreateTeam.m */,
-				2F2AA25E16E6323B00F9C0E3 /* TeamScore.h */,
-				2F2AA25F16E6323B00F9C0E3 /* TeamScore.m */,
 				2F88648416B75EF600867385 /* UltimateAscent.xcdatamodeld */,
+				2FD7E9EC16E8EA5C0075533C /* TeamScore.h */,
+				2FD7E9ED16E8EA5C0075533C /* TeamScore.m */,
 				2FFAE1BC16D3BBC800B180F9 /* MatchData.h */,
 				2FFAE1BD16D3BBC800B180F9 /* MatchData.m */,
 				2FFD94E916D16BF0007052EA /* SettingsData.h */,
@@ -355,6 +355,9 @@
 		2F30EAE316A0F66F0026B258 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2FD7E9EA16E8DAA90075533C /* MatchResults.csv */,
+				2FD7E9E816E8DA130075533C /* MatchList.csv */,
+				2FD7E9E616E8C3540075533C /* TeamList.csv */,
 				2FFAE1C716D51BDD00B180F9 /* robonauts app banner original.jpg */,
 				2FFD94FB16D1ACA1007052EA /* robonauts app banner.jpg */,
 				2FFD94F916D1AC5F007052EA /* Small Grey Button.jpg */,
@@ -363,9 +366,6 @@
 				2FCE54FC16CC29AB00884191 /* Small Green Button.jpg */,
 				2FCE54F916CC271A00884191 /* Small Red Button.jpg */,
 				2FC5D8C816C473820043F68A /* 2013_field.png */,
-				2FC18EE816A2083500D42251 /* TeamList.csv */,
-				2FC18EE016A2083500D42251 /* MatchList.csv */,
-				2FC18EE116A2083500D42251 /* MatchResults.csv */,
 				2F4E01EF16BA10C80092DC86 /* Settings.csv */,
 				2F17D54716BA092B00DC81C1 /* TournamentList.csv */,
 				2F6AE6EF16AD93D1005A24C5 /* 2013_logo.png */,
@@ -507,14 +507,11 @@
 				2FC18EEC16A2083500D42251 /* cell_robonaut_gold.png in Resources */,
 				2FC18EED16A2083500D42251 /* dataMarker.csv in Resources */,
 				2FC18EF116A2083500D42251 /* Gold Fade.gif in Resources */,
-				2FC18EF216A2083500D42251 /* MatchList.csv in Resources */,
-				2FC18EF316A2083500D42251 /* MatchResults.csv in Resources */,
 				2FC18EF416A2083500D42251 /* nasalization rg.ttf in Resources */,
 				2FC18EF516A2083500D42251 /* photo.JPG in Resources */,
 				2FC18EF616A2083500D42251 /* R Big Icon.png in Resources */,
 				2FC18EF716A2083500D42251 /* R Icon.png in Resources */,
 				2FC18EF916A2083500D42251 /* robonauts button.png in Resources */,
-				2FC18EFA16A2083500D42251 /* TeamList.csv in Resources */,
 				2F6AE6F016AD93D1005A24C5 /* 2013_logo.png in Resources */,
 				2F17D54816BA092B00DC81C1 /* TournamentList.csv in Resources */,
 				2F4E01F016BA10C80092DC86 /* Settings.csv in Resources */,
@@ -526,6 +523,9 @@
 				2FFD94FA16D1AC5F007052EA /* Small Grey Button.jpg in Resources */,
 				2FFD94FC16D1ACA1007052EA /* robonauts app banner.jpg in Resources */,
 				2FFAE1C816D51BDD00B180F9 /* robonauts app banner original.jpg in Resources */,
+				2FD7E9E716E8C3540075533C /* TeamList.csv in Resources */,
+				2FD7E9E916E8DA130075533C /* MatchList.csv in Resources */,
+				2FD7E9EB16E8DAA90075533C /* MatchResults.csv in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -571,7 +571,7 @@
 				2F1D99E516DC4D9B00740C6C /* TeamData.m in Sources */,
 				2F47E38516DFE17400609A3E /* TournamentPickerController.m in Sources */,
 				2F43A1CB16E4F219005CAFD9 /* AddMatchViewController.m in Sources */,
-				2F2AA26016E6323B00F9C0E3 /* TeamScore.m in Sources */,
+				2FD7E9EE16E8EA5C0075533C /* TeamScore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

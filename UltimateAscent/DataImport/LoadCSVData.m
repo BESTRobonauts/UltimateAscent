@@ -36,8 +36,8 @@
         filePath = [[NSBundle mainBundle] pathForResource:@"MatchList" ofType:@"csv"];  
         [self loadMatchFile:filePath];
 
-//        filePath = [[NSBundle mainBundle] pathForResource:@"MatchResults" ofType:@"csv"];
-//        [self loadMatchResults:filePath];
+        filePath = [[NSBundle mainBundle] pathForResource:@"MatchResults" ofType:@"csv"];
+        [self loadMatchResults:filePath];
     }
  
 }
@@ -129,7 +129,7 @@
     CSVParser *parser = [CSVParser new];
     [parser openFile: filePath];
     NSMutableArray *csvContent = [parser parseFile];
-    if ([[[csvContent objectAtIndex: 0] objectAtIndex:0] isEqualToString:@"Match"]) {
+    if ([[[csvContent objectAtIndex: 0] objectAtIndex:0] isEqualToString:@"Tournament"]) {
         CreateMatch *match = [CreateMatch new];
         int c;
         for (c = 1; c < [csvContent count]; c++) {

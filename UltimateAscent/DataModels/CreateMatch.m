@@ -15,6 +15,36 @@
 #import "CreateTeam.h"
 #include "MatchTypeDictionary.h"
 
+// Current Match Results File Order
+/*
+ 1  Tournament
+ 2  Match Type
+ 3  Match Number
+ 4  Alliance
+ 5  Team Number
+ 6  Saved
+ 7  Driver Rating
+ 8  Defense Rating
+ 9  Auton High
+10  Auton Mid
+11  Auton Low
+12  Auton Missed
+13  TeleOp High
+14  TeleOp Mid
+15  TeleOp Low
+16  TeleOp Missed
+17  Climb Attempt
+18  Climb Level
+19  Climb Timer
+20  Pyramid Goals
+21  Passes
+22  Blocks
+23  Floor Pickup
+24  Wall PickUp
+25  Field Drawing
+26  Notes
+*/
+
 @implementation CreateMatch {
     MatchTypeDictionary *matchDictionary;
     NSString *teamError;
@@ -134,49 +164,92 @@
         managedObjectContext = [dataManager managedObjectContext];
     }
     
-    matchNumber = [NSNumber numberWithInt:[[data objectAtIndex: 0] intValue]];
-    type = @"Seeding";
-    // NSLog(@"createMatchFromFile:Match Number = %@", matchNumber);
+    tournament = [data objectAtIndex: 0];
+    tournamentRecord = [self getTournamentRecord:tournament];
+    type = [data objectAtIndex: 1];
+    matchNumber = [NSNumber numberWithInt:[[data objectAtIndex: 2] intValue]];
+    NSLog(@"createMatchFromFile:Tournament = %@, Match Type = %@, Match Number = %@", tournament, type, matchNumber);
     MatchData *match = [self GetMatch:matchNumber forMatchType:type forTournament:tournament];
     if (match) {
-        teamNumber = [[data objectAtIndex: 1] intValue];
+        NSLog(@"Match Exists");
+        teamNumber = [[data objectAtIndex: 4] intValue];
 
         NSArray *teamScores = [match.score allObjects];
         TeamScore *score;
         int basketsMade, totalBaskets;
-        //NSLog(@"Team Number = %d", teamNumber);
+        BOOL found = NO;
+        NSLog(@"Team Number = %d", teamNumber);
         for (int i=0; i<[teamScores count]; i++) {
             score = [teamScores objectAtIndex:i];
-            //NSLog(@"Record Number = %d", [score.team.number intValue]);
-            if (teamNumber == [score.team.number intValue]) {
-                score.autonMissed = [NSNumber numberWithInt:[[data objectAtIndex: 2] intValue]];
-                score.autonLow = [NSNumber numberWithInt:[[data objectAtIndex: 3] intValue]];
-                score.autonMid = [NSNumber numberWithInt:[[data objectAtIndex: 4] intValue]];
-                score.autonHigh = [NSNumber numberWithInt:[[data objectAtIndex: 5] intValue]];
- // Temp to get stuff added to new database
+            NSLog(@"Score Team Number = %@", score.team.number);
+            if ([score.team.number intValue] == teamNumber) {
+                found = YES;
+                break;
+            };
+        }
+        if (found) {
+            NSLog(@"Team Number = %@", score.team.number);
+            switch ([data count]) {
+                case 26:
+                    score.notes = [data objectAtIndex: 25];
+                case 25:
+                    score.fieldDrawing = [data objectAtIndex: 24];
+                case 24:
+                    score.wallPickUp = [NSNumber numberWithInt:[[data objectAtIndex: 23] intValue]];
+                case 23:
+                    score.floorPickUp = [NSNumber numberWithInt:[[data objectAtIndex: 22] intValue]];
+                case 22:
+                    score.blocks = [NSNumber numberWithInt:[[data objectAtIndex: 21] intValue]];
+                case 21:
+                    score.passes = [NSNumber numberWithInt:[[data objectAtIndex: 20] intValue]];
+                case 20:
+                    score.pyramid = [NSNumber numberWithInt:[[data objectAtIndex: 19] intValue]];
+                case 19:
+                    score.climbAttempt = [NSNumber numberWithInt:[[data objectAtIndex: 18] intValue]];
+                    NSLog(@"climb = %@", score.climbAttempt);
+                case 18:
+                    score.climbLevel = [NSNumber numberWithInt:[[data objectAtIndex: 17] intValue]];
+                case 17:
+                    score.climbTimer = [NSNumber numberWithFloat:[[data objectAtIndex: 16] floatValue]];
+                case 16:
+                    score.teleOpMissed = [NSNumber numberWithInt:[[data objectAtIndex: 15] intValue]];
+                case 15:
+                    score.teleOpLow = [NSNumber numberWithInt:[[data objectAtIndex: 14] intValue]];
+                case 14:
+                    score.teleOpMid = [NSNumber numberWithInt:[[data objectAtIndex: 13] intValue]];
+                case 13:
+                    score.teleOpHigh = [NSNumber numberWithInt:[[data objectAtIndex: 12] intValue]];
+                case 12:
+                    score.autonMissed = [NSNumber numberWithInt:[[data objectAtIndex: 11] intValue]];
+                case 11:
+                    score.autonLow = [NSNumber numberWithInt:[[data objectAtIndex: 10] intValue]];
+                case 10:
+                    score.autonMid = [NSNumber numberWithInt:[[data objectAtIndex: 9] intValue]];
+                case 9:
+                    score.autonHigh = [NSNumber numberWithInt:[[data objectAtIndex: 8] intValue]];
+                case 8:
+                    score.defenseRating = [NSNumber numberWithInt:[[data objectAtIndex: 7] intValue]];
+                case 7:
+                    score.driverRating = [NSNumber numberWithInt:[[data objectAtIndex: 6] intValue]];
+                case 6:
+                    score.saved = [NSNumber numberWithInt:[[data objectAtIndex: 5] intValue]];
+                  
+                default:
+                    break;
+            }
+                // Temp to get stuff added to new database
                 basketsMade = [score.autonHigh intValue] + [score.autonMid intValue] + [score.autonLow intValue];
                 totalBaskets = basketsMade + [score.autonMissed intValue];
                 score.autonShotsMade = [NSNumber numberWithInt:basketsMade];
                 score.totalAutonShots = [NSNumber numberWithInt:totalBaskets];
- 
-                score.teleOpMissed = [NSNumber numberWithInt:[[data objectAtIndex: 6] intValue]];
-                score.teleOpLow = [NSNumber numberWithInt:[[data objectAtIndex: 7] intValue]];
-                score.teleOpMid = [NSNumber numberWithInt:[[data objectAtIndex: 8] intValue]];
-                score.teleOpHigh = [NSNumber numberWithInt:[[data objectAtIndex: 9] intValue]];
-// Temp to get stuff added to new database
+                
+               // Temp to get stuff added to new database
                 basketsMade = [score.teleOpHigh intValue] + [score.teleOpMid intValue] + [score.teleOpLow intValue];
                 totalBaskets = basketsMade + [score.teleOpMissed intValue];
                 score.teleOpShots = [NSNumber numberWithInt:basketsMade];
                 score.totalTeleOpShots = [NSNumber numberWithInt:totalBaskets];
-                
-
-                score.driverRating = [NSNumber numberWithInt:[[data objectAtIndex: 11] intValue]];
-                score.climbAttempt = [NSNumber numberWithInt:[[data objectAtIndex: 12] intValue]];
-                score.climbLevel = [NSNumber numberWithInt:[[data objectAtIndex: 14] intValue]];
-                score.notes = [data objectAtIndex: 15];
-                break;
-            }
         }
+        
         NSError *error;
         if (![managedObjectContext save:&error]) {
             NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
@@ -231,6 +304,7 @@
     TeamScore *teamScore = [NSEntityDescription insertNewObjectForEntityForName:@"TeamScore"
                                                          inManagedObjectContext:managedObjectContext];
     [teamScore setAlliance:alliance];
+    teamScore.climbAttempt = [NSNumber numberWithInt:0];
     // Some day do better error checking
     [teamScore setTeam:[self GetTeam:teamNumber]]; // Set Relationship!!!
     if (!teamScore.team && [teamNumber intValue] !=0) {
@@ -330,7 +404,7 @@
     }
     else {
         if([tournamentData count] > 0) {  // Tournament Exists
-            TournamentData *tournamentRecord = [tournamentData objectAtIndex:0];
+            tournamentRecord = [tournamentData objectAtIndex:0];
             // NSLog(@"Tournament %@ exists", tournamentRecord.name);
             return tournamentRecord;
         }

@@ -99,6 +99,7 @@
 @synthesize redScore;
 @synthesize blueScore;
 @synthesize teamEdit;
+@synthesize matchListButton;
 
 // Field Drawing
 @synthesize imageContainer;
@@ -230,6 +231,8 @@
     matchResetButton.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:15.0];
     [self SetBigButtonDefaults:teamEdit];
     [teamEdit setTitle:@"Edit Team Info" forState:UIControlStateNormal];
+    [self SetBigButtonDefaults:matchListButton];
+    [matchListButton setTitle:@"Show Match List" forState:UIControlStateNormal];
 
     driverRating.maximumValue = 5.0;
     driverRating.continuous = NO;
@@ -980,10 +983,10 @@
         TeamDetailViewController *detailViewController = [segue destinationViewController];
         detailViewController.team = currentTeam.team;
     }
-    else {
+ /*   else {
         MatchDetailViewController *detailViewController = [segue destinationViewController];
         detailViewController.match = currentMatch;               
-    }
+    }*/
 }
 
 -(void)setTeamList {
@@ -1053,6 +1056,7 @@
     teamName.text = currentTeam.team.name;
     driverRating.value =  [currentTeam.driverRating floatValue];
     defenseRating.value =  [currentTeam.defenseRating floatValue];
+    NSLog(@"climb attempt = %@", currentTeam.climbAttempt);
     if ([currentTeam.climbAttempt intValue] == 0) [attemptedClimb setOn:NO animated:YES];
     else [attemptedClimb setOn:YES animated:YES];
 
@@ -1506,7 +1510,7 @@
     currentTeam.fieldDrawing = nil;
     currentTeam.defenseRating = [NSNumber numberWithInt:0];
     currentTeam.climbLevel = [NSNumber numberWithInt:0];
-    currentTeam.climbAttempt = [NSNumber numberWithInt:-1];
+    currentTeam.climbAttempt = [NSNumber numberWithInt:0];
     currentTeam.climbTimer = [NSNumber numberWithFloat:0.0];
     
     [self ShowTeam:teamIndex];   

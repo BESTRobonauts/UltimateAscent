@@ -16,15 +16,17 @@
  1  Number
  2  Name
  3  Tournament
- 4  Climbing
+ 4  Drive Train Type
  5  Intake
- 6  Upside Down
- 7  Notes
- 8  History
-
- Things to add yet
-    Drive Train Notes
-    
+ 6  Wheel Diameter
+ 7  CIMS
+ 8  Minimum Height
+ 9  Maximum Height
+ 10  Shooter Height
+ 11 Pyramid Dump
+ 12 Climb Level
+ 13 Climb Speed
+ 14 Notes
 */
 @implementation CreateTeam
 @synthesize managedObjectContext;
@@ -58,24 +60,28 @@
                                                            inManagedObjectContext:managedObjectContext];
         [self setTeamDefaults:team];
         switch ([data count]) {
-            case 5:
-                team.history = [data objectAtIndex: 4];
-            case 4:
-                team.notes = [data objectAtIndex: 3];
-/*
+            case 14:
+                team.notes = [data objectAtIndex: 13];
+            case 13:
+                team.climbSpeed = [NSNumber numberWithFloat:[[data objectAtIndex:12] floatValue]];
+            case 12:
+                team.climbLevel = [NSNumber numberWithInt:[[data objectAtIndex:11] intValue]];
+            case 11:
+                team.pyramidDump = [NSNumber numberWithInt:[[data objectAtIndex:10] intValue]];
+            case 10:
+                team.shooterHeight = [NSNumber numberWithFloat:[[data objectAtIndex:9] floatValue]];
+            case 9:
+                team.maxHeight = [NSNumber numberWithFloat:[[data objectAtIndex:8] floatValue]];
+            case 8:
+                team.minHeight = [NSNumber numberWithFloat:[[data objectAtIndex:7] floatValue]];
+            case 7:
+                team.cims = [NSNumber numberWithInt:[[data objectAtIndex:6] intValue]];
             case 6:
-                number = [NSNumber numberWithInt:[[data objectAtIndex:4] intValue]];
-                team.intakeInverted = number;
+                team.wheelDiameter = [NSNumber numberWithFloat:[[data objectAtIndex:5] floatValue]];
             case 5:
-                number = [NSNumber numberWithInt:[[data objectAtIndex:3] intValue]];
-                team.intakeFloor = number;
-            case 5:
-                number = [NSNumber numberWithInt:[[data objectAtIndex:3] intValue]];
-                team.intakeStation = number;
+                team.intake = [NSNumber numberWithInt:[[data objectAtIndex:4] intValue]];
             case 4:
-                number = [NSNumber numberWithInt:[[data objectAtIndex:2] intValue]];
-                team.climbType = number;
- */
+                team.driveTrainType = [NSNumber numberWithInt:[[data objectAtIndex:3] intValue]];
             case 3:
                 tournament = [data objectAtIndex: 2];
                 tournamentRecord = [self getTournamentRecord:tournament];

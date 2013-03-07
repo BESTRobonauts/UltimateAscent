@@ -152,7 +152,7 @@ typedef enum {
 @property (nonatomic, retain) UIPopoverController *teamPickerPopover;
 
 // Other Stuff
-//@property (nonatomic, retain) IBOutlet UIButton *matchEdit;
+@property (nonatomic, retain) IBOutlet UIButton *matchListButton;
 @property (nonatomic, retain) IBOutlet UIButton *teamEdit;
 @property (nonatomic, assign) id<MainScoutingPageDelegate> delegate;
 - (NSString *)applicationDocumentsDirectory;
