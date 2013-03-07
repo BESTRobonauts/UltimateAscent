@@ -43,12 +43,15 @@
 @synthesize autonMed;
 @synthesize autonLow;
 @synthesize autonMissed;
-@synthesize autonPyramidGoals;
-@synthesize teleOpPyramidGoals;
+@synthesize pyramidGoals;
 @synthesize discPassed;
 @synthesize wallPickUp;
+@synthesize wall1, wall2, wall3, wall4;
 @synthesize floorPickUp;
 @synthesize blocked;
+@synthesize climbAttempt;
+@synthesize climbLevel;
+@synthesize climbTime;
 @synthesize notes;
 
 
@@ -90,13 +93,19 @@
     [self SetSmallTextBoxDefaults:teleOpLow];
     [self SetSmallTextBoxDefaults:teleOpMissed];
 
-    [self SetSmallTextBoxDefaults:autonPyramidGoals];
-    [self SetSmallTextBoxDefaults:teleOpPyramidGoals];
+    [self SetSmallTextBoxDefaults:pyramidGoals];
     
     [self SetSmallTextBoxDefaults:discPassed];
     [self SetSmallTextBoxDefaults:wallPickUp];
     [self SetSmallTextBoxDefaults:floorPickUp];
     [self SetSmallTextBoxDefaults:blocked];
+    [self SetSmallTextBoxDefaults:wall1];
+    [self SetSmallTextBoxDefaults:climbAttempt];
+    [self SetSmallTextBoxDefaults:climbLevel];
+    [self SetSmallTextBoxDefaults:climbTime];
+    [self SetSmallTextBoxDefaults:wall2];
+    [self SetSmallTextBoxDefaults:wall3];
+    [self SetSmallTextBoxDefaults:wall4];
     baseDrawingPath = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"Library/FieldDrawings/%@", drawDirectory]];
 
 
@@ -123,12 +132,19 @@
     teleOpLow.text = [NSString stringWithFormat:@"%d", [currentTeam.teleOpLow intValue]];
     teleOpMissed.text = [NSString stringWithFormat:@"%d", [currentTeam.teleOpMissed intValue]];
 
-//    pyramidGoals.text = [NSString stringWithFormat:@"%d", [currentTeam.pyramid intValue]];
+    pyramidGoals.text = [NSString stringWithFormat:@"%d", [currentTeam.pyramid intValue]];
     wallPickUp.text = [NSString stringWithFormat:@"%d", [currentTeam.wallPickUp intValue]];
+    wall1.text = [NSString stringWithFormat:@"%d", [currentTeam.wallPickUp1 intValue]];
+    wall2.text = [NSString stringWithFormat:@"%d", [currentTeam.wallPickUp2 intValue]];
+    wall3.text = [NSString stringWithFormat:@"%d", [currentTeam.wallPickUp3 intValue]];
+    wall4.text = [NSString stringWithFormat:@"%d", [currentTeam.wallPickUp4 intValue]];
     floorPickUp.text = [NSString stringWithFormat:@"%d", [currentTeam.floorPickUp intValue]];
     blocked.text = [NSString stringWithFormat:@"%d", [currentTeam.blocks intValue]];
     discPassed.text = [NSString stringWithFormat:@"%d", [currentTeam.passes intValue]];
-    notes.text= currentTeam.notes;
+    climbLevel.text = [NSString stringWithFormat:@"%d", [currentTeam.climbLevel intValue]];
+    climbAttempt.text = ([currentTeam.climbAttempt intValue] == 0) ? @"N":@"Y";
+    int timer = [currentTeam.climbTimer intValue];
+    climbTime.text = [NSString stringWithFormat:@"%02d:%02d", timer/60, timer%60];
     
     [self loadFieldDrawing];
 }

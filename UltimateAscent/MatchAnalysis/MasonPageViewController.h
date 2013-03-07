@@ -41,10 +41,17 @@
 @property (nonatomic, retain) IBOutlet UITextField *teleOpMissed;
 @property (nonatomic, retain) IBOutlet UITextField *discPassed;
 @property (nonatomic, retain) IBOutlet UITextField *autonPyramidGoals;
-@property (nonatomic, retain) IBOutlet UITextField *teleOpPyramidGoals;
+@property (nonatomic, retain) IBOutlet UITextField *pyramidGoals;
 @property (nonatomic, retain) IBOutlet UITextField *wallPickUp;
+@property (nonatomic, retain) IBOutlet UITextField *wall1;
+@property (nonatomic, retain) IBOutlet UITextField *wall2;
+@property (nonatomic, retain) IBOutlet UITextField *wall3;
+@property (nonatomic, retain) IBOutlet UITextField *wall4;
 @property (nonatomic, retain) IBOutlet UITextField *floorPickUp;
 @property (nonatomic, retain) IBOutlet UITextField *blocked;
+@property (nonatomic, retain) IBOutlet UITextField *climbAttempt;
+@property (nonatomic, retain) IBOutlet UITextField *climbLevel;
+@property (nonatomic, retain) IBOutlet UITextField *climbTime;
 @property (nonatomic, retain) IBOutlet UITextView  *notes;
 @property (nonatomic, retain) IBOutlet UIImageView *fieldImage;
 

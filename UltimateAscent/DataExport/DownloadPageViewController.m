@@ -63,9 +63,9 @@
     // Display the Robotnauts Banner
     [mainLogo setImage:[UIImage imageNamed:@"robonauts app banner.jpg"]];
     // Set Font and Text for Export Buttons
-    [exportTeamData setTitle:@"Email Team Data" forState:UIControlStateNormal];
+    [exportTeamData setTitle:@"Export Team Data" forState:UIControlStateNormal];
     exportTeamData.titleLabel.font = [UIFont fontWithName:@"Nasalization" size:24.0];
-    [exportMatchData setTitle:@"Email Match Data" forState:UIControlStateNormal];
+    [exportMatchData setTitle:@"Export Match Data" forState:UIControlStateNormal];
     exportMatchData.titleLabel.font = [UIFont fontWithName:@"Nasalization" size:24.0];
     exportPath = [self applicationDocumentsDirectory];
     [super viewDidLoad];
@@ -128,8 +128,8 @@
                         encoding:NSUTF8StringEncoding 
                         error:nil];
 
-            NSString *emailSubject = @"Team Data CSV File";
-            [self buildEmail:filePath attach:@"TeamData.csv" subject:emailSubject];
+//            NSString *emailSubject = @"Team Data CSV File";
+//            [self buildEmail:filePath attach:@"TeamData.csv" subject:emailSubject];
         }
         else {
             NSLog(@"No saved data");
@@ -251,7 +251,7 @@
             NSArray *fileList = [[NSArray alloc] initWithObjects:fileListPath, fileDataPath, danielleDataPath,nil];
             NSArray *attachList = [[NSArray alloc] initWithObjects:@"MatchList.csv", @"MatchData.csv", @"DanielleMatch Data.csv", nil];
  
-            [self buildEmail:fileList attach:attachList subject:emailSubject];
+//            [self buildEmail:fileList attach:attachList subject:emailSubject];
         }
         else {
             NSLog(@"No match data");
