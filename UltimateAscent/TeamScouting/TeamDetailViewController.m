@@ -410,7 +410,6 @@
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     NSArray* objectsArray = [team.match allObjects];
     TeamScore *score = [objectsArray objectAtIndex:indexPath.row];
-    MatchData *match = [self getMatchData:score]; 
     NSLog(@"Match Notes = %@", score.notes);
        // Configure the cell...
        // Set a background for the cell
@@ -420,10 +419,10 @@
     //  cell.backgroundView = imageView; Change Varable Name "soon" 
     
 	UILabel *matchNumber = (UILabel *)[cell viewWithTag:10];
-	matchNumber.text = [NSString stringWithFormat:@"%d", [match.number intValue]];
+	matchNumber.text = [NSString stringWithFormat:@"%d", [score.match.number intValue]];
     
 	UILabel *typeLabel = (UILabel *)[cell viewWithTag:20];
-    typeLabel.text = [match.matchType substringToIndex:4];
+    typeLabel.text = [score.match.matchType substringToIndex:4];
 
     int autonPoints = [score.autonHigh intValue]*6 + [score.autonMid intValue]*5 + [score.autonLow intValue]*4;
 	UILabel *autonLabel = (UILabel *)[cell viewWithTag:30];

@@ -14,7 +14,7 @@
 @class TeamData;
 @class SettingsData;
 
-@interface RossPageViewController : UIViewController <NSFetchedResultsControllerDelegate, UITextFieldDelegate, MatchTypePickerDelegate>
+@interface RossPageViewController : UIViewController <NSFetchedResultsControllerDelegate, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, MatchTypePickerDelegate>
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain) SettingsData *settings;
@@ -65,6 +65,8 @@
 @property (nonatomic, retain) IBOutlet UIButton *blue1;
 @property (nonatomic, retain) IBOutlet UIButton *blue2;
 @property (nonatomic, retain) IBOutlet UIButton *blue3;
+@property (nonatomic, retain) IBOutlet UITableView *red1table;
+
 -(TeamScore *)GetTeam:(NSUInteger)currentTeamIndex;
 -(NSArray *)GetTeamMatches:(NSUInteger)currentTeamIndex;
 

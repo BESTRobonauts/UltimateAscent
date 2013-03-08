@@ -175,7 +175,7 @@
             TeamScore *score;
             // Output two sets of data. one is just the match list, the other is the match results
             csvList = @"Match, Red 1, Red 2, Red 3, Blue 1, Blue 2, Blue 3, Type, Tournament, Red Score, Blue Score\n";
-            csvData = @"Tournament, Match Type, Number, Alliance, Team Number, Saved, Driver Rating, Defense Rating, Auton High, Auton Mid, Auton Low, Auton Missed, TeleOp High, TeleOp Mid, TeleOp Low, TeleOp Missed, Climb Attempt, Climb Level, Climb Timer, Pyramid Goals, Passes, Blocks, Floor Pickup, Wall PickUp, Field Drawing, Notes\n";
+            csvData = @"Tournament, Match Type, Number, Alliance, Team Number, Saved, Driver Rating, Defense Rating, Auton High, Auton Mid, Auton Low, Auton Missed, Auton Made, Auton Attempt, TeleOp High, TeleOp Mid, TeleOp Low, TeleOp Missed, TeleOp Made, TeleOp Attempt, Climb Attempt, Climb Level, Climb Timer, Pyramid Goals, Passes, Blocks, Floor Pickup, Wall PickUp, Field Drawing, Notes\n";
             csvDanielleData = @"Team, Match #, Auton Missed, Auton Low, Auton Mid, Auton High, Auton Total, TeleOp Missed, TeleOp Low, TeleOp Mid, TeleOp High, Pyramid Goals, TeleOp Total, Passes, Blocks, Wall PickUp, Floor Pickup, Climb Attempt, Climb Success, Climb Timer, Climb Level, Driver Rating, Defense Rating, Drive Under Pyramid, Max Height, Notes\n";
             int c;
             for (c = 0; c < [matchData count]; c++) {
@@ -226,7 +226,7 @@
                     csvData = [csvData stringByAppendingString:[self buildMatchCSVOutput:score]];
                     csvDanielleData = [csvDanielleData stringByAppendingString:[self buildDanielleMatchCSVOutput:match forTeam:score]];
                 }
-                csvList = [csvList stringByAppendingFormat:@"\n%@,%@,%@,%@,%@,%@,%@,%@,\"%@\"", match.number, r1, r2, r3, b1, b2, b3, match.matchType, match.tournament, match.redScore, match.blueScore];
+                csvList = [csvList stringByAppendingFormat:@"%@, %@, %@, %@, %@, %@, %@, %@,\"%@\", %@, %@\n", match.number, r1, r2, r3, b1, b2, b3, match.matchType, match.tournament, match.redScore, match.blueScore];
 
             }
            [csvList writeToFile:fileListPath
@@ -260,30 +260,31 @@
     NSString *csvDataString;
     
     if (teamScore) {
-        csvDataString = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@",
+        csvDataString = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@",
                          teamScore.team.number,
                          match.number,
                          teamScore.autonMissed,
                          teamScore.autonLow,
                          teamScore.autonMid,
                          teamScore.autonHigh,
-                         // Auton Total
+                         teamScore.totalAutonShots,
                          teamScore.teleOpMissed,
                          teamScore.teleOpLow,
                          teamScore.teleOpMid,
                          teamScore.teleOpHigh,
                          teamScore.pyramid,
-                         // TeleOp Total
+                         teamScore.totalTeleOpShots,
                          teamScore.passes,
                          teamScore.blocks,
                          teamScore.wallPickUp,
                          teamScore.floorPickUp,
                          teamScore.climbAttempt,
+                         ([teamScore.climbLevel intValue] == 0) ? @"N" : @"Y",      // Climb Success
                          teamScore.climbTimer,
                          teamScore.climbLevel,
                          teamScore.driverRating,
                          teamScore.defenseRating,
-                         // drive under pyramid
+                         ([teamScore.team.minHeight floatValue] < 28.5) ? @"Y" : @"N",      // drive under pyramid
                          teamScore.team.maxHeight,
                          (teamScore.notes == nil) ? @"," : [NSString stringWithFormat:@",\"%@\"", teamScore.notes]];
     }
@@ -299,7 +300,7 @@
     NSString *csvDataString;
 
     if (teamScore) {
-        csvDataString = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@%@%@\n",
+        csvDataString = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@,%@%@%@\n",
                 teamScore.alliance,
                 teamScore.team.number,
                 teamScore.saved,
@@ -309,10 +310,14 @@
                 teamScore.autonMid,
                 teamScore.autonLow,
                 teamScore.autonMissed,
+                teamScore.autonShotsMade,
+                teamScore.totalAutonShots,
                 teamScore.teleOpHigh,
                 teamScore.teleOpMid,
                 teamScore.teleOpLow,
                 teamScore.teleOpMissed,
+                teamScore.teleOpShots,
+                teamScore.totalTeleOpShots,
                 teamScore.climbAttempt,
                 teamScore.climbLevel,
                 teamScore.climbTimer,
@@ -321,7 +326,11 @@
                 teamScore.blocks,
                 teamScore.floorPickUp,
                 teamScore.wallPickUp,
-                         (teamScore.fieldDrawing == nil) ? @"," : [NSString stringWithFormat:@",\"%@\"", teamScore.fieldDrawing],
+                teamScore.wallPickUp1,
+                teamScore.wallPickUp2,
+                teamScore.wallPickUp3,
+                teamScore.wallPickUp4,
+                (teamScore.fieldDrawing == nil) ? @"," : [NSString stringWithFormat:@",\"%@\"", teamScore.fieldDrawing],
                 (teamScore.notes == nil) ? @"," : [NSString stringWithFormat:@",\"%@\"", teamScore.notes]];
         
         // NSLog(@"csvDataString = %@", csvDataString);

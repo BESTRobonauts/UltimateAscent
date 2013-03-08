@@ -29,20 +29,28 @@
 10  Auton Mid
 11  Auton Low
 12  Auton Missed
-13  TeleOp High
-14  TeleOp Mid
-15  TeleOp Low
-16  TeleOp Missed
-17  Climb Attempt
-18  Climb Level
-19  Climb Timer
-20  Pyramid Goals
-21  Passes
-22  Blocks
-23  Floor Pickup
-24  Wall PickUp
-25  Field Drawing
-26  Notes
+13  Auton Made
+14  Auton Total
+15  TeleOp High
+16  TeleOp Mid
+17  TeleOp Low
+18  TeleOp Missed
+19  TeleOp Made
+20  TeleOp Total
+21  Climb Attempt
+22  Climb Level
+23  Climb Timer
+24  Pyramid Goals
+25  Passes
+26  Blocks
+27  Floor Pickup
+28  Wall PickUp
+ 
+ 
+ 
+ 
+29  Field Drawing
+30  Notes
 */
 
 @implementation CreateMatch {
@@ -176,49 +184,66 @@
 
         NSArray *teamScores = [match.score allObjects];
         TeamScore *score;
-        int basketsMade, totalBaskets;
         BOOL found = NO;
         NSLog(@"Team Number = %d", teamNumber);
         for (int i=0; i<[teamScores count]; i++) {
             score = [teamScores objectAtIndex:i];
-            NSLog(@"Score Team Number = %@", score.team.number);
             if ([score.team.number intValue] == teamNumber) {
                 found = YES;
                 break;
             };
         }
         if (found) {
-            NSLog(@"Team Number = %@", score.team.number);
+            NSLog(@"Count = %d", [data count]);
+            NSLog(@"30 %@", [data objectAtIndex:29]);
+            NSLog(@"29 %@", [data objectAtIndex:28]);
+            NSLog(@"28 %@", [data objectAtIndex:27]);
             switch ([data count]) {
+                case 34:
+                    score.notes = [data objectAtIndex: 33];
+                case 33:
+                    score.fieldDrawing = [data objectAtIndex: 32];
+                case 32:
+                    score.wallPickUp4 = [NSNumber numberWithInt:[[data objectAtIndex: 31] intValue]];
+                case 31:
+                    score.wallPickUp3 = [NSNumber numberWithInt:[[data objectAtIndex: 30] intValue]];
+                case 30:
+                    score.wallPickUp2 = [NSNumber numberWithInt:[[data objectAtIndex: 29] intValue]];
+                case 29:
+                    score.wallPickUp1 = [NSNumber numberWithInt:[[data objectAtIndex: 28] intValue]];
+                case 28:
+                    score.wallPickUp = [NSNumber numberWithInt:[[data objectAtIndex: 27] intValue]];
+                case 27:
+                    score.floorPickUp = [NSNumber numberWithInt:[[data objectAtIndex: 26] intValue]];
                 case 26:
-                    score.notes = [data objectAtIndex: 25];
+                    score.blocks = [NSNumber numberWithInt:[[data objectAtIndex: 25] intValue]];
                 case 25:
-                    score.fieldDrawing = [data objectAtIndex: 24];
+                    score.passes = [NSNumber numberWithInt:[[data objectAtIndex: 24] intValue]];
                 case 24:
-                    score.wallPickUp = [NSNumber numberWithInt:[[data objectAtIndex: 23] intValue]];
+                    score.pyramid = [NSNumber numberWithInt:[[data objectAtIndex: 23] intValue]];
                 case 23:
-                    score.floorPickUp = [NSNumber numberWithInt:[[data objectAtIndex: 22] intValue]];
-                case 22:
-                    score.blocks = [NSNumber numberWithInt:[[data objectAtIndex: 21] intValue]];
-                case 21:
-                    score.passes = [NSNumber numberWithInt:[[data objectAtIndex: 20] intValue]];
-                case 20:
-                    score.pyramid = [NSNumber numberWithInt:[[data objectAtIndex: 19] intValue]];
-                case 19:
-                    score.climbAttempt = [NSNumber numberWithInt:[[data objectAtIndex: 18] intValue]];
+                    score.climbTimer = [NSNumber numberWithFloat:[[data objectAtIndex: 22] floatValue]];
                     NSLog(@"climb = %@", score.climbAttempt);
+                case 22:
+                    score.climbLevel = [NSNumber numberWithInt:[[data objectAtIndex: 21] intValue]];
+                case 21:
+                    score.climbAttempt = [NSNumber numberWithInt:[[data objectAtIndex: 20] intValue]];
+                case 20:
+                    score.totalTeleOpShots = [NSNumber numberWithInt:[[data objectAtIndex: 19] intValue]];
+                case 19:
+                    score.teleOpShots = [NSNumber numberWithInt:[[data objectAtIndex: 18] intValue]];
                 case 18:
-                    score.climbLevel = [NSNumber numberWithInt:[[data objectAtIndex: 17] intValue]];
+                    score.teleOpMissed = [NSNumber numberWithInt:[[data objectAtIndex: 17] intValue]];
                 case 17:
-                    score.climbTimer = [NSNumber numberWithFloat:[[data objectAtIndex: 16] floatValue]];
+                    score.teleOpLow = [NSNumber numberWithInt:[[data objectAtIndex: 16] intValue]];
                 case 16:
-                    score.teleOpMissed = [NSNumber numberWithInt:[[data objectAtIndex: 15] intValue]];
+                    score.teleOpMid = [NSNumber numberWithInt:[[data objectAtIndex: 15] intValue]];
                 case 15:
-                    score.teleOpLow = [NSNumber numberWithInt:[[data objectAtIndex: 14] intValue]];
+                    score.teleOpHigh = [NSNumber numberWithInt:[[data objectAtIndex: 14] intValue]];
                 case 14:
-                    score.teleOpMid = [NSNumber numberWithInt:[[data objectAtIndex: 13] intValue]];
+                    score.totalAutonShots = [NSNumber numberWithInt:[[data objectAtIndex: 13] intValue]];
                 case 13:
-                    score.teleOpHigh = [NSNumber numberWithInt:[[data objectAtIndex: 12] intValue]];
+                    score.autonShotsMade = [NSNumber numberWithInt:[[data objectAtIndex: 12] intValue]];
                 case 12:
                     score.autonMissed = [NSNumber numberWithInt:[[data objectAtIndex: 11] intValue]];
                 case 11:
@@ -237,17 +262,6 @@
                 default:
                     break;
             }
-                // Temp to get stuff added to new database
-                basketsMade = [score.autonHigh intValue] + [score.autonMid intValue] + [score.autonLow intValue];
-                totalBaskets = basketsMade + [score.autonMissed intValue];
-                score.autonShotsMade = [NSNumber numberWithInt:basketsMade];
-                score.totalAutonShots = [NSNumber numberWithInt:totalBaskets];
-                
-               // Temp to get stuff added to new database
-                basketsMade = [score.teleOpHigh intValue] + [score.teleOpMid intValue] + [score.teleOpLow intValue];
-                totalBaskets = basketsMade + [score.teleOpMissed intValue];
-                score.teleOpShots = [NSNumber numberWithInt:basketsMade];
-                score.totalTeleOpShots = [NSNumber numberWithInt:totalBaskets];
         }
         
         NSError *error;

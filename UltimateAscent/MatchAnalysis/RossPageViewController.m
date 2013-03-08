@@ -23,6 +23,10 @@
 @implementation RossPageViewController {
     MatchTypeDictionary *matchDictionary;
     int numberMatchTypes;
+    NSMutableArray *r1Matches;
+    NSMutableArray *r1MatchTypes;
+    NSMutableArray *r1MatchAuton;
+    NSMutableArray *r1MatchTeleOp;
 }
 
 @synthesize managedObjectContext, fetchedResultsController;
@@ -57,6 +61,7 @@
 @synthesize blue1;
 @synthesize blue2;
 @synthesize blue3;
+@synthesize red1table;
 
 // Other Stuff
 @synthesize redScore;
@@ -119,10 +124,22 @@
     
     // Temp stuff to show db access
     NSArray *red1Matches = [self GetTeamMatches:0];
+    r1Matches = [[NSMutableArray alloc] init];
+    r1MatchTypes = [[NSMutableArray alloc] init];
+    r1MatchAuton = [[NSMutableArray alloc] init];
+    r1MatchTeleOp = [[NSMutableArray alloc] init];
     for (int i=0; i<[red1Matches count]; i++) {
         TeamScore *matchScore = [red1Matches objectAtIndex:i];
-        NSLog(@"Tournament = %@, Team = %@, Match = %@", matchScore.tournament.name, matchScore.team.number, matchScore.match.number);
+        NSLog(@"Tournament = %@, Team = %@, Match = %@, Type = %@", matchScore.tournament.name, matchScore.team.number, matchScore.match.number, matchScore.match.matchType);
+        [r1Matches addObject:matchScore.match.number];
+        [r1MatchTypes addObject:matchScore.match.matchType];
+        [r1MatchAuton addObject:matchScore.autonShotsMade];
+        [r1MatchTeleOp addObject:matchScore.teleOpShots];
     }
+    NSLog(@"r1matches = %@", r1Matches);
+    NSLog(@"r1matchestype = %@", r1MatchTypes);
+    NSLog(@"r1MatchAuton = %@", r1MatchAuton);
+    NSLog(@"r1MatchTeleOp = %@", r1MatchTeleOp);
 }
 
 -(NSMutableArray *)getMatchTypeList {

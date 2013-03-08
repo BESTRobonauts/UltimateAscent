@@ -1,2 +1,3 @@
-Tournament, Match Type, Number, Alliance, Team Number, Saved, Driver Rating, Defense Rating, Auton High, Auton Mid, Auton Low, Auton Missed, TeleOp High, TeleOp Mid, TeleOp Low, TeleOp Missed, Climb Attempt, Climb Level, Climb Timer, Pyramid Goals, Passes, Blocks, Floor Pickup, Wall PickUp, Field Drawing, Notes
-Lone Star Regional, Other, 1,Red 1,118,1,0,0,4,0,0,2,4,0,0,5,1,1,0,0,0,0,3,9,,
+Tournament, Match Type, Number, Alliance, Team Number, Saved, Driver Rating, Defense Rating, Auton High, Auton Mid, Auton Low, Auton Missed, Auton Made, Auton Attempt, TeleOp High, TeleOp Mid, TeleOp Low, TeleOp Missed, TeleOp Made, TeleOp Attempt, Climb Attempt, Climb Level, Climb Timer, Pyramid Goals, Passes, Blocks, Floor Pickup, Wall PickUp, Field Drawing, Notes
+Lone Star Regional, Other, 1,Red 1,118,1,0,0,1,2,3,4,6,10,5,6,7,9,18,27,0,0,0,1,2,3,3,10,1,2,3,4,"MO001_T0118.png",
+

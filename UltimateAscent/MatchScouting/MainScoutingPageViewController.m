@@ -170,7 +170,7 @@
     matchDictionary = [[MatchTypeDictionary alloc] init];    
     matchTypeList = [self getMatchTypeList];
     numberMatchTypes = [matchTypeList count];
-    NSLog(@"Match Type List Count = %@", matchTypeList);
+    // NSLog(@"Match Type List Count = %@", matchTypeList);
 
     // If there are no matches in any section then don't set this stuff. ShowMatch will set currentMatch to
     // nil, printing out blank info in all the display items.
@@ -189,7 +189,7 @@
             CSVParser *parser = [CSVParser new];
             [parser openFile: storePath];
             NSMutableArray *csvContent = [parser parseFile];
-            NSLog(@"data marker = %@", csvContent);
+            // NSLog(@"data marker = %@", csvContent);
             rowIndex = [[[csvContent objectAtIndex:0] objectAtIndex:0] intValue];
             teamIndex = [[[csvContent objectAtIndex:0] objectAtIndex:2] intValue];
             currentSectionType = [[[csvContent objectAtIndex:0] objectAtIndex:1] intValue];
@@ -1056,7 +1056,6 @@
     teamName.text = currentTeam.team.name;
     driverRating.value =  [currentTeam.driverRating floatValue];
     defenseRating.value =  [currentTeam.defenseRating floatValue];
-    NSLog(@"climb attempt = %@", currentTeam.climbAttempt);
     if ([currentTeam.climbAttempt intValue] == 0) [attemptedClimb setOn:NO animated:YES];
     else [attemptedClimb setOn:YES animated:YES];
 
@@ -1158,7 +1157,7 @@
 -(void)scoreDisk:(UITapGestureRecognizer *)gestureRecognizer {
     fieldDrawingChange = YES;
     currentPoint = [gestureRecognizer locationInView:fieldImage];
-    NSLog(@"scoreDisk point = %f %f", currentPoint.x, currentPoint.y);
+    // NSLog(@"scoreDisk point = %f %f", currentPoint.x, currentPoint.y);
     popCounter = 0;
     if (drawMode == DrawDefense) {
         if (defensePicker == nil) {
@@ -1189,12 +1188,12 @@
 -(void)drawPath:(UIPanGestureRecognizer *)gestureRecognizer {
     fieldDrawingChange = YES;
     if ([gestureRecognizer state] == UIGestureRecognizerStateBegan) {
-        NSLog(@"drawPath Began");
+        // NSLog(@"drawPath Began");
         lastPoint = [gestureRecognizer locationInView:fieldImage];
     }
     else {
         currentPoint = [gestureRecognizer locationInView: fieldImage];
-        NSLog(@"current point = %lf, %lf", currentPoint.x, currentPoint.y);
+        // NSLog(@"current point = %lf, %lf", currentPoint.x, currentPoint.y);
         UIGraphicsBeginImageContext(fieldImage.frame.size);
         [self.fieldImage.image drawInRect:CGRectMake(0, 0, fieldImage.frame.size.width, fieldImage.frame.size.height)];
         CGContextMoveToPoint(UIGraphicsGetCurrentContext(), lastPoint.x, lastPoint.y);
@@ -1235,14 +1234,14 @@
     CGPoint popPoint;
     popPoint = location;
     if (location.x <= 98) {
-        NSLog(@"On the left edge");
+        // NSLog(@"On the left edge");
         popPoint.x = -22;
     }
     else if (location.x < 750) {
-        NSLog(@"In the middle");
+        // NSLog(@"In the middle");
         popPoint.x = location.x-55;
     } else {
-        NSLog(@"On the right edge");
+        // NSLog(@"On the right edge");
         popPoint.x = 714;
     }
     
@@ -1328,7 +1327,7 @@
     CGPoint textPoint;
     textPoint.x = currentPoint.x;
     textPoint.y = currentPoint.y + popCounter*16;
-    NSLog(@"Text Point = %f %f", textPoint.x, textPoint.y);
+    // NSLog(@"Text Point = %f %f", textPoint.x, textPoint.y);
     popCounter++;
     for (int i = 0 ; i < [scoreList count] ; i++) {
         if ([newScore isEqualToString:[scoreList objectAtIndex:i]]) {
@@ -1437,7 +1436,7 @@
 }
 
 -(void)checkOverrideCode:(UIButton *)button {
-    NSLog(@"Check override");
+    // NSLog(@"Check override");
     if (alertPrompt == nil) {
         self.alertPrompt = [[AlertPromptViewController alloc] initWithNibName:nil bundle:nil];
         alertPrompt.delegate = self;
