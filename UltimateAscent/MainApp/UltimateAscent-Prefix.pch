@@ -22,5 +22,10 @@ typedef enum {
     Other,
 } MatchType;
 
+typedef enum {
+	Scouter,     // This is a scounting iPad
+	Master,      // This is the master iPad
+} BlueToothType;
+
 #endif
 

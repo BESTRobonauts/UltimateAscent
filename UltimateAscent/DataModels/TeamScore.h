@@ -44,6 +44,8 @@
 @property (nonatomic, retain) NSNumber * wallPickUp2;
 @property (nonatomic, retain) NSNumber * wallPickUp3;
 @property (nonatomic, retain) NSNumber * wallPickUp4;
+@property (nonatomic, retain) NSNumber * synced;
+@property (nonatomic, retain) NSNumber * robotSpeed;
 @property (nonatomic, retain) MatchData *match;
 @property (nonatomic, retain) TeamData *team;
 @property (nonatomic, retain) TournamentData *tournament;

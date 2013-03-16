@@ -50,9 +50,13 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    UITextField *textEntered = [alertView textFieldAtIndex:0];
-    
-    [delegate passCodeResult:textEntered.text];
+    if (buttonIndex == 1) { // Enter
+        UITextField *textEntered = [alertView textFieldAtIndex:0];    
+        [delegate passCodeResult:textEntered.text];
+    }
+    else {
+        [delegate passCodeResult:nil];
+    }
 }
 
 - (void)didReceiveMemoryWarning

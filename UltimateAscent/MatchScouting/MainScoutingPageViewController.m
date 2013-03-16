@@ -100,6 +100,7 @@
 @synthesize blueScore;
 @synthesize teamEdit;
 @synthesize matchListButton;
+@synthesize syncButton;
 
 // Field Drawing
 @synthesize imageContainer;
@@ -231,6 +232,8 @@
     matchResetButton.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:15.0];
     [self SetBigButtonDefaults:teamEdit];
     [teamEdit setTitle:@"Edit Team Info" forState:UIControlStateNormal];
+    [self SetBigButtonDefaults:syncButton];
+    [syncButton setTitle:@"Sync" forState:UIControlStateNormal];
     [self SetBigButtonDefaults:matchListButton];
     [matchListButton setTitle:@"Show Match List" forState:UIControlStateNormal];
 
@@ -322,9 +325,9 @@
     NSString *sectionName;
     for (int i=0; i < [[fetchedResultsController sections] count]; i++) {
         sectionName = [[[fetchedResultsController sections] objectAtIndex:i] name];
-        NSLog(@"Section = %@", sectionName);
+        // NSLog(@"Section = %@", sectionName);
         NSString *str = [matchDictionary getMatchTypeString:[NSNumber numberWithInt:[sectionName intValue]]];
-        NSLog(@"Match Type = %@", str);
+        // NSLog(@"Match Type = %@", str);
         [matchTypes addObject:[matchDictionary getMatchTypeString:[NSNumber numberWithInt:[sectionName intValue]]]];
     }
     return matchTypes;
@@ -518,16 +521,26 @@
 
 -(IBAction)AllianceSelectionChanged:(id)sender {
     //    NSLog(@"AllianceSelectionChanged");
+    if ([settings.mode isEqualToString:@"Test"]) {
+        [self AllianceSelectionPopUp];
+    }
+    else {
+        overrideMode = OverrideAllianceSelection;
+        [self checkAdminCode:alliance];
+    }
+}
+
+-(void)AllianceSelectionPopUp {
     [self CheckDataStatus];
     if (alliancePicker == nil) {
-        self.alliancePicker = [[AlliancePickerController alloc] 
+        self.alliancePicker = [[AlliancePickerController alloc]
                                initWithStyle:UITableViewStylePlain];
         alliancePicker.delegate = self;
         alliancePicker.allianceChoices = allianceList;
-        self.alliancePickerPopover = [[UIPopoverController alloc] 
-                                      initWithContentViewController:alliancePicker];               
+        self.alliancePickerPopover = [[UIPopoverController alloc]
+                                      initWithContentViewController:alliancePicker];
     }
-    [self.alliancePickerPopover presentPopoverFromRect:alliance.bounds inView:alliance 
+    [self.alliancePickerPopover presentPopoverFromRect:alliance.bounds inView:alliance
                               permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
@@ -578,20 +591,28 @@
 
 -(IBAction)TeamSelectionChanged:(id)sender {
     //    NSLog(@"TeamSelectionChanged");
-    
+    if ([settings.mode isEqualToString:@"Test"]) {
+        [self TeamSelectionPopUp];
+    }
+    else {
+        overrideMode = OverrideTeamSelection;
+        [self checkAdminCode:teamNumber];
+    }
+}
+
+-(void)TeamSelectionPopUp {
     [self CheckDataStatus];
     if (teamPicker == nil) {
-        self.teamPicker = [[TeamPickerController alloc] 
+        self.teamPicker = [[TeamPickerController alloc]
                            initWithStyle:UITableViewStylePlain];
         teamPicker.delegate = self;
         teamPicker.teamList = teamList;
-        self.teamPickerPopover = [[UIPopoverController alloc] 
-                                  initWithContentViewController:teamPicker];               
+        self.teamPickerPopover = [[UIPopoverController alloc]
+                                  initWithContentViewController:teamPicker];
     }
     teamPicker.teamList = teamList;
-    [self.teamPickerPopover presentPopoverFromRect:teamNumber.bounds inView:teamNumber 
+    [self.teamPickerPopover presentPopoverFromRect:teamNumber.bounds inView:teamNumber
                           permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-    
 }
 
 - (void)teamSelected:(NSString *)newTeam {
@@ -1450,6 +1471,21 @@
     return;
 }
 
+-(void)checkAdminCode:(UIButton *)button {
+    // NSLog(@"Check override");
+    if (alertPrompt == nil) {
+        self.alertPrompt = [[AlertPromptViewController alloc] initWithNibName:nil bundle:nil];
+        alertPrompt.delegate = self;
+        alertPrompt.titleText = @"Enter Admin Code";
+        alertPrompt.msgText = @"Danielle will kill you.";
+        self.alertPromptPopover = [[UIPopoverController alloc]
+                                   initWithContentViewController:alertPrompt];
+    }
+    [self.alertPromptPopover presentPopoverFromRect:button.bounds inView:button permittedArrowDirections:UIPopoverArrowDirectionLeft animated:YES];
+    
+    return;
+}
+
 - (void)passCodeResult:(NSString *)passCodeAttempt {
     [self.alertPromptPopover dismissPopoverAnimated:YES];
     switch (overrideMode) {
@@ -1465,7 +1501,19 @@
                 [self matchReset];
             }
             break;
-            
+
+        case OverrideAllianceSelection:
+            if ([passCodeAttempt isEqualToString:settings.adminCode]) {
+                [self AllianceSelectionPopUp];
+            }
+            break;
+
+        case OverrideTeamSelection:
+            if ([passCodeAttempt isEqualToString:settings.adminCode]) {
+                [self TeamSelectionPopUp];
+            }
+            break;
+
         default:
             break;
     }

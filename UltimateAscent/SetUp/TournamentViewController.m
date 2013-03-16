@@ -26,7 +26,11 @@
 @synthesize tournamentPicker;
 @synthesize tournamentList;
 @synthesize tournamentPickerPopover;
+// Alliance Picker
 @synthesize allianceButton;
+@synthesize alliancePicker;
+@synthesize allianceList;
+@synthesize alliancePickerPopover;
 @synthesize modeButton;
 @synthesize adminButton;
 @synthesize overrideButton;
@@ -114,6 +118,12 @@
         }
     }
     NSLog(@"Tournament List = %@", tournamentList);
+    
+    // Alliance Selection
+//    [allianceButton setTitle:settings. forState:UIControlStateNormal];
+//    tournamentButton.titleLabel.font = [UIFont fontWithName:@"Nasalization" size:18.0];
+    allianceList = [[NSMutableArray alloc] initWithObjects:@"Red 1", @"Red 2", @"Red 3", @"Blue 1", @"Blue 2", @"Blue 3", nil];
+
 }
 
 -(IBAction)TournamentSelectionChanged:(id)sender {
@@ -144,7 +154,92 @@
         }
     }
 }
+/*
+-(IBAction)AllianceSelectionChanged:(id)sender {
+    //    NSLog(@"AllianceSelectionChanged");
+    if ([settings.mode isEqualToString:@"Test"]) {
+        [self AllianceSelectionPopUp];
+    }
+    else {
+        overrideMode = OverrideAllianceSelection;
+        [self checkAdminCode:alliance];
+    }
+}
 
+-(void)AllianceSelectionPopUp {
+    if (alliancePicker == nil) {
+        self.alliancePicker = [[AlliancePickerController alloc]
+                               initWithStyle:UITableViewStylePlain];
+        alliancePicker.delegate = self;
+        alliancePicker.allianceChoices = allianceList;
+        self.alliancePickerPopover = [[UIPopoverController alloc]
+                                      initWithContentViewController:alliancePicker];
+    }
+    [self.alliancePickerPopover presentPopoverFromRect:alliance.bounds inView:alliance
+                              permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
+- (void)allianceSelected:(NSString *)newAlliance {
+    [self.alliancePickerPopover dismissPopoverAnimated:YES];
+    for (int i = 0 ; i < [allianceList count] ; i++) {
+        if ([newAlliance isEqualToString:[allianceList objectAtIndex:i]]) {
+            teamIndex = i;
+            [alliance setTitle:newAlliance forState:UIControlStateNormal];
+            [self ShowTeam:teamIndex];
+            break;
+        }
+    }
+}
+
+-(void)checkAdminCode:(UIButton *)button {
+    // NSLog(@"Check override");
+    if (alertPrompt == nil) {
+        self.alertPrompt = [[AlertPromptViewController alloc] initWithNibName:nil bundle:nil];
+        alertPrompt.delegate = self;
+        alertPrompt.titleText = @"Enter Admin Code";
+        alertPrompt.msgText = @"Danielle will kill you.";
+        self.alertPromptPopover = [[UIPopoverController alloc]
+                                   initWithContentViewController:alertPrompt];
+    }
+    [self.alertPromptPopover presentPopoverFromRect:button.bounds inView:button permittedArrowDirections:UIPopoverArrowDirectionLeft animated:YES];
+    
+    return;
+}
+
+- (void)passCodeResult:(NSString *)passCodeAttempt {
+    [self.alertPromptPopover dismissPopoverAnimated:YES];
+    switch (overrideMode) {
+        case OverrideDrawLock:
+            if ([passCodeAttempt isEqualToString:settings.overrideCode]) {
+                drawMode = DrawOff;
+                [self drawModeSettings:drawMode];
+            }
+            break;
+            
+        case OverrideMatchReset:
+            if ([passCodeAttempt isEqualToString:settings.overrideCode]) {
+                [self matchReset];
+            }
+            break;
+            
+        case OverrideAllianceSelection:
+            if ([passCodeAttempt isEqualToString:settings.adminCode]) {
+                [self AllianceSelectionPopUp];
+            }
+            break;
+            
+        case OverrideTeamSelection:
+            if ([passCodeAttempt isEqualToString:settings.adminCode]) {
+                [self TeamSelectionPopUp];
+            }
+            break;
+            
+        default:
+            break;
+    }
+    overrideMode = NoOverride;
+}
+*/
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     switch (interfaceOrientation) {

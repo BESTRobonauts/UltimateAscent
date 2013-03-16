@@ -58,6 +58,8 @@ typedef enum {
     NoOverride,
 	OverrideDrawLock,
     OverrideMatchReset,
+    OverrideAllianceSelection,
+    OverrideTeamSelection,
 } OverrideMode;
 
 @property (nonatomic, retain) AlertPromptViewController *alertPrompt;
@@ -143,9 +145,11 @@ typedef enum {
 @property (nonatomic, retain) AlliancePickerController *alliancePicker;
 @property (nonatomic, retain) UIPopoverController *alliancePickerPopover;
 -(IBAction)AllianceSelectionChanged:(id)sender;
+-(void)AllianceSelectionPopUp;
 
 // Team Picker
 -(IBAction)TeamSelectionChanged:(id)sender;
+-(void)TeamSelectionPopUp;
 @property (nonatomic, retain) IBOutlet UIButton *teamNumber;
 @property (nonatomic, retain) NSMutableArray *teamList;
 @property (nonatomic, retain) TeamPickerController *teamPicker;
@@ -154,6 +158,7 @@ typedef enum {
 // Other Stuff
 @property (nonatomic, retain) IBOutlet UIButton *matchListButton;
 @property (nonatomic, retain) IBOutlet UIButton *teamEdit;
+@property (nonatomic, retain) IBOutlet UIButton *syncButton;
 @property (nonatomic, assign) id<MainScoutingPageDelegate> delegate;
 - (NSString *)applicationDocumentsDirectory;
 
@@ -201,4 +206,5 @@ typedef enum {
 -(IBAction)drawModeChange: (id)sender;
 -(void)drawModeSettings:(DrawingMode) mode;
 -(void)checkOverrideCode:(UIButton *)button;
+-(void)checkAdminCode:(UIButton *)button;
 @end

@@ -45,6 +45,8 @@
 @dynamic wallPickUp2;
 @dynamic wallPickUp3;
 @dynamic wallPickUp4;
+@dynamic synced;
+@dynamic robotSpeed;
 @dynamic match;
 @dynamic team;
 @dynamic tournament;

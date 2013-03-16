@@ -70,7 +70,6 @@
 -(TeamScore *)GetTeam:(NSUInteger)currentTeamIndex;
 -(NSArray *)GetTeamMatches:(NSUInteger)currentTeamIndex;
 
-
 // Data Handling
 -(void)ShowMatch;
 -(void)setTeamList;

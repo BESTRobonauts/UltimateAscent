@@ -219,6 +219,7 @@
         [prompt show];    
     }
     else {
+        NSLog(@"red 1 = ^%@^", [newMatch objectAtIndex:2]);
         NSLog(@"matchAdded: Need to add serious error checking");
         CreateMatch *match = [CreateMatch new];
         AddRecordResults results = [match CreateUserAddedMatch:matchNumberString

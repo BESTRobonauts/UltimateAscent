@@ -342,14 +342,23 @@
 
 }
 
-
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {    
     [segue.destinationViewController setCurrentMatch:currentMatch];
-    NSLog(@"Fix this &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
-    [segue.destinationViewController setCurrentTeam:[[currentMatch.score allObjects] objectAtIndex:0]];
-    NSLog(@"Directory = %@", settings.tournament.directory);
     [segue.destinationViewController setDrawDirectory:settings.tournament.directory];
+    if ([segue.identifier isEqualToString:@"Red1"]) {
+        [segue.destinationViewController setCurrentTeam:[self GetTeam:0]];
+    } else if ([segue.identifier isEqualToString:@"Red2"]) {
+        [segue.destinationViewController setCurrentTeam:[self GetTeam:1]];
+    } else if ([segue.identifier isEqualToString:@"Red3"]) {
+        [segue.destinationViewController setCurrentTeam:[self GetTeam:2]];
+    } else if ([segue.identifier isEqualToString:@"Blue1"]) {
+        [segue.destinationViewController setCurrentTeam:[self GetTeam:3]];
+    } else if ([segue.identifier isEqualToString:@"Blue2"]) {
+        [segue.destinationViewController setCurrentTeam:[self GetTeam:4]];
+    } else if ([segue.identifier isEqualToString:@"Blue3"]) {
+        [segue.destinationViewController setCurrentTeam:[self GetTeam:5]];
+    }
 }
 
 -(MatchData *)getCurrentMatch {
