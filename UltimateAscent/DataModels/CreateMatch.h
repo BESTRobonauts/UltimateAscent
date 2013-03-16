@@ -30,19 +30,31 @@
                                       forTournament:(NSString *)tournament
                                       forRedScore:(NSNumber *)redScore
                                       forBlueScore:(NSNumber *)blueScore;
--(TeamScore *)CreateScore:(NSNumber *)teamNumber forAlliance:(NSString *)alliance;
+-(MatchData *)AddMatchObjectWithValidate:(NSNumber *)number
+             forTeam1:(NSNumber *)red1
+             forTeam2:(NSNumber *)red2
+             forTeam3:(NSNumber *)red3
+             forTeam4:(NSNumber *)blue1
+             forTeam5:(NSNumber *)blue2
+             forTeam6:(NSNumber *)blue3
+             forMatch:(NSString *)matchType
+        forTournament:(NSString *)tournament
+          forRedScore:(NSNumber *)redScore
+         forBlueScore:(NSNumber *)blueScore;
+-(TeamScore *)AddScore:(NSNumber *)teamNumber forAlliance:(NSString *)alliance forTournament:(TournamentData *)tournament;
 -(TeamData *)GetTeam:(NSNumber *)teamNumber;
 -(void)setTeamDefaults:(TeamData *)blankTeam;
 -(TournamentData *)getTournamentRecord:(NSString *)tournamentName;
--(AddRecordResults)CreateUserAddedMatch:(NSString *)number
-                               forMatch:(NSString *)matchType
-                               forTournament:(NSString *)tournament
-                               forTeam1:(NSString *)red1
-                               forTeam2:(NSString *)red2
-                               forTeam3:(NSString *)red3
-                               forTeam4:(NSString *)blue1
-                               forTeam5:(NSString *)blue2
-                               forTeam6:(NSString *)blue3;
+-(AddRecordResults)ValidateMatch:(NSNumber *)number
+                        forMatch:(NSString *)matchType
+                   forTournament:(NSString *)tournament
+                        forTeam1:(NSNumber *)red1
+                        forTeam2:(NSNumber *)red2
+                        forTeam3:(NSNumber *)red3
+                        forTeam4:(NSNumber *)blue1
+                        forTeam5:(NSNumber *)blue2
+                        forTeam6:(NSNumber *)blue3;
 
-
+-(AddRecordResults)ValidateTeam:(NSNumber *)red1
+                  forTournament:(NSString *)tournament;
 @end

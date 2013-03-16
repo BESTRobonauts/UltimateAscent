@@ -13,7 +13,8 @@ typedef enum {
     DB_ERROR,
     DB_MATCHED,
     DB_ADDED,
-    DB_MERGE
+    DB_MERGE,
+    DB_GOOD
 } AddRecordResults;
 
 

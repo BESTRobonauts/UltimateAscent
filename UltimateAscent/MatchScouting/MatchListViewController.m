@@ -205,7 +205,8 @@
     // Check to make sure a match number and type have been set
     NSString *matchNumberString = [newMatch objectAtIndex:0];
     NSString *matchType = [newMatch objectAtIndex:1];
-    NSLog(@"number = (%@)", matchNumberString);
+    
+    NSLog(@"number string = (%@)", matchNumberString);
     NSLog(@"type = (%@)", [newMatch objectAtIndex:1]);
 
     if ([matchNumberString isEqualToString:@""] || [matchType isEqualToString:@""]) {
@@ -216,22 +217,34 @@
                                                 cancelButtonTitle:@"Ok"
                                                 otherButtonTitles:nil];        
         [prompt setAlertViewStyle:UIAlertViewStyleDefault];
-        [prompt show];    
+        [prompt show];
+        return;
     }
-    else {
-        NSLog(@"red 1 = ^%@^", [newMatch objectAtIndex:2]);
-        NSLog(@"matchAdded: Need to add serious error checking");
-        CreateMatch *match = [CreateMatch new];
-        AddRecordResults results = [match CreateUserAddedMatch:matchNumberString
-                                                            forMatch:matchType
-                                                       forTournament:settings.tournament.name
-                                                            forTeam1:[newMatch objectAtIndex:2]
-                                                            forTeam2:[newMatch objectAtIndex:3]
-                                                            forTeam3:[newMatch objectAtIndex:4]
-                                                            forTeam4:[newMatch objectAtIndex:5]
-                                                            forTeam5:[newMatch objectAtIndex:6]
-                                                            forTeam6:[newMatch objectAtIndex:7]];
-        NSLog(@"db result = %d", results);
+    NSNumber *matchNumber = [NSNumber numberWithInt:[matchNumberString intValue]];
+    NSNumber *red1 = [NSNumber numberWithInt:[[newMatch objectAtIndex:2] intValue]];
+    NSNumber *red2 = [NSNumber numberWithInt:[[newMatch objectAtIndex:3] intValue]];
+    NSNumber *red3 = [NSNumber numberWithInt:[[newMatch objectAtIndex:4] intValue]];
+    NSNumber *blue1 = [NSNumber numberWithInt:[[newMatch objectAtIndex:5] intValue]];
+    NSNumber *blue2 = [NSNumber numberWithInt:[[newMatch objectAtIndex:6] intValue]];
+    NSNumber *blue3 = [NSNumber numberWithInt:[[newMatch objectAtIndex:7] intValue]];
+    CreateMatch *matchObject = [CreateMatch new];
+    matchObject.managedObjectContext = managedObjectContext;
+    MatchData *match = [matchObject AddMatchObjectWithValidate:matchNumber
+                                              forTeam1:red1
+                                              forTeam2:red2
+                                              forTeam3:red3
+                                              forTeam4:blue1
+                                              forTeam5:blue2
+                                              forTeam6:blue3
+                                              forMatch:matchType
+                                         forTournament:settings.tournament.name
+                                           forRedScore:[NSNumber numberWithInt:-1]
+                                          forBlueScore:[NSNumber numberWithInt:-1]];
+    if (match) {
+        NSError *error;
+        if (![managedObjectContext save:&error]) {
+            NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+        }
     }
 }
 
