@@ -7,7 +7,6 @@
 //
 
 #import "MainScoutingPageViewController.h"
-#import "MatchDetailViewController.h"
 #import "TeamDetailViewController.h"
 #import "MatchData.h"
 #import "TeamScore.h"

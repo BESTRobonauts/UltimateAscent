@@ -17,7 +17,9 @@
 #import "TournamentData.h"
 #include "MatchTypeDictionary.h"
 
-@implementation MatchListViewController
+@implementation MatchListViewController {
+    NSIndexPath *pushedIndexPath;
+}
 @synthesize managedObjectContext, fetchedResultsController;
 @synthesize settings;
 @synthesize headerView;
@@ -251,12 +253,13 @@
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    /*
-    NSIndexPath *indexPath = [ self.tableView indexPathForCell:sender];
-    
-    MatchDetailViewController *detailViewController = [segue destinationViewController];
-    detailViewController.match = [fetchedResultsController objectAtIndexPath:indexPath]; */
-
+    if ([segue.identifier isEqualToString:@"MatchDetail"]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+        pushedIndexPath = [self.tableView indexPathForCell:sender];
+        [segue.destinationViewController setMatch:[fetchedResultsController objectAtIndexPath:indexPath]];
+        [segue.destinationViewController setManagedObjectContext:managedObjectContext];
+        [segue.destinationViewController setDelegate:self];
+    }
     if ([segue.identifier isEqualToString:@"Add"]) {
         NSLog(@"add");
         UINavigationController *nv = (UINavigationController *)[segue destinationViewController];
@@ -264,6 +267,17 @@
         addvc.delegate = self;
     }
  }
+
+- (void)matchDetailReturned:(BOOL)dataChange {
+    if (dataChange) {
+        NSError *error;
+        if (![managedObjectContext save:&error]) {
+            NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+        }
+        [self configureCell:[self.tableView cellForRowAtIndexPath:pushedIndexPath] atIndexPath:pushedIndexPath];
+    }
+}
+
 
 #pragma mark - Table view data source
 
