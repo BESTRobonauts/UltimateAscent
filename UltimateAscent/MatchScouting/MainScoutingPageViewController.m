@@ -1112,7 +1112,7 @@
     fieldDrawingPath = [baseDrawingPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%d", [currentTeam.team.number intValue]]];
     
     // Check the database to see if this team and match have a drawing already
-    if (currentTeam.fieldDrawing) {
+    if (currentTeam.fieldDrawing && ![currentTeam.fieldDrawing isEqualToString:@""]) {
         // Load file, set file name to the name read, and load it as image
         // NSLog(@"Field Drawing= %@", currentTeam.fieldDrawing);
         fieldDrawingFile = currentTeam.fieldDrawing;

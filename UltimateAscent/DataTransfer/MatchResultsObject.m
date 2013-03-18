@@ -51,6 +51,7 @@
 @synthesize tournament;
 @synthesize team;
 @synthesize fieldDrawingImage;
+@synthesize drawingPath;
 
 - (id)initWithScore:(TeamScore *)score {
     self.alliance = score.alliance;
@@ -90,9 +91,21 @@
     self.matchType = score.match.matchType;
     self.tournament = score.tournament.name;
     self.team = score.team.number;
+    self.drawingPath = [NSString stringWithFormat:@"Library/FieldDrawings/%@/%d", score.tournament.directory, [score.team.number intValue]];
     
-    NSString *baseDrawingPath = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"Library/FieldDrawings/%@/%d/%@", score.tournament.directory, [score.team.number intValue], score.fieldDrawing]];
-    self.fieldDrawingImage = UIImagePNGRepresentation([UIImage imageNamed:baseDrawingPath]);
+    NSString *baseDrawingPath = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"%@/%@",self.drawingPath, score.fieldDrawing]];
+    self.fieldDrawingImage = UIImagePNGRepresentation([UIImage imageWithContentsOfFile:baseDrawingPath]);
+
+    if ([[NSFileManager defaultManager] fileExistsAtPath:baseDrawingPath]) {
+        NSLog(@"Drawing exists at %@", baseDrawingPath);
+    }
+    else NSLog(@"Where is my file?????");
+
+
+    UIImage *test = [UIImage imageWithContentsOfFile:baseDrawingPath];
+    NSLog(@"test image = %@", test);
+    NSLog(@"basedrawingpath = %@", baseDrawingPath);
+    NSLog(@"fieldDrawingImage = %@", self.fieldDrawingImage);
     return self;
 }
 
@@ -132,6 +145,7 @@
         self.synced = [decoder decodeObjectForKey:@"synced"];
         self.robotSpeed = [decoder decodeObjectForKey:@"robotSpeed"];
         self.fieldDrawingImage = [decoder decodeObjectForKey:@"fieldDrawingImage"];
+        self.drawingPath = [decoder decodeObjectForKey:@"drawingPath"];
         self.match = [decoder decodeObjectForKey:@"match"];
         self.matchType = [decoder decodeObjectForKey:@"matchType"];
         self.tournament = [decoder decodeObjectForKey:@"tournament"];
@@ -179,6 +193,7 @@
     [encoder encodeObject:tournament forKey:@"tournament"];
     [encoder encodeObject:team forKey:@"team"];
     [encoder encodeObject:fieldDrawingImage forKey:@"fieldDrawingImage"];
+    [encoder encodeObject:drawingPath forKey:@"drawingPath"];
 }
 
 @end

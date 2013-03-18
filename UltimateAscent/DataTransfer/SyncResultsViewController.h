@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <GameKit/GameKit.h>
 
+@class MatchResultsObject;
+@class TeamScore;
+
 @interface SyncResultsViewController : UIViewController <GKPeerPickerControllerDelegate, GKSessionDelegate, NSFetchedResultsControllerDelegate, UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate>
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
@@ -25,6 +28,8 @@
 
 -(IBAction) btnConnect:(id) sender;
 -(IBAction) btnDisconnect:(id) sender;
+-(BOOL)addMatchScore:(MatchResultsObject *) xferData;
+-(void)unpackXferData:(MatchResultsObject *)xferData forScore:(TeamScore *)score;
 - (void)retrieveSettings;
 
 @end

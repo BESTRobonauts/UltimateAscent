@@ -48,7 +48,7 @@
 @property (nonatomic, copy) NSString *matchType;
 @property (nonatomic, copy) NSString *tournament;
 @property (nonatomic, copy) NSNumber *team;
-
+@property (nonatomic, copy) NSString *drawingPath;
 
 - (id)initWithScore:(TeamScore *)score;
 

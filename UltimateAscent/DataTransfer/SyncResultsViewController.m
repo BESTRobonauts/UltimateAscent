@@ -170,16 +170,13 @@ GKPeerPickerController *picker;
                                           error:nil];
 }
 
-
 - (void) receiveData:(NSData *)data
             fromPeer:(NSString *)peer
            inSession:(GKSession *)session
              context:(void *)context {
     
-    NSLog(@"Receiving");
     MatchResultsObject *dataFromTransfer = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     //---convert the NSData to NSString---
-    NSLog(@"Received %@", dataFromTransfer.alliance);
     if (receivedMatches == nil) {
         receivedMatches = [NSMutableArray array];
     }
@@ -189,17 +186,22 @@ GKPeerPickerController *picker;
     if (receivedTeams == nil) {
         receivedTeams = [NSMutableArray array];
     }
-    [receivedMatches addObject:dataFromTransfer.match];
-    [receivedMatchTypes addObject:dataFromTransfer.matchType];
-    [receivedTeams addObject:dataFromTransfer.team];
-    [_receiveDataTable reloadData];
-    NSString* str = @"Receiving";
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Data received"
-                                                    message:str
-                                                   delegate:self
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    [alert show];
+    if ([self addMatchScore:dataFromTransfer]) {
+        [receivedMatches addObject:dataFromTransfer.match];
+        [receivedMatchTypes addObject:dataFromTransfer.matchType];
+        [receivedTeams addObject:dataFromTransfer.team];
+        [_receiveDataTable reloadData];
+    }
+    else {
+        NSString* str = [NSString stringWithFormat:@"Match %@, Team %@", dataFromTransfer.match, dataFromTransfer.team];
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error Receiving"
+                                                        message:str
+                                                       delegate:self
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
 }
 
 - (void)session:(GKSession *)session didFailWithError:(NSError *)error {
@@ -210,11 +212,107 @@ GKPeerPickerController *picker;
     NSLog(@"alert");
 }
 
+-(BOOL)addMatchScore:(MatchResultsObject *) xferData {
+    // Fetch score record
+    // Check to make sure it is neither saved nor synced
+    // Copy the data into the right places
+    // Put the match drawing in the correct directory
+    NSError *error;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"TeamScore" inManagedObjectContext:_managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                              @"match.number == %@ AND match.matchType CONTAINS %@ and tournament.name CONTAINS %@ and team.number == %@", xferData.match, xferData.matchType, xferData.tournament, xferData.team];
+    [fetchRequest setPredicate:predicate];
+    
+    NSArray *scoreData = [_managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    if(!scoreData) {
+        NSLog(@"Karma disruption error");
+        return FALSE;
+    }
+    else {
+        if([scoreData count] > 0) {  // Match Exists
+            TeamScore *score = [scoreData objectAtIndex:0];
+            if ([score.saved intValue] || [score.synced intValue]) {
+                // Match already saved on this device
+                return FALSE;
+            }
+            [self unpackXferData:xferData forScore:score];
+            return TRUE;
+        }
+        else {
+            return FALSE;
+        }
+    }
+}
+
+-(void)unpackXferData:(MatchResultsObject *)xferData forScore:(TeamScore *)score {
+    score.alliance = xferData.alliance;
+    score.autonHigh = xferData.autonHigh;
+    score.autonLow = xferData.autonLow;
+    score.autonMid = xferData.autonMid;
+    score.autonMissed = xferData.autonMissed;
+    score.autonShotsMade = xferData.autonShotsMade;
+    score.blocks = xferData.blocks;
+    score.climbAttempt = xferData.climbAttempt;
+    score.climbLevel = xferData.climbLevel;
+    score.climbTimer = xferData.climbTimer;
+    score.defenseRating = xferData.defenseRating;
+    score.driverRating = xferData.driverRating;
+    score.fieldDrawing = xferData.fieldDrawing;
+    score.floorPickUp = xferData.floorPickUp;
+    score.notes = xferData.notes;
+    score.otherRating = xferData.otherRating;
+    score.passes = xferData.passes;
+    score.pyramid = xferData.pyramid;
+    score.teleOpHigh = xferData.teleOpHigh;
+    score.teleOpLow = xferData.teleOpLow;
+    score.teleOpMid = score.teleOpMid;
+    score.teleOpMissed = xferData.teleOpMissed;
+    score.teleOpShots = xferData.teleOpShots;
+    score.totalAutonShots = xferData.totalAutonShots;
+    score.totalTeleOpShots = xferData.totalTeleOpShots;
+    score.wallPickUp = xferData.wallPickUp;
+    score.wallPickUp1 = xferData.wallPickUp1;
+    score.wallPickUp2 = xferData.wallPickUp2;
+    score.wallPickUp3 = xferData.wallPickUp3;
+    score.wallPickUp4 = xferData.wallPickUp4;
+    score.robotSpeed = xferData.robotSpeed;
+    // For now, set saved to zero so that we know that this iPad didn't do the scouting
+    score.saved = [NSNumber numberWithInt:0];
+    // Set synced to one so that we know it has been received
+    score.synced = [NSNumber numberWithInt:1];
+    
+    // Save the picture
+    NSString *baseDrawingPath = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"%@",xferData.drawingPath]];
+
+    // Check if robot directory exists, if not, create it
+    if (![[NSFileManager defaultManager] fileExistsAtPath:baseDrawingPath isDirectory:NO]) {
+        if (![[NSFileManager defaultManager]createDirectoryAtPath:baseDrawingPath
+                                      withIntermediateDirectories: YES
+                                                       attributes: nil
+                                                            error: NULL]) {
+            NSLog(@"Dreadful error creating directory to save field drawings");
+            return;
+        }
+    }
+    baseDrawingPath = [baseDrawingPath stringByAppendingPathComponent:score.fieldDrawing];
+    NSLog(@"score = %@", score);
+    NSLog(@"base path = %@", baseDrawingPath);
+    UIImage *imge = [UIImage imageWithData:xferData.fieldDrawingImage];
+    [UIImagePNGRepresentation(imge) writeToFile:baseDrawingPath atomically:YES];
+    NSError *error;
+    if (![_managedObjectContext save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+    }
+}
+
 #pragma mark - Table view data source
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     if (tableView == _receiveDataTable) {
-        NSLog(@"header table view = %@", tableView);
         return _headerView2;
     }
     else return _headerView;
@@ -222,7 +320,6 @@ GKPeerPickerController *picker;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     if (tableView == _receiveDataTable) {
-        NSLog(@"height table view = %@", tableView);
     }
     return 50;
 }
@@ -230,7 +327,6 @@ GKPeerPickerController *picker;
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     if (tableView == _receiveDataTable) {
-    NSLog(@"sections table view = %@", tableView);
     }
     if (tableView == _sendDataTable) {
         NSInteger count = [[_fetchedResultsController sections] count];
@@ -247,12 +343,10 @@ GKPeerPickerController *picker;
         
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSLog(@"rows table view = %@", tableView);
     // Return the number of rows in the section.
     if (tableView == _sendDataTable) {
         id <NSFetchedResultsSectionInfo> sectionInfo =
         [[_fetchedResultsController sections] objectAtIndex:section];
-        NSLog(@"saved %d", [sectionInfo numberOfObjects]);
     
         return [sectionInfo numberOfObjects];
     }
@@ -263,7 +357,6 @@ GKPeerPickerController *picker;
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     TeamScore *info = [_fetchedResultsController objectAtIndexPath:indexPath];
-    NSLog(@"configureCell");
     // Configure the cell...
     // Set a background for the cell
     
@@ -281,7 +374,6 @@ GKPeerPickerController *picker;
 }
 
 - (void)configureReceivedCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"configureReceiver");
     // Configure the cell...
     // Set a background for the cell
     
@@ -301,7 +393,6 @@ GKPeerPickerController *picker;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"cellforrow table view = %@", tableView);
     if (tableView == _sendDataTable) {
         UITableViewCell *cell = [tableView
                              dequeueReusableCellWithIdentifier:@"SendData"];
@@ -321,7 +412,6 @@ GKPeerPickerController *picker;
 {
     if (tableView == _receiveDataTable) return;
     
-    NSLog(@"did select");
     MatchResultsObject *transferObject = [[MatchResultsObject alloc] initWithScore:[_fetchedResultsController objectAtIndexPath:indexPath]];
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:transferObject];
     [self mySendDataToPeers:data];
@@ -368,10 +458,9 @@ GKPeerPickerController *picker;
         NSSortDescriptor *typeDescriptor = [[NSSortDescriptor alloc] initWithKey:@"match.matchTypeSection" ascending:YES];
         NSSortDescriptor *numberDescriptor = [[NSSortDescriptor alloc] initWithKey:@"match.number" ascending:YES];
         NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:typeDescriptor, numberDescriptor, nil];
-        // Add the search for tournament name
-//        NSPredicate *pred = [NSPredicate predicateWithFormat:@"(saved == 1) AND (synced == 1)"];
         NSLog(@"Fix this");
         NSPredicate *pred = [NSPredicate predicateWithFormat:@"(ANY tournament = %@) AND (saved == 1) AND (synced == 0)", settings.tournament];
+//        NSPredicate *pred = [NSPredicate predicateWithFormat:@"(ANY tournament = %@) AND (saved == 1) AND (synced == 1)", settings.tournament];
         [fetchRequest setPredicate:pred];
         [fetchRequest setSortDescriptors:sortDescriptors];
         
@@ -412,8 +501,6 @@ GKPeerPickerController *picker;
         }
     }
 }
-
-
 
 - (void)didReceiveMemoryWarning
 {
