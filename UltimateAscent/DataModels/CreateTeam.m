@@ -27,6 +27,7 @@
  12 Climb Level
  13 Climb Speed
  14 Notes
+ 15 Saved
 */
 @implementation CreateTeam
 @synthesize managedObjectContext;
@@ -47,12 +48,12 @@
     TeamData *team = [self GetTeam:teamNumber];
     TournamentData *tournamentRecord;
     if (team) {
-        NSLog(@"createTeamFromFile:Team %@ already exists", teamNumber);
-        NSLog(@"createTeamFromFile:************************************* Really need to add new tournament");
+        // NSLog(@"createTeamFromFile:Team %@ already exists", teamNumber);
+        // NSLog(@"createTeamFromFile:************************************* Really need to add new tournament");
         tournament = [data objectAtIndex: 2];
         tournamentRecord = [self getTournamentRecord:tournament];
         [team addTournamentObject:tournamentRecord];
-        NSLog(@"Team = %@", team);
+        // NSLog(@"Team = %@", team);
         return DB_MATCHED;
     }
     else {
@@ -60,6 +61,8 @@
                                                            inManagedObjectContext:managedObjectContext];
         [self setTeamDefaults:team];
         switch ([data count]) {
+            case 15:
+                team.saved = [NSNumber numberWithInt:[[data objectAtIndex:14] intValue]];
             case 14:
                 team.notes = [data objectAtIndex: 13];
             case 13:

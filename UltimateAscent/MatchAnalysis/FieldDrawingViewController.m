@@ -1,23 +1,23 @@
 //
-//  MasonPageViewController.m
+//  FieldDrawingViewController.m
 //  UltimateAscent
 //
 //  Created by FRC on 2/15/13.
 //  Copyright (c) 2013 FRC. All rights reserved.
 //
 
-#import "MasonPageViewController.h"
+#import "FieldDrawingViewController.h"
 #import "MatchData.h"
 #import "TeamScore.h"
 #import "TeamData.h"
 #import "SettingsData.h"
 #import "TournamentData.h"
 
-@interface MasonPageViewController ()
+@interface FieldDrawingViewController ()
 
 @end
 
-@implementation MasonPageViewController
+@implementation FieldDrawingViewController
 @synthesize currentMatch;
 @synthesize currentTeam;
 @synthesize prevMatch;

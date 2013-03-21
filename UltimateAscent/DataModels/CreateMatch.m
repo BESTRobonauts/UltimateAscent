@@ -134,12 +134,6 @@
         MatchData *match = [NSEntityDescription insertNewObjectForEntityForName:@"MatchData"
                                                          inManagedObjectContext:managedObjectContext];
         matchDictionary = [[MatchTypeDictionary alloc] init];
-        /*
-        NSString *thing = [matchDictionary getMatchTypeString:[NSNumber numberWithInt:Seeding]];
-        NSLog(@"thing = %@", thing);
-        //  NSInteger *other = [matchDictionary getMatchTypeEnum:@"Elimination"];
-        NSLog(@"other = %@", [matchDictionary getMatchTypeEnum:@"Elimination"]);
-        */
         match.matchType = matchType;
         match.matchTypeSection = [matchDictionary getMatchTypeEnum:matchType];
         match.number = number;
@@ -273,16 +267,16 @@
     tournamentRecord = [self getTournamentRecord:tournament];
     type = [data objectAtIndex: 1];
     matchNumber = [NSNumber numberWithInt:[[data objectAtIndex: 2] intValue]];
-    NSLog(@"createMatchFromFile:Tournament = %@, Match Type = %@, Match Number = %@", tournament, type, matchNumber);
+    // NSLog(@"createMatchFromFile:Tournament = %@, Match Type = %@, Match Number = %@", tournament, type, matchNumber);
     MatchData *match = [self GetMatch:matchNumber forMatchType:type forTournament:tournament];
     if (match) {
-        NSLog(@"Match Exists");
+        // NSLog(@"Match Exists");
         teamNumber = [[data objectAtIndex: 4] intValue];
 
         NSArray *teamScores = [match.score allObjects];
         TeamScore *score;
         BOOL found = NO;
-        NSLog(@"Team Number = %d", teamNumber);
+        // NSLog(@"Team Number = %d", teamNumber);
         for (int i=0; i<[teamScores count]; i++) {
             score = [teamScores objectAtIndex:i];
             if ([score.team.number intValue] == teamNumber) {
@@ -291,10 +285,10 @@
             };
         }
         if (found) {
-            NSLog(@"Count = %d", [data count]);
-            NSLog(@"30 %@", [data objectAtIndex:29]);
-            NSLog(@"29 %@", [data objectAtIndex:28]);
-            NSLog(@"28 %@", [data objectAtIndex:27]);
+            // NSLog(@"Count = %d", [data count]);
+            // NSLog(@"30 %@", [data objectAtIndex:29]);
+            // NSLog(@"29 %@", [data objectAtIndex:28]);
+            // NSLog(@"28 %@", [data objectAtIndex:27]);
             switch ([data count]) {
                 case 34:
                     score.notes = [data objectAtIndex: 33];
@@ -320,7 +314,6 @@
                     score.pyramid = [NSNumber numberWithInt:[[data objectAtIndex: 23] intValue]];
                 case 23:
                     score.climbTimer = [NSNumber numberWithFloat:[[data objectAtIndex: 22] floatValue]];
-                    NSLog(@"climb = %@", score.climbAttempt);
                 case 22:
                     score.climbLevel = [NSNumber numberWithInt:[[data objectAtIndex: 21] intValue]];
                 case 21:
@@ -388,12 +381,6 @@
     MatchData *match = [NSEntityDescription insertNewObjectForEntityForName:@"MatchData" 
                                                      inManagedObjectContext:managedObjectContext];        
     matchDictionary = [[MatchTypeDictionary alloc] init];
-/*
-    NSString *thing = [matchDictionary getMatchTypeString:[NSNumber numberWithInt:Seeding]];
-    NSLog(@"thing = %@", thing);
-    //  NSInteger *other = [matchDictionary getMatchTypeEnum:@"Elimination"];
-    NSLog(@"other = %@", [matchDictionary getMatchTypeEnum:@"Elimination"]);
-  */
     match.matchType = matchType;
     match.matchTypeSection = [matchDictionary getMatchTypeEnum:matchType];
     match.number = number;

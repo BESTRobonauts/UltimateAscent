@@ -1,5 +1,5 @@
 //
-//  MasonPageViewController.h
+//  FieldDrawingViewController.h
 //  UltimateAscent
 //
 //  Created by FRC on 2/15/13.
@@ -12,7 +12,7 @@
 @class TeamScore;
 @class SettingsData;
 
-@interface MasonPageViewController : UIViewController
+@interface FieldDrawingViewController : UIViewController
 
 @property (nonatomic, retain) NSString *drawDirectory;
 @property (nonatomic, retain) TeamScore *currentTeam;;

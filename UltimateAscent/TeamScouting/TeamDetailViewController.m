@@ -15,10 +15,16 @@
 @implementation TeamDetailViewController
 @synthesize team;
 @synthesize numberLabel, nameTextField, notesTextField;
-@synthesize intakeType, pyramidDump, climbZone, driveType;
-@synthesize maxHeight, minHeight, shooterHeight;
-@synthesize wheelDiameter, cims;
-@synthesize climbSpeed;
+@synthesize intakeType, climbZone, shootingLevel; 
+@synthesize auton, maxHeight, minHeight;
+@synthesize wheelType, nwheels, wheelDiameter;
+@synthesize driveType, cims;
+@synthesize intakeList = _intakeList;
+@synthesize driveTypePicker = _driveTypePicker;
+@synthesize intakePicker = _intakePicker;
+@synthesize climbZonePicker = _climbZonePicker;
+@synthesize detailPickerPopover = _detailPickerPopover;
+@synthesize detailSelection = _detailSelection;
 @synthesize imageView, choosePhotoBtn, takePhotoBtn;
 @synthesize popoverController;
 @synthesize photoPath;
@@ -55,21 +61,24 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
-    NSLog(@"Team Detail");
-    NSLog(@"Team List viewDidLoad");
-     
+    NSLog(@"Team Detail viewDidLoad");
+    
     numberLabel.font = [UIFont fontWithName:@"Helvetica" size:24.0];
     [self SetTextBoxDefaults:nameTextField];
     [self SetTextBoxDefaults:notesTextField];
-    [self SetTextBoxDefaults:maxHeight];
     [self SetTextBoxDefaults:minHeight];
-    [self SetTextBoxDefaults:shooterHeight];
+    [self SetTextBoxDefaults:maxHeight];
+    [self SetTextBoxDefaults:wheelType];
+    [self SetTextBoxDefaults:nwheels];
     [self SetTextBoxDefaults:wheelDiameter];
     [self SetTextBoxDefaults:cims];
-    [self SetTextBoxDefaults:climbSpeed];
 //    [takePhotoBtn setTitle:@"Take Photo" forState:UIControlStateNormal];
 //    takePhotoBtn.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:24.0];
  
+    _intakeList = [[NSMutableArray alloc] initWithObjects:@"Unknown", @"Floor", @"Human", @"Both", nil];
+    _driveTypeList = [[NSMutableArray alloc] initWithObjects:@"Unknown", @"Mech", @"Omni", @"Swerve", @"Traction", @"Multi", nil];
+    _climbZoneList = [[NSMutableArray alloc] initWithObjects:@"Unknown", @"One", @"Two", @"Three", nil];
+
     matchHeader = [[UIView alloc] initWithFrame:CGRectMake(0,0,768,50)];
     matchHeader.backgroundColor = [UIColor lightGrayColor];
     matchHeader.opaque = YES;
@@ -104,7 +113,6 @@
     teleOpAccLabel.backgroundColor = [UIColor clearColor];
     [matchHeader addSubview:teleOpAccLabel];
     
-    [self createSegments];
     [super viewDidLoad];
 }
 
@@ -114,90 +122,153 @@
     numberLabel.text = [NSString stringWithFormat:@"%d", [team.number intValue]];
     nameTextField.text = team.name;
     notesTextField.text = team.notes;
+    shootingLevel.text = team.sthing1;
+    auton.text = [NSString stringWithFormat:@"%d", [team.auton intValue]];
     minHeight.text = [NSString stringWithFormat:@"%.1f", [team.minHeight floatValue]];
     maxHeight.text = [NSString stringWithFormat:@"%.1f", [team.maxHeight floatValue]];
-    shooterHeight.text = [NSString stringWithFormat:@"%.1f", [team.shooterHeight floatValue]];
+    wheelType.text = team.wheelType;
+    nwheels.text = [NSString stringWithFormat:@"%d", [team.nwheels intValue]];
     wheelDiameter.text = [NSString stringWithFormat:@"%.1f", [team.wheelDiameter floatValue]];
     cims.text = [NSString stringWithFormat:@"%.0f", [team.cims floatValue]];
-    climbSpeed.text = [NSString stringWithFormat:@"%.1f", [team.climbSpeed floatValue]];
-    [self setSegments];
+
+    if ([team.intake intValue] == -1) {
+        [intakeType setTitle:@"Unknown" forState:UIControlStateNormal];
+    }
+    else if ([team.intake intValue] == 0) {
+        [intakeType setTitle:@"Floor" forState:UIControlStateNormal];
+    }
+    else if ([team.intake intValue] == 1) {
+        [intakeType setTitle:@"Human" forState:UIControlStateNormal];
+    }
+    else if ([team.intake intValue] == 2) {
+        [intakeType setTitle:@"Both" forState:UIControlStateNormal];
+    }
+    
+    if ([team.climbLevel intValue] == -1) {
+        [climbZone setTitle:@"Unknown" forState:UIControlStateNormal];
+    }
+    else if ([team.climbLevel intValue] == 0) {
+        [climbZone setTitle:@"One" forState:UIControlStateNormal];
+    }
+    else if ([team.climbLevel intValue] == 1) {
+        [climbZone setTitle:@"Two" forState:UIControlStateNormal];
+    }
+    else if ([team.climbLevel intValue] == 2) {
+        [climbZone setTitle:@"Three" forState:UIControlStateNormal];
+    }
+
+    if ([team.driveTrainType intValue] == -1) {
+        [driveType setTitle:@"Unknown" forState:UIControlStateNormal];
+    }
+    else if ([team.driveTrainType intValue] == 0) {
+        [driveType setTitle:@"Mech" forState:UIControlStateNormal];
+    }
+    else if ([team.driveTrainType intValue] == 1) {
+        [driveType setTitle:@"Omni" forState:UIControlStateNormal];
+    }
+    else if ([team.driveTrainType intValue] == 2) {
+        [driveType setTitle:@"Swerve" forState:UIControlStateNormal];
+    }
+    else if ([team.driveTrainType intValue] == 3) {
+        [driveType setTitle:@"Traction" forState:UIControlStateNormal];
+    }
+    else if ([team.driveTrainType intValue] == 4) {
+        [driveType setTitle:@"Multi" forState:UIControlStateNormal];
+    }
+    
     NSString *path = [NSString stringWithFormat:@"Library/RobotPhotos/%@", [NSString stringWithFormat:@"%d", [team.number intValue]]];
     photoPath = [NSHomeDirectory() stringByAppendingPathComponent:path];
     [self getPhoto];
     dataChange = NO;
-    NSLog(@"Showing team = %@", team);
 }
 
--(void)setSegments {
-    int value = [team.driveTrainType intValue];
-    driveType.selectedSegmentIndex = value;
-
-    value = [team.intake intValue];
-    intakeType.selectedSegmentIndex = value;
-
-    value = [team.pyramidDump intValue];
-    pyramidDump.selectedSegmentIndex = value;
-
-    value = [team.climbLevel intValue];
-    climbZone.selectedSegmentIndex = value;
+-(IBAction)detailChanged:(id)sender {
+    UIButton * PressedButton = (UIButton*)sender;
+    if (PressedButton == intakeType) {
+        _detailSelection = SelectIntake;
+        if (_intakePicker == nil) {
+            _intakePicker = [[TeamDetailPickerController alloc]
+                             initWithStyle:UITableViewStylePlain];
+            _intakePicker.delegate = self;
+        }
+        _intakePicker.detailChoices = _intakeList;
+        self.detailPickerPopover = [[UIPopoverController alloc]
+                                        initWithContentViewController:_intakePicker];
+    }
+    else if (PressedButton == driveType) {
+        _detailSelection = SelectDriveType;
+        if (_driveTypePicker == nil) {
+            _driveTypePicker = [[TeamDetailPickerController alloc]
+                             initWithStyle:UITableViewStylePlain];
+            _driveTypePicker.delegate = self;
+        }
+        _driveTypePicker.detailChoices = _driveTypeList;
+        self.detailPickerPopover = [[UIPopoverController alloc]
+                                        initWithContentViewController:_driveTypePicker];
+    }
+    else if (PressedButton == climbZone) {
+        _detailSelection = SelectClimbZone;
+        if (_climbZonePicker == nil) {
+            _climbZonePicker = [[TeamDetailPickerController alloc]
+                                initWithStyle:UITableViewStylePlain];
+            _climbZonePicker.delegate = self;
+        }
+        _climbZonePicker.detailChoices = _climbZoneList;
+        self.detailPickerPopover = [[UIPopoverController alloc]
+                                        initWithContentViewController:_climbZonePicker];
+    }
+    [self.detailPickerPopover presentPopoverFromRect:PressedButton.bounds inView:PressedButton
+                            permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
--(void)getSelection:(id) sender {
-    UISegmentedControl *segmentedControl = (UISegmentedControl *)sender;
-    NSNumber *current;
-    current = [NSNumber numberWithInt:segmentedControl.selectedSegmentIndex];
-
-    if (segmentedControl == intakeType) {
-            team.intake = current;
+- (void)detailSelected:(NSString *)newDetails {
+    [_detailPickerPopover dismissPopoverAnimated:YES];
+    switch (_detailSelection) {
+        case SelectIntake:
+            [self changeIntake:newDetails];
+            break;
+        case SelectDriveType:
+            [self changeDriveType:newDetails];
+            break;
+        case SelectClimbZone:
+            [self changeClimbZone:newDetails];
+            break;
+        default:
+            break;
     }
-    else if (segmentedControl == pyramidDump) {
-        team.pyramidDump = current;
-    }
-    else if (segmentedControl == climbZone) {
-        team.climbLevel = current;
-    }
-    else if (segmentedControl == driveType) {
-        team.driveTrainType = current;
-    }
-    dataChange = YES;
 }
 
--(void)createSegments {
+-(void)changeIntake:(NSString *)newIntake {
+   for (int i = 0 ; i < [_intakeList count] ; i++) {
+        if ([newIntake isEqualToString:[_intakeList objectAtIndex:i]]) {
+            [intakeType setTitle:newIntake forState:UIControlStateNormal];
+            team.intake = [NSNumber numberWithInt:(i-1)];
+            dataChange = YES;
+            break;
+        }
+    }
+}
 
-    NSMutableArray *itemArray = [NSMutableArray arrayWithObjects: @"No", @"Yes", nil];
-   
-    pyramidDump = [[UISegmentedControl alloc] initWithItems:itemArray];
-    pyramidDump.frame = CGRectMake(210, 505, 140, 38);
-    [pyramidDump addTarget:self action:@selector(getSelection:) forControlEvents:UIControlEventValueChanged];
-    [self.view addSubview:pyramidDump];
+-(void)changeDriveType:(NSString *)newDriveType {
+    for (int i = 0 ; i < [_driveTypeList count] ; i++) {
+        if ([newDriveType isEqualToString:[_driveTypeList objectAtIndex:i]]) {
+            [driveType setTitle:newDriveType forState:UIControlStateNormal];
+            team.driveTrainType = [NSNumber numberWithInt:(i-1)];
+            dataChange = YES;
+            break;
+        }
+    }
+}
 
-    [itemArray replaceObjectAtIndex:0 withObject:@"Floor"];
-    [itemArray replaceObjectAtIndex:1 withObject:@"Human"];
-    [itemArray addObject:@"Both"];
-    intakeType = [[UISegmentedControl alloc] initWithItems:itemArray];
-    intakeType.frame = CGRectMake(120, 450, 210, 38);
-    [intakeType addTarget:self action:@selector(getSelection:) forControlEvents:UIControlEventValueChanged];
-    [self.view addSubview:intakeType];
- 
-    [itemArray replaceObjectAtIndex:0 withObject:@"None"];
-    [itemArray replaceObjectAtIndex:1 withObject:@"One"];
-    [itemArray replaceObjectAtIndex:2 withObject:@"Two"];
-    [itemArray addObject:@"Three"];
-    climbZone = [[UISegmentedControl alloc] initWithItems:itemArray];
-    climbZone.frame = CGRectMake(210, 595, 280, 38);
-    [climbZone addTarget:self action:@selector(getSelection:) forControlEvents:UIControlEventValueChanged];
-    [self.view addSubview:climbZone];
-
-    [itemArray replaceObjectAtIndex:0 withObject:@"Mech"];
-    [itemArray replaceObjectAtIndex:1 withObject:@"Omni"];
-    [itemArray replaceObjectAtIndex:2 withObject:@"Swerve"];
-    [itemArray replaceObjectAtIndex:3 withObject:@"Tank"];
-    [itemArray addObject:@"Multi"];
-    driveType = [[UISegmentedControl alloc] initWithItems:itemArray];
-    driveType.frame = CGRectMake(377, 405, 430, 38);
-    [driveType addTarget:self action:@selector(getSelection:) forControlEvents:UIControlEventValueChanged];
-    [self.view addSubview:driveType];
-    [[UISegmentedControl appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"Helvetica" size:16.0], UITextAttributeFont, nil] forState:UIControlStateNormal];
+-(void)changeClimbZone:(NSString *)newClimbZone {
+    for (int i = 0 ; i < [_climbZoneList count] ; i++) {
+        if ([newClimbZone isEqualToString:[_climbZoneList objectAtIndex:i]]) {
+            [climbZone setTitle:newClimbZone forState:UIControlStateNormal];
+            team.climbLevel = [NSNumber numberWithInt:(i-1)];
+            dataChange = YES;
+            break;
+        }
+    }
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
@@ -212,24 +283,31 @@
 	else if (textField == notesTextField) {
 		team.notes = notesTextField.text;
 	}
-	else if (textField == maxHeight) {
-		team.maxHeight = [NSNumber numberWithFloat:[maxHeight.text floatValue]];
+	else if (textField == auton) {
+		team.auton = [NSNumber numberWithInt:[auton.text floatValue]];
+	}
+	else if (textField == shootingLevel) {
+		team.sthing1 = shootingLevel.text;
 	}
 	else if (textField == minHeight) {
 		team.minHeight = [NSNumber numberWithFloat:[minHeight.text floatValue]];
 	}
-	else if (textField == shooterHeight) {
-		team.shooterHeight = [NSNumber numberWithFloat:[shooterHeight.text floatValue]];
+	else if (textField == maxHeight) {
+		team.maxHeight = [NSNumber numberWithFloat:[maxHeight.text floatValue]];
+	}
+	else if (textField == wheelType) {
+		team.wheelType = wheelType.text;
+	}
+	else if (textField == nwheels) {
+		team.nwheels = [NSNumber numberWithInt:[nwheels.text floatValue]];
 	}
 	else if (textField == wheelDiameter) {
 		team.wheelDiameter = [NSNumber numberWithFloat:[wheelDiameter.text floatValue]];
 	}
 	else if (textField == cims) {
-		team.cims = [NSNumber numberWithFloat:[cims.text floatValue]];
+		team.cims = [NSNumber numberWithInt:[cims.text intValue]];
 	}
-	else if (textField == climbSpeed) {
-		team.climbSpeed = [NSNumber numberWithFloat:[climbSpeed.text floatValue]];
-	}
+
 	return YES;
 }
 
@@ -240,7 +318,7 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     
-    if (textField == nameTextField || textField == notesTextField)  return YES;
+    if (textField == nameTextField || textField == notesTextField || textField == wheelType || textField == shootingLevel)  return YES;
     
     NSString *resultingString = [textField.text stringByReplacingCharactersInRange: range withString: string];
     
@@ -248,15 +326,13 @@
     if ([resultingString length] == 0) {
         return true;
     }
-    if (textField == cims) {
-        NSLog(@"should change integer");
+    if (textField == cims || textField == nwheels) {
         NSInteger holder;
         NSScanner *scan = [NSScanner scannerWithString: resultingString];
         
         return [scan scanInteger: &holder] && [scan isAtEnd];
     }
     else {
-        NSLog(@"should change float");
         float holder;
         NSScanner *scan = [NSScanner scannerWithString: resultingString];
         
@@ -286,7 +362,6 @@
 -(void)getPhoto {
     NSError *fileError = nil;
     NSArray *dirList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:photoPath error:&fileError];
-    NSLog(@"dir list = %@", dirList);
     int dirCount = [dirList count];
     if (dirCount) {
         NSString  *jpgPath = [photoPath stringByAppendingPathComponent:[dirList objectAtIndex:(dirCount-1)]];
@@ -357,7 +432,6 @@
     NSString  *jpgPath;
     NSError *fileError;
     NSArray *dirList = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:photoPath error:&fileError];
-    NSLog(@"dir list = %@", dirList);
     int dirCount = [dirList count];
     if (dirCount) {
         if (dirCount < 10) {
@@ -493,6 +567,10 @@
 
 -(void)SetTextBoxDefaults:(UITextField *)currentTextField {
     currentTextField.font = [UIFont fontWithName:@"Helvetica" size:22.0];
+}
+
+-(void)SetBigButtonDefaults:(UIButton *)currentButton {
+    currentButton.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:22.0];
 }
 
 

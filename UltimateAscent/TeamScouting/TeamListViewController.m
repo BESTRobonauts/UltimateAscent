@@ -254,7 +254,7 @@
         case 0: driveLabel.text = @"Mech"; break;
         case 1: driveLabel.text = @"Omni"; break;
         case 2: driveLabel.text = @"Swerve"; break;
-        case 3: driveLabel.text = @"Tank"; break;
+        case 3: driveLabel.text = @"Traction"; break;
         case 4: driveLabel.text = @"Multi"; break;
         default: driveLabel.text = @""; break;
     }
@@ -399,6 +399,7 @@
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
     
     UITableView *tableView = self.tableView;
+    NSError *error;
     
     switch(type) {
             
@@ -413,6 +414,9 @@
         case NSFetchedResultsChangeUpdate:
             NSLog(@"NSFetchedResultsChangeUpdate");
             dataChange = YES;
+            if (![managedObjectContext save:&error]) {
+                NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+            }
             [self configureCell:[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
             break;
             

@@ -9,18 +9,64 @@
         <attribute name="tournament" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="score" optional="YES" toMany="YES" maxCount="6" deletionRule="Cascade" destinationEntity="TeamScore" inverseName="match" inverseEntity="TeamScore" syncable="YES"/>
     </entity>
+    <entity name="Regional" representedClassName="Regional" syncable="YES">
+        <attribute name="dpr" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="eliminated" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eliminationRecord" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="finishPosition" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="opr" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="rank" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="reg1" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="reg2" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="reg3" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="reg4" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="reg5" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="reg6" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="seedingRecord" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="team" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="TeamData" inverseName="regional" inverseEntity="TeamData" syncable="YES"/>
+    </entity>
     <entity name="SettingsData" representedClassName="SettingsData" syncable="YES">
         <attribute name="adminCode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="alliance" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="master" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="mode" attributeType="String" defaultValueString="Test" syncable="YES"/>
         <attribute name="overrideCode" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="tournament" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="TournamentData" inverseName="settings" inverseEntity="TournamentData" syncable="YES"/>
     </entity>
+    <entity name="Statistics" representedClassName="Statistics" syncable="YES">
+        <attribute name="autonAccuracy" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="autonPoints" optional="YES" attributeType="Integer 16" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="aveAuton" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="aveClimbHeight" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="aveClimbTime" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="aveTeleOp" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="recalcStats" optional="YES" attributeType="Boolean" defaultValueString="YES" syncable="YES"/>
+        <attribute name="stat1" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="stat2" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="stat3" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="stat4" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="stat5" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="stat6" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="stat7" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="stat8" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="teleOpAccuracy" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="teleOpPoints" optional="YES" attributeType="Integer 16" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="team" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="TeamData" inverseName="stats" inverseEntity="TeamData" syncable="YES"/>
+        <relationship name="tournament" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="TournamentData" inverseName="statistics" inverseEntity="TournamentData" syncable="YES"/>
+    </entity>
     <entity name="TeamData" representedClassName="TeamData" syncable="YES">
-        <attribute name="cims" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="auton" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="cims" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
         <attribute name="climbLevel" optional="YES" attributeType="Integer 16" minValueString="-1" maxValueString="2" defaultValueString="-1" syncable="YES"/>
         <attribute name="climbSpeed" optional="YES" attributeType="Float" syncable="YES"/>
         <attribute name="driveTrainType" optional="YES" attributeType="Integer 16" minValueString="-1" maxValueString="4" defaultValueString="-1" syncable="YES"/>
+        <attribute name="fthing1" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="fthing2" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="fthing3" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="fthing4" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="fthing5" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="goalHeight" optional="YES" attributeType="Integer 16" minValueString="-1" maxValueString="5" defaultValueString="-1" syncable="YES"/>
         <attribute name="history" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="intake" optional="YES" attributeType="Integer 16" minValueString="-1" maxValueString="3" defaultValueString="-1" syncable="YES"/>
         <attribute name="maxHeight" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -28,15 +74,28 @@
         <attribute name="name" optional="YES" attributeType="String" maxValueString="50" syncable="YES"/>
         <attribute name="notes" optional="YES" attributeType="String" maxValueString="1000" syncable="YES"/>
         <attribute name="number" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="nwheels" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="pyramidDump" optional="YES" attributeType="Integer 16" minValueString="-1" maxValueString="1" defaultValueString="-1" syncable="YES"/>
         <attribute name="saved" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="shooterHeight" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="sthing1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sthing3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sting2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="thing1" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="thing2" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="thing3" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="thing4" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="thing5" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="wheelDiameter" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="wheelType" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="match" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TeamScore" inverseName="team" inverseEntity="TeamScore" syncable="YES"/>
+        <relationship name="regional" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Regional" inverseName="team" inverseEntity="Regional" syncable="YES"/>
+        <relationship name="stats" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Statistics" inverseName="team" inverseEntity="Statistics" syncable="YES"/>
         <relationship name="tournament" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TournamentData" inverseName="teams" inverseEntity="TournamentData" syncable="YES"/>
     </entity>
     <entity name="TeamScore" representedClassName="TeamScore" syncable="YES">
         <attribute name="alliance" optional="YES" attributeType="String" maxValueString="7" syncable="YES"/>
+        <attribute name="allianceSection" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="autonHigh" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="2000" defaultValueString="0" syncable="YES"/>
         <attribute name="autonLow" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="2000" defaultValueString="0" syncable="YES"/>
         <attribute name="autonMid" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="2000" defaultValueString="0" syncable="YES"/>
@@ -56,6 +115,15 @@
         <attribute name="pyramid" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="2000" defaultValueString="0" syncable="YES"/>
         <attribute name="robotSpeed" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="5" defaultValueString="0" syncable="YES"/>
         <attribute name="saved" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="sc1" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="sc2" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="sc3" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="sc4" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="sc5" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="sc6" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="sc7" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sc8" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sc9" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="synced" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="teleOpHigh" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="2000" defaultValueString="0" syncable="YES"/>
         <attribute name="teleOpLow" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="2000" defaultValueString="0" syncable="YES"/>
@@ -78,13 +146,16 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="score" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TeamScore" inverseName="tournament" inverseEntity="TeamScore" syncable="YES"/>
         <relationship name="settings" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="SettingsData" inverseName="tournament" inverseEntity="SettingsData" syncable="YES"/>
+        <relationship name="statistics" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Statistics" inverseName="tournament" inverseEntity="Statistics" syncable="YES"/>
         <relationship name="teams" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TeamData" inverseName="tournament" inverseEntity="TeamData" syncable="YES"/>
     </entity>
     <elements>
         <element name="MatchData" positionX="27" positionY="33" width="128" height="150"/>
-        <element name="SettingsData" positionX="18" positionY="-144" width="128" height="120"/>
-        <element name="TeamData" positionX="432" positionY="24" width="128" height="315"/>
-        <element name="TeamScore" positionX="198" positionY="-432" width="128" height="585"/>
-        <element name="TournamentData" positionX="216" positionY="177" width="128" height="120"/>
+        <element name="Regional" positionX="178" positionY="378" width="128" height="268"/>
+        <element name="SettingsData" positionX="18" positionY="-144" width="128" height="135"/>
+        <element name="Statistics" positionX="261" positionY="135" width="128" height="330"/>
+        <element name="TeamData" positionX="504" positionY="-117" width="128" height="585"/>
+        <element name="TeamScore" positionX="198" positionY="-432" width="128" height="733"/>
+        <element name="TournamentData" positionX="216" positionY="177" width="128" height="133"/>
     </elements>
 </model>
