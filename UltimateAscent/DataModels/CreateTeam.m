@@ -28,6 +28,9 @@
  13 Climb Speed
  14 Notes
  15 Saved
+ 16 Auton
+ 17 Number of Wheels
+ 18 Wheel Type
 */
 @implementation CreateTeam
 @synthesize managedObjectContext;
@@ -59,8 +62,14 @@
     else {
         TeamData *team = [NSEntityDescription insertNewObjectForEntityForName:@"TeamData"
                                                            inManagedObjectContext:managedObjectContext];
-        [self setTeamDefaults:team];
+        [self setTeamDefaults:team]; 
         switch ([data count]) {
+            case 19:
+                team.wheelType = [data objectAtIndex:18];
+            case 17:
+                team.nwheels = [NSNumber numberWithInt:[[data objectAtIndex:16] intValue]];
+            case 16:
+                team.auton = [NSNumber numberWithInt:[[data objectAtIndex:15] intValue]];
             case 15:
                 team.saved = [NSNumber numberWithInt:[[data objectAtIndex:14] intValue]];
             case 14:
@@ -87,8 +96,10 @@
                 team.driveTrainType = [NSNumber numberWithInt:[[data objectAtIndex:3] intValue]];
             case 3:
                 tournament = [data objectAtIndex: 2];
-                tournamentRecord = [self getTournamentRecord:tournament];
-                [team addTournamentObject:tournamentRecord];
+                if (tournament && ![tournament isEqualToString:@""]) {
+                    tournamentRecord = [self getTournamentRecord:tournament];
+                    [team addTournamentObject:tournamentRecord];
+                }
             case 2:
                 team.name = [data objectAtIndex: 1];
             case 1:

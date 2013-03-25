@@ -11,6 +11,8 @@
 		21EBC7D716B358D000CBFDFD /* TeamDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21EBC7D616B358D000CBFDFD /* TeamDetailViewController.m */; };
 		21F72D6016A78135000B99AB /* TeamListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F72D5F16A78135000B99AB /* TeamListViewController.m */; };
 		2F0E3A7516D7FB4D00A359D5 /* DefensePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F0E3A7416D7FB4D00A359D5 /* DefensePickerController.m */; };
+		2F12350316FB71E200DBF4B0 /* MasonPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F12350216FB71E200DBF4B0 /* MasonPageViewController.m */; };
+		2F12350916FBC74F00DBF4B0 /* CalculateTeamStats.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F12350816FBC74F00DBF4B0 /* CalculateTeamStats.m */; };
 		2F17D54816BA092B00DC81C1 /* TournamentList.csv in Resources */ = {isa = PBXBuildFile; fileRef = 2F17D54716BA092B00DC81C1 /* TournamentList.csv */; };
 		2F30EABC16A0EB4F0026B258 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F30EABB16A0EB4F0026B258 /* UIKit.framework */; };
 		2F30EABE16A0EB4F0026B258 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F30EABD16A0EB4F0026B258 /* Foundation.framework */; };
@@ -94,6 +96,10 @@
 		21F72D5F16A78135000B99AB /* TeamListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TeamListViewController.m; path = TeamScouting/TeamListViewController.m; sourceTree = "<group>"; };
 		2F0E3A7316D7FB4C00A359D5 /* DefensePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DefensePickerController.h; path = MatchScouting/DefensePickerController.h; sourceTree = "<group>"; };
 		2F0E3A7416D7FB4D00A359D5 /* DefensePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DefensePickerController.m; path = MatchScouting/DefensePickerController.m; sourceTree = "<group>"; };
+		2F12350116FB71E200DBF4B0 /* MasonPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MasonPageViewController.h; path = MatchAnalysis/MasonPageViewController.h; sourceTree = "<group>"; };
+		2F12350216FB71E200DBF4B0 /* MasonPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MasonPageViewController.m; path = MatchAnalysis/MasonPageViewController.m; sourceTree = "<group>"; };
+		2F12350716FBC74F00DBF4B0 /* CalculateTeamStats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalculateTeamStats.h; sourceTree = "<group>"; };
+		2F12350816FBC74F00DBF4B0 /* CalculateTeamStats.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalculateTeamStats.m; sourceTree = "<group>"; };
 		2F17D54716BA092B00DC81C1 /* TournamentList.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TournamentList.csv; path = Resources/TournamentList.csv; sourceTree = "<group>"; };
 		2F30EAB716A0EB4F0026B258 /* UltimateAscent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UltimateAscent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F30EABB16A0EB4F0026B258 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -457,6 +463,10 @@
 				2FB3A4C016CEC17C00E895E5 /* MatchAnalysisViewController.m */,
 				2FB3A4C516CF044C00E895E5 /* RossPageViewController.h */,
 				2FB3A4C616CF044C00E895E5 /* RossPageViewController.m */,
+				2F12350116FB71E200DBF4B0 /* MasonPageViewController.h */,
+				2F12350216FB71E200DBF4B0 /* MasonPageViewController.m */,
+				2F12350716FBC74F00DBF4B0 /* CalculateTeamStats.h */,
+				2F12350816FBC74F00DBF4B0 /* CalculateTeamStats.m */,
 			);
 			name = "Match Analysis";
 			sourceTree = "<group>";
@@ -614,6 +624,8 @@
 				2FD5595516FA443C0099C5D9 /* Statistics.m in Sources */,
 				2FD5595816FA4BBC0099C5D9 /* TeamData.m in Sources */,
 				2FD5595B16FA61F70099C5D9 /* TeamDetailPickerController.m in Sources */,
+				2F12350316FB71E200DBF4B0 /* MasonPageViewController.m in Sources */,
+				2F12350916FBC74F00DBF4B0 /* CalculateTeamStats.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

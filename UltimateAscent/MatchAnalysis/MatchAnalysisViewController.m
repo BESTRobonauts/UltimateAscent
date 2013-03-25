@@ -38,7 +38,7 @@
     pictureCaption.text = @"Just Hangin' Out";
     
     // Set Font and Text for Mason Page Button
-    [masonPageButton setTitle:@"Mason" forState:UIControlStateNormal];
+    [masonPageButton setTitle:@"Mason Page" forState:UIControlStateNormal];
     masonPageButton.titleLabel.font = [UIFont fontWithName:@"Nasalization" size:36.0];
     
     // Set Font and Text for Ross Page Button
