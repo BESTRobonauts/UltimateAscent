@@ -66,6 +66,8 @@
     numberLabel.font = [UIFont fontWithName:@"Helvetica" size:24.0];
     [self SetTextBoxDefaults:nameTextField];
     [self SetTextBoxDefaults:notesTextField];
+    [self SetTextBoxDefaults:shootingLevel];
+    [self SetTextBoxDefaults:auton];
     [self SetTextBoxDefaults:minHeight];
     [self SetTextBoxDefaults:maxHeight];
     [self SetTextBoxDefaults:wheelType];
@@ -118,11 +120,12 @@
 
 - (void) viewWillAppear:(BOOL)animated
 {
+    NSLog(@"team = %@", team);
     self.title = [NSString stringWithFormat:@"%d - %@", [team.number intValue], team.name];
     numberLabel.text = [NSString stringWithFormat:@"%d", [team.number intValue]];
     nameTextField.text = team.name;
     notesTextField.text = team.notes;
-    shootingLevel.text = team.sthing1;
+//    shootingLevel.text = team.goalHeight;
     auton.text = [NSString stringWithFormat:@"%d", [team.auton intValue]];
     minHeight.text = [NSString stringWithFormat:@"%.1f", [team.minHeight floatValue]];
     maxHeight.text = [NSString stringWithFormat:@"%.1f", [team.maxHeight floatValue]];
@@ -287,7 +290,7 @@
 		team.auton = [NSNumber numberWithInt:[auton.text floatValue]];
 	}
 	else if (textField == shootingLevel) {
-		team.sthing1 = shootingLevel.text;
+		team.goalHeight = shootingLevel.text;
 	}
 	else if (textField == minHeight) {
 		team.minHeight = [NSNumber numberWithFloat:[minHeight.text floatValue]];

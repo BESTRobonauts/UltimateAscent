@@ -16,16 +16,20 @@
 @synthesize window = _window;
 @synthesize navigationController;
 @synthesize splashPageViewController;
+@synthesize dataManager = _dataManager;
 @synthesize loadDataFromBundle;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     NSLog(@"didFinishLaunchingWithOptions");
-    LoadCSVData *loadData = [LoadCSVData new];
+    // Create the managed object and persistant store
+    _dataManager = [[DataManager alloc] init];
+    LoadCSVData *loadData = [[LoadCSVData alloc] initWithDataManager:_dataManager];
     [loadData loadCSVDataFromBundle];
-    splashPageViewController = [[SplashPageViewController alloc] init];
-    navigationController = [[UINavigationController alloc]
-                            initWithRootViewController:splashPageViewController];
+
+    navigationController = (UINavigationController *)self.window.rootViewController;
+    splashPageViewController = (SplashPageViewController *)navigationController.topViewController;
+    splashPageViewController.dataManager = self.dataManager;
     
     NSURL *url = (NSURL *)[launchOptions valueForKey:UIApplicationLaunchOptionsURLKey];
     if (url != nil && [url isFileURL]) {
@@ -60,7 +64,6 @@
     return YES;
 }
 
-
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -86,8 +89,7 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Saves changes in the application's managed object context before the application terminates.
-    DataManager *dataManager = [DataManager new];
-    [dataManager saveContext];
+    [_dataManager saveContext];
 }
 
 /**

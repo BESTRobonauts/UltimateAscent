@@ -33,6 +33,7 @@
 		2F50BF9A16F2D7A9004569F2 /* SyncResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F50BF9916F2D7A9004569F2 /* SyncResultsViewController.m */; };
 		2F50BF9D16F2DD65004569F2 /* MatchResultsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F50BF9C16F2DD65004569F2 /* MatchResultsObject.m */; };
 		2F6AE6F016AD93D1005A24C5 /* 2013_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F6AE6EF16AD93D1005A24C5 /* 2013_logo.png */; };
+		2F80CB0617012821000A2BB8 /* TeamRecordObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F80CB0517012821000A2BB8 /* TeamRecordObject.m */; };
 		2F88648616B75EF600867385 /* UltimateAscent.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2F88648416B75EF600867385 /* UltimateAscent.xcdatamodeld */; };
 		2F88649A16B76B1700867385 /* AlliancePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F88648D16B76B1700867385 /* AlliancePickerController.m */; };
 		2F88649B16B76B1700867385 /* MainScoutingPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F88648F16B76B1700867385 /* MainScoutingPageViewController.m */; };
@@ -129,6 +130,8 @@
 		2F50BF9B16F2DD65004569F2 /* MatchResultsObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MatchResultsObject.h; path = DataTransfer/MatchResultsObject.h; sourceTree = "<group>"; };
 		2F50BF9C16F2DD65004569F2 /* MatchResultsObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MatchResultsObject.m; path = DataTransfer/MatchResultsObject.m; sourceTree = "<group>"; };
 		2F6AE6EF16AD93D1005A24C5 /* 2013_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 2013_logo.png; path = Resources/2013_logo.png; sourceTree = "<group>"; };
+		2F80CB0417012821000A2BB8 /* TeamRecordObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TeamRecordObject.h; path = DataTransfer/TeamRecordObject.h; sourceTree = "<group>"; };
+		2F80CB0517012821000A2BB8 /* TeamRecordObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TeamRecordObject.m; path = DataTransfer/TeamRecordObject.m; sourceTree = "<group>"; };
 		2F88648516B75EF600867385 /* UltimateAscent.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UltimateAscent.xcdatamodel; sourceTree = "<group>"; };
 		2F88648C16B76B1700867385 /* AlliancePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlliancePickerController.h; path = MatchScouting/AlliancePickerController.h; sourceTree = "<group>"; };
 		2F88648D16B76B1700867385 /* AlliancePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AlliancePickerController.m; path = MatchScouting/AlliancePickerController.m; sourceTree = "<group>"; };
@@ -425,6 +428,8 @@
 				2F50BF9916F2D7A9004569F2 /* SyncResultsViewController.m */,
 				2F50BF9B16F2DD65004569F2 /* MatchResultsObject.h */,
 				2F50BF9C16F2DD65004569F2 /* MatchResultsObject.m */,
+				2F80CB0417012821000A2BB8 /* TeamRecordObject.h */,
+				2F80CB0517012821000A2BB8 /* TeamRecordObject.m */,
 			);
 			name = "Data Transfer";
 			sourceTree = "<group>";
@@ -626,6 +631,7 @@
 				2FD5595B16FA61F70099C5D9 /* TeamDetailPickerController.m in Sources */,
 				2F12350316FB71E200DBF4B0 /* MasonPageViewController.m in Sources */,
 				2F12350916FBC74F00DBF4B0 /* CalculateTeamStats.m in Sources */,
+				2F80CB0617012821000A2BB8 /* TeamRecordObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

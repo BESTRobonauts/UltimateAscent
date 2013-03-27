@@ -21,6 +21,7 @@
 @class MatchData;
 @class TeamScore;
 @class SettingsData;
+@class DataManager;
 
 @interface MainScoutingPageViewController : UIViewController <NSFetchedResultsControllerDelegate, UITextFieldDelegate, AlliancePickerDelegate, MatchTypePickerDelegate, TeamPickerDelegate, RecordScorePickerDelegate, DefensePickerDelegate, AlertPromptDelegate> {
     
@@ -34,6 +35,7 @@
 }
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, retain) DataManager *dataManager;
 @property (nonatomic, retain) SettingsData *settings;
 @property (nonatomic, assign) MatchType currentSectionType;
 @property (nonatomic, assign) NSUInteger sectionIndex;

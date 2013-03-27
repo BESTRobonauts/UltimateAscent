@@ -24,6 +24,7 @@
     NSMutableArray *receivedMatches;
     NSMutableArray *receivedMatchTypes;
     NSMutableArray *receivedTeams;
+    MatchResultsObject *dataFromTransfer;
 }
 
 @synthesize managedObjectContext = _managedObjectContext;
@@ -38,6 +39,8 @@
 @synthesize disconnectButton = _disconnectButton;
 @synthesize peerLabel = _peerLabel;
 @synthesize peerName = _peerName;
+@synthesize alertPrompt = _alertPrompt;
+@synthesize alertPromptPopover = _alertPromptPopover;
 
 GKPeerPickerController *picker;
 
@@ -79,6 +82,8 @@ GKPeerPickerController *picker;
     [_disconnectButton setHidden:YES];
     [_peerLabel setHidden:YES];
     [_peerName setHidden:YES];
+    [_sendDataTable setHidden:YES];
+    [_receiveDataTable setHidden:YES];
     _headerView = [[UIView alloc] initWithFrame:CGRectMake(0,0,282,50)];
     _headerView.backgroundColor = [UIColor lightGrayColor];
     _headerView.opaque = YES;
@@ -105,7 +110,17 @@ GKPeerPickerController *picker;
     UILabel *syncLabel = [[UILabel alloc] initWithFrame:CGRectMake(290, 11, 65, 21)];
 	syncLabel.text = @"Synced";
     syncLabel.backgroundColor = [UIColor clearColor];
-    [_headerView addSubview:syncLabel];}
+    [_headerView addSubview:syncLabel];
+}
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+    //    NSLog(@"viewWillDisappear");
+    NSError *error;
+    if (![_managedObjectContext save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+    }
+}
 
 -(IBAction) btnConnect:(id) sender {
     picker = [[GKPeerPickerController alloc] init];
@@ -146,6 +161,8 @@ GKPeerPickerController *picker;
     {
         case GKPeerStateConnected:
             NSLog(@"connected");
+            [_sendDataTable setHidden:NO];
+            [_receiveDataTable setHidden:NO];
             break;
         case GKPeerStateDisconnected:
             NSLog(@"disconnected");
@@ -175,7 +192,7 @@ GKPeerPickerController *picker;
            inSession:(GKSession *)session
              context:(void *)context {
     
-    MatchResultsObject *dataFromTransfer = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    dataFromTransfer = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     //---convert the NSData to NSString---
     if (receivedMatches == nil) {
         receivedMatches = [NSMutableArray array];
@@ -193,13 +210,13 @@ GKPeerPickerController *picker;
         [_receiveDataTable reloadData];
     }
     else {
-        NSString* str = [NSString stringWithFormat:@"Match %@, Team %@", dataFromTransfer.match, dataFromTransfer.team];
+        NSString* str = [NSString stringWithFormat:@"Match %@, Team %@ Already Synced", dataFromTransfer.match, dataFromTransfer.team];
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error Receiving"
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sync Again?"
                                                         message:str
                                                        delegate:self
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
+                                              cancelButtonTitle:@"No"
+                                              otherButtonTitles:@"Yes", nil];
         [alert show];
     }
 }
@@ -210,11 +227,19 @@ GKPeerPickerController *picker;
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     NSLog(@"alert");
+    if (buttonIndex == 1) { // Yes
+        NSLog(@"Resync Match");
+        if ([self addMatchScore:dataFromTransfer]) {
+            [receivedMatches addObject:dataFromTransfer.match];
+            [receivedMatchTypes addObject:dataFromTransfer.matchType];
+            [receivedTeams addObject:dataFromTransfer.team];
+            [_receiveDataTable reloadData];
+        }        
+    }
 }
 
 -(BOOL)addMatchScore:(MatchResultsObject *) xferData {
     // Fetch score record
-    // Check to make sure it is neither saved nor synced
     // Copy the data into the right places
     // Put the match drawing in the correct directory
     NSError *error;
@@ -235,7 +260,7 @@ GKPeerPickerController *picker;
     else {
         if([scoreData count] > 0) {  // Match Exists
             TeamScore *score = [scoreData objectAtIndex:0];
-            if ([score.saved intValue] || [score.synced intValue]) {
+            if ([score.saved intValue]) {
                 // Match already saved on this device
                 return FALSE;
             }
@@ -267,6 +292,7 @@ GKPeerPickerController *picker;
     score.otherRating = xferData.otherRating;
     score.passes = xferData.passes;
     score.pyramid = xferData.pyramid;
+    score.robotSpeed = xferData.robotSpeed;
     score.teleOpHigh = xferData.teleOpHigh;
     score.teleOpLow = xferData.teleOpLow;
     score.teleOpMid = score.teleOpMid;
@@ -279,7 +305,16 @@ GKPeerPickerController *picker;
     score.wallPickUp2 = xferData.wallPickUp2;
     score.wallPickUp3 = xferData.wallPickUp3;
     score.wallPickUp4 = xferData.wallPickUp4;
-    score.robotSpeed = xferData.robotSpeed;
+    score.allianceSection = xferData.allianceSection;
+    score.sc1 = xferData.sc1;
+    score.sc2 = xferData.sc2;
+    score.sc3 = xferData.sc3;
+    score.sc4 = xferData.sc4;
+    score.sc5 = xferData.sc5;
+    score.sc6 = xferData.sc6;
+    score.sc7 = xferData.sc7;
+    score.sc8 = xferData.sc8;
+    score.sc9 = xferData.sc9;
     // For now, set saved to zero so that we know that this iPad didn't do the scouting
     score.saved = [NSNumber numberWithInt:0];
     // Set synced to one so that we know it has been received
@@ -415,6 +450,8 @@ GKPeerPickerController *picker;
     MatchResultsObject *transferObject = [[MatchResultsObject alloc] initWithScore:[_fetchedResultsController objectAtIndexPath:indexPath]];
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:transferObject];
     [self mySendDataToPeers:data];
+    TeamScore *info = [_fetchedResultsController objectAtIndexPath:indexPath];
+    info.synced = [NSNumber numberWithInt:1];
     NSString* str = @"Sending";
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Data sending"
                                                     message:str

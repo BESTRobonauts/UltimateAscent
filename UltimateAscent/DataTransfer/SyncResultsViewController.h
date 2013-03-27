@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <GameKit/GameKit.h>
+#import "AlertPromptViewController.h"
 
 @class MatchResultsObject;
 @class TeamScore;
@@ -25,6 +26,8 @@
 @property (nonatomic, retain) IBOutlet UIButton *disconnectButton;
 @property (nonatomic, retain) IBOutlet UILabel *peerLabel;
 @property (nonatomic, retain) IBOutlet UILabel *peerName;
+@property (nonatomic, retain) AlertPromptViewController *alertPrompt;
+@property (nonatomic, retain) UIPopoverController *alertPromptPopover;
 
 -(IBAction) btnConnect:(id) sender;
 -(IBAction) btnDisconnect:(id) sender;

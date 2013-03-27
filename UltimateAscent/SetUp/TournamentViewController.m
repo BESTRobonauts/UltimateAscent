@@ -15,6 +15,7 @@
 @end
 
 @implementation TournamentViewController
+@synthesize dataManager = _dataManager;
 @synthesize mainLogo;
 @synthesize splashPicture, pictureCaption;
 @synthesize managedObjectContext;
@@ -70,8 +71,13 @@
     self.title = @"iPad Set-Up Page";
 
     if (!managedObjectContext) {
-        DataManager *dataManager = [DataManager new];
-        managedObjectContext = [dataManager managedObjectContext];
+        if (_dataManager) {
+            managedObjectContext = _dataManager.managedObjectContext;
+        }
+        else {
+            _dataManager = [DataManager new];
+            managedObjectContext = [_dataManager managedObjectContext];
+        }
     }
 
     NSError *error;
@@ -240,6 +246,12 @@
     overrideMode = NoOverride;
 }
 */
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    [segue.destinationViewController setDataManager:_dataManager];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     switch (interfaceOrientation) {

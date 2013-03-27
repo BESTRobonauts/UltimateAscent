@@ -15,13 +15,30 @@
 #import "CreateSettings.h"
 #import "AddRecordResults.h"
 
-@implementation LoadCSVData
+@implementation LoadCSVData {
+    BOOL loadDataFromBundle;
+}
+
+@synthesize dataManager = _dataManager;
+
+- (id)initWithDataManager:(DataManager *)initManager {
+	if ((self = [super init]))
+	{
+        _dataManager = initManager;
+	}
+	return self;
+}
 
 -(void)loadCSVDataFromBundle {
     // NSLog(@"loadCSVDataFromBundle");
 
-    DataManager *dataManager = [DataManager new];
-    BOOL loadDataFromBundle = [dataManager databaseExists];
+    if (_dataManager == nil) {
+        _dataManager = [DataManager new];
+        loadDataFromBundle = [_dataManager databaseExists];
+    }
+    else {
+        loadDataFromBundle = _dataManager.loadDataFromBundle;
+    }
 
     if (loadDataFromBundle) {
         NSString *filePath = [[NSBundle mainBundle] pathForResource:@"TournamentList" ofType:@"csv"];

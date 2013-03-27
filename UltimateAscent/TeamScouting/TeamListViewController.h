@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+@class DataManager;
 @class TeamData;
 @class SettingsData;
 
 @interface TeamListViewController : UITableViewController <NSFetchedResultsControllerDelegate>
+@property (nonatomic, retain) DataManager *dataManager;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, retain) SettingsData *settings;

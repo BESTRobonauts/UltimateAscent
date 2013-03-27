@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@class DataManager;
 
 @interface SetUpPageViewController : UIViewController
+@property (nonatomic, retain) DataManager *dataManager;
 @property (nonatomic, retain) IBOutlet UIImageView *mainLogo;
 @property (nonatomic, retain) IBOutlet UILabel *pictureCaption;
 @property (nonatomic, retain) IBOutlet UIButton *matchSetUpButton;

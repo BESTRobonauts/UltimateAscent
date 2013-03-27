@@ -28,7 +28,9 @@
 @property (nonatomic, copy) NSNumber * otherRating;
 @property (nonatomic, copy) NSNumber * passes;
 @property (nonatomic, copy) NSNumber * pyramid;
+@property (nonatomic, copy) NSNumber * robotSpeed;
 @property (nonatomic, copy) NSNumber * saved;
+@property (nonatomic, copy) NSNumber * synced;
 @property (nonatomic, copy) NSNumber * teleOpHigh;
 @property (nonatomic, copy) NSNumber * teleOpLow;
 @property (nonatomic, copy) NSNumber * teleOpMid;
@@ -41,8 +43,16 @@
 @property (nonatomic, copy) NSNumber * wallPickUp2;
 @property (nonatomic, copy) NSNumber * wallPickUp3;
 @property (nonatomic, copy) NSNumber * wallPickUp4;
-@property (nonatomic, copy) NSNumber * synced;
-@property (nonatomic, copy) NSNumber * robotSpeed;
+@property (nonatomic, copy) NSNumber * allianceSection;
+@property (nonatomic, copy) NSNumber * sc1;
+@property (nonatomic, copy) NSNumber * sc2;
+@property (nonatomic, copy) NSNumber * sc3;
+@property (nonatomic, copy) NSNumber * sc4;
+@property (nonatomic, copy) NSNumber * sc5;
+@property (nonatomic, copy) NSNumber * sc6;
+@property (nonatomic, copy) NSString * sc7;
+@property (nonatomic, copy) NSString * sc8;
+@property (nonatomic, copy) NSString * sc9;
 @property (nonatomic, copy) NSData * fieldDrawingImage;
 @property (nonatomic, copy) NSNumber *match;
 @property (nonatomic, copy) NSString *matchType;

@@ -7,9 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+@class DataManager;
 
 @interface LoadCSVData : NSObject
 
+@property (nonatomic, retain) DataManager *dataManager;
+
+- (id)initWithDataManager:(DataManager *)initManager;
 -(void)loadCSVDataFromBundle;
 -(void)handleOpenURL:(NSURL *)url;
 -(void)loadTournamentFile:(NSString *)filePath;

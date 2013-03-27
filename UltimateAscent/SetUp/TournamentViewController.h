@@ -11,8 +11,10 @@
 #import "AlliancePickerController.h"
 
 @class SettingsData;
+@class DataManager;
 
 @interface TournamentViewController : UIViewController <TournamentPickerDelegate>
+@property (nonatomic, retain) DataManager *dataManager;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain) IBOutlet UIImageView *mainLogo;
 @property (nonatomic, retain) IBOutlet UIImageView *splashPicture;

@@ -10,11 +10,13 @@
 #import "AddMatchViewController.h"
 #import "MatchDetailViewController.h"
 
+@class DataManager;
 @class SettingsData;
 @class MatchData;
 
 @interface MatchListViewController : UITableViewController <NSFetchedResultsControllerDelegate, UIAlertViewDelegate, AddMatchDelegate, MatchDetailDelegate>
 
+@property (nonatomic, retain) DataManager *dataManager;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, retain) SettingsData *settings;

@@ -9,9 +9,18 @@
 #import "SetUpPageViewController.h"
 
 @implementation SetUpPageViewController
+@synthesize dataManager = _dataManager;
 @synthesize mainLogo;
 @synthesize tournamentSetUpButton, matchSetUpButton, importDataButton, exportDataButton;
 @synthesize splashPicture, pictureCaption;
+
+- (id)initWithManagedObject:(NSManagedObjectContext *)managedObjectContext {
+	if ((self = [super init]))
+	{
+//        _managedObjectContext = managedObjectContext;
+	}
+	return self;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -71,7 +80,12 @@
 
 - (void) viewWillAppear:(BOOL)animated {
 }
-    
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    [segue.destinationViewController setDataManager:_dataManager];
+}
+
 - (void)viewDidUnload
 {
     [super viewDidUnload];

@@ -14,8 +14,16 @@
 @synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
 @synthesize loadDataFromBundle;
 
+- (id)init
+{
+	if ((self = [super init]))
+	{
+        [self managedObjectContext];
+	}
+	return self;
+}
+
 -(BOOL)databaseExists {
-    loadDataFromBundle = FALSE;
     [self managedObjectContext];
     return loadDataFromBundle;
 }
@@ -75,6 +83,17 @@
     __managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
     return __managedObjectModel;
 }
+/*- (NSManagedObjectModel *)managedObjectModel
+{
+    if (__managedObjectModel != nil)
+    {
+        return __managedObjectModel;
+    }
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"UltimateAscent" ofType:@"momd"];
+    NSURL *momURL = [NSURL fileURLWithPath:path];
+    __managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:momURL];
+    return __managedObjectModel;
+}*/
 
 /**
  Returns the persistent store coordinator for the application.
@@ -107,9 +126,19 @@
         }
     }
 
+/*    // handle db upgrade
+    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
+                             [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
+                             [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
+ 
+    NSError *error = nil;
+    __persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+    if (![__persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error])
+ */
     NSError *error = nil;
     __persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
     if (![__persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error])
+        
     {
         /*
          Replace this implementation with code to handle the error appropriately.

@@ -9,6 +9,7 @@
 #import "SplashPageViewController.h"
 
 @implementation SplashPageViewController
+@synthesize dataManager; // = _dataManager;
 @synthesize mainLogo;
 @synthesize pictureCaption;
 @synthesize teamScoutingButton, matchSetUpButton, matchScoutingButton, matchAnalysisButton, splashPicture;
@@ -53,7 +54,7 @@
     [teamScoutingButton setTitle:@"Team/Pit Scouting" forState:UIControlStateNormal];
     teamScoutingButton.titleLabel.font = [UIFont fontWithName:@"Nasalization" size:36.0];
     // Set Font and Text for Tournament Set Up Button
-    [matchSetUpButton setTitle:@"Before and after" forState:UIControlStateNormal];
+    [matchSetUpButton setTitle:@"Data Handling" forState:UIControlStateNormal];
     matchSetUpButton.titleLabel.font = [UIFont fontWithName:@"Nasalization" size:36.0];
     // Set Font and Text for Match Scouting Up Button
     [matchScoutingButton setTitle:@"Match Scouting" forState:UIControlStateNormal];
@@ -71,6 +72,11 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    [segue.destinationViewController setDataManager:dataManager];
 }
 
 - (void)scoutingPageStatus:(NSUInteger)sectionIndex forRow:(NSUInteger)rowIndex forTeam:(NSUInteger)teamIndex {

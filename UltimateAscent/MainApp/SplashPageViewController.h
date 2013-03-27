@@ -7,14 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+@class DataManager;
+
 //#import "MainScoutingPageViewController.h"
 
 @interface SplashPageViewController : UIViewController //<MainScoutingPageDelegate>
-    @property (nonatomic, retain) IBOutlet UIImageView *mainLogo;
-    @property (nonatomic, retain) IBOutlet UILabel *pictureCaption;
-    @property (nonatomic, retain) IBOutlet UIButton *teamScoutingButton;
-    @property (nonatomic, retain) IBOutlet UIButton *matchSetUpButton;
-    @property (nonatomic, retain) IBOutlet UIButton *matchScoutingButton;
-    @property (nonatomic, retain) IBOutlet UIButton *matchAnalysisButton;
-    @property (nonatomic, retain) IBOutlet UIImageView *splashPicture;
+@property (nonatomic, retain) DataManager *dataManager;
+@property (nonatomic, retain) IBOutlet UIImageView *mainLogo;
+@property (nonatomic, retain) IBOutlet UILabel *pictureCaption;
+@property (nonatomic, retain) IBOutlet UIButton *teamScoutingButton;
+@property (nonatomic, retain) IBOutlet UIButton *matchSetUpButton;
+@property (nonatomic, retain) IBOutlet UIButton *matchScoutingButton;
+@property (nonatomic, retain) IBOutlet UIButton *matchAnalysisButton;
+@property (nonatomic, retain) IBOutlet UIImageView *splashPicture;
 @end
