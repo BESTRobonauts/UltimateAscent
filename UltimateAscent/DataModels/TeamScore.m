@@ -2,7 +2,7 @@
 //  TeamScore.m
 //  UltimateAscent
 //
-//  Created by FRC on 3/19/13.
+//  Created by FRC on 3/28/13.
 //  Copyright (c) 2013 FRC. All rights reserved.
 //
 
@@ -15,6 +15,7 @@
 @implementation TeamScore
 
 @dynamic alliance;
+@dynamic allianceSection;
 @dynamic autonHigh;
 @dynamic autonLow;
 @dynamic autonMid;
@@ -34,7 +35,17 @@
 @dynamic pyramid;
 @dynamic robotSpeed;
 @dynamic saved;
+@dynamic sc1;
+@dynamic sc2;
+@dynamic sc3;
+@dynamic sc4;
+@dynamic sc5;
+@dynamic sc6;
+@dynamic sc7;
+@dynamic sc8;
+@dynamic sc9;
 @dynamic synced;
+@dynamic teamScoreId;
 @dynamic teleOpHigh;
 @dynamic teleOpLow;
 @dynamic teleOpMid;
@@ -47,16 +58,7 @@
 @dynamic wallPickUp2;
 @dynamic wallPickUp3;
 @dynamic wallPickUp4;
-@dynamic allianceSection;
-@dynamic sc1;
-@dynamic sc2;
-@dynamic sc3;
-@dynamic sc4;
-@dynamic sc5;
-@dynamic sc6;
-@dynamic sc7;
-@dynamic sc8;
-@dynamic sc9;
+@dynamic stacked;
 @dynamic match;
 @dynamic team;
 @dynamic tournament;

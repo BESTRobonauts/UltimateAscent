@@ -12,9 +12,11 @@
 @class MatchData;
 @class SettingsData;
 @class TeamScore;
+@class DataManager;
 
 @interface MasonPageViewController : UIViewController <NSFetchedResultsControllerDelegate, UITableViewDelegate, UITableViewDataSource, MatchTypePickerDelegate>
 
+@property (nonatomic, retain) DataManager *dataManager;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, retain) SettingsData *settings;

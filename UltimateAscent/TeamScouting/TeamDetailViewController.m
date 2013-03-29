@@ -290,7 +290,7 @@
 		team.auton = [NSNumber numberWithInt:[auton.text floatValue]];
 	}
 	else if (textField == shootingLevel) {
-		team.goalHeight = shootingLevel.text;
+//		team.goalHeight = shootingLevel.text;
 	}
 	else if (textField == minHeight) {
 		team.minHeight = [NSNumber numberWithFloat:[minHeight.text floatValue]];

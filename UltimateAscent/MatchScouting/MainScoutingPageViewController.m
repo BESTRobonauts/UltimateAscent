@@ -25,6 +25,7 @@
 }
 
 @synthesize managedObjectContext, fetchedResultsController;
+@synthesize dataManager = _dataManager;
 // Data Markers
 @synthesize currentSectionType;
 @synthesize rowIndex;
@@ -145,8 +146,13 @@
     NSLog(@"Main Scouting viewDidLoad");
     NSError *error = nil;
     if (!managedObjectContext) {
-        DataManager *dataManager = [DataManager new];
-        managedObjectContext = [dataManager managedObjectContext];
+        if (_dataManager) {
+            managedObjectContext = _dataManager.managedObjectContext;
+        }
+        else {
+            _dataManager = [DataManager new];
+            managedObjectContext = [_dataManager managedObjectContext];
+        }
     }
     [self retrieveSettings];
     if (settings) {

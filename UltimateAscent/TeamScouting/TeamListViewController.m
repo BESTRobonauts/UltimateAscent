@@ -15,6 +15,7 @@
 
 @implementation TeamListViewController
 @synthesize managedObjectContext, fetchedResultsController;
+@synthesize dataManager = _dataManager;
 @synthesize settings;
 @synthesize headerView;
 @synthesize dataChange;
@@ -43,8 +44,13 @@
     NSLog(@"Team List viewDidLoad");
     NSError *error = nil;
     if (!managedObjectContext) {
-        DataManager *dataManager = [DataManager new];
-        managedObjectContext = [dataManager managedObjectContext];
+        if (_dataManager) {
+            managedObjectContext = _dataManager.managedObjectContext;
+        }
+        else {
+            _dataManager = [DataManager new];
+            managedObjectContext = [_dataManager managedObjectContext];
+        }
     }
     
     [self retrieveSettings];

@@ -2,7 +2,7 @@
 //  TeamData.m
 //  UltimateAscent
 //
-//  Created by FRC on 3/20/13.
+//  Created by FRC on 3/28/13.
 //  Copyright (c) 2013 FRC. All rights reserved.
 //
 
@@ -25,7 +25,6 @@
 @dynamic fthing3;
 @dynamic fthing4;
 @dynamic fthing5;
-@dynamic goalHeight;
 @dynamic history;
 @dynamic intake;
 @dynamic maxHeight;
@@ -33,12 +32,14 @@
 @dynamic name;
 @dynamic notes;
 @dynamic number;
+@dynamic nwheels;
 @dynamic pyramidDump;
 @dynamic saved;
 @dynamic shooterHeight;
 @dynamic sthing1;
 @dynamic sthing3;
 @dynamic sting2;
+@dynamic teamDataId;
 @dynamic thing1;
 @dynamic thing2;
 @dynamic thing3;
@@ -46,7 +47,10 @@
 @dynamic thing5;
 @dynamic wheelDiameter;
 @dynamic wheelType;
-@dynamic nwheels;
+@dynamic shootsTo;
+@dynamic sthing4;
+@dynamic sthing5;
+@dynamic stacked;
 @dynamic match;
 @dynamic regional;
 @dynamic stats;

@@ -27,6 +27,7 @@
     int numberMatchTypes;
     MatchTypeDictionary *matchDictionary;
 }
+@synthesize dataManager = _dataManager;
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize fetchedResultsController = _fetchedResultsController;
 @synthesize settings = _settings;
@@ -69,8 +70,13 @@
     [super viewDidLoad];
     NSError *error = nil;
     if (!_managedObjectContext) {
-        DataManager *dataManager = [DataManager new];
-        _managedObjectContext = [dataManager managedObjectContext];
+        if (_dataManager) {
+            _managedObjectContext = _dataManager.managedObjectContext;
+        }
+        else {
+            _dataManager = [DataManager new];
+            _managedObjectContext = [_dataManager managedObjectContext];
+        }
     }
     [self retrieveSettings];
     if (_settings) {

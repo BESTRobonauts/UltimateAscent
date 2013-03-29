@@ -13,8 +13,10 @@
 @class TeamScore;
 @class TeamData;
 @class SettingsData;
+@class DataManager;
 
 @interface RossPageViewController : UIViewController <NSFetchedResultsControllerDelegate, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, MatchTypePickerDelegate>
+@property (nonatomic, retain) DataManager *dataManager;
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain) SettingsData *settings;

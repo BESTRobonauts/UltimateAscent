@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class DataManager;
+
 @interface MatchAnalysisViewController : UIViewController
+@property (nonatomic, retain) DataManager *dataManager;
 @property (nonatomic, retain) IBOutlet UIImageView *mainLogo;
 @property (nonatomic, retain) IBOutlet UILabel *pictureCaption;
 @property (nonatomic, retain) IBOutlet UIImageView *matchPicture;

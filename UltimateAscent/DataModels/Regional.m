@@ -2,7 +2,7 @@
 //  Regional.m
 //  UltimateAscent
 //
-//  Created by FRC on 3/19/13.
+//  Created by FRC on 3/27/13.
 //  Copyright (c) 2013 FRC. All rights reserved.
 //
 
@@ -12,20 +12,21 @@
 
 @implementation Regional
 
-@dynamic name;
-@dynamic rank;
-@dynamic seedingRecord;
+@dynamic dpr;
+@dynamic eliminated;
 @dynamic eliminationRecord;
 @dynamic finishPosition;
-@dynamic eliminated;
+@dynamic name;
 @dynamic opr;
-@dynamic dpr;
+@dynamic rank;
 @dynamic reg1;
 @dynamic reg2;
 @dynamic reg3;
 @dynamic reg4;
 @dynamic reg5;
 @dynamic reg6;
+@dynamic seedingRecord;
+@dynamic regionalId;
 @dynamic team;
 
 @end

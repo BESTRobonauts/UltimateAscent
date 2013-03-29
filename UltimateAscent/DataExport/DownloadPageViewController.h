@@ -11,8 +11,10 @@
 @class MatchData;
 @class TeamScore;
 @class SettingsData;
+@class DataManager;
 
 @interface DownloadPageViewController : UIViewController <UIActionSheetDelegate, MFMailComposeViewControllerDelegate>
+@property (nonatomic, retain) DataManager *dataManager;
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) SettingsData *settings;
 @property (nonatomic, strong) IBOutlet UIImageView *mainLogo;

@@ -15,6 +15,7 @@
 #import "TournamentData.h"
 
 @implementation DownloadPageViewController
+@synthesize dataManager = _dataManager;
 @synthesize managedObjectContext;
 @synthesize settings;
 @synthesize exportTeamData;
@@ -48,8 +49,13 @@
 {
     NSLog(@"Download Page");
     if (!managedObjectContext) {
-       DataManager *dataManager = [DataManager new];
-       managedObjectContext = [dataManager managedObjectContext];
+        if (_dataManager) {
+            managedObjectContext = _dataManager.managedObjectContext;
+        }
+        else {
+            _dataManager = [DataManager new];
+            managedObjectContext = [_dataManager managedObjectContext];
+        }
     }
 
     [self retrieveSettings];

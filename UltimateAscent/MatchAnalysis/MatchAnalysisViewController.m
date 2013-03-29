@@ -7,12 +7,14 @@
 //
 
 #import "MatchAnalysisViewController.h"
+#import "DataManager.h"
 
 @interface MatchAnalysisViewController ()
 
 @end
 
 @implementation MatchAnalysisViewController
+@synthesize dataManager = _dataManager;
 @synthesize mainLogo;
 @synthesize matchPicture;
 @synthesize splashPicture;
@@ -48,6 +50,11 @@
     self.title = @"Match Analysis";
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    [segue.destinationViewController setDataManager:_dataManager];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

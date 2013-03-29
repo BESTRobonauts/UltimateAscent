@@ -2,7 +2,7 @@
 //  TeamScore.h
 //  UltimateAscent
 //
-//  Created by FRC on 3/19/13.
+//  Created by FRC on 3/28/13.
 //  Copyright (c) 2013 FRC. All rights reserved.
 //
 
@@ -14,6 +14,7 @@
 @interface TeamScore : NSManagedObject
 
 @property (nonatomic, retain) NSString * alliance;
+@property (nonatomic, retain) NSNumber * allianceSection;
 @property (nonatomic, retain) NSNumber * autonHigh;
 @property (nonatomic, retain) NSNumber * autonLow;
 @property (nonatomic, retain) NSNumber * autonMid;
@@ -33,7 +34,17 @@
 @property (nonatomic, retain) NSNumber * pyramid;
 @property (nonatomic, retain) NSNumber * robotSpeed;
 @property (nonatomic, retain) NSNumber * saved;
+@property (nonatomic, retain) NSNumber * sc1;
+@property (nonatomic, retain) NSNumber * sc2;
+@property (nonatomic, retain) NSNumber * sc3;
+@property (nonatomic, retain) NSNumber * sc4;
+@property (nonatomic, retain) NSNumber * sc5;
+@property (nonatomic, retain) NSNumber * sc6;
+@property (nonatomic, retain) NSString * sc7;
+@property (nonatomic, retain) NSString * sc8;
+@property (nonatomic, retain) NSString * sc9;
 @property (nonatomic, retain) NSNumber * synced;
+@property (nonatomic, retain) NSString * teamScoreId;
 @property (nonatomic, retain) NSNumber * teleOpHigh;
 @property (nonatomic, retain) NSNumber * teleOpLow;
 @property (nonatomic, retain) NSNumber * teleOpMid;
@@ -46,16 +57,7 @@
 @property (nonatomic, retain) NSNumber * wallPickUp2;
 @property (nonatomic, retain) NSNumber * wallPickUp3;
 @property (nonatomic, retain) NSNumber * wallPickUp4;
-@property (nonatomic, retain) NSNumber * allianceSection;
-@property (nonatomic, retain) NSNumber * sc1;
-@property (nonatomic, retain) NSNumber * sc2;
-@property (nonatomic, retain) NSNumber * sc3;
-@property (nonatomic, retain) NSNumber * sc4;
-@property (nonatomic, retain) NSNumber * sc5;
-@property (nonatomic, retain) NSNumber * sc6;
-@property (nonatomic, retain) NSString * sc7;
-@property (nonatomic, retain) NSString * sc8;
-@property (nonatomic, retain) NSString * sc9;
+@property (nonatomic, retain) NSNumber * stacked;
 @property (nonatomic, retain) MatchData *match;
 @property (nonatomic, retain) TeamData *team;
 @property (nonatomic, retain) TournamentData *tournament;

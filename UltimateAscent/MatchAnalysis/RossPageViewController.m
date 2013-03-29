@@ -29,6 +29,7 @@
     NSMutableArray *r1MatchTeleOp;
 }
 
+@synthesize dataManager = _dataManager;
 @synthesize managedObjectContext, fetchedResultsController;
 @synthesize settings;
 
@@ -82,8 +83,13 @@
     NSLog(@"Match Analysis viewDidLoad");
     NSError *error = nil;
     if (!managedObjectContext) {
-        DataManager *dataManager = [DataManager new];
-        managedObjectContext = [dataManager managedObjectContext];
+        if (_dataManager) {
+            managedObjectContext = _dataManager.managedObjectContext;
+        }
+        else {
+            _dataManager = [DataManager new];
+            managedObjectContext = [_dataManager managedObjectContext];
+        }
     }
     [self retrieveSettings];
     if (settings) {
