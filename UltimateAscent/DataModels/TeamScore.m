@@ -2,7 +2,7 @@
 //  TeamScore.m
 //  UltimateAscent
 //
-//  Created by FRC on 3/28/13.
+//  Created by FRC on 3/29/13.
 //  Copyright (c) 2013 FRC. All rights reserved.
 //
 
@@ -44,8 +44,9 @@
 @dynamic sc7;
 @dynamic sc8;
 @dynamic sc9;
+@dynamic stacked;
 @dynamic synced;
-@dynamic teamScoreId;
+@dynamic teamscoreId;
 @dynamic teleOpHigh;
 @dynamic teleOpLow;
 @dynamic teleOpMid;
@@ -58,7 +59,6 @@
 @dynamic wallPickUp2;
 @dynamic wallPickUp3;
 @dynamic wallPickUp4;
-@dynamic stacked;
 @dynamic match;
 @dynamic team;
 @dynamic tournament;

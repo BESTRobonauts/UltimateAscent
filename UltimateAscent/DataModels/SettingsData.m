@@ -2,7 +2,7 @@
 //  SettingsData.m
 //  UltimateAscent
 //
-//  Created by FRC on 3/27/13.
+//  Created by FRC on 3/29/13.
 //  Copyright (c) 2013 FRC. All rights reserved.
 //
 
@@ -17,7 +17,7 @@
 @dynamic master;
 @dynamic mode;
 @dynamic overrideCode;
-@dynamic settingsDataId;
+@dynamic settingsdataId;
 @dynamic tournament;
 
 @end

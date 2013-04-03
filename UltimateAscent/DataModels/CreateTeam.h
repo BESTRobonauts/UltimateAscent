@@ -9,11 +9,15 @@
 #import <Foundation/Foundation.h>
 #import "AddRecordResults.h"
 
+@class DataManager;
 @class TeamData;
 @class TournamentData;
 
 @interface CreateTeam : NSObject
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, retain) DataManager *dataManager;
+
+- (id)initWithDataManager:(DataManager *)initManager;
 
 -(AddRecordResults)createTeamFromFile:(NSMutableArray *)headers dataFields:(NSMutableArray *)data;
 -(TeamData *)GetTeam:(NSNumber *)teamNumber;

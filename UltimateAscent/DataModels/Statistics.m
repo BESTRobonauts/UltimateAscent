@@ -2,7 +2,7 @@
 //  Statistics.m
 //  UltimateAscent
 //
-//  Created by FRC on 3/28/13.
+//  Created by FRC on 3/29/13.
 //  Copyright (c) 2013 FRC. All rights reserved.
 //
 
@@ -28,13 +28,13 @@
 @dynamic stat6;
 @dynamic stat7;
 @dynamic stat8;
-@dynamic statisticsId;
-@dynamic teleOpAccuracy;
-@dynamic teleOpPoints;
 @dynamic stat9;
 @dynamic stat10;
 @dynamic stat11;
 @dynamic stat12;
+@dynamic statisticsId;
+@dynamic teleOpAccuracy;
+@dynamic teleOpPoints;
 @dynamic team;
 @dynamic tournament;
 

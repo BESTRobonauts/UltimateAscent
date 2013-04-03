@@ -125,7 +125,7 @@
     numberLabel.text = [NSString stringWithFormat:@"%d", [team.number intValue]];
     nameTextField.text = team.name;
     notesTextField.text = team.notes;
-//    shootingLevel.text = team.goalHeight;
+    shootingLevel.text = team.shootsTo;
     auton.text = [NSString stringWithFormat:@"%d", [team.auton intValue]];
     minHeight.text = [NSString stringWithFormat:@"%.1f", [team.minHeight floatValue]];
     maxHeight.text = [NSString stringWithFormat:@"%.1f", [team.maxHeight floatValue]];
@@ -290,7 +290,7 @@
 		team.auton = [NSNumber numberWithInt:[auton.text floatValue]];
 	}
 	else if (textField == shootingLevel) {
-//		team.goalHeight = shootingLevel.text;
+		team.shootsTo = shootingLevel.text;
 	}
 	else if (textField == minHeight) {
 		team.minHeight = [NSNumber numberWithFloat:[minHeight.text floatValue]];
@@ -561,6 +561,7 @@
     NSLog(@"view will disappear");
     if (dataChange) {
         team.saved = [NSNumber numberWithInt:1];
+        team.stacked = [NSNumber numberWithInt:0];
     }
 }
 

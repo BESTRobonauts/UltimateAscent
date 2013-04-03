@@ -72,6 +72,7 @@
 @synthesize teamName;
 @synthesize driverRating;
 @synthesize defenseRating;
+@synthesize robotSpeed = _robotSpeed;
 @synthesize climbLevel;
 @synthesize attemptedClimb;
 @synthesize climbTimerButton;
@@ -246,6 +247,8 @@
     driverRating.continuous = NO;
     defenseRating.maximumValue = 5.0;
     defenseRating.continuous = NO;
+    _robotSpeed.maximumValue = 5.0;
+    _robotSpeed.continuous = NO;
 
     NSMutableArray *itemArray = [NSMutableArray arrayWithObjects: @"None", @"One", @"Two", @"Three", nil];
     climbLevel = [[UISegmentedControl alloc] initWithItems:itemArray];
@@ -704,11 +707,18 @@
     currentTeam.DriverRating = [NSNumber numberWithInt:driverRating.value];
 }
 
+- (IBAction) updateRobotSpeed:(id) sender
+{
+    _robotSpeed.value = roundf(_robotSpeed.value);
+    dataChange = YES;
+    currentTeam.robotSpeed = [NSNumber numberWithInt:_robotSpeed.value];
+}
+
 - (IBAction) updateDefenseRating:(id) sender
 {
-    defenseRating.value = roundf(defenseRating.value);
+    driverRating.value = roundf(driverRating.value);
     dataChange = YES;
-    currentTeam.defenseRating = [NSNumber numberWithInt:defenseRating.value];
+    currentTeam.DriverRating = [NSNumber numberWithInt:driverRating.value];
 }
 
 -(IBAction)toggleForClimbAttempt: (id) sender {
@@ -1009,10 +1019,9 @@
         TeamDetailViewController *detailViewController = [segue destinationViewController];
         detailViewController.team = currentTeam.team;
     }
- /*   else {
-        MatchDetailViewController *detailViewController = [segue destinationViewController];
-        detailViewController.match = currentMatch;               
-    }*/
+    else {
+        [segue.destinationViewController setDataManager:_dataManager];
+    }
 }
 
 -(void)setTeamList {
@@ -1082,6 +1091,7 @@
     teamName.text = currentTeam.team.name;
     driverRating.value =  [currentTeam.driverRating floatValue];
     defenseRating.value =  [currentTeam.defenseRating floatValue];
+    _robotSpeed.value =  [currentTeam.robotSpeed floatValue];
     if ([currentTeam.climbAttempt intValue] == 0) [attemptedClimb setOn:NO animated:YES];
     else [attemptedClimb setOn:YES animated:YES];
 
@@ -1557,6 +1567,7 @@
     currentTeam.wallPickUp4 = [NSNumber numberWithInt:0];
     currentTeam.floorPickUp = [NSNumber numberWithInt:0];
     currentTeam.driverRating = [NSNumber numberWithInt:0];
+    currentTeam.robotSpeed = [NSNumber numberWithInt:0];
     currentTeam.notes = @"";
     currentTeam.saved = [NSNumber numberWithInt:0];
     currentTeam.fieldDrawing = nil;

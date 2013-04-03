@@ -2,7 +2,7 @@
 //  SettingsData.h
 //  UltimateAscent
 //
-//  Created by FRC on 3/27/13.
+//  Created by FRC on 3/29/13.
 //  Copyright (c) 2013 FRC. All rights reserved.
 //
 
@@ -18,7 +18,7 @@
 @property (nonatomic, retain) NSNumber * master;
 @property (nonatomic, retain) NSString * mode;
 @property (nonatomic, retain) NSString * overrideCode;
-@property (nonatomic, retain) NSString * settingsDataId;
+@property (nonatomic, retain) NSString * settingsdataId;
 @property (nonatomic, retain) TournamentData *tournament;
 
 @end

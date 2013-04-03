@@ -34,6 +34,15 @@
 */
 @implementation CreateTeam
 @synthesize managedObjectContext;
+@synthesize dataManager = _dataManager;
+
+- (id)initWithDataManager:(DataManager *)initManager {
+	if ((self = [super init]))
+	{
+        _dataManager = initManager;
+	}
+	return self;
+}
 
 -(AddRecordResults)createTeamFromFile:(NSMutableArray *)headers dataFields:(NSMutableArray *)data {
     NSNumber *teamNumber;
@@ -42,10 +51,15 @@
     if (![data count]) return DB_ERROR;
 
     if (!managedObjectContext) {
-        DataManager *dataManager = [DataManager new];
-        managedObjectContext = [dataManager managedObjectContext];
+        if (_dataManager) {
+            managedObjectContext = _dataManager.managedObjectContext;
+        }
+        else {
+            _dataManager = [DataManager new];
+            managedObjectContext = [_dataManager managedObjectContext];
+        }
     }
-
+    
     teamNumber = [NSNumber numberWithInt:[[data objectAtIndex: 0] intValue]];
     // NSLog(@"createTeamFromFile:Team Number = %@", teamNumber);
     TeamData *team = [self GetTeam:teamNumber];
@@ -121,10 +135,15 @@
     // NSLog(@"Searching for team = %@", teamNumber);
     NSError *error;
     if (!managedObjectContext) {
-        DataManager *dataManager = [DataManager new];
-        managedObjectContext = [dataManager managedObjectContext];
+        if (_dataManager) {
+            managedObjectContext = _dataManager.managedObjectContext;
+        }
+        else {
+            _dataManager = [DataManager new];
+            managedObjectContext = [_dataManager managedObjectContext];
+        }
     }
-
+    
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription 
                                    entityForName:@"TeamData" inManagedObjectContext:managedObjectContext];

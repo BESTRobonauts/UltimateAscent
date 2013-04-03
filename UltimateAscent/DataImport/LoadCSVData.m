@@ -75,7 +75,7 @@
     [parser openFile: filePath];
     NSMutableArray *csvContent = [parser parseFile];
     if ([[[csvContent objectAtIndex: 0] objectAtIndex:0] isEqualToString:@"Tournament"]) {
-        CreateTournament *tournament = [CreateTournament new];
+        CreateTournament *tournament = [[CreateTournament alloc] initWithDataManager:_dataManager];
         int c;
         for (c = 1; c < [csvContent count]; c++) {
             // NSLog(@"loadTournamentFile:Tournament = %@", [[csvContent objectAtIndex: c] objectAtIndex:0]);
@@ -93,7 +93,7 @@
     [parser openFile: filePath];
     NSMutableArray *csvContent = [parser parseFile];
     if ([[[csvContent objectAtIndex: 0] objectAtIndex:0] isEqualToString:@"Mode"]) {
-        CreateSettings *settings = [CreateSettings new];
+        CreateSettings *settings = [[CreateSettings alloc] initWithDataManager:_dataManager];
         int c;
         for (c = 1; c < [csvContent count]; c++) {
             // NSLog(@"loadSettingsFile:Mode = %@", [[csvContent objectAtIndex: c] objectAtIndex:0]);
@@ -111,7 +111,7 @@
     [parser openFile: filePath];
     NSMutableArray *csvContent = [parser parseFile];
     if ([[[csvContent objectAtIndex: 0] objectAtIndex:0] isEqualToString:@"Team Number"]) {
-        CreateTeam *team = [CreateTeam new];
+        CreateTeam *team = [[CreateTeam alloc] initWithDataManager:_dataManager];
         int c;
         for (c = 1; c < [csvContent count]; c++) {
             // NSLog(@"loadTeamFile:TeamNumber = %@", [[csvContent objectAtIndex: c] objectAtIndex:0]);
@@ -129,7 +129,7 @@
     [parser openFile: filePath];
     NSMutableArray *csvContent = [parser parseFile];
     if ([[[csvContent objectAtIndex: 0] objectAtIndex:0] isEqualToString:@"Match"]) {
-        CreateMatch *match = [CreateMatch new];
+        CreateMatch *match = [[CreateMatch alloc] initWithDataManager:_dataManager];
         int c;
         for (c = 1; c < [csvContent count]; c++) {
 //            NSLog(@"Match = %@", [csvContent objectAtIndex: c]);
@@ -147,7 +147,7 @@
     [parser openFile: filePath];
     NSMutableArray *csvContent = [parser parseFile];
     if ([[[csvContent objectAtIndex: 0] objectAtIndex:0] isEqualToString:@"Tournament"]) {
-        CreateMatch *match = [CreateMatch new];
+        CreateMatch *match = [[CreateMatch alloc] initWithDataManager:_dataManager];
         int c;
         for (c = 1; c < [csvContent count]; c++) {
             // NSLog(@"Match = %@", [csvContent objectAtIndex: c]);

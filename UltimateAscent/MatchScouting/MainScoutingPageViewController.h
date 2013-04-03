@@ -78,6 +78,7 @@ typedef enum {
 @property (nonatomic, retain) IBOutlet UILabel *teamName;
 @property (nonatomic, retain) IBOutlet UISlider *driverRating;
 @property (nonatomic, retain) IBOutlet UISlider *defenseRating;
+@property (nonatomic, retain) IBOutlet UISlider *robotSpeed;
 @property (nonatomic, retain) IBOutlet UISwitch *attemptedClimb;
 @property (nonatomic, retain) UISegmentedControl *climbLevel;
 @property (nonatomic, retain) IBOutlet UITextField *notes;
@@ -87,6 +88,7 @@ typedef enum {
 -(void)matchReset;
 -(IBAction)updateDriverRating:(id) sender;
 -(IBAction)updateDefenseRating: (id) sender;
+-(IBAction)updateRobotSpeed: (id) sender;
 -(IBAction)toggleForClimbAttempt: (id) sender;
 -(void)setClimbSegment: (id) sender;
 -(IBAction)climbTimerStart:(id)sender;

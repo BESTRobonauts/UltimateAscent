@@ -60,6 +60,15 @@
 
 @synthesize managedObjectContext;
 @synthesize tournamentRecord;
+@synthesize dataManager = _dataManager;
+
+- (id)initWithDataManager:(DataManager *)initManager {
+	if ((self = [super init]))
+	{
+        _dataManager = initManager;
+	}
+	return self;
+}
 
 -(AddRecordResults)createMatchFromFile:(NSMutableArray *)headers dataFields:(NSMutableArray *)data {
     NSNumber *matchNumber;
@@ -69,8 +78,13 @@
     if (![data count]) return DB_ERROR;
     
     if (!managedObjectContext) {
-        DataManager *dataManager = [DataManager new];
-        managedObjectContext = [dataManager managedObjectContext];
+        if (_dataManager) {
+            managedObjectContext = _dataManager.managedObjectContext;
+        }
+        else {
+            _dataManager = [DataManager new];
+            managedObjectContext = [_dataManager managedObjectContext];
+        }
     }
     
     matchNumber = [NSNumber numberWithInt:[[data objectAtIndex: 0] intValue]];
@@ -118,8 +132,13 @@
                             forBlueScore:(NSNumber *)blueScore
 {
     if (!managedObjectContext) {
-        DataManager *dataManager = [DataManager new];
-        managedObjectContext = [dataManager managedObjectContext];
+        if (_dataManager) {
+            managedObjectContext = _dataManager.managedObjectContext;
+        }
+        else {
+            _dataManager = [DataManager new];
+            managedObjectContext = [_dataManager managedObjectContext];
+        }
     }
     AddRecordResults results = [self ValidateMatch:number
                                           forMatch:matchType
@@ -167,8 +186,13 @@
                         forTeam6:(NSNumber *)blue3 {
     
     if (!managedObjectContext) {
-        DataManager *dataManager = [DataManager new];
-        managedObjectContext = [dataManager managedObjectContext];
+        if (_dataManager) {
+            managedObjectContext = _dataManager.managedObjectContext;
+        }
+        else {
+            _dataManager = [DataManager new];
+            managedObjectContext = [_dataManager managedObjectContext];
+        }
     }
     
     MatchData *match = [self GetMatch:number forMatchType:matchType forTournament:tournament];
@@ -259,10 +283,15 @@
     if (![data count]) return DB_ERROR;
     
     if (!managedObjectContext) {
-        DataManager *dataManager = [DataManager new];
-        managedObjectContext = [dataManager managedObjectContext];
+        if (_dataManager) {
+            managedObjectContext = _dataManager.managedObjectContext;
+        }
+        else {
+            _dataManager = [DataManager new];
+            managedObjectContext = [_dataManager managedObjectContext];
+        }
     }
-    
+   
     tournament = [data objectAtIndex: 0];
     tournamentRecord = [self getTournamentRecord:tournament];
     type = [data objectAtIndex: 1];
@@ -460,10 +489,15 @@
 //    NSLog(@"Searching for team = %@", teamNumber);
     NSError *error;
     if (!managedObjectContext) {
-        DataManager *dataManager = [DataManager new];
-        managedObjectContext = [dataManager managedObjectContext];
+        if (_dataManager) {
+            managedObjectContext = _dataManager.managedObjectContext;
+        }
+        else {
+            _dataManager = [DataManager new];
+            managedObjectContext = [_dataManager managedObjectContext];
+        }
     }
-    
+   
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription 
                                    entityForName:@"TeamData" inManagedObjectContext:managedObjectContext];

@@ -22,6 +22,7 @@
 @property (nonatomic, strong) IBOutlet UILabel *pictureCaption;
 @property (nonatomic, strong) IBOutlet UIButton *exportTeamData;
 @property (nonatomic, strong) IBOutlet UIButton *exportMatchData;
+@property (weak, nonatomic) IBOutlet UIButton *stackMobButton;
 @property (nonatomic, strong) NSString *exportPath;
 
 -(IBAction)exportTapped:(id)sender;
@@ -30,7 +31,7 @@
 -(NSString *)buildMatchCSVOutput:(TeamScore *)teamScore;
 -(NSString *)buildDanielleMatchCSVOutput:(MatchData *)match forTeam:(TeamScore *)teamScore;
 -(NSString *)applicationDocumentsDirectory;
--(void)buildEmail:(NSArray *)filePath attach:(NSArray *)emailFile subject:(NSString *)emailSubject;
+-(void)buildEmail:(NSString *)filePath attach:(NSString *)emailFile subject:(NSString *)emailSubject;
 -(void)retrieveSettings;
 
 @end

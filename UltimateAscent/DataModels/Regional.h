@@ -2,7 +2,7 @@
 //  Regional.h
 //  UltimateAscent
 //
-//  Created by FRC on 3/27/13.
+//  Created by FRC on 3/29/13.
 //  Copyright (c) 2013 FRC. All rights reserved.
 //
 
@@ -26,8 +26,8 @@
 @property (nonatomic, retain) NSNumber * reg4;
 @property (nonatomic, retain) NSString * reg5;
 @property (nonatomic, retain) NSString * reg6;
-@property (nonatomic, retain) NSString * seedingRecord;
 @property (nonatomic, retain) NSString * regionalId;
+@property (nonatomic, retain) NSString * seedingRecord;
 @property (nonatomic, retain) TeamData *team;
 
 @end

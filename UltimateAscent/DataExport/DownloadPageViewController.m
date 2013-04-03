@@ -24,6 +24,7 @@
 @synthesize splashPicture;
 @synthesize pictureCaption;
 @synthesize exportPath;
+@synthesize stackMobButton = _stackMobButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -74,6 +75,11 @@
     [exportMatchData setTitle:@"Export Match Data" forState:UIControlStateNormal];
     exportMatchData.titleLabel.font = [UIFont fontWithName:@"Nasalization" size:24.0];
     exportPath = [self applicationDocumentsDirectory];
+    [_stackMobButton setTitle:@"Export to Stack Mob" forState:UIControlStateNormal];
+    _stackMobButton.titleLabel.font = [UIFont fontWithName:@"Nasalization" size:24.0];
+    // Display the Label for the Picture
+    pictureCaption.font = [UIFont fontWithName:@"Nasalization" size:24.0];
+    pictureCaption.text = @"Just Hangin' Out";
     [super viewDidLoad];
 }
 
@@ -110,7 +116,7 @@
     NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:numberDescriptor, nil];
 
     [fetchRequest setSortDescriptors:sortDescriptors];
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"saved == 1"];
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"saved == 1 AND ANY tournament = %@", settings.tournament];
     [fetchRequest setPredicate:pred];
     NSArray *teamData = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
     if(!teamData) {
@@ -118,11 +124,11 @@
     } 
     else {
         if ([teamData count]) {
-            csvString = @"Team Number, Name, Tournament, Drive Train Type, Intake, Wheel Diameter, CIMS, Minimum Height, Maximum Height, Shooter Height, Pyramid Dump, Climb Level, Climb Speed, Notes\n";
+            csvString = @"Team Number, Name, Tournament, Drive Train Type, Intake, Wheel Diameter, CIMS, Minimum Height, Maximum Height, Pyramid Dump, Climb Level, Climb Speed, Wheel Type, Notes\n";
             int c;
             for (c = 0; c < [teamData count]; c++) {
                 team = [teamData objectAtIndex:c];
-                csvString = [csvString stringByAppendingFormat:@"%@, %@, %@, %@, %@, %@, %@, %@, %@, %@, %@, %@, %@ %@\n", team.number, team.name, settings.tournament.name, team.driveTrainType, team.intake, team.wheelDiameter, team.cims, team.minHeight, team.maxHeight, team.shooterHeight, team.pyramidDump, team.climbLevel, team.climbSpeed, ([team.notes isEqualToString:@""] ? @"," : [NSString stringWithFormat:@",\"%@\"", team.notes])];
+                csvString = [csvString stringByAppendingFormat:@"%@, %@, %@, %@, %@, %@, %@, %@, %@, %@, %@, %@, %@ %@\n", team.number, team.name, settings.tournament.name, team.driveTrainType, team.intake, team.wheelDiameter, team.cims, team.minHeight, team.maxHeight, team.pyramidDump, team.climbLevel, team.climbSpeed, team.wheelType, ([team.notes isEqualToString:@""] ? @"," : [NSString stringWithFormat:@",\"%@\"", team.notes])];
             }
 //            csvString = [csvString stringByAppendingString:@"\n"];
             // NSLog(@"csvString = %@", csvString);
@@ -131,8 +137,8 @@
                         encoding:NSUTF8StringEncoding 
                         error:nil];
 
-//            NSString *emailSubject = @"Team Data CSV File";
-//            [self buildEmail:filePath attach:@"TeamData.csv" subject:emailSubject];
+            NSString *emailSubject = @"Team Data CSV File";
+            [self buildEmail:filePath attach:@"TeamData.csv" subject:emailSubject];
         }
         else {
             NSLog(@"No saved data");
@@ -349,7 +355,7 @@
 }
 
 
--(void)buildEmail:(NSArray *)filePath attach:(NSArray *)emailFile subject:(NSString *)emailSubject {
+-(void)buildEmail:(NSString *)filePath attach:(NSString *)emailFile subject:(NSString *)emailSubject {
     MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
     NSArray *array = [[NSArray alloc] initWithObjects:@"kpettinger@comcast.net", @"BESTRobonauts@gmail.com",nil];
     [picker setSubject:emailSubject];
@@ -357,14 +363,12 @@
     [picker setMessageBody:@"Downloaded Data from UltimateAscent" isHTML:NO];
     [picker setMailComposeDelegate:self];
 
-    for (int i=0; i < [filePath count]; i++) {
-        NSData *ultimateData = [[NSData alloc] initWithContentsOfFile:[filePath objectAtIndex:i]];
-        if (ultimateData) {
-            [picker addAttachmentData:ultimateData mimeType:@"application/UltimateAscent" fileName:[emailFile objectAtIndex:i]];
-        }
-        else {
-            NSLog(@"Error encoding data for email");
-        }
+    NSData *ultimateData = [[NSData alloc] initWithContentsOfFile:filePath];
+    if (ultimateData) {
+            [picker addAttachmentData:ultimateData mimeType:@"application/UltimateAscent" fileName:emailFile];
+    }
+    else {
+        NSLog(@"Error encoding data for email");
     }
     [self presentModalViewController:picker animated:YES];
 }
@@ -373,6 +377,11 @@
 		  didFinishWithResult:(MFMailComposeResult)result
 						error:(NSError *)error {
     [self dismissModalViewControllerAnimated:YES];
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    [segue.destinationViewController setDataManager:_dataManager];
 }
 
 -(void)retrieveSettings {
@@ -407,6 +416,7 @@
             [mainLogo setImage:[UIImage imageNamed:@"robonauts app banner.jpg"]];
             exportTeamData.frame = CGRectMake(325, 125, 400, 68);
             exportMatchData.frame = CGRectMake(325, 225, 400, 68);
+            _stackMobButton.frame = CGRectMake(325, 325, 400, 68);
             splashPicture.frame = CGRectMake(293, 563, 468, 330);
             pictureCaption.frame = CGRectMake(293, 901, 468, 39);
             break;
@@ -416,6 +426,7 @@
             [mainLogo setImage:[UIImage imageNamed:@"robonauts app banner original.jpg"]];
             exportTeamData.frame = CGRectMake(550, 225, 400, 68);
             exportMatchData.frame = CGRectMake(550, 325, 400, 68);
+            _stackMobButton.frame = CGRectMake(550, 425, 400, 68);
             splashPicture.frame = CGRectMake(50, 243, 468, 330);
             pictureCaption.frame = CGRectMake(50, 581, 468, 39);
             break;

@@ -10,9 +10,13 @@
 #import "AddRecordResults.h"
 
 @class SettingsData;
+@class DataManager;
 
 @interface CreateSettings : NSObject
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, retain) DataManager *dataManager;
+
+- (id)initWithDataManager:(DataManager *)initManager;
 
 -(AddRecordResults)createSettingsFromFile:(NSMutableArray *)headers dataFields:(NSMutableArray *)data;
 

@@ -2,7 +2,7 @@
 //  TournamentData.m
 //  UltimateAscent
 //
-//  Created by FRC on 3/27/13.
+//  Created by FRC on 3/29/13.
 //  Copyright (c) 2013 FRC. All rights reserved.
 //
 
@@ -17,7 +17,7 @@
 
 @dynamic directory;
 @dynamic name;
-@dynamic tournamentDataId;
+@dynamic tournamentdataId;
 @dynamic score;
 @dynamic settings;
 @dynamic statistics;

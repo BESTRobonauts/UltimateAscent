@@ -27,6 +27,7 @@
     MatchResultsObject *dataFromTransfer;
 }
 
+@synthesize dataManager = _dataManager;
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize fetchedResultsController = _fetchedResultsController;
 @synthesize currentSession = _currentSession;
@@ -58,8 +59,13 @@ GKPeerPickerController *picker;
     [super viewDidLoad];
     NSError *error = nil;
     if (!_managedObjectContext) {
-        DataManager *dataManager = [DataManager new];
-        _managedObjectContext = [dataManager managedObjectContext];
+        if (_dataManager) {
+            _managedObjectContext = _dataManager.managedObjectContext;
+        }
+        else {
+            _dataManager = [DataManager new];
+            _managedObjectContext = [_dataManager managedObjectContext];
+        }
     }
     [self retrieveSettings];
     if (settings) {
@@ -260,10 +266,10 @@ GKPeerPickerController *picker;
     else {
         if([scoreData count] > 0) {  // Match Exists
             TeamScore *score = [scoreData objectAtIndex:0];
-            if ([score.saved intValue]) {
+ /*           if ([score.saved intValue]) {
                 // Match already saved on this device
                 return FALSE;
-            }
+            }*/
             [self unpackXferData:xferData forScore:score];
             return TRUE;
         }
@@ -496,7 +502,7 @@ GKPeerPickerController *picker;
         NSSortDescriptor *numberDescriptor = [[NSSortDescriptor alloc] initWithKey:@"match.number" ascending:YES];
         NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:typeDescriptor, numberDescriptor, nil];
         NSLog(@"Fix this");
-        NSPredicate *pred = [NSPredicate predicateWithFormat:@"(ANY tournament = %@) AND (saved == 1) AND (synced == 0)", settings.tournament];
+        NSPredicate *pred = [NSPredicate predicateWithFormat:@"(ANY tournament = %@) AND (saved == 1)", settings.tournament];
 //        NSPredicate *pred = [NSPredicate predicateWithFormat:@"(ANY tournament = %@) AND (saved == 1) AND (synced == 1)", settings.tournament];
         [fetchRequest setPredicate:pred];
         [fetchRequest setSortDescriptors:sortDescriptors];

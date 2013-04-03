@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "AddRecordResults.h"
 
+@class DataManager;
 @class MatchData;
 @class TeamScore;
 @class TeamData;
@@ -16,7 +17,11 @@
 
 @interface CreateMatch : NSObject
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, retain) DataManager *dataManager;
+- (id)initWithDataManager:(DataManager *)initManager;
+
 @property (nonatomic, strong) TournamentData *tournamentRecord;
+
 -(AddRecordResults)createMatchFromFile:(NSMutableArray *)headers dataFields:(NSMutableArray *)data;
 -(AddRecordResults)addMatchResultsFromFile:(NSMutableArray *)headers dataFields:(NSMutableArray *)data;
 -(MatchData *)GetMatch:(NSNumber *)matchNumber forMatchType:(NSString *) type forTournament:(NSString *) tournament;
@@ -57,4 +62,7 @@
 
 -(AddRecordResults)ValidateTeam:(NSNumber *)red1
                   forTournament:(NSString *)tournament;
+
+-(TeamScore *)CreateScore:(NSNumber *)teamNumber forAlliance:(NSString *)alliance;
+
 @end

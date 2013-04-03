@@ -2,7 +2,7 @@
 //  MatchData.h
 //  UltimateAscent
 //
-//  Created by FRC on 3/28/13.
+//  Created by FRC on 3/29/13.
 //  Copyright (c) 2013 FRC. All rights reserved.
 //
 
@@ -14,13 +14,13 @@
 @interface MatchData : NSManagedObject
 
 @property (nonatomic, retain) NSNumber * blueScore;
-@property (nonatomic, retain) NSString * matchDataId;
+@property (nonatomic, retain) NSString * matchdataId;
 @property (nonatomic, retain) NSString * matchType;
 @property (nonatomic, retain) NSNumber * matchTypeSection;
 @property (nonatomic, retain) NSNumber * number;
 @property (nonatomic, retain) NSNumber * redScore;
-@property (nonatomic, retain) NSString * tournament;
 @property (nonatomic, retain) NSNumber * stacked;
+@property (nonatomic, retain) NSString * tournament;
 @property (nonatomic, retain) NSSet *score;
 @end
 

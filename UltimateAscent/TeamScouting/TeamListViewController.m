@@ -70,7 +70,8 @@
          */
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
-    }		
+    }
+      
     headerView = [[UIView alloc] initWithFrame:CGRectMake(0,0,768,50)];
     headerView.backgroundColor = [UIColor lightGrayColor];
     headerView.opaque = YES;

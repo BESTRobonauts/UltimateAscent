@@ -7,18 +7,31 @@
 //
 
 #import "DataManager.h"
+#import "StackMob.h"
+#import "AppDelegate.h"
+
 
 @implementation DataManager
+@synthesize client = _client;
+@synthesize coreDataStore = _coreDataStore;
 @synthesize managedObjectContext = __managedObjectContext;
 @synthesize managedObjectModel = __managedObjectModel;
+@synthesize smManagedObjectContext = _smManagedObjectContext;
 @synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
 @synthesize loadDataFromBundle;
+
+- (AppDelegate *)appDelegate {
+    return (AppDelegate *)[[UIApplication sharedApplication] delegate];
+}
 
 - (id)init
 {
 	if ((self = [super init]))
 	{
         [self managedObjectContext];
+        self.client = [[SMClient alloc] initWithAPIVersion:@"0" publicKey:@"109962e9-0f33-4479-9785-49e8cf5e7f1d"];
+        self.coreDataStore = [self.client coreDataStoreWithManagedObjectModel:self.managedObjectModel];
+        _smManagedObjectContext = [self.coreDataStore contextForCurrentThread];
 	}
 	return self;
 }
@@ -26,6 +39,10 @@
 -(BOOL)databaseExists {
     [self managedObjectContext];
     return loadDataFromBundle;
+}
+
+-(NSManagedObjectContext *)getSMContext {
+    return [self.coreDataStore contextForCurrentThread];
 }
 
 - (void)saveContext
@@ -87,6 +104,7 @@
     // or not to migrate
 /*    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"UltimateAscent" withExtension:@"momd"];
     __managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL]; */
+    
     return __managedObjectModel;
 }
 
@@ -132,7 +150,7 @@
         
     // or not to migrate
 /*    __persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    if (![__persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) */
+    if (![__persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error])*/
         
     {
         /*

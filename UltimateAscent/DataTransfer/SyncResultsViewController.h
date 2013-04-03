@@ -10,10 +10,12 @@
 #import <GameKit/GameKit.h>
 #import "AlertPromptViewController.h"
 
+@class DataManager;
 @class MatchResultsObject;
 @class TeamScore;
 
 @interface SyncResultsViewController : UIViewController <GKPeerPickerControllerDelegate, GKSessionDelegate, NSFetchedResultsControllerDelegate, UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate>
+@property (nonatomic, retain) DataManager *dataManager;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, assign) BlueToothType blueToothType;

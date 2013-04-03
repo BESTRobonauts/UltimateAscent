@@ -2,7 +2,7 @@
 //  TournamentData.h
 //  UltimateAscent
 //
-//  Created by FRC on 3/27/13.
+//  Created by FRC on 3/29/13.
 //  Copyright (c) 2013 FRC. All rights reserved.
 //
 
@@ -15,7 +15,7 @@
 
 @property (nonatomic, retain) NSString * directory;
 @property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSString * tournamentDataId;
+@property (nonatomic, retain) NSString * tournamentdataId;
 @property (nonatomic, retain) NSSet *score;
 @property (nonatomic, retain) SettingsData *settings;
 @property (nonatomic, retain) NSSet *statistics;

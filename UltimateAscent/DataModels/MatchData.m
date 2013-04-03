@@ -2,7 +2,7 @@
 //  MatchData.m
 //  UltimateAscent
 //
-//  Created by FRC on 3/28/13.
+//  Created by FRC on 3/29/13.
 //  Copyright (c) 2013 FRC. All rights reserved.
 //
 
@@ -13,13 +13,13 @@
 @implementation MatchData
 
 @dynamic blueScore;
-@dynamic matchDataId;
+@dynamic matchdataId;
 @dynamic matchType;
 @dynamic matchTypeSection;
 @dynamic number;
 @dynamic redScore;
-@dynamic tournament;
 @dynamic stacked;
+@dynamic tournament;
 @dynamic score;
 
 @end

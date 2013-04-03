@@ -2,7 +2,7 @@
 //  Statistics.h
 //  UltimateAscent
 //
-//  Created by FRC on 3/28/13.
+//  Created by FRC on 3/29/13.
 //  Copyright (c) 2013 FRC. All rights reserved.
 //
 
@@ -28,13 +28,13 @@
 @property (nonatomic, retain) NSNumber * stat6;
 @property (nonatomic, retain) NSNumber * stat7;
 @property (nonatomic, retain) NSNumber * stat8;
-@property (nonatomic, retain) NSString * statisticsId;
-@property (nonatomic, retain) NSNumber * teleOpAccuracy;
-@property (nonatomic, retain) NSNumber * teleOpPoints;
 @property (nonatomic, retain) NSNumber * stat9;
 @property (nonatomic, retain) NSNumber * stat10;
 @property (nonatomic, retain) NSNumber * stat11;
 @property (nonatomic, retain) NSNumber * stat12;
+@property (nonatomic, retain) NSString * statisticsId;
+@property (nonatomic, retain) NSNumber * teleOpAccuracy;
+@property (nonatomic, retain) NSNumber * teleOpPoints;
 @property (nonatomic, retain) TeamData *team;
 @property (nonatomic, retain) TournamentData *tournament;
 

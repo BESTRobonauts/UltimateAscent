@@ -18,6 +18,15 @@
 
 @implementation CreateTournament
 @synthesize managedObjectContext;
+@synthesize dataManager = _dataManager;
+
+- (id)initWithDataManager:(DataManager *)initManager {
+	if ((self = [super init]))
+	{
+        _dataManager = initManager;
+	}
+	return self;
+}
 
 -(AddRecordResults)createTournamentFromFile:(NSMutableArray *)headers dataFields:(NSMutableArray *)data {
     NSString *name;
@@ -25,8 +34,13 @@
     if (![data count]) return DB_ERROR;
     
     if (!managedObjectContext) {
-        DataManager *dataManager = [DataManager new];
-        managedObjectContext = [dataManager managedObjectContext];
+        if (_dataManager) {
+            managedObjectContext = _dataManager.managedObjectContext;
+        }
+        else {
+            _dataManager = [DataManager new];
+            managedObjectContext = [_dataManager managedObjectContext];
+        }
     }
     
     name = [data objectAtIndex: 0];
@@ -61,8 +75,13 @@
     // NSLog(@"Searching for tournament = %@", name);
     NSError *error;
     if (!managedObjectContext) {
-        DataManager *dataManager = [DataManager new];
-        managedObjectContext = [dataManager managedObjectContext];
+        if (_dataManager) {
+            managedObjectContext = _dataManager.managedObjectContext;
+        }
+        else {
+            _dataManager = [DataManager new];
+            managedObjectContext = [_dataManager managedObjectContext];
+        }
     }
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
