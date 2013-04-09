@@ -8,10 +8,12 @@
 
 #import <Foundation/Foundation.h>
 @class DataManager;
+@class SettingsData;
 
 @interface LoadCSVData : NSObject
 
 @property (nonatomic, retain) DataManager *dataManager;
+@property (nonatomic, strong) SettingsData *settings;
 
 - (id)initWithDataManager:(DataManager *)initManager;
 -(void)loadCSVDataFromBundle;
@@ -19,7 +21,9 @@
 -(void)loadTournamentFile:(NSString *)filePath;
 -(void)loadSettingsFile:(NSString *)filePath;
 -(void)loadTeamFile:(NSString *)filePath;
+-(void)loadTeamHistory:(NSString *)filePath;
 -(void)loadMatchFile:(NSString *)filePath;
 -(void)loadMatchResults:(NSString *)filePath;
+-(void)retrieveSettings;
 
 @end

@@ -17,7 +17,9 @@
 
 @implementation ImportDataViewController
 @synthesize dataManager = _dataManager;
+@synthesize settings = _settings;
 @synthesize importSMButton = _importSMButton;
+@synthesize importMatchList = _importMatchList;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,14 +39,21 @@
 
     [self retrieveSettings];
     if (_settings) {
-        self.title =  [NSString stringWithFormat:@"%@ Stack Mob Import", _settings.tournament.name];
+        self.title =  [NSString stringWithFormat:@"%@ Import", _settings.tournament.name];
     }
     else {
-        self.title = @"Stack Mob";
+        self.title = @"Import";
     }
     
     [_importSMButton setTitle:@"Import from Stack Mob" forState:UIControlStateNormal];
     _importSMButton.titleLabel.font = [UIFont fontWithName:@"Nasalization" size:20.0];
+    [_importMatchList setTitle:@"Xfer Match List from iDevice" forState:UIControlStateNormal];
+    _importMatchList.titleLabel.font = [UIFont fontWithName:@"Nasalization" size:20.0];
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    [segue.destinationViewController setDataManager:_dataManager];
 }
 
 -(void)retrieveSettings {
@@ -76,4 +85,8 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewDidUnload {
+    [self setImportMatchList:nil];
+    [super viewDidUnload];
+}
 @end

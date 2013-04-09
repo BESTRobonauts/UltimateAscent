@@ -61,10 +61,70 @@
 }
 
 -(void)retrieveTeamDataFromSM:(NSArray *)teamRecords {
+    NSError *error;
+
     if (!_dataManager) {
         _dataManager = [DataManager new];
     }
+    // Loop through local team records
+    for (int i=0; i < [teamRecords count]; i++) {
+        TeamData *team = [teamRecords objectAtIndex:i];
+        NSLog(@"Team = %@", team.name);
+        // Execute SM fetch of current local tournament record
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription
+                                       entityForName:@"TeamData" inManagedObjectContext:_dataManager.smManagedObjectContext];
+        [fetchRequest setEntity:entity];
+        NSPredicate *predicte = [NSPredicate predicateWithFormat:@"number == %@", team.number];
+        [fetchRequest setPredicate:predicte];
+        NSArray *SMTeamDataRecord = [_dataManager.smManagedObjectContext executeFetchRequestAndWait:fetchRequest error:&error];
+        NSLog(@"Successful fetch count = %d", [SMTeamDataRecord count]);
+        if (SMTeamDataRecord && [SMTeamDataRecord count]) {
+            TeamData *smTeam = [SMTeamDataRecord objectAtIndex:0];
+            [self getTeamRecord:smTeam forLocalTeam:team];
+        }
+    }
+}
 
+-(void)getTeamRecord:(TeamData *)smTeam forLocalTeam:(TeamData *)team {
+    NSError *error;
+    team.name = smTeam.name;
+    team.auton = smTeam.auton;
+    team.cims = smTeam.cims;
+    team.climbLevel = smTeam.climbLevel;
+    team.driveTrainType = smTeam.driveTrainType;
+    team.fthing1 = smTeam.fthing1;
+    team.fthing2 = smTeam.fthing2;
+    team.fthing3 = smTeam.fthing3;
+    team.fthing4 = smTeam.fthing4;
+    team.fthing5 = smTeam.fthing5;
+    team.history = smTeam.history;
+    team.intake = smTeam.intake;
+    team.maxHeight = smTeam.maxHeight;
+    team.minHeight = smTeam.minHeight;
+    team.notes = smTeam.notes;
+    team.number = smTeam.number;
+    team.nwheels = smTeam.nwheels;
+    team.pyramidDump = smTeam.pyramidDump;
+ //   team.shooterHeight = smTeam.shooterHeight;
+    team.shootsTo = smTeam.shootsTo;
+    team.sthing1 = smTeam.sthing1;
+    team.sthing3 = smTeam.sthing3;
+    team.sthing4 = smTeam.sthing4;
+    team.sthing5 = smTeam.sthing5;
+    team.sting2 = smTeam.sting2;
+    team.thing1 = smTeam.thing1;
+    team.thing2 = smTeam.thing2;
+    team.thing3 = smTeam.thing3;
+    team.thing4 = smTeam.thing4;
+    team.thing5 = smTeam.thing5;
+    team.wheelDiameter = smTeam.wheelDiameter;
+    team.wheelType = smTeam.wheelType;
+        
+    team.stacked = [NSNumber numberWithInt:1];
+    if (![_dataManager.managedObjectContext save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+    }
 }
 
 -(void)setTeamRecord:(TeamData *)smTeam forLocalTeam:(TeamData *)team {
@@ -87,7 +147,7 @@
     smTeam.number = team.number;
     smTeam.nwheels = team.nwheels;
     smTeam.pyramidDump = team.pyramidDump;
-    smTeam.shooterHeight = team.shooterHeight;
+//    smTeam.shooterHeight = team.shooterHeight;
     smTeam.shootsTo = team.shootsTo;
     smTeam.sthing1 = team.sthing1;
     smTeam.sthing3 = team.sthing3;

@@ -12,6 +12,7 @@
 @class DataManager;
 @class TeamData;
 @class TournamentData;
+@class Regional;
 
 @interface CreateTeam : NSObject
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
@@ -20,8 +21,10 @@
 - (id)initWithDataManager:(DataManager *)initManager;
 
 -(AddRecordResults)createTeamFromFile:(NSMutableArray *)headers dataFields:(NSMutableArray *)data;
+-(AddRecordResults)addTeamHistoryFromFile:(NSMutableArray *)headers dataFields:(NSMutableArray *)data;
 -(TeamData *)GetTeam:(NSNumber *)teamNumber;
 -(void)setTeamDefaults:(TeamData *)blankTeam;
 -(TournamentData *)getTournamentRecord:(NSString *)tournamentName;
+-(Regional *)getRegionalRecord:(NSNumber *)week forRegionals:(NSArray *)regionalList;
 
 @end

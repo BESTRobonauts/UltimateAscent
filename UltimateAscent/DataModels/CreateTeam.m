@@ -10,6 +10,7 @@
 #import "DataManager.h"
 #import "TeamData.h"
 #import "TournamentData.h"
+#import "Regional.h"
 
 // Current File Order
 /*
@@ -129,6 +130,66 @@
     }
 }
 
+-(AddRecordResults)addTeamHistoryFromFile:(NSMutableArray *)headers dataFields:(NSMutableArray *)data {
+    NSNumber *teamNumber;
+
+    if (![data count]) return DB_ERROR;
+    
+    if (!managedObjectContext) {
+        if (_dataManager) {
+            managedObjectContext = _dataManager.managedObjectContext;
+        }
+        else {
+            _dataManager = [DataManager new];
+            managedObjectContext = [_dataManager managedObjectContext];
+        }
+    }
+    
+    teamNumber = [NSNumber numberWithInt:[[data objectAtIndex: 0] intValue]];
+    NSLog(@"addTeamHistoryFromFile:Team Number = %@", teamNumber);
+    TeamData *team = [self GetTeam:teamNumber];
+    AddRecordResults results = DB_ERROR;
+    NSError *error;
+    if (team) {
+        NSString *week;
+        NSArray *regionalList = [team.regional allObjects];
+        for (int i=2; i<[data count]; i+=9) {
+            week = [data objectAtIndex:i];
+            if (week && ![week isEqualToString:@""]) {
+                NSLog(@"Week = %@", week);
+                Regional *regionalRecord;
+                regionalRecord = [self getRegionalRecord:[NSNumber numberWithInt:[week intValue]] forRegionals:regionalList];
+                if (regionalRecord) {
+                    results = DB_MATCHED;
+                }
+                else {
+                    results = DB_ADDED;
+                    regionalRecord = [NSEntityDescription insertNewObjectForEntityForName:@"Regional"
+                                                           inManagedObjectContext:managedObjectContext];
+                }
+                // Store the week in reg1 because I forgot to add a week spot in the database
+                regionalRecord.reg1 = [NSNumber numberWithInt:[week intValue]];
+                regionalRecord.name = [data objectAtIndex:(i+1)];
+                regionalRecord.rank = [NSNumber numberWithInt:[[data objectAtIndex:(i+2)] intValue]];
+                regionalRecord.seedingRecord = [data objectAtIndex:(i+3)];
+                // CCWM
+                regionalRecord.reg3 = [NSNumber numberWithFloat:[[data objectAtIndex:(i+4)] floatValue]];
+                regionalRecord.opr = [NSNumber numberWithFloat:[[data objectAtIndex:(i+5)] floatValue]];
+                regionalRecord.finishPosition = [data objectAtIndex:(i+6)];
+                // Awards
+                regionalRecord.reg5 = [data objectAtIndex:(i+7)];
+                NSLog(@"Regional = %@", regionalRecord);
+                [team addRegionalObject:regionalRecord];
+                if (![managedObjectContext save:&error]) {
+                    NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+                    return DB_ERROR;
+                }
+            }
+        }
+    }
+    return results;
+}
+
 -(TeamData *)GetTeam:(NSNumber *)teamNumber {
     TeamData *team;
 
@@ -165,6 +226,16 @@
             return Nil;
         }
     }
+}
+
+-(Regional *)getRegionalRecord:(NSNumber *)week forRegionals:(NSArray *)regionalList {
+    for (int i=0; i<[regionalList count]; i++) {
+        Regional *regional = [regionalList objectAtIndex:i];
+        if ([week intValue] == [regional.reg1 intValue]) {
+            return regional;
+        }
+    }
+    return nil;
 }
 
 -(TournamentData *)getTournamentRecord:(NSString *)tournamentName {

@@ -24,6 +24,7 @@
 @property (nonatomic, strong) IBOutlet UIButton *exportMatchData;
 @property (weak, nonatomic) IBOutlet UIButton *stackMobButton;
 @property (nonatomic, strong) NSString *exportPath;
+@property (weak, nonatomic) IBOutlet UIButton *iPadExportButton;
 
 -(IBAction)exportTapped:(id)sender;
 -(void)emailTeamData;

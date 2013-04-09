@@ -77,6 +77,8 @@
     exportPath = [self applicationDocumentsDirectory];
     [_stackMobButton setTitle:@"Export to Stack Mob" forState:UIControlStateNormal];
     _stackMobButton.titleLabel.font = [UIFont fontWithName:@"Nasalization" size:24.0];
+    [_iPadExportButton setTitle:@"Export to iDevice" forState:UIControlStateNormal];
+    _iPadExportButton.titleLabel.font = [UIFont fontWithName:@"Nasalization" size:24.0];
     // Display the Label for the Picture
     pictureCaption.font = [UIFont fontWithName:@"Nasalization" size:24.0];
     pictureCaption.text = @"Just Hangin' Out";
@@ -86,6 +88,7 @@
 
 - (void)viewDidUnload
 {
+    [self setIPadExportButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -417,6 +420,7 @@
             exportTeamData.frame = CGRectMake(325, 125, 400, 68);
             exportMatchData.frame = CGRectMake(325, 225, 400, 68);
             _stackMobButton.frame = CGRectMake(325, 325, 400, 68);
+            _iPadExportButton.frame = CGRectMake(325, 425, 400, 68);
             splashPicture.frame = CGRectMake(293, 563, 468, 330);
             pictureCaption.frame = CGRectMake(293, 901, 468, 39);
             break;
@@ -427,6 +431,7 @@
             exportTeamData.frame = CGRectMake(550, 225, 400, 68);
             exportMatchData.frame = CGRectMake(550, 325, 400, 68);
             _stackMobButton.frame = CGRectMake(550, 425, 400, 68);
+            _iPadExportButton.frame = CGRectMake(550, 525, 400, 68);
             splashPicture.frame = CGRectMake(50, 243, 468, 330);
             pictureCaption.frame = CGRectMake(50, 581, 468, 39);
             break;

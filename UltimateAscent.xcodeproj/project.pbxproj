@@ -12,6 +12,7 @@
 		21F72D6016A78135000B99AB /* TeamListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F72D5F16A78135000B99AB /* TeamListViewController.m */; };
 		2F0E3A7516D7FB4D00A359D5 /* DefensePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F0E3A7416D7FB4D00A359D5 /* DefensePickerController.m */; };
 		2F12350316FB71E200DBF4B0 /* MasonPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F12350216FB71E200DBF4B0 /* MasonPageViewController.m */; };
+		2F13339F170E20CD006669FF /* iPhoneMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F13339E170E20CD006669FF /* iPhoneMainViewController.m */; };
 		2F17D54816BA092B00DC81C1 /* TournamentList.csv in Resources */ = {isa = PBXBuildFile; fileRef = 2F17D54716BA092B00DC81C1 /* TournamentList.csv */; };
 		2F21C5CF170BCC31008A3C24 /* ImportDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F21C5CE170BCC31008A3C24 /* ImportDataViewController.m */; };
 		2F21C5D2170BCDCB008A3C24 /* StackMobImportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F21C5D1170BCDCB008A3C24 /* StackMobImportViewController.m */; };
@@ -35,6 +36,7 @@
 		2F32A7861707771A00100705 /* SMTeamDataObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F32A7851707771A00100705 /* SMTeamDataObject.m */; };
 		2F43A1CB16E4F219005CAFD9 /* AddMatchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F43A1CA16E4F219005CAFD9 /* AddMatchViewController.m */; };
 		2F47E38516DFE17400609A3E /* TournamentPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F47E38416DFE17400609A3E /* TournamentPickerController.m */; };
+		2F4CD04417122E1600428859 /* PopUpPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4CD04317122E1600428859 /* PopUpPickerViewController.m */; };
 		2F4E01EB16BA103E0092DC86 /* CreateTournament.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4E01EA16BA103E0092DC86 /* CreateTournament.m */; };
 		2F4E01EE16BA10560092DC86 /* CreateSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4E01ED16BA10560092DC86 /* CreateSettings.m */; };
 		2F4E01F016BA10C80092DC86 /* Settings.csv in Resources */ = {isa = PBXBuildFile; fileRef = 2F4E01EF16BA10C80092DC86 /* Settings.csv */; };
@@ -48,6 +50,11 @@
 		2F56B56E17052BC80093A976 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F56B56D17052BC80093A976 /* SystemConfiguration.framework */; };
 		2F56B57017052BDB0093A976 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F56B56F17052BDA0093A976 /* Security.framework */; };
 		2F56B573170532F60093A976 /* StackMobExportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F56B572170532F60093A976 /* StackMobExportViewController.m */; };
+		2F621F22170CA39F00D2ABD1 /* UltimateAscent.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 2F621F21170CA39F00D2ABD1 /* UltimateAscent.sqlite */; };
+		2F621F25170DE91300D2ABD1 /* iDeviceExportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F621F24170DE91200D2ABD1 /* iDeviceExportViewController.m */; };
+		2F621F28170DEC9F00D2ABD1 /* SyncMatchListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F621F27170DEC9E00D2ABD1 /* SyncMatchListViewController.m */; };
+		2F621F2B170DF2FE00D2ABD1 /* ImportDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F621F2A170DF2FE00D2ABD1 /* ImportDeviceViewController.m */; };
+		2F621F2D170E18CA00D2ABD1 /* UltimateAscent_iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F621F2C170E18CA00D2ABD1 /* UltimateAscent_iphone.storyboard */; };
 		2F6AE6F016AD93D1005A24C5 /* 2013_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F6AE6EF16AD93D1005A24C5 /* 2013_logo.png */; };
 		2F80CB0617012821000A2BB8 /* TeamRecordObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F80CB0517012821000A2BB8 /* TeamRecordObject.m */; };
 		2F88649A16B76B1700867385 /* AlliancePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F88648D16B76B1700867385 /* AlliancePickerController.m */; };
@@ -111,6 +118,8 @@
 		2F0E3A7416D7FB4D00A359D5 /* DefensePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DefensePickerController.m; path = MatchScouting/DefensePickerController.m; sourceTree = "<group>"; };
 		2F12350116FB71E200DBF4B0 /* MasonPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MasonPageViewController.h; path = MatchAnalysis/MasonPageViewController.h; sourceTree = "<group>"; };
 		2F12350216FB71E200DBF4B0 /* MasonPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MasonPageViewController.m; path = MatchAnalysis/MasonPageViewController.m; sourceTree = "<group>"; };
+		2F13339D170E20CD006669FF /* iPhoneMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iPhoneMainViewController.h; path = MainApp/iPhoneMainViewController.h; sourceTree = "<group>"; };
+		2F13339E170E20CD006669FF /* iPhoneMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iPhoneMainViewController.m; path = MainApp/iPhoneMainViewController.m; sourceTree = "<group>"; };
 		2F17D54716BA092B00DC81C1 /* TournamentList.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TournamentList.csv; path = Resources/TournamentList.csv; sourceTree = "<group>"; };
 		2F21C5CD170BCC31008A3C24 /* ImportDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImportDataViewController.h; path = DataImport/ImportDataViewController.h; sourceTree = "<group>"; };
 		2F21C5CE170BCC31008A3C24 /* ImportDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImportDataViewController.m; path = DataImport/ImportDataViewController.m; sourceTree = "<group>"; };
@@ -148,6 +157,8 @@
 		2F43A1CA16E4F219005CAFD9 /* AddMatchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddMatchViewController.m; path = MatchScouting/AddMatchViewController.m; sourceTree = "<group>"; };
 		2F47E38316DFE17300609A3E /* TournamentPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TournamentPickerController.h; path = SetUp/TournamentPickerController.h; sourceTree = "<group>"; };
 		2F47E38416DFE17400609A3E /* TournamentPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TournamentPickerController.m; path = SetUp/TournamentPickerController.m; sourceTree = "<group>"; };
+		2F4CD04217122E1600428859 /* PopUpPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PopUpPickerViewController.h; path = Utilities/PopUpPickerViewController.h; sourceTree = "<group>"; };
+		2F4CD04317122E1600428859 /* PopUpPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PopUpPickerViewController.m; path = Utilities/PopUpPickerViewController.m; sourceTree = "<group>"; };
 		2F4E01E916BA103E0092DC86 /* CreateTournament.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CreateTournament.h; path = DataModels/CreateTournament.h; sourceTree = "<group>"; };
 		2F4E01EA16BA103E0092DC86 /* CreateTournament.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CreateTournament.m; path = DataModels/CreateTournament.m; sourceTree = "<group>"; };
 		2F4E01EC16BA10560092DC86 /* CreateSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CreateSettings.h; path = DataModels/CreateSettings.h; sourceTree = "<group>"; };
@@ -215,6 +226,14 @@
 		2F56B56F17052BDA0093A976 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		2F56B571170532F60093A976 /* StackMobExportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StackMobExportViewController.h; path = DataExport/StackMobExportViewController.h; sourceTree = "<group>"; };
 		2F56B572170532F60093A976 /* StackMobExportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StackMobExportViewController.m; path = DataExport/StackMobExportViewController.m; sourceTree = "<group>"; };
+		2F621F21170CA39F00D2ABD1 /* UltimateAscent.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = UltimateAscent.sqlite; path = Resources/UltimateAscent.sqlite; sourceTree = "<group>"; };
+		2F621F23170DE91200D2ABD1 /* iDeviceExportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iDeviceExportViewController.h; path = DataExport/iDeviceExportViewController.h; sourceTree = "<group>"; };
+		2F621F24170DE91200D2ABD1 /* iDeviceExportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iDeviceExportViewController.m; path = DataExport/iDeviceExportViewController.m; sourceTree = "<group>"; };
+		2F621F26170DEC9E00D2ABD1 /* SyncMatchListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SyncMatchListViewController.h; path = DataTransfer/SyncMatchListViewController.h; sourceTree = "<group>"; };
+		2F621F27170DEC9E00D2ABD1 /* SyncMatchListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SyncMatchListViewController.m; path = DataTransfer/SyncMatchListViewController.m; sourceTree = "<group>"; };
+		2F621F29170DF2FE00D2ABD1 /* ImportDeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImportDeviceViewController.h; path = DataImport/ImportDeviceViewController.h; sourceTree = "<group>"; };
+		2F621F2A170DF2FE00D2ABD1 /* ImportDeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImportDeviceViewController.m; path = DataImport/ImportDeviceViewController.m; sourceTree = "<group>"; };
+		2F621F2C170E18CA00D2ABD1 /* UltimateAscent_iphone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = UltimateAscent_iphone.storyboard; path = MainApp/UltimateAscent_iphone.storyboard; sourceTree = "<group>"; };
 		2F6AE6EF16AD93D1005A24C5 /* 2013_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 2013_logo.png; path = Resources/2013_logo.png; sourceTree = "<group>"; };
 		2F80CB0417012821000A2BB8 /* TeamRecordObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TeamRecordObject.h; path = DataTransfer/TeamRecordObject.h; sourceTree = "<group>"; };
 		2F80CB0517012821000A2BB8 /* TeamRecordObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TeamRecordObject.m; path = DataTransfer/TeamRecordObject.m; sourceTree = "<group>"; };
@@ -394,6 +413,8 @@
 				2FC18F0F16A215EA00D42251 /* DownloadPageViewController.m */,
 				2F56B571170532F60093A976 /* StackMobExportViewController.h */,
 				2F56B572170532F60093A976 /* StackMobExportViewController.m */,
+				2F621F23170DE91200D2ABD1 /* iDeviceExportViewController.h */,
+				2F621F24170DE91200D2ABD1 /* iDeviceExportViewController.m */,
 			);
 			name = "Data Export";
 			sourceTree = "<group>";
@@ -410,6 +431,8 @@
 				2F21C5CE170BCC31008A3C24 /* ImportDataViewController.m */,
 				2F21C5D0170BCDCB008A3C24 /* StackMobImportViewController.h */,
 				2F21C5D1170BCDCB008A3C24 /* StackMobImportViewController.m */,
+				2F621F29170DF2FE00D2ABD1 /* ImportDeviceViewController.h */,
+				2F621F2A170DF2FE00D2ABD1 /* ImportDeviceViewController.m */,
 			);
 			name = "Data Import";
 			sourceTree = "<group>";
@@ -476,6 +499,9 @@
 				2F30EAEC16A101570026B258 /* AppDelegate.h */,
 				2F30EAED16A101AB0026B258 /* AppDelegate.m */,
 				2F30EAEA16A100850026B258 /* main.m */,
+				2F13339D170E20CD006669FF /* iPhoneMainViewController.h */,
+				2F13339E170E20CD006669FF /* iPhoneMainViewController.m */,
+				2F621F2C170E18CA00D2ABD1 /* UltimateAscent_iphone.storyboard */,
 				2FC18E9416A1F7D100D42251 /* UltimateAscent_ipad.storyboard */,
 			);
 			name = "Main App";
@@ -484,6 +510,7 @@
 		2F30EAE316A0F66F0026B258 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2F621F21170CA39F00D2ABD1 /* UltimateAscent.sqlite */,
 				2FEBE13016F226B40094E2C3 /* MatchResults.csv */,
 				2FD7E9E816E8DA130075533C /* MatchList.csv */,
 				2FD7E9E616E8C3540075533C /* TeamList.csv */,
@@ -528,6 +555,8 @@
 				2F32A7821707336500100705 /* SMTournamentObject.m */,
 				2F32A7841707771A00100705 /* SMTeamDataObject.h */,
 				2F32A7851707771A00100705 /* SMTeamDataObject.m */,
+				2F621F26170DEC9E00D2ABD1 /* SyncMatchListViewController.h */,
+				2F621F27170DEC9E00D2ABD1 /* SyncMatchListViewController.m */,
 			);
 			name = "Data Transfer";
 			sourceTree = "<group>";
@@ -657,6 +686,8 @@
 				2FFAE1B316D29B9600B180F9 /* AlertPromptViewController.m */,
 				2FFAE1B916D3235600B180F9 /* MatchTypeDictionary.h */,
 				2FFAE1BA16D3235600B180F9 /* MatchTypeDictionary.m */,
+				2F4CD04217122E1600428859 /* PopUpPickerViewController.h */,
+				2F4CD04317122E1600428859 /* PopUpPickerViewController.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -743,6 +774,8 @@
 				2FD7E9E916E8DA130075533C /* MatchList.csv in Resources */,
 				2FEBE13116F226B40094E2C3 /* MatchResults.csv in Resources */,
 				2F56B56717052A890093A976 /* CHANGELOG.md in Resources */,
+				2F621F22170CA39F00D2ABD1 /* UltimateAscent.sqlite in Resources */,
+				2F621F2D170E18CA00D2ABD1 /* UltimateAscent_iphone.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -802,6 +835,11 @@
 				2F9C12DF1708815C005EE9D3 /* TeamData.m in Sources */,
 				2F21C5CF170BCC31008A3C24 /* ImportDataViewController.m in Sources */,
 				2F21C5D2170BCDCB008A3C24 /* StackMobImportViewController.m in Sources */,
+				2F621F25170DE91300D2ABD1 /* iDeviceExportViewController.m in Sources */,
+				2F621F28170DEC9F00D2ABD1 /* SyncMatchListViewController.m in Sources */,
+				2F621F2B170DF2FE00D2ABD1 /* ImportDeviceViewController.m in Sources */,
+				2F13339F170E20CD006669FF /* iPhoneMainViewController.m in Sources */,
+				2F4CD04417122E1600428859 /* PopUpPickerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

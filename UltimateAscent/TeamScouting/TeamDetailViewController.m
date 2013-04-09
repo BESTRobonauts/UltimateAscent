@@ -11,10 +11,12 @@
 #import "TeamScore.h"
 #import "MatchData.h"
 #import "DataManager.h"
+#import "Regional.h"
 
 @implementation TeamDetailViewController
 @synthesize team;
 @synthesize numberLabel, nameTextField, notesTextField;
+@synthesize notesViewField = _notesViewField;
 @synthesize intakeType, climbZone, shootingLevel; 
 @synthesize auton, maxHeight, minHeight;
 @synthesize wheelType, nwheels, wheelDiameter;
@@ -30,6 +32,7 @@
 @synthesize photoPath;
 @synthesize dataChange;
 @synthesize matchInfo, matchHeader;
+@synthesize regionalList = _regionalList;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -78,53 +81,69 @@
 //    takePhotoBtn.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:24.0];
  
     _intakeList = [[NSMutableArray alloc] initWithObjects:@"Unknown", @"Floor", @"Human", @"Both", nil];
-    _driveTypeList = [[NSMutableArray alloc] initWithObjects:@"Unknown", @"Mech", @"Omni", @"Swerve", @"Traction", @"Multi", nil];
+    _driveTypeList = [[NSMutableArray alloc] initWithObjects:@"Unknown", @"Mech", @"Omni", @"Swerve", @"Traction", @"Multi", @"Tank", @"West Coast", nil];
     _climbZoneList = [[NSMutableArray alloc] initWithObjects:@"Unknown", @"One", @"Two", @"Three", nil];
 
     matchHeader = [[UIView alloc] initWithFrame:CGRectMake(0,0,768,50)];
     matchHeader.backgroundColor = [UIColor lightGrayColor];
     matchHeader.opaque = YES;
     
-	UILabel *matchLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 200, 50)];
-	matchLabel.text = @"Match";
-    matchLabel.backgroundColor = [UIColor clearColor];
-    [matchHeader addSubview:matchLabel];
+	UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 200, 50)];
+	label1.text = @"Week";
+    label1.backgroundColor = [UIColor clearColor];
+    [matchHeader addSubview:label1];
     
-	UILabel *typeLabel = [[UILabel alloc] initWithFrame:CGRectMake(105, 0, 200, 50)];
-	typeLabel.text = @"Type";
-    typeLabel.backgroundColor = [UIColor clearColor];
-    [matchHeader addSubview:typeLabel];
+	UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(95, 0, 200, 50)];
+	label2.text = @"Regional";
+    label2.backgroundColor = [UIColor clearColor];
+    [matchHeader addSubview:label2];
     
- 	UILabel *hybridLabel = [[UILabel alloc] initWithFrame:CGRectMake(195, 0, 200, 50)];
-	hybridLabel.text = @"HP";
-    hybridLabel.backgroundColor = [UIColor clearColor];
-    [matchHeader addSubview:hybridLabel];
+ 	UILabel *label3 = [[UILabel alloc] initWithFrame:CGRectMake(205, 0, 200, 50)];
+	label3.text = @"Rank";
+    label3.backgroundColor = [UIColor clearColor];
+    [matchHeader addSubview:label3];
     
-	UILabel *teleOpLabel = [[UILabel alloc] initWithFrame:CGRectMake(260, 0, 200, 50)];
-	teleOpLabel.text = @"TP";
-    teleOpLabel.backgroundColor = [UIColor clearColor];
-    [matchHeader addSubview:teleOpLabel];
+	UILabel *label4 = [[UILabel alloc] initWithFrame:CGRectMake(270, 0, 200, 50)];
+	label4.text = @"Record";
+    label4.backgroundColor = [UIColor clearColor];
+    [matchHeader addSubview:label4];
     
-	UILabel *autonAccLabel = [[UILabel alloc] initWithFrame:CGRectMake(331, 0, 200, 50)];
-	autonAccLabel.text = @"Auton Accuracy";
-    autonAccLabel.backgroundColor = [UIColor clearColor];
-    [matchHeader addSubview:autonAccLabel];
+	UILabel *label5 = [[UILabel alloc] initWithFrame:CGRectMake(365, 0, 200, 50)];
+	label5.text = @"CCWM";
+    label5.backgroundColor = [UIColor clearColor];
+    [matchHeader addSubview:label5];
 
-	UILabel *teleOpAccLabel = [[UILabel alloc] initWithFrame:CGRectMake(485, 0, 200, 50)];
-	teleOpAccLabel.text = @"TeleOp Accuracy";
-    teleOpAccLabel.backgroundColor = [UIColor clearColor];
-    [matchHeader addSubview:teleOpAccLabel];
+	UILabel *label6 = [[UILabel alloc] initWithFrame:CGRectMake(460, 0, 200, 50)];
+	label6.text = @"OPR";
+    label6.backgroundColor = [UIColor clearColor];
+    [matchHeader addSubview:label6];
+
+    UILabel *label7 = [[UILabel alloc] initWithFrame:CGRectMake(555, 0, 200, 50)];
+	label7.text = @"Elim Position";
+    label7.backgroundColor = [UIColor clearColor];
+    [matchHeader addSubview:label7];
+
+    UILabel *label8 = [[UILabel alloc] initWithFrame:CGRectMake(730, 0, 200, 50)];
+	label8.text = @"Awards";
+    label8.backgroundColor = [UIColor clearColor];
+    [matchHeader addSubview:label8];
+
+    NSSortDescriptor *regionalSort = [NSSortDescriptor sortDescriptorWithKey:@"reg1" ascending:YES];
+    _regionalList = [[team.regional allObjects] sortedArrayUsingDescriptors:[NSArray arrayWithObject:regionalSort]];
     
+
     [super viewDidLoad];
 }
 
 - (void) viewWillAppear:(BOOL)animated
 {
     NSLog(@"team = %@", team);
+    NSLog(@"Regional = %@", team.regional);
     self.title = [NSString stringWithFormat:@"%d - %@", [team.number intValue], team.name];
     numberLabel.text = [NSString stringWithFormat:@"%d", [team.number intValue]];
     nameTextField.text = team.name;
     notesTextField.text = team.notes;
+    _notesViewField.text = team.notes;
     shootingLevel.text = team.shootsTo;
     auton.text = [NSString stringWithFormat:@"%d", [team.auton intValue]];
     minHeight.text = [NSString stringWithFormat:@"%.1f", [team.minHeight floatValue]];
@@ -177,6 +196,12 @@
     }
     else if ([team.driveTrainType intValue] == 4) {
         [driveType setTitle:@"Multi" forState:UIControlStateNormal];
+    }
+    else if ([team.driveTrainType intValue] == 5) {
+        [driveType setTitle:@"Tank" forState:UIControlStateNormal];
+    }
+    else if ([team.driveTrainType intValue] == 6) {
+        [driveType setTitle:@"West Coast" forState:UIControlStateNormal];
     }
     
     NSString *path = [NSString stringWithFormat:@"Library/RobotPhotos/%@", [NSString stringWithFormat:@"%d", [team.number intValue]]];
@@ -284,7 +309,7 @@
 		team.name = nameTextField.text;
 	}
 	else if (textField == notesTextField) {
-		team.notes = notesTextField.text;
+//		team.notes = notesTextField.text;
 	}
 	else if (textField == auton) {
 		team.auton = [NSNumber numberWithInt:[auton.text floatValue]];
@@ -343,6 +368,20 @@
     }
 }
 
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    NSLog(@"Text view did begin editting");
+    dataChange = YES;
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    NSLog(@"Text view did end editting");
+    team.notes = _notesViewField.text;
+}
+
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView; {
+    NSLog(@"should end editting");
+    return YES;
+}
 
 -(IBAction) useCamera: (id)sender
 {   NSLog(@"Take photo");
@@ -479,15 +518,13 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    int x = [team.match count];
-//    NSLog(@"Matchscore count = %d", x);
+    int x = [_regionalList count];
     return x; 
 }
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    NSArray* objectsArray = [team.match allObjects];
-    TeamScore *score = [objectsArray objectAtIndex:indexPath.row];
-    NSLog(@"Match Notes = %@", score.notes);
+    Regional *regional = [_regionalList objectAtIndex:indexPath.row];
+    NSLog(@"Week = %@", regional.reg1);
        // Configure the cell...
        // Set a background for the cell
      // UIImageView *tableBackground = [[UIImageView alloc] initWithFrame:cell.frame];
@@ -495,38 +532,30 @@
      // tableBackground.image = image;
     //  cell.backgroundView = imageView; Change Varable Name "soon" 
     
-	UILabel *matchNumber = (UILabel *)[cell viewWithTag:10];
-	matchNumber.text = [NSString stringWithFormat:@"%d", [score.match.number intValue]];
-    
-	UILabel *typeLabel = (UILabel *)[cell viewWithTag:20];
-    typeLabel.text = [score.match.matchType substringToIndex:4];
+	UILabel *label1 = (UILabel *)[cell viewWithTag:10];
+	label1.text = [NSString stringWithFormat:@"%d", [regional.reg1 intValue]];
 
-    int autonPoints = [score.autonHigh intValue]*6 + [score.autonMid intValue]*5 + [score.autonLow intValue]*4;
-	UILabel *autonLabel = (UILabel *)[cell viewWithTag:30];
-	autonLabel.text = [NSString stringWithFormat:@"%d", autonPoints];
+	UILabel *label2 = (UILabel *)[cell viewWithTag:20];
+    label2.text = regional.name;
 
-    int teleOpPoints = [score.teleOpHigh intValue]*3 + [score.teleOpMid intValue]*2 + [score.teleOpLow intValue];
-	UILabel *teleOpLabel = (UILabel *)[cell viewWithTag:40];
-    teleOpLabel.text = [NSString stringWithFormat:@"%d", teleOpPoints];
+	UILabel *label3 = (UILabel *)[cell viewWithTag:30];
+	label3.text = [NSString stringWithFormat:@"%d", [regional.rank intValue]];
 
+	UILabel *label4 = (UILabel *)[cell viewWithTag:40];
+    label4.text = regional.seedingRecord;
 
-    int basketsMade = [score.autonHigh intValue] + [score.autonMid intValue] + [score.autonLow intValue];
-    int totalBaskets = basketsMade + [score.autonMissed intValue];
-    int autonAccuracy;
-    if (totalBaskets) autonAccuracy = 100 * basketsMade / (basketsMade + [score.autonMissed intValue]);
-    else autonAccuracy = 0;
-    UILabel *autonAccLabel = (UILabel *)[cell viewWithTag:50];
-	autonAccLabel.text = [NSString stringWithFormat:@"%d%%", autonAccuracy];
+    // CCWM
+    UILabel *label5 = (UILabel *)[cell viewWithTag:50];
+	label5.text = [NSString stringWithFormat:@"%.1f", [regional.reg3 floatValue]];
 
-    basketsMade = [score.teleOpHigh intValue] + [score.teleOpMid intValue] + [score.teleOpLow intValue];
-    totalBaskets = basketsMade + [score.teleOpMissed intValue];
-    int teleOpAccuracy;
-    if (totalBaskets) teleOpAccuracy = 100 * basketsMade / (basketsMade + [score.teleOpMissed intValue]);
-    else teleOpAccuracy = 0;
-    
-	UILabel *teleOpAccLabel = (UILabel *)[cell viewWithTag:60];
-	teleOpAccLabel.text = [NSString stringWithFormat:@"%d%%", teleOpAccuracy]; 
+	UILabel *label6 = (UILabel *)[cell viewWithTag:60];
+	label6.text = [NSString stringWithFormat:@"%.1f", [regional.opr floatValue]];
 
+	UILabel *label7 = (UILabel *)[cell viewWithTag:70];
+	label7.text = regional.finishPosition;
+
+	UILabel *label8 = (UILabel *)[cell viewWithTag:80];
+	label8.text = regional.reg5;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

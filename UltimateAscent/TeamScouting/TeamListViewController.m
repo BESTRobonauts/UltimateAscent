@@ -54,6 +54,7 @@
     }
     
     [self retrieveSettings];
+    NSLog(@"mode = %@", settings.mode);
     if (settings) {
         self.title =  [NSString stringWithFormat:@"%@ Team List", settings.tournament.name];
     }
@@ -263,6 +264,8 @@
         case 2: driveLabel.text = @"Swerve"; break;
         case 3: driveLabel.text = @"Traction"; break;
         case 4: driveLabel.text = @"Multi"; break;
+        case 5: driveLabel.text = @"Tank"; break;
+        case 6: driveLabel.text = @"West Coast"; break;
         default: driveLabel.text = @""; break;
     }
     

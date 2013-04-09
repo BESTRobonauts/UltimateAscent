@@ -15,6 +15,8 @@
 @property (nonatomic, retain) DataManager *dataManager;
 @property (nonatomic, strong) SettingsData *settings;
 @property (weak, nonatomic) IBOutlet UIButton *importSMButton;
+@property (weak, nonatomic) IBOutlet UIButton *importMatchList;
+
 -(void)retrieveSettings;
 
 @end

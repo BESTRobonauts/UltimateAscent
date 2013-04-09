@@ -10,6 +10,7 @@
 #import "DataManager.h"
 #import "SettingsData.h"
 #import "TournamentData.h"
+#import "SMTeamDataObject.h"
 
 @interface StackMobImportViewController ()
 
@@ -49,6 +50,22 @@
 }
 
 - (IBAction)pullTeamData:(id)sender {
+    SMTeamDataObject *teamObject = [[SMTeamDataObject alloc] initWithDataManager:_dataManager];
+    NSError *error;
+    
+    // Fetch local team records
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"TeamData" inManagedObjectContext:_dataManager.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    NSPredicate *predicte = [NSPredicate predicateWithFormat:@"tournament.name CONTAINS %@", _settings.tournament.name];
+    [fetchRequest setPredicate:predicte];
+    NSSortDescriptor *numberDescriptor = [[NSSortDescriptor alloc] initWithKey:@"number" ascending:YES];
+    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:numberDescriptor, nil];
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    NSArray *teamRecord = [_dataManager.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    [teamObject retrieveTeamDataFromSM:teamRecord];
 }
 
 -(void)retrieveSettings {

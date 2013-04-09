@@ -13,11 +13,12 @@
 @class MatchData;
 @class TeamScore;
 
-@interface TeamDetailViewController : UIViewController <UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPopoverControllerDelegate, UITableViewDelegate, UITableViewDataSource, TeamDetailPickerDelegate>
+@interface TeamDetailViewController : UIViewController <UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPopoverControllerDelegate, UITableViewDelegate, UITableViewDataSource, TeamDetailPickerDelegate>
 
 @property (nonatomic, retain) TeamData *team;
 @property (nonatomic, retain) IBOutlet UILabel *numberLabel;
 @property (nonatomic, retain) IBOutlet UITextField *nameTextField;
+@property (nonatomic, retain) IBOutlet UITextView *notesViewField;
 @property (nonatomic, retain) IBOutlet UITextField *notesTextField;
 @property (nonatomic, retain) IBOutlet UIImageView *imageView;
 @property (nonatomic, retain) IBOutlet UIButton *intakeType;
@@ -51,6 +52,7 @@ typedef enum {
 @property (nonatomic, retain) TeamDetailPickerController *driveTypePicker;
 @property (nonatomic, retain) TeamDetailPickerController *climbZonePicker;
 @property (nonatomic, retain) UIPopoverController *detailPickerPopover;
+@property (nonatomic, strong) NSArray *regionalList;
 -(IBAction)detailChanged:(id)sender;
 -(void)detailSelectionPopUp:(UIButton *)button forChoices:(NSMutableArray *)detailChoices;
 -(void)changeIntake:(NSString *)newIntake;

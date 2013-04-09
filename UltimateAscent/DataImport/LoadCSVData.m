@@ -7,6 +7,8 @@
 //
 
 #import "DataManager.h"
+#import "SettingsData.h"
+#import "TournamentData.h"
 #import "LoadCSVData.h"
 #import "parseCSV.h"
 #import "CreateTeam.h"
@@ -20,6 +22,7 @@
 }
 
 @synthesize dataManager = _dataManager;
+@synthesize settings = _settings;
 
 - (id)initWithDataManager:(DataManager *)initManager {
 	if ((self = [super init]))
@@ -39,6 +42,17 @@
     else {
         loadDataFromBundle = _dataManager.loadDataFromBundle;
     }
+    
+    // Set some of the settings
+    [self retrieveSettings];
+    _settings.adminCode = @"bluefish";
+    _settings.mode = @"Tournament";
+    _settings.alliance = @"Blue 1";
+ //   _settings.tournament.name = @"Silicon Valley Regional";
+    NSError *error;
+    if (![_dataManager.managedObjectContext save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+    }
 
     if (loadDataFromBundle) {
         NSString *filePath = [[NSBundle mainBundle] pathForResource:@"TournamentList" ofType:@"csv"];
@@ -50,7 +64,10 @@
         filePath = [[NSBundle mainBundle] pathForResource:@"TeamList" ofType:@"csv"];
         [self loadTeamFile:filePath];
 
-        filePath = [[NSBundle mainBundle] pathForResource:@"MatchList" ofType:@"csv"];  
+//        filePath = [[NSBundle mainBundle] pathForResource:@"TeamHistory" ofType:@"csv"];
+//        [self loadTeamHistory:filePath];
+        
+        filePath = [[NSBundle mainBundle] pathForResource:@"MatchList" ofType:@"csv"];
         [self loadMatchFile:filePath];
 
         filePath = [[NSBundle mainBundle] pathForResource:@"MatchResults" ofType:@"csv"];
@@ -60,12 +77,17 @@
 }
 
 -(void) handleOpenURL:(NSURL *)url {
+    if (_dataManager == nil) {
+        _dataManager = [DataManager new];
+    }
     NSString *filePath = [url path];
     NSLog(@"Emailed File = %@", filePath);
     NSLog(@"Add decision for team or match file");
     [self loadTournamentFile:filePath];
     [self loadSettingsFile:filePath];
     [self loadTeamFile:filePath];
+//    [self loadTeamHistory:filePath];
+    NSLog(@"loaded histiry");
     [self loadMatchFile:filePath];
 //    [self loadMatchResults:filePath];
 }
@@ -124,6 +146,25 @@
     [parser closeFile]; 
 }
 
+-(void)loadTeamHistory:(NSString *)filePath {
+    NSLog(@"Team History");
+    CSVParser *parser = [CSVParser new];
+    [parser openFile: filePath];
+    NSMutableArray *csvContent = [parser parseFile];
+    if ([[[csvContent objectAtIndex: 0] objectAtIndex:0] isEqualToString:@"Team History"]) {
+        CreateTeam *team = [[CreateTeam alloc] initWithDataManager:_dataManager];
+        int c;
+        for (c = 1; c < [csvContent count]; c++) {
+            // NSLog(@"loadTeamFile:TeamNumber = %@", [[csvContent objectAtIndex: c] objectAtIndex:0]);
+            AddRecordResults results = [team addTeamHistoryFromFile:[csvContent objectAtIndex: 0] dataFields:[csvContent objectAtIndex: c]];
+            if (results != DB_MATCHED) {
+                NSLog(@"Check database - Team History Add Code %d", results);
+            }
+        }
+    }
+    [parser closeFile];
+}
+
 -(void)loadMatchFile:(NSString *)filePath {
     CSVParser *parser = [CSVParser new];
     [parser openFile: filePath];
@@ -160,5 +201,27 @@
     [parser closeFile];    
 }
 
+-(void)retrieveSettings {
+    NSError *error;
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"SettingsData" inManagedObjectContext:_dataManager.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    NSArray *settingsRecord = [_dataManager.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    if(!settingsRecord) {
+        NSLog(@"Karma disruption error");
+        _settings = Nil;
+    }
+    else {
+        if([settingsRecord count] == 0) {  // No Settings Exists
+            NSLog(@"Karma disruption error");
+            _settings = Nil;
+        }
+        else {
+            _settings = [settingsRecord objectAtIndex:0];
+        }
+    }
+}
 
 @end

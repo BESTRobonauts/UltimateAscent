@@ -10,12 +10,14 @@
 #import "LoadCSVData.h"
 #import "DataManager.h"
 #import "SplashPageViewController.h"
+#import "iPhoneMainViewController.h"
 
 @implementation AppDelegate
 
 @synthesize window = _window;
 @synthesize navigationController;
 @synthesize splashPageViewController;
+@synthesize iPhoneMainViewController = _iPhoneMainViewController;
 @synthesize dataManager = _dataManager;
 @synthesize loadDataFromBundle;
 
@@ -24,6 +26,13 @@
     NSLog(@"didFinishLaunchingWithOptions");
     // Create the managed object and persistant store
     _dataManager = [[DataManager alloc] init];
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        navigationController = (UINavigationController *)self.window.rootViewController;
+        _iPhoneMainViewController = (iPhoneMainViewController *)navigationController.topViewController;
+        _iPhoneMainViewController.dataManager = self.dataManager;
+        return YES;
+    }
     LoadCSVData *loadData = [[LoadCSVData alloc] initWithDataManager:_dataManager];
     [loadData loadCSVDataFromBundle];
 
@@ -60,7 +69,8 @@
     if (url != nil && [url isFileURL]) {
         LoadCSVData *loadData = [LoadCSVData new];
         [loadData handleOpenURL:url];
-    }    
+    }
+    NSLog(@"end of openurl");
     return YES;
 }
 

@@ -17,5 +17,6 @@
 - (id)initWithDataManager:(DataManager *)initManager;
 -(void)sendTeamDataToSM:(NSArray *)teamRecords;
 -(void)setTeamRecord:(TeamData *)smTeam forLocalTeam:(TeamData *)team;
+-(void)getTeamRecord:(TeamData *)smTeam forLocalTeam:(TeamData *)team;
 -(void)retrieveTeamDataFromSM:(NSArray *)teamRecords;
 @end

@@ -10,11 +10,16 @@
 #import "DataManager.h"
 #import "SettingsData.h"
 #import "TournamentData.h"
+#import "PopUpPickerViewController.h"
+#import "AlertPromptViewController.h"
 
 @interface TournamentViewController ()
 @end
 
-@implementation TournamentViewController
+@implementation TournamentViewController {
+    id popUp;
+    OverrideMode overrideMode;
+}
 @synthesize dataManager = _dataManager;
 @synthesize mainLogo;
 @synthesize splashPicture, pictureCaption;
@@ -28,14 +33,20 @@
 @synthesize tournamentList;
 @synthesize tournamentPickerPopover;
 // Alliance Picker
-@synthesize allianceButton;
-@synthesize alliancePicker;
-@synthesize allianceList;
-@synthesize alliancePickerPopover;
-@synthesize modeButton;
+@synthesize allianceButton = _allianceButton;
+@synthesize alliancePicker = _alliancePicker;
+@synthesize allianceList = _allianceList;
+@synthesize alliancePickerPopover = _alliancePickerPopover;
+
+
+@synthesize modeSegment = _modeSegment;
 @synthesize adminButton;
 @synthesize overrideButton;
 @synthesize bluetoothButton;
+
+// User access control
+@synthesize alertPrompt = _alertPrompt;
+@synthesize alertPromptPopover = _alertPromptPopover;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -126,24 +137,44 @@
     NSLog(@"Tournament List = %@", tournamentList);
     
     // Alliance Selection
-//    [allianceButton setTitle:settings. forState:UIControlStateNormal];
-//    tournamentButton.titleLabel.font = [UIFont fontWithName:@"Nasalization" size:18.0];
-    allianceList = [[NSMutableArray alloc] initWithObjects:@"Red 1", @"Red 2", @"Red 3", @"Blue 1", @"Blue 2", @"Blue 3", nil];
+    [_allianceButton setTitle:settings.alliance forState:UIControlStateNormal];
+    _allianceButton.titleLabel.font = [UIFont fontWithName:@"Nasalization" size:18.0];
+    _allianceList = [[NSMutableArray alloc] initWithObjects:@"Red 1", @"Red 2", @"Red 3", @"Blue 1", @"Blue 2", @"Blue 3", nil];
+
+    // Set Mode segment
+    if ([settings.mode isEqualToString:@"Test"]) {
+        _modeSegment.selectedSegmentIndex = 0;
+    }
+    else {
+        _modeSegment.selectedSegmentIndex = 1;
+    }
 
 }
 
 -(IBAction)TournamentSelectionChanged:(id)sender {
     //    NSLog(@"TournamentSelectionChanged");
     if (tournamentPicker == nil) {
-        self.tournamentPicker = [[TournamentPickerController alloc]
+        self.tournamentPicker = [[PopUpPickerViewController alloc]
                                initWithStyle:UITableViewStylePlain];
         tournamentPicker.delegate = self;
-        tournamentPicker.tournamentChoices = tournamentList;
+        tournamentPicker.pickerChoices = tournamentList;
         self.tournamentPickerPopover = [[UIPopoverController alloc]
                                       initWithContentViewController:tournamentPicker];
     }
+    tournamentPicker.pickerChoices = tournamentList;
+    popUp = sender;
     [self.tournamentPickerPopover presentPopoverFromRect:tournamentButton.bounds inView:tournamentButton
                               permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
+- (void)pickerSelected:(NSString *)newPick {
+    NSLog(@"Picker = %@", newPick);
+    if (popUp == tournamentButton) {
+        [self tournamentSelected:newPick];
+    }
+    else if (popUp == _allianceButton) {
+        [self allianceSelected:newPick];
+    }
 }
 
 - (void)tournamentSelected:(NSString *)newTournament {
@@ -160,52 +191,59 @@
         }
     }
 }
-/*
--(IBAction)AllianceSelectionChanged:(id)sender {
+
+
+-(IBAction)allianceSelectionChanged:(id)sender {
     //    NSLog(@"AllianceSelectionChanged");
+    popUp = sender;
     if ([settings.mode isEqualToString:@"Test"]) {
-        [self AllianceSelectionPopUp];
+        [self allianceSelectionPopUp];
     }
     else {
         overrideMode = OverrideAllianceSelection;
-        [self checkAdminCode:alliance];
+        [self checkAdminCode:_allianceButton];
     }
 }
 
--(void)AllianceSelectionPopUp {
-    if (alliancePicker == nil) {
-        self.alliancePicker = [[AlliancePickerController alloc]
+-(void)allianceSelectionPopUp {
+    if (_alliancePicker == nil) {
+        self.alliancePicker = [[PopUpPickerViewController alloc]
                                initWithStyle:UITableViewStylePlain];
-        alliancePicker.delegate = self;
-        alliancePicker.allianceChoices = allianceList;
+        _alliancePicker.delegate = self;
+        _alliancePicker.pickerChoices = _allianceList;
         self.alliancePickerPopover = [[UIPopoverController alloc]
-                                      initWithContentViewController:alliancePicker];
+                                      initWithContentViewController:_alliancePicker];
     }
-    [self.alliancePickerPopover presentPopoverFromRect:alliance.bounds inView:alliance
+    _alliancePicker.pickerChoices = _allianceList;
+    [self.alliancePickerPopover presentPopoverFromRect:_allianceButton.bounds inView:_allianceButton
                               permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
 - (void)allianceSelected:(NSString *)newAlliance {
     [self.alliancePickerPopover dismissPopoverAnimated:YES];
-    for (int i = 0 ; i < [allianceList count] ; i++) {
-        if ([newAlliance isEqualToString:[allianceList objectAtIndex:i]]) {
-            teamIndex = i;
-            [alliance setTitle:newAlliance forState:UIControlStateNormal];
-            [self ShowTeam:teamIndex];
+    for (int i = 0 ; i < [_allianceList count] ; i++) {
+        if ([newAlliance isEqualToString:[_allianceList objectAtIndex:i]]) {
+            [_allianceButton setTitle:newAlliance forState:UIControlStateNormal];
+            settings.alliance = newAlliance;
             break;
         }
     }
+    NSError *error;
+    if (![managedObjectContext save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+    }
 }
 
+
 -(void)checkAdminCode:(UIButton *)button {
-    // NSLog(@"Check override");
-    if (alertPrompt == nil) {
+   // NSLog(@"Check override");
+    if (_alertPrompt == nil) {
         self.alertPrompt = [[AlertPromptViewController alloc] initWithNibName:nil bundle:nil];
-        alertPrompt.delegate = self;
-        alertPrompt.titleText = @"Enter Admin Code";
-        alertPrompt.msgText = @"Danielle will kill you.";
+        _alertPrompt.delegate = self;
+        _alertPrompt.titleText = @"Enter Admin Code";
+        _alertPrompt.msgText = @"Danielle will kill you.";
         self.alertPromptPopover = [[UIPopoverController alloc]
-                                   initWithContentViewController:alertPrompt];
+                                   initWithContentViewController:_alertPrompt];
     }
     [self.alertPromptPopover presentPopoverFromRect:button.bounds inView:button permittedArrowDirections:UIPopoverArrowDirectionLeft animated:YES];
     
@@ -215,42 +253,37 @@
 - (void)passCodeResult:(NSString *)passCodeAttempt {
     [self.alertPromptPopover dismissPopoverAnimated:YES];
     switch (overrideMode) {
-        case OverrideDrawLock:
-            if ([passCodeAttempt isEqualToString:settings.overrideCode]) {
-                drawMode = DrawOff;
-                [self drawModeSettings:drawMode];
-            }
-            break;
-            
-        case OverrideMatchReset:
-            if ([passCodeAttempt isEqualToString:settings.overrideCode]) {
-                [self matchReset];
-            }
-            break;
-            
         case OverrideAllianceSelection:
             if ([passCodeAttempt isEqualToString:settings.adminCode]) {
-                [self AllianceSelectionPopUp];
+                [self allianceSelectionPopUp];
             }
             break;
-            
-        case OverrideTeamSelection:
-            if ([passCodeAttempt isEqualToString:settings.adminCode]) {
-                [self TeamSelectionPopUp];
-            }
-            break;
-            
+                        
         default:
             break;
-    }
+    } 
     overrideMode = NoOverride;
 }
-*/
 
-- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    [segue.destinationViewController setDataManager:_dataManager];
+
+
+- (IBAction)modeSelectionChanged:(id)sender {
+    UISegmentedControl *segmentedControl = (UISegmentedControl *)sender;
+    int current;
+    current = segmentedControl.selectedSegmentIndex;
+    
+    if (current == 0) {
+        settings.mode = @"Test";
+    }
+    else {
+        settings.mode = @"Tournament";
+    }
+    NSError *error;
+    if (![managedObjectContext save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+    }
 }
+
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -291,5 +324,4 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 @end
