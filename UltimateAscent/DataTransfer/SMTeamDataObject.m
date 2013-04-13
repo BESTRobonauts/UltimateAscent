@@ -12,8 +12,6 @@
 #import "TournamentData.h"
 #import "TeamData.h"
 
-#define SMALL 0.0000000000001
-
 @implementation SMTeamDataObject
 
 @synthesize dataManager = _dataManager;

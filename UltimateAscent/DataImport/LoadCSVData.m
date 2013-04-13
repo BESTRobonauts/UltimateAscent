@@ -86,7 +86,7 @@
     [self loadTournamentFile:filePath];
     [self loadSettingsFile:filePath];
     [self loadTeamFile:filePath];
-//    [self loadTeamHistory:filePath];
+    [self loadTeamHistory:filePath];
     NSLog(@"loaded histiry");
     [self loadMatchFile:filePath];
 //    [self loadMatchResults:filePath];

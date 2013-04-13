@@ -57,6 +57,7 @@
 		2F621F2D170E18CA00D2ABD1 /* UltimateAscent_iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F621F2C170E18CA00D2ABD1 /* UltimateAscent_iphone.storyboard */; };
 		2F6AE6F016AD93D1005A24C5 /* 2013_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F6AE6EF16AD93D1005A24C5 /* 2013_logo.png */; };
 		2F80CB0617012821000A2BB8 /* TeamRecordObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F80CB0517012821000A2BB8 /* TeamRecordObject.m */; };
+		2F82694217139F740080253D /* SMMatchObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F82694117139F740080253D /* SMMatchObject.m */; };
 		2F88649A16B76B1700867385 /* AlliancePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F88648D16B76B1700867385 /* AlliancePickerController.m */; };
 		2F88649B16B76B1700867385 /* MainScoutingPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F88648F16B76B1700867385 /* MainScoutingPageViewController.m */; };
 		2F88649C16B76B1700867385 /* MatchDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F88649116B76B1700867385 /* MatchDetailViewController.m */; };
@@ -237,6 +238,8 @@
 		2F6AE6EF16AD93D1005A24C5 /* 2013_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 2013_logo.png; path = Resources/2013_logo.png; sourceTree = "<group>"; };
 		2F80CB0417012821000A2BB8 /* TeamRecordObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TeamRecordObject.h; path = DataTransfer/TeamRecordObject.h; sourceTree = "<group>"; };
 		2F80CB0517012821000A2BB8 /* TeamRecordObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TeamRecordObject.m; path = DataTransfer/TeamRecordObject.m; sourceTree = "<group>"; };
+		2F82694017139F740080253D /* SMMatchObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SMMatchObject.h; path = DataTransfer/SMMatchObject.h; sourceTree = "<group>"; };
+		2F82694117139F740080253D /* SMMatchObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SMMatchObject.m; path = DataTransfer/SMMatchObject.m; sourceTree = "<group>"; };
 		2F88648C16B76B1700867385 /* AlliancePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlliancePickerController.h; path = MatchScouting/AlliancePickerController.h; sourceTree = "<group>"; };
 		2F88648D16B76B1700867385 /* AlliancePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AlliancePickerController.m; path = MatchScouting/AlliancePickerController.m; sourceTree = "<group>"; };
 		2F88648E16B76B1700867385 /* MainScoutingPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainScoutingPageViewController.h; path = MatchScouting/MainScoutingPageViewController.h; sourceTree = "<group>"; };
@@ -552,6 +555,8 @@
 				2F80CB0417012821000A2BB8 /* TeamRecordObject.h */,
 				2F80CB0517012821000A2BB8 /* TeamRecordObject.m */,
 				2F32A7811707336500100705 /* SMTournamentObject.h */,
+				2F82694017139F740080253D /* SMMatchObject.h */,
+				2F82694117139F740080253D /* SMMatchObject.m */,
 				2F32A7821707336500100705 /* SMTournamentObject.m */,
 				2F32A7841707771A00100705 /* SMTeamDataObject.h */,
 				2F32A7851707771A00100705 /* SMTeamDataObject.m */,
@@ -840,6 +845,7 @@
 				2F621F2B170DF2FE00D2ABD1 /* ImportDeviceViewController.m in Sources */,
 				2F13339F170E20CD006669FF /* iPhoneMainViewController.m in Sources */,
 				2F4CD04417122E1600428859 /* PopUpPickerViewController.m in Sources */,
+				2F82694217139F740080253D /* SMMatchObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -95,7 +95,16 @@
     MatchData *match = [self GetMatch:matchNumber forMatchType:type forTournament:tournament];
     if (match) {
         // NSLog(@"createMatchFromFile:Match %@ %@ already exists", matchNumber, type);
-        return DB_MATCHED;
+        if ([data count] == 11) {
+            match.redScore = [NSNumber numberWithInt:[[data objectAtIndex: 9] intValue]];
+            match.blueScore = [NSNumber numberWithInt:[[data objectAtIndex: 10] intValue]];
+            NSError *error;
+            if (![managedObjectContext save:&error]) {
+                NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+                return DB_ERROR;
+            }
+            return DB_MATCHED;
+        }
     }
     else {
         if ([data count] != 11) return DB_ERROR;

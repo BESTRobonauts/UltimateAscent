@@ -13,6 +13,7 @@
 #import "TeamData.h"
 #import "SMTournamentObject.h"
 #import "SMTeamDataObject.h"
+#import "SMMatchObject.h"
 
 @interface StackMobExportViewController ()
 
@@ -24,6 +25,8 @@
 @synthesize smManagedObjectContext = _smManagedObjectContext;
 @synthesize pushTeamButton = _pushTeamButton;
 @synthesize pushTournamentButton = _pushTournamentButton;
+@synthesize pushMatchButton = _pushMatchButton;
+
 @synthesize settings = _settings;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -64,6 +67,9 @@
     [_pushTournamentButton setTitle:@"Push Tournament Data" forState:UIControlStateNormal];
     _pushTournamentButton.titleLabel.font = [UIFont fontWithName:@"Nasalization" size:20.0];
 
+//    [_pushMatchButton setTitle:@"Push Match Data" forState:UIControlStateNormal];
+//    _pushMatchButton.titleLabel.font = [UIFont fontWithName:@"Nasalization" size:20.0];
+    
 }
 
 - (IBAction)pushTeamData:(id)sender {
@@ -99,6 +105,27 @@
     [tournamentObject sendTournamentDataToSM:tournamentRecord];
 }
 
+- (IBAction)pushMatchData:(id)sender {
+    SMMatchObject *matchObject = [[SMMatchObject alloc] initWithDataManager:_dataManager];
+    NSError *error;
+    
+    // Fetch local team records
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"MatchData" inManagedObjectContext:_dataManager.managedObjectContext];
+    [fetchRequest setEntity:entity];
+//    NSSortDescriptor *typeDescriptor = [[NSSortDescriptor alloc] initWithKey:@"matchTypeSection" ascending:YES];
+//    NSSortDescriptor *numberDescriptor = [[NSSortDescriptor alloc] initWithKey:@"number" ascending:YES];
+//    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:typeDescriptor, numberDescriptor, nil];
+    // Add the search for tournament name
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"tournament CONTAINS %@", _settings.tournament.name];
+    [fetchRequest setPredicate:pred];
+//    [fetchRequest setSortDescriptors:sortDescriptors];
+    NSArray *matchRecord = [_dataManager.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    [matchObject sendMatchDataToSM:matchRecord];
+}
+
 -(void)retrieveSettings {
     NSError *error;
     
@@ -131,6 +158,7 @@
 - (void)viewDidUnload {
     [self setPushTeamButton:nil];
     [self setPushTournamentButton:nil];
+    [self setPushMatchButton:nil];
     [super viewDidUnload];
 }
 

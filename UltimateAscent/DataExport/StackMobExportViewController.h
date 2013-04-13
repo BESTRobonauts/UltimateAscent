@@ -20,6 +20,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *pushTournamentButton;
 - (IBAction)pushTeamData:(id)sender;
 - (IBAction)pushTournamentData:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *pushMatchButton;
+- (IBAction)pushMatchData:(id)sender;
+
 -(void)retrieveSettings;
 
 @end
