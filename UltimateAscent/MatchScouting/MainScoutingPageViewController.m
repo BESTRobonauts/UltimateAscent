@@ -333,9 +333,6 @@
     NSString *sectionName;
     for (int i=0; i < [[fetchedResultsController sections] count]; i++) {
         sectionName = [[[fetchedResultsController sections] objectAtIndex:i] name];
-        // NSLog(@"Section = %@", sectionName);
-        NSString *str = [matchDictionary getMatchTypeString:[NSNumber numberWithInt:[sectionName intValue]]];
-        // NSLog(@"Match Type = %@", str);
         [matchTypes addObject:[matchDictionary getMatchTypeString:[NSNumber numberWithInt:[sectionName intValue]]]];
     }
     return matchTypes;

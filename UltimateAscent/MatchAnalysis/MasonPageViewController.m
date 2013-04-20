@@ -18,6 +18,7 @@
 #import "CalculateTeamStats.h"
 #import "TeamDetailViewController.h"
 #import "FieldDrawingViewController.h"
+#import "parseCSV.h"
 
 @interface MasonPageViewController ()
 
@@ -26,6 +27,8 @@
 @implementation MasonPageViewController {
     int numberMatchTypes;
     MatchTypeDictionary *matchDictionary;
+    NSFileManager *fileManager;
+    NSString *storePath;
 }
 @synthesize dataManager = _dataManager;
 @synthesize managedObjectContext = _managedObjectContext;
@@ -46,11 +49,22 @@
 @synthesize matchTypePickerPopover;
 
 @synthesize teamData;
+@synthesize teamList = _teamList;
+@synthesize teamMatches = _teamMatches;
+@synthesize teamAuton = _teamAuton;
+@synthesize teamTeleOp = _teamTeleOp;
+@synthesize teamHang = _teamHang;
+@synthesize teamHangLevel = _teamHangLevel;
+@synthesize teamDriving = _teamDriving;
+@synthesize teamDefense = _teamDefense;
+@synthesize teamSpeed = _teamSpeed;
 @synthesize teamHeader = _teamHeader;
 @synthesize teamInfo = _teamInfo;
 
 @synthesize red1 = _red1;
 @synthesize red1Team = _red1Team;
+@synthesize red1Stats = _red1Stats;
+
 @synthesize red2Team = _red2Team;
 @synthesize red3Team = _red3Team;
 @synthesize red1Table = _red1Table;
@@ -104,12 +118,33 @@
     // If there are no matches in any section then don't set this stuff. ShowMatch will set currentMatch to
     // nil, printing out blank info in all the display items.
     if (numberMatchTypes) {
-        // Loading Default Data Markers
-        _currentSectionType = [[matchDictionary getMatchTypeEnum:[matchTypeList objectAtIndex:0]] intValue];
-        _rowIndex = 0;
-        _teamIndex = 0;
-        _sectionIndex = [self getMatchSectionInfo:_currentSectionType];
+        // Temporary method to save the data markers
+        storePath = [[self applicationDocumentsDirectory] stringByAppendingPathComponent: @"dataMarkerMason.csv"];
+        fileManager = [NSFileManager defaultManager];
+        if (![fileManager fileExistsAtPath:storePath]) {
+            // Loading Default Data Markers
+            _currentSectionType = [[matchDictionary getMatchTypeEnum:[matchTypeList objectAtIndex:0]] intValue];
+            _rowIndex = 0;
+            _teamIndex = 0;
+            _sectionIndex = [self getMatchSectionInfo:_currentSectionType];
+        }
+        else {
+            CSVParser *parser = [CSVParser new];
+            [parser openFile: storePath];
+            NSMutableArray *csvContent = [parser parseFile];
+            // NSLog(@"data marker = %@", csvContent);
+            _rowIndex = [[[csvContent objectAtIndex:0] objectAtIndex:0] intValue];
+            _teamIndex = [[[csvContent objectAtIndex:0] objectAtIndex:2] intValue];
+            _currentSectionType = [[[csvContent objectAtIndex:0] objectAtIndex:1] intValue];
+            _sectionIndex = [self getMatchSectionInfo:_currentSectionType];
+            if (_sectionIndex == -1) { // The selected match type does not exist
+                // Go back to the first section in the table
+                _currentSectionType = [[matchDictionary getMatchTypeEnum:[matchTypeList objectAtIndex:0]] intValue];
+                _sectionIndex = [self getMatchSectionInfo:_currentSectionType];
+            }
+        }
     }
+        
     [self SetTextBoxDefaults:matchNumber];
     [self SetBigButtonDefaults:matchType];
     [self SetBigButtonDefaults:prevMatch];
@@ -124,47 +159,62 @@
     teamLabel.backgroundColor = [UIColor clearColor];
     [_teamHeader addSubview:teamLabel];
     
-	UILabel *nMatchesLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, 0, 200, 50)];
+	UILabel *nMatchesLabel = [[UILabel alloc] initWithFrame:CGRectMake(90, 0, 200, 50)];
 	nMatchesLabel.text = @"Matches";
     nMatchesLabel.backgroundColor = [UIColor clearColor];
     [_teamHeader addSubview:nMatchesLabel];
     
-	UILabel *autonLabel = [[UILabel alloc] initWithFrame:CGRectMake(220, 0, 200, 50)];
+	UILabel *autonLabel = [[UILabel alloc] initWithFrame:CGRectMake(180, 0, 200, 50)];
 	autonLabel.text = @"Auton Points";
     autonLabel.backgroundColor = [UIColor clearColor];
     [_teamHeader addSubview:autonLabel];
 
-    UILabel *teleOpLabel = [[UILabel alloc] initWithFrame:CGRectMake(350, 0, 200, 50)];
+    UILabel *teleOpLabel = [[UILabel alloc] initWithFrame:CGRectMake(290, 0, 200, 50)];
 	teleOpLabel.text = @"TeleOp Points";
     teleOpLabel.backgroundColor = [UIColor clearColor];
     [_teamHeader addSubview:teleOpLabel];
 
-    UILabel *hangLabel = [[UILabel alloc] initWithFrame:CGRectMake(480, 0, 200, 50)];
-	hangLabel.text = @"Success Hang?";
+    UILabel *hangLabel = [[UILabel alloc] initWithFrame:CGRectMake(420, 0, 200, 50)];
+	hangLabel.text = @"Hangs?";
     hangLabel.backgroundColor = [UIColor clearColor];
     [_teamHeader addSubview:hangLabel];
    
+    UILabel *hangLevelLabel = [[UILabel alloc] initWithFrame:CGRectMake(500, 0, 200, 50)];
+	hangLevelLabel.text = @"Hang Level";
+    hangLevelLabel.backgroundColor = [UIColor clearColor];
+    [_teamHeader addSubview:hangLevelLabel];
+
     UILabel *drivingLabel = [[UILabel alloc] initWithFrame:CGRectMake(620, 0, 200, 50)];
 	drivingLabel.text = @"Driving";
     drivingLabel.backgroundColor = [UIColor clearColor];
     [_teamHeader addSubview:drivingLabel];
 
-    UILabel *defenseLabel = [[UILabel alloc] initWithFrame:CGRectMake(720, 0, 200, 50)];
+    UILabel *defenseLabel = [[UILabel alloc] initWithFrame:CGRectMake(710, 0, 200, 50)];
 	defenseLabel.text = @"Defense";
     defenseLabel.backgroundColor = [UIColor clearColor];
     [_teamHeader addSubview:defenseLabel];
     
-    UILabel *speedLabel = [[UILabel alloc] initWithFrame:CGRectMake(820, 0, 200, 50)];
-	speedLabel.text = @"Robot Speed";
+    UILabel *speedLabel = [[UILabel alloc] initWithFrame:CGRectMake(800, 0, 200, 50)];
+	speedLabel.text = @"Speed";
     speedLabel.backgroundColor = [UIColor clearColor];
     [_teamHeader addSubview:speedLabel];
     
-    UILabel *minHeightLabel = [[UILabel alloc] initWithFrame:CGRectMake(920, 0, 200, 50)];
+    UILabel *minHeightLabel = [[UILabel alloc] initWithFrame:CGRectMake(880, 0, 200, 50)];
 	minHeightLabel.text = @"Minimum Height";
     minHeightLabel.backgroundColor = [UIColor clearColor];
     [_teamHeader addSubview:minHeightLabel];
 
     teamData = [NSMutableArray arrayWithCapacity:6];
+    _teamList = [[NSMutableArray alloc] initWithObjects:@"0", @"0", @"0", @"0", @"0", @"0", nil];
+    _teamMatches = [[NSMutableArray alloc] initWithObjects:@"0", @"0", @"0", @"0", @"0", @"0", nil];
+    _teamAuton = [[NSMutableArray alloc] initWithObjects:@"0", @"0", @"0", @"0", @"0", @"0", nil];
+    _teamTeleOp = [[NSMutableArray alloc] initWithObjects:@"0", @"0", @"0", @"0", @"0", @"0", nil];
+    _teamHang = [[NSMutableArray alloc] initWithObjects:@"", @"", @"", @"", @"", @"", nil];
+    _teamHangLevel = [[NSMutableArray alloc] initWithObjects:@"0.0", @"0.0", @"0.0", @"0.0", @"0.0", @"0.0", nil];
+    _teamDriving = [[NSMutableArray alloc] initWithObjects:@"0.0", @"0.0", @"0.0", @"0.0", @"0.0", @"0.0", nil];
+    _teamDefense = [[NSMutableArray alloc] initWithObjects:@"0.0", @"0.0", @"0.0", @"0.0", @"0.0", @"0.0", nil];
+    _teamSpeed = [[NSMutableArray alloc] initWithObjects:@"0.0", @"0.0", @"0.0", @"0.0", @"0.0", @"0.0", nil];
+    _teamHeight = [[NSMutableArray alloc] initWithObjects:@"0.0", @"0.0", @"0.0", @"0.0", @"0.0", @"0.0", nil];
     [self ShowMatch];
 }
 
@@ -395,62 +445,81 @@
 }
 
 -(void)setTeamList {
-//    NSArray* objectsArray = [team.match allObjects];
-//    TeamScore *score = [objectsArray objectAtIndex:indexPath.row];
-
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"tournament.name CONTAINS %@", _settings.tournament.name];
     NSSortDescriptor *allianceSort = [NSSortDescriptor sortDescriptorWithKey:@"alliance" ascending:YES];
     NSArray *data = [[_currentMatch.score allObjects] sortedArrayUsingDescriptors:[NSArray arrayWithObject:allianceSort]];
 
-    NSSortDescriptor *typeDescriptor = [[NSSortDescriptor alloc] initWithKey:@"matchTypeSection" ascending:YES];
-    NSSortDescriptor *numberDescriptor = [[NSSortDescriptor alloc] initWithKey:@"number" ascending:YES];
-    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:typeDescriptor, numberDescriptor, nil];
+    if (!data) return;
 
     TeamScore *score;
     CalculateTeamStats *teamStats = [CalculateTeamStats new];
     teamStats.managedObjectContext = _managedObjectContext;
-    int nteams = [teamData count];
+    Statistics *stats;
 
-    if (!data) return;
-    // Red 1
-    score = [data objectAtIndex:3];
-    ((nteams >0 && [teamData objectAtIndex:0])) ? [teamData replaceObjectAtIndex:0 withObject:score.team] : [teamData addObject:score.team];
-    [teamStats calculateMason:score.team forTournament:_settings.tournament.name];
-     NSArray *teamScores = [score.team.match allObjects];
-//    _red1 = [teamScores sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptors]];
-    _red1 = [teamScores filteredArrayUsingPredicate:pred];
-    for (int i=0; i <[_red1 count]; i++) {
-        TeamScore *junk = [_red1 objectAtIndex:i];
-        NSLog(@"Tourney = %@", junk.tournament.name);
+    if ([data count] == 6) {
+        // Reds
+        for (int i=3; i<6; i++) {
+            score = [data objectAtIndex:i];
+            [_teamList replaceObjectAtIndex:(i-3)
+                                withObject:[NSString stringWithFormat:@"%d", [score.team.number intValue]]];
+            stats = [teamStats calculateMason:score.team forTournament:_settings.tournament.name];
+            [_teamMatches replaceObjectAtIndex:(i-3)
+                                    withObject:[NSString stringWithFormat:@"%d", [stats.stat1 intValue]]];
+            [_teamAuton replaceObjectAtIndex:(i-3)
+                                    withObject:[NSString stringWithFormat:@"%d", [stats.autonPoints intValue]]];
+            [_teamTeleOp replaceObjectAtIndex:(i-3)
+                                  withObject:[NSString stringWithFormat:@"%d", [stats.teleOpPoints intValue]]];
+            [_teamHang replaceObjectAtIndex:(i-3)
+                                   withObject:[NSString stringWithFormat:@"%d", [stats.stat5 intValue]]];
+            [_teamHangLevel replaceObjectAtIndex:(i-3)
+                                    withObject:[NSString stringWithFormat:@"%.1f", [stats.aveClimbHeight floatValue]]];
+            [_teamDriving replaceObjectAtIndex:(i-3)
+                                 withObject:[NSString stringWithFormat:@"%.1f", [stats.stat2 floatValue]]];
+            [_teamDefense replaceObjectAtIndex:(i-3)
+                                 withObject:[NSString stringWithFormat:@"%.1f", [stats.stat3 floatValue]]];
+            [_teamSpeed replaceObjectAtIndex:(i-3)
+                                 withObject:[NSString stringWithFormat:@"%.1f", [stats.stat4 floatValue]]];
+            if (score.team.minHeight) {
+                [_teamHeight replaceObjectAtIndex:(i-3)
+                                  withObject:[NSString stringWithFormat:@"%.1f", [score.team.minHeight floatValue]]];
+            }
+            else {
+                [_teamHeight replaceObjectAtIndex:(i-3)
+                                       withObject:[NSString stringWithFormat:@""]];
+            }
+        }
+        // Blues
+        for (int i=0; i<3; i++) {
+            score = [data objectAtIndex:i];
+            [_teamList replaceObjectAtIndex:(i+3)
+                                 withObject:[NSString stringWithFormat:@"%d", [score.team.number intValue]]];
+            stats = [teamStats calculateMason:score.team forTournament:_settings.tournament.name];
+            [_teamMatches replaceObjectAtIndex:(i+3)
+                                    withObject:[NSString stringWithFormat:@"%d", [stats.stat1 intValue]]];
+            [_teamAuton replaceObjectAtIndex:(i+3)
+                                  withObject:[NSString stringWithFormat:@"%d", [stats.autonPoints intValue]]];
+            [_teamTeleOp replaceObjectAtIndex:(i+3)
+                                   withObject:[NSString stringWithFormat:@"%d", [stats.teleOpPoints intValue]]];
+            [_teamHang replaceObjectAtIndex:(i+3)
+                                 withObject:[NSString stringWithFormat:@"%d", [stats.stat5 intValue]]];
+            [_teamHangLevel replaceObjectAtIndex:(i+3)
+                                      withObject:[NSString stringWithFormat:@"%.1f", [stats.aveClimbHeight floatValue]]];
+            [_teamDriving replaceObjectAtIndex:(i+3)
+                                    withObject:[NSString stringWithFormat:@"%.1f", [stats.stat2 floatValue]]];
+            [_teamDefense replaceObjectAtIndex:(i+3)
+                                    withObject:[NSString stringWithFormat:@"%.1f", [stats.stat3 floatValue]]];
+            [_teamSpeed replaceObjectAtIndex:(i+3)
+                                  withObject:[NSString stringWithFormat:@"%.1f", [stats.stat4 floatValue]]];
+            if (score.team.minHeight) {
+                [_teamHeight replaceObjectAtIndex:(i+3)
+                                       withObject:[NSString stringWithFormat:@"%.1f", [score.team.minHeight floatValue]]];
+            }
+            else {
+                [_teamHeight replaceObjectAtIndex:(i+3)
+                                       withObject:[NSString stringWithFormat:@""]];
+            }
+        }
     }
-    _red1Team.text =  [NSString stringWithFormat:@"%d", [score.team.number intValue]];;
-
-    // Red 2
-    score = [data objectAtIndex:4];
-    ((nteams >1 && [teamData objectAtIndex:1])) ? [teamData replaceObjectAtIndex:1 withObject:score.team] : [teamData addObject:score.team];
-    [teamStats calculateMason:score.team forTournament:_settings.tournament.name];
-    teamScores = [score.team.match allObjects];
-    _red2Team.text =  [NSString stringWithFormat:@"%d", [score.team.number intValue]];;
-    _red2 = [teamScores filteredArrayUsingPredicate:pred];
-    // Red 3
-    score = [data objectAtIndex:5];
-    ((nteams >2 && [teamData objectAtIndex:2])) ? [teamData replaceObjectAtIndex:2 withObject:score.team] : [teamData addObject:score.team];
-    [teamStats calculateMason:score.team forTournament:_settings.tournament.name];
-    _red3Team.text =  [NSString stringWithFormat:@"%d", [score.team.number intValue]];;
-    // Blue 1
-    score = [data objectAtIndex:0];
-    ((nteams >3 && [teamData objectAtIndex:3])) ? [teamData replaceObjectAtIndex:3 withObject:score.team] : [teamData addObject:score.team];
-    [teamStats calculateMason:score.team forTournament:_settings.tournament.name];
-    // Blue 2
-    score = [data objectAtIndex:1];
-    ((nteams >4 && [teamData objectAtIndex:4])) ? [teamData replaceObjectAtIndex:4 withObject:score.team] : [teamData addObject:score.team];
-    [teamStats calculateMason:score.team forTournament:_settings.tournament.name];
-    // Blue 3
-    score = [data objectAtIndex:2];
-    ((nteams >5 && [teamData objectAtIndex:5])) ? [teamData replaceObjectAtIndex:5 withObject:score.team] : [teamData addObject:score.team];
-    [teamStats calculateMason:score.team forTournament:_settings.tournament.name];
     [self.teamInfo reloadData];
-
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -477,11 +546,24 @@
     }
 }
 
+- (void) viewWillDisappear:(BOOL)animated
+{
+    //    NSLog(@"viewWillDisappear");
+    NSString *dataMarkerString;
+    storePath = [[self applicationDocumentsDirectory] stringByAppendingPathComponent: @"dataMarkerMason.csv"];
+    dataMarkerString = [NSString stringWithFormat:@"%d, %d, %d\n", _rowIndex, _currentSectionType, _teamIndex];
+    [dataMarkerString writeToFile:storePath
+                       atomically:YES
+                         encoding:NSUTF8StringEncoding
+                            error:nil];
+}
+
 #pragma mark - Table view data source
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    
-    return _teamHeader;
+    NSLog(@"viewforheader");
+    if (tableView == _teamInfo) return _teamHeader;
+    else return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -498,13 +580,13 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (tableView == _teamInfo) return [_teamList count];
     if (tableView == _red1Table) return [_red1 count];
     if (tableView == _red2Table) return [_red2 count];
     else return [teamData count];
 }
 
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    TeamData *team = [teamData objectAtIndex:indexPath.row];
+- (void)configureScoreCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     // Configure the cell...
     // Set a background for the cell
     // UIImageView *tableBackground = [[UIImageView alloc] initWithFrame:cell.frame];
@@ -512,34 +594,36 @@
     // tableBackground.image = image;
     //  cell.backgroundView = imageView; Change Varable Name "soon"
     
-    NSArray *stats = [team.stats allObjects];
-    Statistics *teamStats = [stats objectAtIndex:0];
 	UILabel *teamNumber = (UILabel *)[cell viewWithTag:10];
-	teamNumber.text = [NSString stringWithFormat:@"%d", [team.number intValue]];
+	teamNumber.text = [_teamList objectAtIndex:indexPath.row];
 
 	UILabel *nMatchesLabel = (UILabel *)[cell viewWithTag:20];
-    nMatchesLabel.text = [NSString stringWithFormat:@"%d", [teamStats.stat1 intValue]];
-    
+    nMatchesLabel.text = [_teamMatches objectAtIndex:indexPath.row];
+
 	UILabel *autonLabel = (UILabel *)[cell viewWithTag:30];
-	autonLabel.text = [NSString stringWithFormat:@"%d", [teamStats.autonPoints intValue]];
+	autonLabel.text = [_teamAuton objectAtIndex:indexPath.row];
 
     UILabel *teleOpLabel = (UILabel *)[cell viewWithTag:40];
-	teleOpLabel.text = [NSString stringWithFormat:@"%d", [teamStats.teleOpPoints intValue]];
+	teleOpLabel.text = [_teamTeleOp objectAtIndex:indexPath.row];
 
     UILabel *hangLabel = (UILabel *)[cell viewWithTag:50];
-    hangLabel.text = ([teamStats.stat5 intValue]) ? @"Y": @"N";
+    hangLabel.text = ([[_teamHang objectAtIndex:indexPath.row] intValue]) ? @"Y": @"N";
+
+    UILabel *hangLevel = (UILabel *)[cell viewWithTag:55];
+	hangLevel.text = [_teamHangLevel objectAtIndex:indexPath.row];
 
     UILabel *drivingLabel = (UILabel *)[cell viewWithTag:60];
-	drivingLabel.text = [NSString stringWithFormat:@"%.1f", [teamStats.stat2 floatValue]];
+	drivingLabel.text = [_teamDriving objectAtIndex:indexPath.row];
 
     UILabel *defenseLabel = (UILabel *)[cell viewWithTag:70];
-	defenseLabel.text = [NSString stringWithFormat:@"%.1f", [teamStats.stat3 floatValue]];
+	defenseLabel.text = [_teamDefense objectAtIndex:indexPath.row];
 
     UILabel *speedLabel = (UILabel *)[cell viewWithTag:80];
-	speedLabel.text = [NSString stringWithFormat:@"%.1f", [teamStats.stat4 floatValue]];
+	speedLabel.text = [_teamSpeed objectAtIndex:indexPath.row];
 
     UILabel *heightLabel = (UILabel *)[cell viewWithTag:90];
-	heightLabel.text = [NSString stringWithFormat:@"%.1f", [team.minHeight floatValue]];
+	heightLabel.text = [_teamHeight objectAtIndex:indexPath.row];
+
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -548,7 +632,7 @@
         UITableViewCell *cell = [tableView
                                  dequeueReusableCellWithIdentifier:@"TeamInfo"];
         // Set up the cell...
-        [self configureCell:cell atIndexPath:indexPath];
+        [self configureScoreCell:cell atIndexPath:indexPath];
         
         return cell;
     }
@@ -575,6 +659,7 @@
         
         return cell;
     }
+    else return nil;
 }
 
 -(void)SetTextBoxDefaults:(UITextField *)currentTextField {
@@ -604,6 +689,11 @@
     NSScanner *scan = [NSScanner scannerWithString: resultingString];
     
     return [scan scanInteger: &holder] && [scan isAtEnd];
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    //    NSLog(@"should end editing");
+	return YES;
 }
 
 #pragma mark -
@@ -668,6 +758,13 @@
     }
 	
 	return _fetchedResultsController;
+}
+
+/**
+ Returns the path to the application's Documents directory.
+ */
+- (NSString *)applicationDocumentsDirectory {
+	return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

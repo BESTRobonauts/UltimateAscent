@@ -12,8 +12,13 @@
 #import "DataManager.h"
 #import "SettingsData.h"
 #import "TournamentData.h"
+#import "Statistics.h"
+#import "CalculateTeamStats.h"
 
-@implementation TeamListViewController
+@implementation TeamListViewController {
+    CalculateTeamStats *teamStats;
+    Statistics *stats;
+}
 @synthesize managedObjectContext, fetchedResultsController;
 @synthesize dataManager = _dataManager;
 @synthesize settings;
@@ -41,7 +46,6 @@
 
 - (void)viewDidLoad
 {
-    NSLog(@"Team List viewDidLoad");
     NSError *error = nil;
     if (!managedObjectContext) {
         if (_dataManager) {
@@ -54,7 +58,6 @@
     }
     
     [self retrieveSettings];
-    NSLog(@"mode = %@", settings.mode);
     if (settings) {
         self.title =  [NSString stringWithFormat:@"%@ Team List", settings.tournament.name];
     }
@@ -73,6 +76,9 @@
         abort();
     }
       
+    teamStats = [CalculateTeamStats new];
+    teamStats.managedObjectContext = _dataManager.managedObjectContext;
+
     headerView = [[UIView alloc] initWithFrame:CGRectMake(0,0,768,50)];
     headerView.backgroundColor = [UIColor lightGrayColor];
     headerView.opaque = YES;
@@ -82,17 +88,17 @@
     teamLabel.backgroundColor = [UIColor clearColor];
     [headerView addSubview:teamLabel];
 
-	UILabel *aveAutonLabel = [[UILabel alloc] initWithFrame:CGRectMake(155, 0, 200, 50)];
+	UILabel *aveAutonLabel = [[UILabel alloc] initWithFrame:CGRectMake(150, 0, 200, 50)];
 	aveAutonLabel.text = @"Ave. Auton";
     aveAutonLabel.backgroundColor = [UIColor clearColor];
     [headerView addSubview:aveAutonLabel];
     
- 	UILabel *aveTeleopLabel = [[UILabel alloc] initWithFrame:CGRectMake(277, 0, 200, 50)];
+ 	UILabel *aveTeleopLabel = [[UILabel alloc] initWithFrame:CGRectMake(270, 0, 200, 50)];
 	aveTeleopLabel.text = @"Ave. TeleOp";
     aveTeleopLabel.backgroundColor = [UIColor clearColor];
     [headerView addSubview:aveTeleopLabel];
     
-	UILabel *aveHangLabel = [[UILabel alloc] initWithFrame:CGRectMake(400, 0, 200, 50)];
+	UILabel *aveHangLabel = [[UILabel alloc] initWithFrame:CGRectMake(390, 0, 200, 50)];
 	aveHangLabel.text = @"Ave. Hang";
     aveHangLabel.backgroundColor = [UIColor clearColor];
     [headerView addSubview:aveHangLabel];
@@ -107,12 +113,12 @@
     driveLabel.backgroundColor = [UIColor clearColor];
     [headerView addSubview:driveLabel];
     
-    UILabel *defenseLabel = [[UILabel alloc] initWithFrame:CGRectMake(699, 0, 200, 50)];
+    UILabel *defenseLabel = [[UILabel alloc] initWithFrame:CGRectMake(705, 0, 200, 50)];
 	defenseLabel.text = @"Defense";
     defenseLabel.backgroundColor = [UIColor clearColor];
     [headerView addSubview:defenseLabel];
     
-    UILabel *minHeightLabel = [[UILabel alloc] initWithFrame:CGRectMake(799, 0, 200, 50)];
+    UILabel *minHeightLabel = [[UILabel alloc] initWithFrame:CGRectMake(805, 0, 200, 50)];
 	minHeightLabel.text = @"Minimum Height";
     minHeightLabel.backgroundColor = [UIColor clearColor];
     [headerView addSubview:minHeightLabel];
@@ -135,7 +141,6 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    NSLog(@"Team List viewWillAppear");
     dataChange = NO;
    [super viewWillAppear:animated];
 }
@@ -174,7 +179,6 @@
 }
 
 - (void)showTeam:(TeamData *)team animated:(BOOL)animated {
-    NSLog(@"Show Team");
     // Create a detail view controller, set the team, then push it.
  //   TeamDetailViewController *detailViewController = [[TeamDetailViewController alloc] 
  //                                                     initWithNibName:@"TeamDetailViewController" bundle:nil];
@@ -217,47 +221,25 @@
     UIImage *image = [UIImage imageNamed:@"Blue Fade.gif"];
     imageView.image = image;
     cell.backgroundView = imageView;
+    stats = [teamStats calculateMason:info forTournament:settings.tournament.name];
     
 	UILabel *numberLabel = (UILabel *)[cell viewWithTag:10];
 	numberLabel.text = [NSString stringWithFormat:@"%d", [info.number intValue]];
     
-	UILabel *orientationLabel = (UILabel *)[cell viewWithTag:20];
-    int number = 0;//[info.orientation intValue];
-    switch (number) {
-        case 0: orientationLabel.text = @"Long"; break;
-        case 1: orientationLabel.text = @"Wide"; break;
-        case 2: orientationLabel.text = @"Square"; break;
-        case 3: orientationLabel.text = @"Other"; break;
-        default: orientationLabel.text = @""; break;
-    }
-	UILabel *balanceLabel = (UILabel *)[cell viewWithTag:30];
-    number = 0; //[info.balance intValue];
-    switch (number) {
-        case 0: balanceLabel.text = @"None"; break;
-        case 1: balanceLabel.text = @"Stinger"; break;
-        case 2: balanceLabel.text = @"Other"; break;
-        default: balanceLabel.text = @""; break;
-    }
+	UILabel *aveAutonLabel = (UILabel *)[cell viewWithTag:20];
+	aveAutonLabel.text = [NSString stringWithFormat:@"%d", [stats.aveAuton intValue]];
+
+	UILabel *aveTeleOpLabel = (UILabel *)[cell viewWithTag:30];
+	aveTeleOpLabel.text = [NSString stringWithFormat:@"%d", [stats.aveTeleOp intValue]];
     
-	UILabel *modingLabel = (UILabel *)[cell viewWithTag:40];
-    number = 0; //[info.moding intValue];
-    switch (number) {
-        case 0: modingLabel.text = @"Rams"; break;
-        case 1: modingLabel.text = @"Slap"; break;
-        case 2: modingLabel.text = @"None"; break;
-        case 3: modingLabel.text = @"Other"; break;
-        default: modingLabel.text = @""; break;
-    }
-    
-	UILabel *brakesLabel = (UILabel *)[cell viewWithTag:50];
-    number = 0; // [info.brakes intValue];
-    switch (number) {
-        case 0: brakesLabel.text = @"No"; break;
-        case 1: brakesLabel.text = @"Yes"; break;
-        default: brakesLabel.text = @""; break;
-    }
+	UILabel *aveHangLabel = (UILabel *)[cell viewWithTag:40];
+	aveHangLabel.text = [NSString stringWithFormat:@"%.1f", [stats.aveClimbHeight floatValue]];
+
+	UILabel *speedLabel = (UILabel *)[cell viewWithTag:50];
+	speedLabel.text = [NSString stringWithFormat:@"%.1f", [stats.stat4 floatValue]];
+
     UILabel *driveLabel = (UILabel *)[cell viewWithTag:70];
-    number = [info.driveTrainType intValue];
+    int number = [info.driveTrainType intValue];
     switch (number) {
         case 0: driveLabel.text = @"Mech"; break;
         case 1: driveLabel.text = @"Omni"; break;
@@ -270,6 +252,7 @@
     }
     
     UILabel *defenseLabel = (UILabel *)[cell viewWithTag:80];
+	defenseLabel.text = [NSString stringWithFormat:@"%.1f", [stats.stat3 floatValue]];
 
     UILabel *heightLabel = (UILabel *)[cell viewWithTag:90];
     heightLabel.text = [NSString stringWithFormat:@"%.1f", [info.minHeight floatValue]];
@@ -422,7 +405,6 @@
             break;
             
         case NSFetchedResultsChangeUpdate:
-            NSLog(@"NSFetchedResultsChangeUpdate");
             dataChange = YES;
             if (![managedObjectContext save:&error]) {
                 NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);

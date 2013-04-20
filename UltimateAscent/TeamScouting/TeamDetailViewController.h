@@ -54,7 +54,6 @@ typedef enum {
 @property (nonatomic, retain) UIPopoverController *detailPickerPopover;
 @property (nonatomic, strong) NSArray *regionalList;
 -(IBAction)detailChanged:(id)sender;
--(void)detailSelectionPopUp:(UIButton *)button forChoices:(NSMutableArray *)detailChoices;
 -(void)changeIntake:(NSString *)newIntake;
 -(void)changeDriveType:(NSString *)newDriveType;
 -(void)changeClimbZone:(NSString *)newClimbZone;
@@ -65,7 +64,6 @@ typedef enum {
 -(void)SetTextBoxDefaults:(UITextField *)textField;
 -(void)SetBigButtonDefaults:(UIButton *)currentButton;
 //-(void)SetTextBoxDefaults:(UITextField *)textField;
--(void)getSelection:(id) sender;
 -(MatchData *)getMatchData: (TeamScore *) teamScore;
 
 -(IBAction)useCamera: (id)sender;

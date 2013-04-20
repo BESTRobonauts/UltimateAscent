@@ -9,9 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @class TeamData;
+@class Statistics;
 
 @interface CalculateTeamStats : NSObject
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
--(void)calculateMason:(TeamData *)team forTournament:(NSString *)tournament;
+-(Statistics *)calculateMason:(TeamData *)team forTournament:(NSString *)tournament;
 
 @end

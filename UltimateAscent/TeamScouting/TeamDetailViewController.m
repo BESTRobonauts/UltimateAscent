@@ -64,8 +64,6 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
-    NSLog(@"Team Detail viewDidLoad");
-    
     numberLabel.font = [UIFont fontWithName:@"Helvetica" size:24.0];
     [self SetTextBoxDefaults:nameTextField];
     [self SetTextBoxDefaults:notesTextField];
@@ -137,8 +135,6 @@
 
 - (void) viewWillAppear:(BOOL)animated
 {
-    NSLog(@"team = %@", team);
-    NSLog(@"Regional = %@", team.regional);
     self.title = [NSString stringWithFormat:@"%d - %@", [team.number intValue], team.name];
     numberLabel.text = [NSString stringWithFormat:@"%d", [team.number intValue]];
     nameTextField.text = team.name;
@@ -369,17 +365,14 @@
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
-    NSLog(@"Text view did begin editting");
     dataChange = YES;
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
-    NSLog(@"Text view did end editting");
     team.notes = _notesViewField.text;
 }
 
 - (BOOL)textViewShouldEndEditing:(UITextView *)textView; {
-    NSLog(@"should end editting");
     return YES;
 }
 
@@ -524,7 +517,6 @@
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     Regional *regional = [_regionalList objectAtIndex:indexPath.row];
-    NSLog(@"Week = %@", regional.reg1);
        // Configure the cell...
        // Set a background for the cell
      // UIImageView *tableBackground = [[UIImageView alloc] initWithFrame:cell.frame];
@@ -587,7 +579,6 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated { // Called when the view is dismissed, covered or otherwise hidden. Default does nothing
-    NSLog(@"view will disappear");
     if (dataChange) {
         team.saved = [NSNumber numberWithInt:1];
         team.stacked = [NSNumber numberWithInt:0];

@@ -67,7 +67,7 @@
     <entity name="TeamData" representedClassName="TeamData" syncable="YES">
         <attribute name="auton" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="cims" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="climbLevel" optional="YES" attributeType="Integer 16" minValueString="-1" maxValueString="2" defaultValueString="-1" syncable="YES"/>
+        <attribute name="climbLevel" optional="YES" attributeType="Integer 16" minValueString="-1" maxValueString="3" defaultValueString="-1" syncable="YES"/>
         <attribute name="climbSpeed" optional="YES" attributeType="Float" syncable="YES"/>
         <attribute name="driveTrainType" optional="YES" attributeType="Integer 16" minValueString="-1" maxValueString="10" defaultValueString="-1" syncable="YES"/>
         <attribute name="fthing1" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
@@ -166,12 +166,12 @@
         <relationship name="teams" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TeamData" inverseName="tournament" inverseEntity="TeamData" syncable="YES"/>
     </entity>
     <elements>
-        <element name="MatchData" positionX="27" positionY="33" width="128" height="180"/>
-        <element name="Regional" positionX="178" positionY="378" width="128" height="285"/>
-        <element name="SettingsData" positionX="18" positionY="-144" width="128" height="150"/>
-        <element name="Statistics" positionX="349" positionY="117" width="128" height="405"/>
-        <element name="TeamData" positionX="504" positionY="-117" width="128" height="645"/>
-        <element name="TeamScore" positionX="198" positionY="-432" width="128" height="765"/>
-        <element name="TournamentData" positionX="358" positionY="-45" width="128" height="150"/>
+        <element name="MatchData" positionX="358" positionY="-63" width="128" height="180"/>
+        <element name="Regional" positionX="684" positionY="-51" width="128" height="285"/>
+        <element name="SettingsData" positionX="360" positionY="-414" width="128" height="150"/>
+        <element name="Statistics" positionX="682" positionY="-432" width="128" height="405"/>
+        <element name="TeamData" positionX="538" positionY="-432" width="128" height="645"/>
+        <element name="TeamScore" positionX="160" positionY="-414" width="128" height="765"/>
+        <element name="TournamentData" positionX="358" positionY="-234" width="128" height="150"/>
     </elements>
 </model>

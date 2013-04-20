@@ -12,9 +12,10 @@
 @class MatchData;
 @class SettingsData;
 @class TeamScore;
+@class Statistics;
 @class DataManager;
 
-@interface MasonPageViewController : UIViewController <NSFetchedResultsControllerDelegate, UITableViewDelegate, UITableViewDataSource, MatchTypePickerDelegate>
+@interface MasonPageViewController : UIViewController <NSFetchedResultsControllerDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, MatchTypePickerDelegate>
 
 @property (nonatomic, retain) DataManager *dataManager;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
@@ -53,14 +54,26 @@
 @property (nonatomic, retain) UIPopoverController *matchTypePickerPopover;
 -(IBAction)MatchTypeSelectionChanged:(id)sender;
 
-// Team Data
+// Team Statistics Table
 @property (nonatomic, retain) NSMutableArray *teamData;
+@property (nonatomic, retain) NSMutableArray *teamList;
+@property (nonatomic, retain) NSMutableArray *teamMatches;
+@property (nonatomic, retain) NSMutableArray *teamAuton;
+@property (nonatomic, retain) NSMutableArray *teamTeleOp;
+@property (nonatomic, retain) NSMutableArray *teamHang;
+@property (nonatomic, retain) NSMutableArray *teamHangLevel;
+@property (nonatomic, retain) NSMutableArray *teamDriving;
+@property (nonatomic, retain) NSMutableArray *teamDefense;
+@property (nonatomic, retain) NSMutableArray *teamSpeed;
+@property (nonatomic, retain) NSMutableArray *teamHeight;
+
 @property (nonatomic, retain) IBOutlet UITableView *teamInfo;
 @property (nonatomic, retain) UIView *teamHeader;
 
 @property (nonatomic, retain) NSArray *red1;
 @property (nonatomic, retain) NSArray *red2;
 @property (nonatomic, retain) NSArray *red3;
+@property (nonatomic, retain) Statistics *red1Stats;
 @property (nonatomic, retain) IBOutlet UILabel *red1Team;
 @property (weak, nonatomic) IBOutlet UILabel *red2Team;
 @property (weak, nonatomic) IBOutlet UILabel *red3Team;
@@ -77,6 +90,7 @@
 -(void)SetBigButtonDefaults:(UIButton *)currentButton;
 -(void)SetSmallButtonDefaults:(UIButton *)currentButton;
 
+- (NSString *)applicationDocumentsDirectory;
 - (void)retrieveSettings;
 
 @end
