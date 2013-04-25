@@ -23,6 +23,7 @@
 @property (nonatomic, strong) IBOutlet UIButton *exportTeamData;
 @property (nonatomic, strong) IBOutlet UIButton *exportMatchData;
 @property (weak, nonatomic) IBOutlet UIButton *stackMobButton;
+@property (weak, nonatomic) IBOutlet UIButton *ftpButton;
 @property (nonatomic, strong) NSString *exportPath;
 @property (weak, nonatomic) IBOutlet UIButton *iPadExportButton;
 

@@ -25,6 +25,7 @@
 @synthesize pictureCaption;
 @synthesize exportPath;
 @synthesize stackMobButton = _stackMobButton;
+@synthesize ftpButton = _ftpButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -79,6 +80,8 @@
     _stackMobButton.titleLabel.font = [UIFont fontWithName:@"Nasalization" size:24.0];
     [_iPadExportButton setTitle:@"Export to iDevice" forState:UIControlStateNormal];
     _iPadExportButton.titleLabel.font = [UIFont fontWithName:@"Nasalization" size:24.0];
+    [_ftpButton setTitle:@"FTP" forState:UIControlStateNormal];
+    _ftpButton.titleLabel.font = [UIFont fontWithName:@"Nasalization" size:24.0];
     // Display the Label for the Picture
     pictureCaption.font = [UIFont fontWithName:@"Nasalization" size:24.0];
     pictureCaption.text = @"Just Hangin' Out";
@@ -421,6 +424,7 @@
             exportMatchData.frame = CGRectMake(325, 225, 400, 68);
             _stackMobButton.frame = CGRectMake(325, 325, 400, 68);
             _iPadExportButton.frame = CGRectMake(325, 425, 400, 68);
+            _ftpButton.frame = CGRectMake(325, 525, 400, 68);
             splashPicture.frame = CGRectMake(293, 563, 468, 330);
             pictureCaption.frame = CGRectMake(293, 901, 468, 39);
             break;
@@ -432,6 +436,7 @@
             exportMatchData.frame = CGRectMake(550, 325, 400, 68);
             _stackMobButton.frame = CGRectMake(550, 425, 400, 68);
             _iPadExportButton.frame = CGRectMake(550, 525, 400, 68);
+            _ftpButton.frame = CGRectMake(550, 625, 400, 68);
             splashPicture.frame = CGRectMake(50, 243, 468, 330);
             pictureCaption.frame = CGRectMake(50, 581, 468, 39);
             break;

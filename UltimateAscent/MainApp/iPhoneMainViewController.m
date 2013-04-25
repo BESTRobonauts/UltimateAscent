@@ -18,6 +18,8 @@
 
 @synthesize dataManager = _dataManager;
 @synthesize viewWeb = _viewWeb;
+@synthesize url = _url;
+@synthesize urlTextField = _urlTextField;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -30,18 +32,13 @@
 
 - (void)viewDidLoad
 {
-    NSError *error;
     [super viewDidLoad];
     NSLog(@"iPhone main");
     NSString *fullURL = @"http://www2.usfirst.org/2013comp/events/CASJ/ScheduleQual.html";
-    NSURL *url = [NSURL URLWithString:fullURL];
-    NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
+    _urlTextField.text = fullURL;
+    _url = [NSURL URLWithString:fullURL];
+    NSURLRequest *requestObj = [NSURLRequest requestWithURL:_url];
     [_viewWeb loadRequest:requestObj];
-    
-    NSString *html = [NSString stringWithContentsOfURL:url encoding:NSASCIIStringEncoding error:&error];
-    NSArray *line = [html componentsSeparatedByString:@"\n"];
-    
-    [self extractMatchList:line];
 }
 
 -(void) extractMatchList:(NSArray *)allLines {
@@ -55,6 +52,7 @@
     int stage1=1, stage2=0;
     int n;
     int nlines = [allLines count];
+
     strcpy(type, "Seeding");
     csvString = @"Match, Red 1, Red 2, Red 3, Blue 1, Blue 2, Blue 3, Type, Tournament, Red Score, Blue Score\n";
 
@@ -114,10 +112,42 @@
     NSLog(@"Match List\n%@", csvString);
 }
 
+- (IBAction)getMatchList:(id)sender {
+    NSError *error;
+    NSURL *currentURL;
+    
+    NSString *currentUrlString = _viewWeb.request.mainDocumentURL.absoluteString;
+    if ([currentUrlString isEqualToString:_url.absoluteString]) {
+        currentURL = _url;
+    }
+    else {
+        currentURL = [NSURL URLWithString:currentUrlString];
+        NSURLRequest *requestObj = [NSURLRequest requestWithURL:currentURL];
+        [_viewWeb loadRequest:requestObj];
+    }
+    NSString *html = [NSString stringWithContentsOfURL:currentURL encoding:NSASCIIStringEncoding error:&error];
+    NSArray *line = [html componentsSeparatedByString:@"\n"];
+    
+    [self extractMatchList:line];
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    //    NSLog(@"should end editing");
+    NSString *fullURL = textField.text;
+    _url = [NSURL URLWithString:fullURL];
+    NSURLRequest *requestObj = [NSURLRequest requestWithURL:_url];
+    [_viewWeb loadRequest:requestObj];
+	return YES;
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewDidUnload {
+    [self setUrlTextField:nil];
+    [super viewDidUnload];
+}
 @end

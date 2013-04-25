@@ -12,6 +12,7 @@
 @class MatchData;
 @class SettingsData;
 @class TeamScore;
+@class TeamData;
 @class Statistics;
 @class DataManager;
 
@@ -70,20 +71,41 @@
 @property (nonatomic, retain) IBOutlet UITableView *teamInfo;
 @property (nonatomic, retain) UIView *teamHeader;
 
+// Team Match List Table
+@property (nonatomic, retain) NSArray *red1Matches;
 @property (nonatomic, retain) NSArray *red1;
 @property (nonatomic, retain) NSArray *red2;
 @property (nonatomic, retain) NSArray *red3;
 @property (nonatomic, retain) Statistics *red1Stats;
+
+// Team tables
 @property (nonatomic, retain) IBOutlet UILabel *red1Team;
 @property (weak, nonatomic) IBOutlet UILabel *red2Team;
 @property (weak, nonatomic) IBOutlet UILabel *red3Team;
+@property (weak, nonatomic) IBOutlet UILabel *blue1Team;
+@property (weak, nonatomic) IBOutlet UILabel *blue2Team;
+@property (weak, nonatomic) IBOutlet UILabel *blue3Team;
+
 @property (nonatomic, retain) IBOutlet UITableView *red1Table;
 @property (nonatomic, retain) IBOutlet UITableView *red2Table;
+@property (weak, nonatomic) IBOutlet UITableView *red3Table;
+@property (weak, nonatomic) IBOutlet UITableView *blue1Table;
+@property (weak, nonatomic) IBOutlet UITableView *blue2Table;
+@property (weak, nonatomic) IBOutlet UITableView *blue3Table;
+
+// Team Scores for Segue
+@property (nonatomic, retain) NSMutableArray *red1Scores;
+@property (nonatomic, retain) NSMutableArray *red2Scores;
+@property (nonatomic, retain) NSMutableArray *red3Scores;
+@property (nonatomic, retain) NSMutableArray *blue1Scores;
+@property (nonatomic, retain) NSMutableArray *blue2Scores;
+@property (nonatomic, retain) NSMutableArray *blue3Scores;
 
 
 // Data Handling
 -(void)ShowMatch;
 -(void)setTeamList;
+-(NSMutableArray *)getScoreList:(TeamData *)team;
 
 // Make It Look Good
 -(void)SetTextBoxDefaults:(UITextField *)textField;

@@ -17,6 +17,7 @@
 @property (nonatomic, retain) IBOutlet UIImageView *matchPicture;
 @property (nonatomic, retain) IBOutlet UIButton *masonPageButton;
 @property (nonatomic, retain) IBOutlet UIButton *rossPageButton;
+@property (nonatomic, retain) IBOutlet UIButton *lucienPageButton;
 @property (nonatomic, retain) IBOutlet UIImageView *splashPicture;
 
 @end

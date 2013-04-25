@@ -14,14 +14,16 @@
 #import "TournamentData.h"
 
 @interface FieldDrawingViewController ()
-
 @end
 
-@implementation FieldDrawingViewController
-@synthesize currentMatch;
-@synthesize currentTeam;
-@synthesize prevMatch;
-@synthesize nextMatch;
+@implementation FieldDrawingViewController {
+    TeamScore *currentScore;
+    int currentIndex;
+}
+@synthesize startingIndex = _startingIndex;
+@synthesize teamScores = _teamScores;
+@synthesize prevMatchButton = _prevMatchButton;
+@synthesize nextMatchButton = _nextMatchButton;
 @synthesize baseDrawingPath;
 @synthesize fieldDrawingPath;
 @synthesize fieldDrawingFile;
@@ -67,16 +69,30 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    if (currentMatch.tournament) {
-        self.title =  [NSString stringWithFormat:@"%@ Match Analysis", currentMatch.tournament];
+    currentIndex = _startingIndex;
+    currentScore = [_teamScores objectAtIndex:currentIndex];
+    if (currentScore.tournament) {
+        self.title =  [NSString stringWithFormat:@"%@ Match Analysis", currentScore.tournament.name];
     }
     else {
         self.title = @"Match Analysis";
     }
+    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(gotoNextMatch:)];
+    swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+    swipeLeft.numberOfTouchesRequired = 1;
+    swipeLeft.delegate = self;
+    [self.view addGestureRecognizer:swipeLeft];
+ 
+    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(gotoPrevMatch:)];
+    swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
+    swipeRight.numberOfTouchesRequired = 1;
+    swipeRight.delegate = self;
+    [self.view addGestureRecognizer:swipeRight];
+
     [self SetTextBoxDefaults:matchNumber];
     [self SetBigButtonDefaults:matchType];
-    [self SetBigButtonDefaults:prevMatch];
-    [self SetBigButtonDefaults:nextMatch];
+    [self SetBigButtonDefaults:_prevMatchButton];
+    [self SetBigButtonDefaults:_nextMatchButton];
     [self SetTextBoxDefaults:teamName];
     [self SetTextBoxDefaults:teamNumber];
     [self SetSmallTextBoxDefaults:autonScoreMade];
@@ -113,49 +129,49 @@
 }
 
 -(void)setDisplayData {
-    matchNumber.text = [NSString stringWithFormat:@"%d", [currentMatch.number intValue]];
-    [matchType setTitle:currentMatch.matchType forState:UIControlStateNormal];
-    teamName.text = currentTeam.team.name;
-    teamNumber.text = [NSString stringWithFormat:@"%d", [currentTeam.team.number intValue]];
+    matchNumber.text = [NSString stringWithFormat:@"%d", [currentScore.match.number intValue]];
+    [matchType setTitle:currentScore.match.matchType forState:UIControlStateNormal];
+    teamName.text = currentScore.team.name;
+    teamNumber.text = [NSString stringWithFormat:@"%d", [currentScore.team.number intValue]];
 
-    autonScoreMade.text = [NSString stringWithFormat:@"%d", [currentTeam.autonShotsMade intValue]];
-    autonScoreShot.text = [NSString stringWithFormat:@"%d", [currentTeam.totalAutonShots intValue]];
-    autonHigh.text = [NSString stringWithFormat:@"%d", [currentTeam.autonHigh intValue]];
-    autonMed.text = [NSString stringWithFormat:@"%d", [currentTeam.autonMid intValue]];
-    autonLow.text = [NSString stringWithFormat:@"%d", [currentTeam.autonLow intValue]];
-    autonMissed.text = [NSString stringWithFormat:@"%d", [currentTeam.autonMissed intValue]];
+    autonScoreMade.text = [NSString stringWithFormat:@"%d", [currentScore.autonShotsMade intValue]];
+    autonScoreShot.text = [NSString stringWithFormat:@"%d", [currentScore.totalAutonShots intValue]];
+    autonHigh.text = [NSString stringWithFormat:@"%d", [currentScore.autonHigh intValue]];
+    autonMed.text = [NSString stringWithFormat:@"%d", [currentScore.autonMid intValue]];
+    autonLow.text = [NSString stringWithFormat:@"%d", [currentScore.autonLow intValue]];
+    autonMissed.text = [NSString stringWithFormat:@"%d", [currentScore.autonMissed intValue]];
     
-    teleOpScoreMade.text = [NSString stringWithFormat:@"%d", [currentTeam.teleOpShots intValue]];
-    teleOpScoreShot.text = [NSString stringWithFormat:@"%d", [currentTeam.totalTeleOpShots intValue]];
-    teleOpHigh.text = [NSString stringWithFormat:@"%d", [currentTeam.teleOpHigh intValue]];
-    teleOpMed.text = [NSString stringWithFormat:@"%d", [currentTeam.teleOpMid intValue]];
-    teleOpLow.text = [NSString stringWithFormat:@"%d", [currentTeam.teleOpLow intValue]];
-    teleOpMissed.text = [NSString stringWithFormat:@"%d", [currentTeam.teleOpMissed intValue]];
+    teleOpScoreMade.text = [NSString stringWithFormat:@"%d", [currentScore.teleOpShots intValue]];
+    teleOpScoreShot.text = [NSString stringWithFormat:@"%d", [currentScore.totalTeleOpShots intValue]];
+    teleOpHigh.text = [NSString stringWithFormat:@"%d", [currentScore.teleOpHigh intValue]];
+    teleOpMed.text = [NSString stringWithFormat:@"%d", [currentScore.teleOpMid intValue]];
+    teleOpLow.text = [NSString stringWithFormat:@"%d", [currentScore.teleOpLow intValue]];
+    teleOpMissed.text = [NSString stringWithFormat:@"%d", [currentScore.teleOpMissed intValue]];
 
-    pyramidGoals.text = [NSString stringWithFormat:@"%d", [currentTeam.pyramid intValue]];
-    wallPickUp.text = [NSString stringWithFormat:@"%d", [currentTeam.wallPickUp intValue]];
-    wall1.text = [NSString stringWithFormat:@"%d", [currentTeam.wallPickUp1 intValue]];
-    wall2.text = [NSString stringWithFormat:@"%d", [currentTeam.wallPickUp2 intValue]];
-    wall3.text = [NSString stringWithFormat:@"%d", [currentTeam.wallPickUp3 intValue]];
-    wall4.text = [NSString stringWithFormat:@"%d", [currentTeam.wallPickUp4 intValue]];
-    floorPickUp.text = [NSString stringWithFormat:@"%d", [currentTeam.floorPickUp intValue]];
-    blocked.text = [NSString stringWithFormat:@"%d", [currentTeam.blocks intValue]];
-    discPassed.text = [NSString stringWithFormat:@"%d", [currentTeam.passes intValue]];
-    climbLevel.text = [NSString stringWithFormat:@"%d", [currentTeam.climbLevel intValue]];
-    climbAttempt.text = ([currentTeam.climbAttempt intValue] == 0) ? @"N":@"Y";
-    int timer = [currentTeam.climbTimer intValue];
+    pyramidGoals.text = [NSString stringWithFormat:@"%d", [currentScore.pyramid intValue]];
+    wallPickUp.text = [NSString stringWithFormat:@"%d", [currentScore.wallPickUp intValue]];
+    wall1.text = [NSString stringWithFormat:@"%d", [currentScore.wallPickUp1 intValue]];
+    wall2.text = [NSString stringWithFormat:@"%d", [currentScore.wallPickUp2 intValue]];
+    wall3.text = [NSString stringWithFormat:@"%d", [currentScore.wallPickUp3 intValue]];
+    wall4.text = [NSString stringWithFormat:@"%d", [currentScore.wallPickUp4 intValue]];
+    floorPickUp.text = [NSString stringWithFormat:@"%d", [currentScore.floorPickUp intValue]];
+    blocked.text = [NSString stringWithFormat:@"%d", [currentScore.blocks intValue]];
+    discPassed.text = [NSString stringWithFormat:@"%d", [currentScore.passes intValue]];
+    climbLevel.text = [NSString stringWithFormat:@"%d", [currentScore.climbLevel intValue]];
+    climbAttempt.text = ([currentScore.climbAttempt intValue] == 0) ? @"N":@"Y";
+    int timer = [currentScore.climbTimer intValue];
     climbTime.text = [NSString stringWithFormat:@"%02d:%02d", timer/60, timer%60];
     
     [self loadFieldDrawing];
 }
 
 -(void)loadFieldDrawing {
-    if (currentTeam.fieldDrawing) {
+    if (currentScore.fieldDrawing) {
         // Load file, set file name to the name read, and load it as image
-        NSLog(@"Field Drawing= %@", currentTeam.fieldDrawing);
-        fieldDrawingFile = currentTeam.fieldDrawing;
-        fieldDrawingPath = [baseDrawingPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%d", [currentTeam.team.number intValue]]];
-        NSString *path = [fieldDrawingPath stringByAppendingPathComponent:currentTeam.fieldDrawing];
+        NSLog(@"Field Drawing= %@", currentScore.fieldDrawing);
+        fieldDrawingFile = currentScore.fieldDrawing;
+        fieldDrawingPath = [baseDrawingPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%d", [currentScore.team.number intValue]]];
+        NSString *path = [fieldDrawingPath stringByAppendingPathComponent:currentScore.fieldDrawing];
         NSLog(@"Full path = %@", path);
         if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
             [fieldImage setImage:[UIImage imageWithContentsOfFile:path]];
@@ -166,29 +182,66 @@
         }
     }
     else {
-        // NSLog(@"Field Drawing= %@", currentTeam.fieldDrawing);
+        // No field drawing name set in data base. Check default name just in case.
         [fieldImage setImage:[UIImage imageNamed:@"2013_field.png"]];
+
         NSString *match;
-        if ([currentMatch.number intValue] < 10) {
-            match = [NSString stringWithFormat:@"M%c%@", [currentMatch.matchType characterAtIndex:0], [NSString stringWithFormat:@"00%d", [currentMatch.number intValue]]];
-        } else if ( [currentMatch.number intValue] < 100) {
-            match = [NSString stringWithFormat:@"M%c%@", [currentMatch.matchType characterAtIndex:0], [NSString stringWithFormat:@"0%d", [currentMatch.number intValue]]];
+        if ([currentScore.match.number intValue] < 10) {
+            match = [NSString stringWithFormat:@"M%c%@", [currentScore.match.matchType characterAtIndex:0], [NSString stringWithFormat:@"00%d", [currentScore.match.number intValue]]];
+        } else if ( [currentScore.match.number intValue] < 100) {
+            match = [NSString stringWithFormat:@"M%c%@", [currentScore.match.matchType characterAtIndex:0], [NSString stringWithFormat:@"0%d", [currentScore.match.number intValue]]];
         } else {
-            match = [NSString stringWithFormat:@"M%c%@", [currentMatch.matchType characterAtIndex:0], [NSString stringWithFormat:@"%d", [currentMatch.number intValue]]];
+            match = [NSString stringWithFormat:@"M%c%@", [currentScore.match.matchType characterAtIndex:0], [NSString stringWithFormat:@"%d", [currentScore.match.number intValue]]];
         }
         NSString *team;
-        if ([currentTeam.team.number intValue] < 100) {
-            team = [NSString stringWithFormat:@"T%@", [NSString stringWithFormat:@"00%d", [currentTeam.team.number intValue]]];
-        } else if ( [currentTeam.team.number intValue] < 1000) {
-            team = [NSString stringWithFormat:@"T%@", [NSString stringWithFormat:@"0%d", [currentTeam.team.number intValue]]];
+        if ([currentScore.team.number intValue] < 100) {
+            team = [NSString stringWithFormat:@"T%@", [NSString stringWithFormat:@"00%d", [currentScore.team.number intValue]]];
+        } else if ( [currentScore.team.number intValue] < 1000) {
+            team = [NSString stringWithFormat:@"T%@", [NSString stringWithFormat:@"0%d", [currentScore.team.number intValue]]];
         } else {
-            team = [NSString stringWithFormat:@"T%@", [NSString stringWithFormat:@"%d", [currentTeam.team.number intValue]]];
+            team = [NSString stringWithFormat:@"T%@", [NSString stringWithFormat:@"%d", [currentScore.team.number intValue]]];
         }
-        // Since no field drawing exists, we guess that the user wants to start in auton mode
         fieldDrawingFile = [NSString stringWithFormat:@"%@_%@.png", match, team];
-        [fieldImage setImage:[UIImage imageNamed:@"2013_field.png"]];
-    }
+        fieldDrawingPath = [baseDrawingPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%d", [currentScore.team.number intValue]]];
+        NSString *path = [fieldDrawingPath stringByAppendingPathComponent:fieldDrawingFile];
+        NSLog(@"Full path = %@", path);
+        if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+            [fieldImage setImage:[UIImage imageWithContentsOfFile:path]];
+        }
+        else {
+            [fieldImage setImage:[UIImage imageNamed:@"2013_field.png"]];
+            NSLog(@"Error reading field drawing file %@", fieldDrawingFile);
+        }
  
+    }
+}
+
+- (IBAction)nextMatch:(id)sender {
+    if (currentIndex < ([_teamScores count]-1)) currentIndex++;
+    else currentIndex = 0;
+    currentScore = [_teamScores objectAtIndex:currentIndex];
+    [self setDisplayData];
+}
+
+- (IBAction)prevMatch:(id)sender {
+    if (currentIndex == 0) currentIndex = [_teamScores count] - 1;
+    else currentIndex--;
+    currentScore = [_teamScores objectAtIndex:currentIndex];
+    [self setDisplayData];
+}
+
+-(void)gotoNextMatch:(UISwipeGestureRecognizer *)gestureRecognizer {
+    if (currentIndex < ([_teamScores count]-1)) currentIndex++;
+    else currentIndex = 0;
+    currentScore = [_teamScores objectAtIndex:currentIndex];
+    [self setDisplayData];
+}
+
+-(void)gotoPrevMatch:(UISwipeGestureRecognizer *)gestureRecognizer {
+    if (currentIndex == 0) currentIndex = [_teamScores count] - 1;
+    else currentIndex--;
+    currentScore = [_teamScores objectAtIndex:currentIndex];
+    [self setDisplayData];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

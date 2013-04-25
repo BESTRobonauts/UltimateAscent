@@ -12,13 +12,15 @@
 @class TeamScore;
 @class SettingsData;
 
-@interface FieldDrawingViewController : UIViewController
+@interface FieldDrawingViewController : UIViewController <UIGestureRecognizerDelegate>
 
+@property (nonatomic, retain) NSArray *teamScores;
+@property (nonatomic, assign) int *startingIndex;
 @property (nonatomic, retain) NSString *drawDirectory;
-@property (nonatomic, retain) TeamScore *currentTeam;;
-@property (nonatomic, retain) MatchData *currentMatch;
-@property (nonatomic, retain) IBOutlet UIButton *prevMatch;
-@property (nonatomic, retain) IBOutlet UIButton *nextMatch;
+@property (nonatomic, retain) IBOutlet UIButton *prevMatchButton;
+@property (nonatomic, retain) IBOutlet UIButton *nextMatchButton;
+- (IBAction)nextMatch:(id)sender;
+- (IBAction)prevMatch:(id)sender;
 @property (nonatomic, retain) NSString *baseDrawingPath;
 @property (nonatomic, retain) NSString *fieldDrawingPath;
 @property (nonatomic, retain) NSString *fieldDrawingFile;
@@ -57,6 +59,8 @@
 
 -(void)setDisplayData;
 -(void)loadFieldDrawing;
+-(void)gotoNextMatch:(UISwipeGestureRecognizer *)gestureRecognizer;
+-(void)gotoPrevMatch:(UISwipeGestureRecognizer *)gestureRecognizer;
 
 // Make It Look Good
 -(void)SetTextBoxDefaults:(UITextField *)textField;

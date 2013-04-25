@@ -349,7 +349,7 @@
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{    
+{ /*
     [segue.destinationViewController setCurrentMatch:currentMatch];
     [segue.destinationViewController setDrawDirectory:settings.tournament.directory];
     if ([segue.identifier isEqualToString:@"Red1"]) {
@@ -364,7 +364,7 @@
         [segue.destinationViewController setCurrentTeam:[self GetTeam:4]];
     } else if ([segue.identifier isEqualToString:@"Blue3"]) {
         [segue.destinationViewController setCurrentTeam:[self GetTeam:5]];
-    }
+    }*/
 }
 
 -(MatchData *)getCurrentMatch {
