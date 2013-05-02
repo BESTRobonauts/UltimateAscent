@@ -402,6 +402,7 @@
 				2F30EADD16A0F3F40026B258 /* Data Export */,
 				2F30EADF16A0F47B0026B258 /* Data Management */,
 				2F30EAE016A0F4E50026B258 /* Team Scouting */,
+				2F30EAE216A0F56E0026B258 /* Main App */,
 				2FFAE1B016D29B8200B180F9 /* Utilities */,
 				2F56B53317052A890093A976 /* StackMob-v1.3.0 */,
 				2F30EAE316A0F66F0026B258 /* Resources */,
@@ -466,7 +467,6 @@
 		2F30EAE016A0F4E50026B258 /* Team Scouting */ = {
 			isa = PBXGroup;
 			children = (
-				2F30EAE216A0F56E0026B258 /* Main App */,
 				21EBC7D516B358D000CBFDFD /* TeamDetailViewController.h */,
 				21EBC7D616B358D000CBFDFD /* TeamDetailViewController.m */,
 				21F72D5E16A78135000B99AB /* TeamListViewController.h */,

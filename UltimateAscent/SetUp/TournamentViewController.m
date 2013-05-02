@@ -265,8 +265,6 @@
     overrideMode = NoOverride;
 }
 
-
-
 - (IBAction)modeSelectionChanged:(id)sender {
     UISegmentedControl *segmentedControl = (UISegmentedControl *)sender;
     int current;
@@ -278,6 +276,15 @@
     else {
         settings.mode = @"Tournament";
     }
+    NSError *error;
+    if (![managedObjectContext save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+    }
+}
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+    //    NSLog(@"viewWillDisappear");
     NSError *error;
     if (![managedObjectContext save:&error]) {
         NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);

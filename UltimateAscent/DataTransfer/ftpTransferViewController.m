@@ -86,6 +86,8 @@ enum {
     uint8_t                     _buffer[kSendBufferSize];
     BOOL sending;
     NSTimer *sendTimer;
+    NSMutableArray *fileList;
+    int sendIndex;
 }
 @synthesize dataManager = _dataManager;
 @synthesize settings = _settings;
@@ -397,6 +399,7 @@ enum {
     [_usernameText setHidden:YES];
     [_passwordText setHidden:YES];
     sending = FALSE;
+    fileList = [[NSMutableArray alloc] init];
 }
 
 - (IBAction)pushData:(id)sender {
@@ -465,7 +468,9 @@ enum {
     [fetchRequest setSortDescriptors:sortDescriptors];
     NSArray *teamList = [_dataManager.managedObjectContext executeFetchRequest:fetchRequest error:&error];
 
+    [fileList removeAllObjects];
     NSString *  filePath;
+    sendIndex = 0;
     filePath = [[self applicationLibraryDirectory] stringByAppendingPathComponent: @"RobotPhotos"];
     NSString *path;
     for (int i=0; i<[teamList count]; i++) {
@@ -473,25 +478,40 @@ enum {
         path = [filePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%d", [team.number intValue]]];
         NSArray *dirList = [self listFileAtPath:path];
         for (int j=0; j<[dirList count]; j++) {
-            path = [path stringByAppendingPathComponent:[dirList objectAtIndex:j]];
-            NSLog(@"Sending file = %@", [dirList objectAtIndex:j]);
-/*
-            if (sendTimer == nil) {
-                sendTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
-                                                              target:self
-                                                            selector:@selector(timerFired)
-                                                            userInfo:nil
-                                                             repeats:YES];
-            }
-            timerCount = 0;
-            sending = TRUE;
-            NSLog(@"start send");
-            [self startSend:path forDestination:nil];*/
+            NSString *file;
+            file = [path stringByAppendingPathComponent:[dirList objectAtIndex:j]];
+            [fileList addObject:file];
         }
     }
+    NSLog(@"Sending file = %@", fileList);
+    [self timerStart];
+
 /*     path = @"/Users/frc/Library/Application Support/iPhone Simulator/5.0/Applications/492F3A65-3B0D-4ACC-A50C-7BAFF2D5CAFA/Library/RobotPhotos/118/T0118_img001.jpg";
         NSLog(@"Sending file = %@", path);
         [self startSend:path forDestination:nil];*/
+}
+
+-(void)timerStart {
+    if (sendTimer == nil) {
+        sendTimer = [NSTimer scheduledTimerWithTimeInterval:2.0
+                                                     target:self
+                                                   selector:@selector(timerFired)
+                                                   userInfo:nil
+                                                    repeats:YES];
+    }
+//    timerCount = 0;
+    sending = TRUE;
+    NSLog(@"start send");
+    //  [self startSend:path forDestination:nil];
+ 
+}
+
+- (void)timerFired {
+    
+}
+
+-(void)timerEnd {
+    
 }
 
 - (void)retrieveSettings {

@@ -135,7 +135,27 @@ GKPeerPickerController *picker;
             fromPeer:(NSString *)peer
            inSession:(GKSession *)session
              context:(void *)context {
-//
+    NSArray *events = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    for (int i = 0; i < [events count]; i++) {
+        NSDictionary *dict = [events objectAtIndex:i];
+        NSString *regionalName = [[dict allKeys] objectAtIndex:0];
+        NSArray *matchArrayForRegional = [dict objectForKey:regionalName];
+        for (int x = 0; x < [matchArrayForRegional count]; x++) {
+            NSDictionary *matchData = [matchArrayForRegional objectAtIndex:x];
+            int blueScore = [matchData objectForKey:@"blueScore"];
+            int redScore = [matchData objectForKey:@"redScore"];
+            int matchNumber = [matchData objectForKey:@"matchNumber"];
+            NSArray *blueTeam = [matchData objectForKey:@"blueTeam"];
+            NSArray *redTeam = [matchData objectForKey:@"redTeam"];
+            NSString *matchType = [matchData objectForKey:@"matchType"];
+            NSLog(@"Blue score: %i", blueScore);
+            NSLog(@"Red score: %i", redScore);
+            NSLog(@"Match number: %i", matchNumber);
+            NSLog(@"Match type: %@", matchType);
+            //^^data here, to be added to the database; see 'regionalName' above
+            
+        }
+    }
 /*    dataFromTransfer = [NSKeyedUnarchiver unarchiveObjectWithData:data];*
     //---convert the NSData to NSString---
     if (receivedMatches == nil) {

@@ -133,7 +133,7 @@
     [matchType setTitle:currentScore.match.matchType forState:UIControlStateNormal];
     teamName.text = currentScore.team.name;
     teamNumber.text = [NSString stringWithFormat:@"%d", [currentScore.team.number intValue]];
-
+    notes.text = currentScore.notes;
     autonScoreMade.text = [NSString stringWithFormat:@"%d", [currentScore.autonShotsMade intValue]];
     autonScoreShot.text = [NSString stringWithFormat:@"%d", [currentScore.totalAutonShots intValue]];
     autonHigh.text = [NSString stringWithFormat:@"%d", [currentScore.autonHigh intValue]];

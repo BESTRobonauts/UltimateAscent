@@ -31,7 +31,9 @@
 - (IBAction)getData:(id)sender;
 - (IBAction)pushDatabase:(id)sender;
 - (IBAction)pictures:(id)sender;
+-(void)timerStart;
 - (void)timerFired;
+-(void)timerEnd;
 
 - (void)retrieveSettings;
 - (NSString *)applicationDocumentsDirectory;
