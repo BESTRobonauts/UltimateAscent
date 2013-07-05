@@ -58,7 +58,6 @@ typedef enum {
 
 -(BOOL)editTeam:(int)teamNumber forScore:(TeamScore *)score;
 -(BOOL)editMatch:(NSNumber *)number forMatchType:(NSString *)matchType;
--(TeamData *)GetTeam:(int)teamNumber forTournament:(NSString *)tournament;
 -(void)setTeamField:(UITextField *)textBox forTeam:(TeamScore *)score;
 -(void)setScoreData:(TeamScore *)score;
 

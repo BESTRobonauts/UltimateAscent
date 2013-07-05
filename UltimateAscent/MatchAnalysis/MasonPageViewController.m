@@ -13,6 +13,7 @@
 #import "MatchTypeDictionary.h"
 #import "MatchData.h"
 #import "TeamData.h"
+#import "TeamDataInterfaces.h"
 #import "TeamScore.h"
 #import "Statistics.h"
 #import "CalculateTeamStats.h"
@@ -603,7 +604,7 @@
         NSIndexPath *indexPath = [ self.teamInfo indexPathForCell:sender];
         TeamDetailViewController *detailViewController = [segue destinationViewController];
         NSLog(@"Team = %@", [_teamList objectAtIndex:indexPath.row]);
-        TeamData *team = [self getTeam:[_teamList objectAtIndex:indexPath.row]];
+        TeamData *team = [[[TeamDataInterfaces alloc] initWithDataManager:_dataManager] getTeam:[_teamList objectAtIndex:indexPath.row]];
         detailViewController.team = team;
         [_teamInfo deselectRowAtIndexPath:indexPath animated:YES];
     }
@@ -641,34 +642,6 @@
             [segue.destinationViewController setTeamScores:_blue3Scores];
         }
         [segue.destinationViewController setStartingIndex:indexPath.row];
-    }
-}
-
--(TeamData *)getTeam:(NSString *)teamNumber {
-    TeamData *team;
-        
-    // NSLog(@"Searching for team = %@", teamNumber);
-    NSError *error;
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription
-                                       entityForName:@"TeamData" inManagedObjectContext:_dataManager.managedObjectContext];
-    [fetchRequest setEntity:entity];
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"number == %d", [teamNumber intValue]];
-    [fetchRequest setPredicate:pred];
-    NSArray *fetchResults = [_dataManager.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-    if(!fetchResults) {
-        NSLog(@"Karma disruption error");
-        return Nil;
-    }
-    else {
-        if([fetchResults count] > 0) {  // Team Exists
-            team = [fetchResults objectAtIndex:0];
-            // NSLog(@"Team %@ exists", team.number);
-            return team;
-        }
-        else {
-            return Nil;
-        }
     }
 }
 

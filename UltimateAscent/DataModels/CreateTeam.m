@@ -78,9 +78,12 @@
         TeamData *team = [NSEntityDescription insertNewObjectForEntityForName:@"TeamData"
                                                            inManagedObjectContext:managedObjectContext];
         [self setTeamDefaults:team]; 
+        //- (void)setValue:(id)value forKey:(NSString *)key;
+
         switch ([data count]) {
             case 19:
-                team.wheelType = [data objectAtIndex:18];
+                [team setValue:[data objectAtIndex:18] forKey:@"wheelType"];
+//                team.wheelType = [data objectAtIndex:18];
             case 17:
                 team.nwheels = [NSNumber numberWithInt:[[data objectAtIndex:16] intValue]];
             case 16:

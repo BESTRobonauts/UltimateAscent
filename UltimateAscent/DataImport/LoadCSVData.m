@@ -11,7 +11,7 @@
 #import "TournamentData.h"
 #import "LoadCSVData.h"
 #import "parseCSV.h"
-#import "CreateTeam.h"
+#import "TeamDataInterfaces.h"
 #import "CreateMatch.h"
 #import "CreateTournament.h"
 #import "CreateSettings.h"
@@ -43,17 +43,6 @@
         loadDataFromBundle = _dataManager.loadDataFromBundle;
     }
     
-    // Set some of the settings
-    [self retrieveSettings];
-    _settings.adminCode = @"bluefish";
-    _settings.mode = @"Tournament";
-    _settings.alliance = @"Blue 1";
- //   _settings.tournament.name = @"Silicon Valley Regional";
-    NSError *error;
-    if (![_dataManager.managedObjectContext save:&error]) {
-        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
-    }
-
     if (loadDataFromBundle) {
         NSString *filePath = [[NSBundle mainBundle] pathForResource:@"TournamentList" ofType:@"csv"];
         [self loadTournamentFile:filePath];
@@ -118,7 +107,7 @@
         CreateSettings *settings = [[CreateSettings alloc] initWithDataManager:_dataManager];
         int c;
         for (c = 1; c < [csvContent count]; c++) {
-            // NSLog(@"loadSettingsFile:Mode = %@", [[csvContent objectAtIndex: c] objectAtIndex:0]);
+             NSLog(@"loadSettingsFile:Mode = %@", [[csvContent objectAtIndex: c] objectAtIndex:0]);
             AddRecordResults results = [settings createSettingsFromFile:[csvContent objectAtIndex: 0] dataFields:[csvContent objectAtIndex: c]];
             if (results != DB_ADDED) {
                 NSLog(@"Check database - Settings Add Code %d", results);
@@ -133,7 +122,7 @@
     [parser openFile: filePath];
     NSMutableArray *csvContent = [parser parseFile];
     if ([[[csvContent objectAtIndex: 0] objectAtIndex:0] isEqualToString:@"Team Number"]) {
-        CreateTeam *team = [[CreateTeam alloc] initWithDataManager:_dataManager];
+        TeamDataInterfaces *team = [[TeamDataInterfaces alloc] initWithDataManager:_dataManager];
         int c;
         for (c = 1; c < [csvContent count]; c++) {
             // NSLog(@"loadTeamFile:TeamNumber = %@", [[csvContent objectAtIndex: c] objectAtIndex:0]);
@@ -151,6 +140,7 @@
     CSVParser *parser = [CSVParser new];
     [parser openFile: filePath];
     NSMutableArray *csvContent = [parser parseFile];
+/*
     if ([[[csvContent objectAtIndex: 0] objectAtIndex:0] isEqualToString:@"Team History"]) {
         CreateTeam *team = [[CreateTeam alloc] initWithDataManager:_dataManager];
         int c;
@@ -161,7 +151,7 @@
                 NSLog(@"Check database - Team History Add Code %d", results);
             }
         }
-    }
+    }*/
     [parser closeFile];
 }
 

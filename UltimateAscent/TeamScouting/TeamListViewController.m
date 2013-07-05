@@ -365,7 +365,7 @@
         [fetchRequest setPredicate:pred];
         
         [fetchRequest setSortDescriptors:sortDescriptors];
-        [fetchRequest setFetchBatchSize:20];
+        [fetchRequest setFetchBatchSize:50];
         
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".

@@ -208,6 +208,7 @@
             }
         }
     }
+    
     overrideMode = NoOverride;
     teamName.font = [UIFont fontWithName:@"Helvetica" size:24.0];
     [self SetBigButtonDefaults:prevMatch];
