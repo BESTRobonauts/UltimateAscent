@@ -55,8 +55,12 @@
 @property (weak, nonatomic) IBOutlet UIButton *height2Average;
 @property (weak, nonatomic) IBOutlet UITextField *height2Factor;
 
+@property (weak, nonatomic) IBOutlet UIButton *calculateButton;
+
 - (IBAction)selectAverage:(id)sender;
 - (IBAction)selectHeight:(id)sender;
+
+-(float)calculateNumbers:(NSMutableArray *)list forAverage:(NSNumber *)average forNormal:(NSNumber *)normal forFactor:(NSNumber *)factor;
 
 - (NSString *)applicationDocumentsDirectory;
 -(void)setDisplayData;

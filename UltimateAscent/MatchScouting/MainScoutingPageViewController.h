@@ -13,6 +13,8 @@
 #import "RecordScorePickerController.h"
 #import "DefensePickerController.h"
 #import "AlertPromptViewController.h"
+#import "ValuePromptViewController.h"
+#import "PopUpPickerViewController.h"
 
 @protocol MainScoutingPageDelegate
 - (void)scoutingPageStatus:(NSUInteger)sectionIndex forRow:(NSUInteger)rowIndex forTeam:(NSUInteger)teamIndex;
@@ -23,7 +25,7 @@
 @class SettingsData;
 @class DataManager;
 
-@interface MainScoutingPageViewController : UIViewController <NSFetchedResultsControllerDelegate, UITextFieldDelegate, AlliancePickerDelegate, MatchTypePickerDelegate, TeamPickerDelegate, RecordScorePickerDelegate, DefensePickerDelegate, AlertPromptDelegate> {
+@interface MainScoutingPageViewController : UIViewController <NSFetchedResultsControllerDelegate, UITextFieldDelegate, AlliancePickerDelegate, MatchTypePickerDelegate, TeamPickerDelegate, RecordScorePickerDelegate, DefensePickerDelegate, PopUpPickerDelegate, AlertPromptDelegate, ValuePromptDelegate> {
     
     CGPoint lastPoint;
     CGFloat red;
@@ -113,19 +115,26 @@ typedef enum {
 @property (nonatomic, retain) IBOutlet UIButton *wall2Button;
 @property (nonatomic, retain) IBOutlet UIButton *wall3Button;
 @property (nonatomic, retain) IBOutlet UIButton *wall4Button;
--(void)teleOpMiss;
--(void)teleOpHigh;
--(void)teleOpMedium;
--(void)teleOpLow;
--(void)autonMiss;
--(void)autonHigh;
--(void)autonMedium;
--(void)autonLow;
+@property (nonatomic, retain) PopUpPickerViewController *scoreButtonReset;
+@property (nonatomic, retain) NSMutableArray *scoreButtonChoices;
+@property (nonatomic, retain) UIPopoverController *scoreButtonPickerPopover;
+@property (nonatomic, retain) ValuePromptViewController *valuePrompt;
+@property (nonatomic, retain) UIPopoverController *valuePromptPopover;
+
+-(void)teleOpMiss:(NSString *)choice;
+-(void)teleOpHigh:(NSString *)choice;
+-(void)teleOpMedium:(NSString *)choice;
+-(void)teleOpLow:(NSString *)choice;
+-(void)autonMiss:(NSString *)choice;
+-(void)autonHigh:(NSString *)choice;
+-(void)autonMedium:(NSString *)choice;
+-(void)autonLow:(NSString *)choice;
 -(void)pyramidGoals;
 -(void)blockedShots;
 -(void)passesMade;
 -(IBAction)wallPickUpsMade:(id) sender;
 -(void)floorPickUpsMade;
+-(void)promptForValue:(UIButton *)button;
 
 // Overall Match Scores
 @property (nonatomic, retain) IBOutlet UITextField *redScore;
@@ -201,6 +210,8 @@ typedef enum {
 @property (nonatomic, assign) CGPoint currentPoint;
 @property (nonatomic, assign) DrawingMode drawMode;
 @property (nonatomic, retain) IBOutlet UIButton *drawModeButton;
+@property (weak, nonatomic) IBOutlet UIButton *eraserButton;
+
 -(void)floorDiskPickUp:(UITapGestureRecognizer *)gestureRecognizer;
 -(void)scoreDisk:(UITapGestureRecognizer *)gestureRecognizer;
 -(void)drawPath:(UIPanGestureRecognizer *)gestureRecognizer;
@@ -208,6 +219,8 @@ typedef enum {
 -(CGPoint)scorePopOverLocation:(CGPoint)location;
 -(CGPoint)defensePopOverLocation:(CGPoint)location;
 -(IBAction)drawModeChange: (id)sender;
+-(IBAction)eraserPressed:(id)sender;
+
 -(void)drawModeSettings:(DrawingMode) mode;
 -(void)checkOverrideCode:(UIButton *)button;
 -(void)checkAdminCode:(UIButton *)button;

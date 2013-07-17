@@ -75,9 +75,6 @@
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
-      
-    teamStats = [CalculateTeamStats new];
-    teamStats.managedObjectContext = _dataManager.managedObjectContext;
 
     headerView = [[UIView alloc] initWithFrame:CGRectMake(0,0,768,50)];
     headerView.backgroundColor = [UIColor lightGrayColor];
@@ -221,6 +218,8 @@
     UIImage *image = [UIImage imageNamed:@"Blue Fade.gif"];
     imageView.image = image;
     cell.backgroundView = imageView;
+    teamStats = [CalculateTeamStats new];
+    teamStats.managedObjectContext = _dataManager.managedObjectContext;
     stats = [teamStats calculateMason:info forTournament:settings.tournament.name];
     
 	UILabel *numberLabel = (UILabel *)[cell viewWithTag:10];

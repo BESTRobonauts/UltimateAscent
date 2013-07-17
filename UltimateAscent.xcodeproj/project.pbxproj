@@ -54,11 +54,14 @@
 		2F56B56E17052BC80093A976 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F56B56D17052BC80093A976 /* SystemConfiguration.framework */; };
 		2F56B57017052BDB0093A976 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F56B56F17052BDA0093A976 /* Security.framework */; };
 		2F56B573170532F60093A976 /* StackMobExportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F56B572170532F60093A976 /* StackMobExportViewController.m */; };
+		2F5D64BF179212EB0028F57D /* LucienNumberObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D64BE179212EB0028F57D /* LucienNumberObject.m */; };
+		2F5D64C5179220280028F57D /* LucienTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D64C4179220280028F57D /* LucienTableViewController.m */; };
 		2F621F25170DE91300D2ABD1 /* iDeviceExportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F621F24170DE91200D2ABD1 /* iDeviceExportViewController.m */; };
 		2F621F28170DEC9F00D2ABD1 /* SyncMatchListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F621F27170DEC9E00D2ABD1 /* SyncMatchListViewController.m */; };
 		2F621F2B170DF2FE00D2ABD1 /* ImportDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F621F2A170DF2FE00D2ABD1 /* ImportDeviceViewController.m */; };
 		2F621F2D170E18CA00D2ABD1 /* UltimateAscent_iphone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F621F2C170E18CA00D2ABD1 /* UltimateAscent_iphone.storyboard */; };
 		2F67D4291728815300FA04CF /* InitialDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2F67D4281728815300FA04CF /* InitialDefaults.plist */; };
+		2F6A0E5C178A2D66001A114F /* ValuePromptViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6A0E5B178A2D66001A114F /* ValuePromptViewController.m */; };
 		2F6AE6F016AD93D1005A24C5 /* 2013_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F6AE6EF16AD93D1005A24C5 /* 2013_logo.png */; };
 		2F80CB0617012821000A2BB8 /* TeamRecordObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F80CB0517012821000A2BB8 /* TeamRecordObject.m */; };
 		2F82694217139F740080253D /* SMMatchObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F82694117139F740080253D /* SMMatchObject.m */; };
@@ -242,6 +245,10 @@
 		2F56B56F17052BDA0093A976 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		2F56B571170532F60093A976 /* StackMobExportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StackMobExportViewController.h; path = DataExport/StackMobExportViewController.h; sourceTree = "<group>"; };
 		2F56B572170532F60093A976 /* StackMobExportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StackMobExportViewController.m; path = DataExport/StackMobExportViewController.m; sourceTree = "<group>"; };
+		2F5D64BD179212EB0028F57D /* LucienNumberObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LucienNumberObject.h; path = MatchAnalysis/LucienNumberObject.h; sourceTree = "<group>"; };
+		2F5D64BE179212EB0028F57D /* LucienNumberObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LucienNumberObject.m; path = MatchAnalysis/LucienNumberObject.m; sourceTree = "<group>"; };
+		2F5D64C3179220280028F57D /* LucienTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LucienTableViewController.h; sourceTree = "<group>"; };
+		2F5D64C4179220280028F57D /* LucienTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LucienTableViewController.m; sourceTree = "<group>"; };
 		2F621F23170DE91200D2ABD1 /* iDeviceExportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iDeviceExportViewController.h; path = DataExport/iDeviceExportViewController.h; sourceTree = "<group>"; };
 		2F621F24170DE91200D2ABD1 /* iDeviceExportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iDeviceExportViewController.m; path = DataExport/iDeviceExportViewController.m; sourceTree = "<group>"; };
 		2F621F26170DEC9E00D2ABD1 /* SyncMatchListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SyncMatchListViewController.h; path = DataTransfer/SyncMatchListViewController.h; sourceTree = "<group>"; };
@@ -250,6 +257,8 @@
 		2F621F2A170DF2FE00D2ABD1 /* ImportDeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImportDeviceViewController.m; path = DataImport/ImportDeviceViewController.m; sourceTree = "<group>"; };
 		2F621F2C170E18CA00D2ABD1 /* UltimateAscent_iphone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = UltimateAscent_iphone.storyboard; path = MainApp/UltimateAscent_iphone.storyboard; sourceTree = "<group>"; };
 		2F67D4281728815300FA04CF /* InitialDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = InitialDefaults.plist; path = Resources/InitialDefaults.plist; sourceTree = "<group>"; };
+		2F6A0E5A178A2D66001A114F /* ValuePromptViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ValuePromptViewController.h; path = Utilities/ValuePromptViewController.h; sourceTree = "<group>"; };
+		2F6A0E5B178A2D66001A114F /* ValuePromptViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ValuePromptViewController.m; path = Utilities/ValuePromptViewController.m; sourceTree = "<group>"; };
 		2F6AE6EF16AD93D1005A24C5 /* 2013_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 2013_logo.png; path = Resources/2013_logo.png; sourceTree = "<group>"; };
 		2F80CB0417012821000A2BB8 /* TeamRecordObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TeamRecordObject.h; path = DataTransfer/TeamRecordObject.h; sourceTree = "<group>"; };
 		2F80CB0517012821000A2BB8 /* TeamRecordObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TeamRecordObject.m; path = DataTransfer/TeamRecordObject.m; sourceTree = "<group>"; };
@@ -699,6 +708,10 @@
 				2F12350216FB71E200DBF4B0 /* MasonPageViewController.m */,
 				2F06F98E1724CB70002C947D /* LucienPageViewController.h */,
 				2F06F98F1724CB70002C947D /* LucienPageViewController.m */,
+				2F5D64BD179212EB0028F57D /* LucienNumberObject.h */,
+				2F5D64BE179212EB0028F57D /* LucienNumberObject.m */,
+				2F5D64C3179220280028F57D /* LucienTableViewController.h */,
+				2F5D64C4179220280028F57D /* LucienTableViewController.m */,
 			);
 			name = "Match Analysis";
 			sourceTree = "<group>";
@@ -723,6 +736,8 @@
 				2FFAE1BA16D3235600B180F9 /* MatchTypeDictionary.m */,
 				2F4CD04217122E1600428859 /* PopUpPickerViewController.h */,
 				2F4CD04317122E1600428859 /* PopUpPickerViewController.m */,
+				2F6A0E5A178A2D66001A114F /* ValuePromptViewController.h */,
+				2F6A0E5B178A2D66001A114F /* ValuePromptViewController.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -882,6 +897,9 @@
 				2F06F98D1724B180002C947D /* NetworkManager.m in Sources */,
 				2F06F9901724CB70002C947D /* LucienPageViewController.m in Sources */,
 				2F2CA1631733301B00736351 /* TeamDataInterfaces.m in Sources */,
+				2F6A0E5C178A2D66001A114F /* ValuePromptViewController.m in Sources */,
+				2F5D64BF179212EB0028F57D /* LucienNumberObject.m in Sources */,
+				2F5D64C5179220280028F57D /* LucienTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

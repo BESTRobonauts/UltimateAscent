@@ -722,7 +722,7 @@
                                     <outlet property="delegate" destination="WBb-6A-oWA" id="tCw-6u-Sln"/>
                                 </connections>
                             </textField>
-                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="AtJ-gy-1QW" userLabel="Button - TeleOp Missed">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="AtJ-gy-1QW" userLabel="Button - TeleOp Missed">
                                 <rect key="frame" x="954" y="319" width="60" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
@@ -733,8 +733,11 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="scoreButtons:" destination="WBb-6A-oWA" eventType="touchUpInside" id="UDA-uY-S01"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="sLc-p8-GyK" userLabel="Button - Auton Missed">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="sLc-p8-GyK" userLabel="Button - Auton Missed">
                                 <rect key="frame" x="884" y="319" width="60" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
@@ -745,6 +748,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="scoreButtons:" destination="WBb-6A-oWA" eventType="touchUpInside" id="SFi-Ze-ZkH"/>
+                                </connections>
                             </button>
                             <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2bS-kZ-9mp" userLabel="Button - Pyramid Goals">
                                 <rect key="frame" x="884" y="378" width="60" height="37"/>
@@ -856,7 +862,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
-                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="vL6-Ag-PVU" userLabel="Button - TeleOp High">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="vL6-Ag-PVU" userLabel="Button - TeleOp High">
                                 <rect key="frame" x="954" y="120" width="60" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
@@ -867,8 +873,11 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="scoreButtons:" destination="WBb-6A-oWA" eventType="touchUpInside" id="M4p-8q-31B"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="xNq-1T-IuA" userLabel="Button - Auton High">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="xNq-1T-IuA" userLabel="Button - Auton High">
                                 <rect key="frame" x="884" y="121" width="60" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
@@ -879,8 +888,11 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="scoreButtons:" destination="WBb-6A-oWA" eventType="touchUpInside" id="ubH-cg-xbM"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="6GV-Xs-z6L" userLabel="Button - TeleOp Medium">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="6GV-Xs-z6L" userLabel="Button - TeleOp Medium">
                                 <rect key="frame" x="954" y="184" width="60" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
@@ -891,8 +903,11 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="scoreButtons:" destination="WBb-6A-oWA" eventType="touchUpInside" id="642-xy-bpO"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="DG0-z6-bFN" userLabel="Button - Auton Medium">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="DG0-z6-bFN" userLabel="Button - Auton Medium">
                                 <rect key="frame" x="886" y="184" width="60" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
@@ -903,8 +918,11 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="scoreButtons:" destination="WBb-6A-oWA" eventType="touchUpInside" id="L8j-Hk-zRw"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MZR-J3-hgL" userLabel="Button - TeleOp Low">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MZR-J3-hgL" userLabel="Button - TeleOp Low">
                                 <rect key="frame" x="954" y="250" width="60" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
@@ -915,8 +933,11 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="scoreButtons:" destination="WBb-6A-oWA" eventType="touchUpInside" id="PFt-J4-3fH"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="5r3-Vh-c0v" userLabel="Button - Auton Low">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="5r3-Vh-c0v" userLabel="Button - Auton Low">
                                 <rect key="frame" x="884" y="250" width="60" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
@@ -927,6 +948,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="scoreButtons:" destination="WBb-6A-oWA" eventType="touchUpInside" id="8YQ-lD-AiF"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="TmH-ak-QdU" userLabel="Button - Team">
                                 <rect key="frame" x="594" y="23" width="83" height="31"/>
@@ -1332,6 +1356,21 @@
                                     <segue destination="foR-gV-UYn" kind="push" id="w3u-S1-fcn"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="xrD-cl-mQS" userLabel="Button - Eraser">
+                                <rect key="frame" x="519" y="513" width="72" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Erase">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="eraserPressed:" destination="WBb-6A-oWA" eventType="touchUpInside" id="JYi-3W-5k4"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.74509803919999995" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -1351,6 +1390,7 @@
                         <outlet property="defenseRating" destination="kFE-Y8-0uU" id="7bu-sL-LDD"/>
                         <outlet property="drawModeButton" destination="kd3-Al-5aW" id="E1w-tJ-j01"/>
                         <outlet property="driverRating" destination="e3M-4Q-lW8" id="klm-P9-5ya"/>
+                        <outlet property="eraserButton" destination="xrD-cl-mQS" id="Ard-um-Atd"/>
                         <outlet property="fieldImage" destination="RvX-YB-hOX" id="EsN-pr-Sra"/>
                         <outlet property="floorPickUpsButton" destination="j91-FG-JGI" id="0vd-Dz-7J1"/>
                         <outlet property="imageContainer" destination="6Qn-p6-4MN" id="dpe-Lz-yBU"/>
@@ -2508,13 +2548,6 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Blue 1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ak7-Ns-iiW">
-                                <rect key="frame" x="0.0" y="66" width="49" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="QWE-EP-c5b" userLabel="Table View - Red 2">
                                 <rect key="frame" x="170" y="414" width="320" height="135"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2823,7 +2856,7 @@
             <objects>
                 <viewController id="8Ip-0z-ATI" customClass="LucienPageViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dml-uq-Fqt">
-                        <rect key="frame" x="0.0" y="64" width="768" height="960"/>
+                        <rect key="frame" x="0.0" y="64" width="1024" height="704"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Auton Points" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NLQ-hu-WZL">
@@ -2904,7 +2937,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="qrO-K0-cPT" userLabel="Button - Lucien">
-                                <rect key="frame" x="237" y="544" width="400" height="68"/>
+                                <rect key="frame" x="200" y="545" width="400" height="68"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" backgroundImage="button_robonaut_gold.png">
@@ -2914,6 +2947,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="bxp-VI-tf2" kind="push" id="f9D-hR-vLn"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" id="IP8-R2-Rwi">
                                 <rect key="frame" x="365" y="142" width="97" height="30"/>
@@ -3179,14 +3215,24 @@
                                     <action selector="selectHeight:" destination="8Ip-0z-ATI" eventType="touchUpInside" id="bho-eA-5XI"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Magic # = S((Ave/Normal) * Factor)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Mtk-ML-elq">
+                                <rect key="frame" x="200" y="478" width="305" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.74509803919999995" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <navigationItem key="navigationItem" id="i0d-DL-EHh"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
                         <outlet property="autonAverage" destination="CKj-KT-RKf" id="sKv-Yp-2rq"/>
                         <outlet property="autonFactor" destination="Xnd-gL-nZx" id="fM9-IX-ebL"/>
                         <outlet property="autonNormal" destination="IP8-R2-Rwi" id="VEH-bG-rc8"/>
+                        <outlet property="calculateButton" destination="qrO-K0-cPT" id="zcS-I2-3xH"/>
                         <outlet property="climbAverage" destination="Mvo-3p-h3Z" id="7kl-0A-coc"/>
                         <outlet property="climbFactor" destination="lSf-bG-zix" id="6LM-Sa-ufV"/>
                         <outlet property="climbNormal" destination="nWg-5T-M6A" id="1uJ-ex-5FM"/>
@@ -3212,7 +3258,111 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dYq-g6-3hi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3242" y="2011"/>
+            <point key="canvasLocation" x="-3504" y="2141"/>
+        </scene>
+        <!--Lucien Table View Controller-->
+        <scene sceneID="piB-g2-LMR">
+            <objects>
+                <tableViewController storyboardIdentifier="LucienTableViewController" id="bxp-VI-tf2" customClass="LucienTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" tag="10" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="81K-Zi-1L2">
+                        <rect key="frame" x="0.0" y="64" width="1024" height="704"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="LucienList" id="8gi-Ys-rQg">
+                                <rect key="frame" x="0.0" y="22" width="1024" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="10" contentMode="left" text="Team" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Koo-wb-7Vi">
+                                            <rect key="frame" x="32" y="11" width="44" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="40" contentMode="left" text="TeleOp" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uOy-ES-tuq">
+                                            <rect key="frame" x="290" y="11" width="56" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="30" contentMode="left" text="Auton" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nEr-KF-gqB">
+                                            <rect key="frame" x="200" y="11" width="45" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="20" contentMode="left" text="Lucien" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Lji-ef-HFt">
+                                            <rect key="frame" x="120" y="11" width="51" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="50" contentMode="left" text="Hang" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BIZ-e9-E5O">
+                                            <rect key="frame" x="390" y="11" width="41" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="60" contentMode="left" text="Speed" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="S6A-q1-7nY">
+                                            <rect key="frame" x="480" y="11" width="50" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="70" contentMode="left" text="Drive" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ILO-gV-jck">
+                                            <rect key="frame" x="570" y="10" width="42" height="22"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="80" contentMode="left" text="Defense" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pt2-dv-HOY">
+                                            <rect key="frame" x="680" y="10" width="78" height="22"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="90" contentMode="left" text="Min" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3Tn-HX-fkX">
+                                            <rect key="frame" x="805" y="11" width="89" height="22"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="100" contentMode="left" text="Max" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1vo-5N-FL1">
+                                            <rect key="frame" x="920" y="11" width="42" height="22"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="bxp-VI-tf2" id="Yb1-ZU-FLZ"/>
+                            <outlet property="delegate" destination="bxp-VI-tf2" id="vfX-hd-eQO"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="lH6-D2-ZzX"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="40q-Ym-cRn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2403" y="2382"/>
         </scene>
         <!--Ross Page View Controller-->
         <scene sceneID="Q7s-72-nIi">
@@ -4491,412 +4641,15 @@
         <image name="button_robonaut_gold.png" width="518" height="194"/>
         <image name="photo.JPG" width="640" height="478"/>
     </resources>
-    <classes>
-        <class className="AddMatchViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/AddMatchViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="addAction:"/>
-                <relationship kind="action" name="cancelVC:"/>
-                <relationship kind="action" name="showPopup:"/>
-                <relationship kind="outlet" name="blue1" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="blue2" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="blue3" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="matchNumber" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="matchTypeButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="red1" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="red2" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="red3" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="DownloadPageViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DownloadPageViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="exportTapped:"/>
-                <relationship kind="outlet" name="exportMatchData" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="exportTeamData" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="ftpButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="iPadExportButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="mainLogo" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="pictureCaption" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="splashPicture" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="stackMobButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="FieldDrawingViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FieldDrawingViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="nextMatch:"/>
-                <relationship kind="action" name="prevMatch:"/>
-                <relationship kind="outlet" name="autonHigh" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="autonLow" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="autonMed" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="autonMissed" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="autonPyramidGoals" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="autonScoreMade" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="autonScoreShot" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="blocked" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="climbAttempt" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="climbLevel" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="climbTime" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="discPassed" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="fieldImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="floorPickUp" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="matchNumber" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="matchType" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="nextMatchButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="notes" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="prevMatchButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="pyramidGoals" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="teamName" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="teamNumber" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="teleOpHigh" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="teleOpLow" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="teleOpMed" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="teleOpMissed" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="teleOpScoreMade" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="teleOpScoreShot" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="wall1" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="wall2" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="wall3" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="wall4" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="wallPickUp" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="ImportDataViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ImportDataViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="importMatchList" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="importSMButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="LucienPageViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/LucienPageViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="selectAverage:"/>
-                <relationship kind="action" name="selectHeight:"/>
-                <relationship kind="outlet" name="autonAverage" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="autonFactor" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="autonNormal" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="climbAverage" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="climbFactor" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="climbNormal" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="defenseAverage" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="defenseFactor" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="defenseNormal" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="driverAverage" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="driverFactor" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="driverNormal" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="height1Average" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="height1Factor" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="height1Normal" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="height2Average" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="height2Factor" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="height2Normal" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="speedAverage" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="speedFactor" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="speedNormal" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="teleOpAverage" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="teleOpFactor" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="teleOpNormal" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="MainScoutingPageViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainScoutingPageViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="AllianceSelectionChanged:"/>
-                <relationship kind="action" name="MatchNumberChanged"/>
-                <relationship kind="action" name="MatchTypeSelectionChanged:"/>
-                <relationship kind="action" name="NextButton"/>
-                <relationship kind="action" name="PrevButton"/>
-                <relationship kind="action" name="TeamSelectionChanged:"/>
-                <relationship kind="action" name="climbTimerStart:"/>
-                <relationship kind="action" name="climbTimerStop:"/>
-                <relationship kind="action" name="drawModeChange:"/>
-                <relationship kind="action" name="matchResetRequest:"/>
-                <relationship kind="action" name="scoreButtons:"/>
-                <relationship kind="action" name="toggleForClimbAttempt:"/>
-                <relationship kind="action" name="updateDefenseRating:"/>
-                <relationship kind="action" name="updateDriverRating:"/>
-                <relationship kind="action" name="updateRobotSpeed:"/>
-                <relationship kind="action" name="wallPickUpsMade:"/>
-                <relationship kind="outlet" name="alliance" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="attemptedClimb" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="autonHighButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="autonLowButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="autonMediumButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="autonMissButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="blocksButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="blueScore" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="climbTimerButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="defenseRating" candidateClass="UISlider"/>
-                <relationship kind="outlet" name="drawModeButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="driverRating" candidateClass="UISlider"/>
-                <relationship kind="outlet" name="fieldImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="floorPickUpsButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="imageContainer" candidateClass="UIView"/>
-                <relationship kind="outlet" name="matchListButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="matchNumber" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="matchResetButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="matchType" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="nextMatch" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="notes" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="passesButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="prevMatch" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="pyramidGoalsButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="redScore" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="robotSpeed" candidateClass="UISlider"/>
-                <relationship kind="outlet" name="syncButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="teamEdit" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="teamName" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="teamNumber" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="teleOpHighButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="teleOpLowButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="teleOpMediumButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="teleOpMissButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="wall1Button" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="wall2Button" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="wall3Button" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="wall4Button" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="wallPickUpsButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="MasonPageViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MasonPageViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="MatchNumberChanged"/>
-                <relationship kind="action" name="MatchTypeSelectionChanged:"/>
-                <relationship kind="action" name="NextButton"/>
-                <relationship kind="action" name="OurNextButton"/>
-                <relationship kind="action" name="OurPrevButton"/>
-                <relationship kind="action" name="PrevButton"/>
-                <relationship kind="outlet" name="blue1Table" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="blue1Team" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="blue2Table" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="blue2Team" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="blue3Table" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="blue3Team" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="matchNumber" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="matchType" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="nextMatch" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="ourNextMatch" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="ourPrevMatch" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="prevMatch" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="red1Table" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="red1Team" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="red2Table" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="red2Team" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="red3Table" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="red3Team" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="teamInfo" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="MatchAnalysisViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MatchAnalysisViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="lucienPageButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="mainLogo" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="masonPageButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="matchPicture" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="pictureCaption" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="rossPageButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="splashPicture" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-        <class className="MatchDetailViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MatchDetailViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="MatchTypeSelectionChanged:"/>
-                <relationship kind="outlet" name="blue1TextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="blue2TextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="blue3TextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="matchTypeButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="numberTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="red1TextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="red2TextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="red3TextField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="MatchListViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MatchListViewController.h"/>
-        </class>
-        <class className="RossPageViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RossPageViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="MatchNumberChanged"/>
-                <relationship kind="action" name="MatchTypeSelectionChanged:"/>
-                <relationship kind="action" name="NextButton"/>
-                <relationship kind="action" name="OurNextButton"/>
-                <relationship kind="action" name="OurPrevButton"/>
-                <relationship kind="action" name="PrevButton"/>
-                <relationship kind="outlet" name="blue1" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="blue2" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="blue3" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="blueScore" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="matchNumber" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="matchType" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="nextMatch" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="ourNextMatch" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="ourPrevMatch" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="prevMatch" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="red1" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="red1table" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="red2" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="red3" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="redScore" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="SetUpPageViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SetUpPageViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="exportDataButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="importDataButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="mainLogo" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="matchSetUpButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="pictureCaption" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="splashPicture" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="tournamentSetUpButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="SplashPageViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SplashPageViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="mainLogo" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="matchAnalysisButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="matchScoutingButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="matchSetUpButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="pictureCaption" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="splashPicture" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="teamScoutingButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="StackMobExportViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/StackMobExportViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="pushMatchData:"/>
-                <relationship kind="action" name="pushTeamData:"/>
-                <relationship kind="action" name="pushTournamentData:"/>
-                <relationship kind="outlet" name="pushMatchButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="pushTeamButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="pushTournamentButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="StackMobImportViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/StackMobImportViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="pullTeamData:"/>
-                <relationship kind="outlet" name="importTeamButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="SyncMatchListViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SyncMatchListViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="btnConnect:"/>
-                <relationship kind="action" name="btnDisconnect:"/>
-                <relationship kind="outlet" name="connectButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="disconnectButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="peerLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="peerName" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="receiveDataTable" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="SyncResultsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SyncResultsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="btnConnect:"/>
-                <relationship kind="action" name="btnDisconnect:"/>
-                <relationship kind="outlet" name="connectButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="disconnectButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="peerLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="peerName" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="receiveDataTable" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="sendDataTable" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="TeamDetailViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TeamDetailViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="detailChanged:"/>
-                <relationship kind="action" name="useCamera:"/>
-                <relationship kind="action" name="useCameraRoll:"/>
-                <relationship kind="outlet" name="auton" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="choosePhotoBtn" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="cims" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="climbZone" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="driveType" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="intakeType" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="matchInfo" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="maxHeight" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="minHeight" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="nameTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="notesTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="notesViewField" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="numberLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="nwheels" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="shootingLevel" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="takePhotoBtn" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="wheelDiameter" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="wheelType" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="TeamListViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TeamListViewController.h"/>
-        </class>
-        <class className="TournamentViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TournamentViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="TournamentSelectionChanged:"/>
-                <relationship kind="action" name="allianceSelectionChanged:"/>
-                <relationship kind="action" name="modeSelectionChanged:"/>
-                <relationship kind="outlet" name="adminButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="allianceButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="bluetoothButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="mainLogo" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="modeSegment" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="overrideButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="pictureCaption" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="splashPicture" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="tournamentButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="tournamentLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="ftpTransferViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ftpTransferViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="cancelAction:"/>
-                <relationship kind="action" name="getData:"/>
-                <relationship kind="action" name="pictures:"/>
-                <relationship kind="action" name="pushData:"/>
-                <relationship kind="action" name="pushDatabase:"/>
-                <relationship kind="action" name="sendAction:" candidateClass="UIView"/>
-                <relationship kind="outlet" name="activityIndicator" candidateClass="UIActivityIndicatorView"/>
-                <relationship kind="outlet" name="cancelButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="getDataButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="passwordText" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="picturesButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="pushDataButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="sendDatabaseButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="statusLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="urlText" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="usernameText" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="iDeviceExportViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/iDeviceExportViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="exportMatchListButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="ba1-Dr-RVr"/>
-        <segue reference="hA4-za-hde"/>
-        <segue reference="TkS-kf-3fo"/>
+        <segue reference="0QU-hg-CV0"/>
         <segue reference="6V1-MF-63T"/>
+        <segue reference="TkS-kf-3fo"/>
+        <segue reference="ba1-Dr-RVr"/>
     </inferredMetricsTieBreakers>
 </document>

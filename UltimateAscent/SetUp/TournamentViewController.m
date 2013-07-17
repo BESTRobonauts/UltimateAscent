@@ -190,6 +190,12 @@
             break;
         }
     }
+    NSError *error;
+    NSString *storePath = [[self applicationDocumentsDirectory] stringByAppendingPathComponent: @"dataMarker.csv"];
+    [[NSFileManager defaultManager] removeItemAtPath: storePath error: &error];
+    storePath = [[self applicationDocumentsDirectory] stringByAppendingPathComponent: @"dataMarkerMason.csv"];
+    [[NSFileManager defaultManager] removeItemAtPath: storePath error: &error];
+
 }
 
 
@@ -324,6 +330,14 @@
     }
     // Return YES for supported orientations 
 	return YES;
+}
+
+
+/**
+ Returns the path to the application's Documents directory.
+ */
+- (NSString *)applicationDocumentsDirectory {
+	return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
 }
 
 - (void)didReceiveMemoryWarning
