@@ -172,6 +172,7 @@
     NSIndexPath *indexPath = [ self.tableView indexPathForCell:sender];
     
     TeamDetailViewController *detailViewController = [segue destinationViewController];
+    [segue.destinationViewController setDataManager:_dataManager];
     detailViewController.team = [fetchedResultsController objectAtIndexPath:indexPath];
 }
 

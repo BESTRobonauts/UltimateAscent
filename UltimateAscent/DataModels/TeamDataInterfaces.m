@@ -124,7 +124,7 @@
 //  Hack work around to get the relationship. Must fix this someday.
     [_teamDataDictionary setObject:[NSNumber numberWithInt:-100] forKey:@"tournament"];
     [_teamDataDictionary setObject:[NSNumber numberWithInt:-200] forKey:@"regional"];
-    NSLog(@"Disctionary = %@", _teamDataDictionary);
+    // NSLog(@"Disctionary = %@", _teamDataDictionary);
 }
 
 -(TeamData *)getTeam:(NSNumber *)teamNumber {
@@ -157,6 +157,22 @@
             return Nil;
         }
     }
+}
+
+-(NSArray *)getTeamListTournament:(NSString *)tournament {
+    NSError *error;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"TeamData" inManagedObjectContext:_dataManager.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    // Add the search for tournament name
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"ANY tournament.name = %@",  tournament];
+    [fetchRequest setPredicate:pred];
+    NSArray *teamData = [_dataManager.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    NSSortDescriptor *sortByNumber = [NSSortDescriptor sortDescriptorWithKey:@"number" ascending:YES];
+    NSArray *sortedTeams = [teamData sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortByNumber]];
+    return sortedTeams;
 }
 
 -(void)setTeamDefaults:(TeamData *)blankTeam {

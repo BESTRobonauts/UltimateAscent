@@ -7,13 +7,21 @@
 //
 
 #import "TeamDetailViewController.h"
+#import "SettingsData.h"
+#import "TournamentData.h"
 #import "TeamData.h"
 #import "TeamScore.h"
+#import "CreateMatch.h"
 #import "MatchData.h"
 #import "DataManager.h"
 #import "Regional.h"
+#import "FieldDrawingViewController.h"
 
-@implementation TeamDetailViewController
+@implementation TeamDetailViewController {
+    SettingsData *settings;
+    NSArray *matchList;
+}
+@synthesize dataManager = _dataManager;
 @synthesize team;
 @synthesize numberLabel, nameTextField, notesTextField;
 @synthesize notesViewField = _notesViewField;
@@ -31,7 +39,10 @@
 @synthesize popoverController;
 @synthesize photoPath;
 @synthesize dataChange;
-@synthesize matchInfo, matchHeader;
+@synthesize matchInfo = _matchInfo;
+@synthesize matchHeader = _matchHeader;
+@synthesize regionalInfo = _regionalInfo;
+@synthesize regionalHeader = _regionalHeader;
 @synthesize regionalList = _regionalList;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -64,6 +75,7 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
+    [self retrieveSettings];
     numberLabel.font = [UIFont fontWithName:@"Helvetica" size:24.0];
     [self SetTextBoxDefaults:nameTextField];
     [self SetTextBoxDefaults:notesTextField];
@@ -77,59 +89,19 @@
     [self SetTextBoxDefaults:cims];
 //    [takePhotoBtn setTitle:@"Take Photo" forState:UIControlStateNormal];
 //    takePhotoBtn.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:24.0];
- 
+
+    [self createRegionalHeader];
+    [self createMatchHeader];
+    
     _intakeList = [[NSMutableArray alloc] initWithObjects:@"Unknown", @"Floor", @"Human", @"Both", nil];
     _driveTypeList = [[NSMutableArray alloc] initWithObjects:@"Unknown", @"Mech", @"Omni", @"Swerve", @"Traction", @"Multi", @"Tank", @"West Coast", nil];
     _climbZoneList = [[NSMutableArray alloc] initWithObjects:@"Unknown", @"One", @"Two", @"Three", nil];
 
-    matchHeader = [[UIView alloc] initWithFrame:CGRectMake(0,0,768,50)];
-    matchHeader.backgroundColor = [UIColor lightGrayColor];
-    matchHeader.opaque = YES;
-    
-	UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 200, 50)];
-	label1.text = @"Week";
-    label1.backgroundColor = [UIColor clearColor];
-    [matchHeader addSubview:label1];
-    
-	UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(95, 0, 200, 50)];
-	label2.text = @"Regional";
-    label2.backgroundColor = [UIColor clearColor];
-    [matchHeader addSubview:label2];
-    
- 	UILabel *label3 = [[UILabel alloc] initWithFrame:CGRectMake(205, 0, 200, 50)];
-	label3.text = @"Rank";
-    label3.backgroundColor = [UIColor clearColor];
-    [matchHeader addSubview:label3];
-    
-	UILabel *label4 = [[UILabel alloc] initWithFrame:CGRectMake(270, 0, 200, 50)];
-	label4.text = @"Record";
-    label4.backgroundColor = [UIColor clearColor];
-    [matchHeader addSubview:label4];
-    
-	UILabel *label5 = [[UILabel alloc] initWithFrame:CGRectMake(365, 0, 200, 50)];
-	label5.text = @"CCWM";
-    label5.backgroundColor = [UIColor clearColor];
-    [matchHeader addSubview:label5];
-
-	UILabel *label6 = [[UILabel alloc] initWithFrame:CGRectMake(460, 0, 200, 50)];
-	label6.text = @"OPR";
-    label6.backgroundColor = [UIColor clearColor];
-    [matchHeader addSubview:label6];
-
-    UILabel *label7 = [[UILabel alloc] initWithFrame:CGRectMake(555, 0, 200, 50)];
-	label7.text = @"Elim Position";
-    label7.backgroundColor = [UIColor clearColor];
-    [matchHeader addSubview:label7];
-
-    UILabel *label8 = [[UILabel alloc] initWithFrame:CGRectMake(730, 0, 200, 50)];
-	label8.text = @"Awards";
-    label8.backgroundColor = [UIColor clearColor];
-    [matchHeader addSubview:label8];
-
     NSSortDescriptor *regionalSort = [NSSortDescriptor sortDescriptorWithKey:@"reg1" ascending:YES];
     _regionalList = [[team.regional allObjects] sortedArrayUsingDescriptors:[NSArray arrayWithObject:regionalSort]];
     
-
+    matchList = [[[CreateMatch alloc] initWithDataManager:_dataManager] getMatchListTournament:team.number forTournament:settings.tournament.name];
+    
     [super viewDidLoad];
 }
 
@@ -204,6 +176,74 @@
     photoPath = [NSHomeDirectory() stringByAppendingPathComponent:path];
     [self getPhoto];
     dataChange = NO;
+}
+
+-(void)createRegionalHeader {
+    _regionalHeader = [[UIView alloc] initWithFrame:CGRectMake(0,0,768,35)];
+    _regionalHeader.backgroundColor = [UIColor lightGrayColor];
+    _regionalHeader.opaque = YES;
+    
+	UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 200, 35)];
+	label1.text = @"Week";
+    label1.backgroundColor = [UIColor clearColor];
+    [_regionalHeader addSubview:label1];
+    
+	UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(95, 0, 200, 35)];
+	label2.text = @"Regional";
+    label2.backgroundColor = [UIColor clearColor];
+    [_regionalHeader addSubview:label2];
+    
+ 	UILabel *label3 = [[UILabel alloc] initWithFrame:CGRectMake(205, 0, 200, 35)];
+	label3.text = @"Rank";
+    label3.backgroundColor = [UIColor clearColor];
+    [_regionalHeader addSubview:label3];
+    
+	UILabel *label4 = [[UILabel alloc] initWithFrame:CGRectMake(270, 0, 200, 35)];
+	label4.text = @"Record";
+    label4.backgroundColor = [UIColor clearColor];
+    [_regionalHeader addSubview:label4];
+    
+	UILabel *label5 = [[UILabel alloc] initWithFrame:CGRectMake(365, 0, 200, 35)];
+	label5.text = @"CCWM";
+    label5.backgroundColor = [UIColor clearColor];
+    [_regionalHeader addSubview:label5];
+    
+	UILabel *label6 = [[UILabel alloc] initWithFrame:CGRectMake(460, 0, 200, 35)];
+	label6.text = @"OPR";
+    label6.backgroundColor = [UIColor clearColor];
+    [_regionalHeader addSubview:label6];
+    
+    UILabel *label7 = [[UILabel alloc] initWithFrame:CGRectMake(555, 0, 200, 35)];
+	label7.text = @"Elim Position";
+    label7.backgroundColor = [UIColor clearColor];
+    [_regionalHeader addSubview:label7];
+    
+    UILabel *label8 = [[UILabel alloc] initWithFrame:CGRectMake(730, 0, 200, 35)];
+	label8.text = @"Awards";
+    label8.backgroundColor = [UIColor clearColor];
+    [_regionalHeader addSubview:label8];
+}
+
+-(void)createMatchHeader {
+    _matchHeader = [[UIView alloc] initWithFrame:CGRectMake(0,0,768,50)];
+    _matchHeader.backgroundColor = [UIColor lightGrayColor];
+    _matchHeader.opaque = YES;
+    
+	UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 200, 35)];
+	label1.text = @"Match";
+    label1.backgroundColor = [UIColor clearColor];
+    [_matchHeader addSubview:label1];
+    
+	UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(105, 0, 200, 35)];
+	label2.text = @"Type";
+    label2.backgroundColor = [UIColor clearColor];
+    [_matchHeader addSubview:label2];
+    
+ 	UILabel *label3 = [[UILabel alloc] initWithFrame:CGRectMake(235, 0, 200, 35)];
+	label3.text = @"Results";
+    label3.backgroundColor = [UIColor clearColor];
+    [_matchHeader addSubview:label3];
+    
 }
 
 -(IBAction)detailChanged:(id)sender {
@@ -491,15 +531,25 @@
  //   [UIImagePNGRepresentation(image) writeToFile:pngPath atomically:YES];
 }
 
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    NSIndexPath *indexPath = [ self.matchInfo indexPathForCell:sender];
+    [segue.destinationViewController setDrawDirectory:settings.tournament.directory];
+    [segue.destinationViewController setTeamScores:matchList];
+    [_matchInfo deselectRowAtIndexPath:indexPath animated:YES];
+}
+
 #pragma mark - Table view data source
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
-    return matchHeader;    
+    if (tableView == _regionalInfo) return _regionalHeader;
+    if (tableView == _matchInfo) return _matchHeader;
+    
+    return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 50;
+    return 35;
 }
 
 
@@ -511,11 +561,12 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    int x = [_regionalList count];
-    return x; 
+    if (tableView == _regionalInfo) return [_regionalList count];
+    else return [matchList count];
+ 
 }
 
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+- (void)configureRegionalCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     Regional *regional = [_regionalList objectAtIndex:indexPath.row];
        // Configure the cell...
        // Set a background for the cell
@@ -550,14 +601,59 @@
 	label8.text = regional.reg5;
 }
 
+- (void)configureMatchCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    TeamScore *score = [matchList objectAtIndex:indexPath.row];
+
+	UILabel *label1 = (UILabel *)[cell viewWithTag:10];
+	label1.text = [NSString stringWithFormat:@"%d", [score.match.number intValue]];
+
+    UILabel *label2 = (UILabel *)[cell viewWithTag:20];
+	label2.text = score.match.matchType;
+
+    UILabel *label3 = (UILabel *)[cell viewWithTag:30];
+    if ([score.saved intValue] || [score.synced intValue]) label3.text = @"Y";
+    else label3.text = @"N";
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	UITableViewCell *cell = [tableView 
-                             dequeueReusableCellWithIdentifier:@"MatchSchedule"];
-    // Set up the cell...
-    [self configureCell:cell atIndexPath:indexPath];
+    UITableViewCell *cell = nil;
+    if (tableView == _regionalInfo) {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"Regional"];
+        // Set up the cell...
+        [self configureRegionalCell:cell atIndexPath:indexPath];
+    }
+    else if (tableView == _matchInfo) {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"MatchSchedule"];
+        // Set up the cell...
+        [self configureMatchCell:cell atIndexPath:indexPath];
+    }
     
     return cell;
+}
+
+- (void)retrieveSettings {
+    NSError *error;
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"SettingsData" inManagedObjectContext:_dataManager.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    NSArray *settingsRecord = [_dataManager.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    if(!settingsRecord) {
+        NSLog(@"Karma disruption error");
+        settings = Nil;
+    }
+    else {
+        if([settingsRecord count] == 0) {  // No Settings Exists
+            NSLog(@"Karma disruption error");
+            settings = Nil;
+        }
+        else {
+            settings = [settingsRecord objectAtIndex:0];
+        }
+    }
+    
 }
 
 -(MatchData *)getMatchData: (TeamScore *) teamScore {
@@ -573,6 +669,10 @@
 
 - (void)viewDidUnload
 {
+    [self setMatchHeader:nil];
+    [self setRegionalHeader:nil];
+    [self setRegionalInfo:nil];
+    [self setRegionalHeader:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

@@ -9,6 +9,7 @@
 #import "CreateMatch.h"
 #import "DataManager.h"
 #import "TeamData.h"
+#import "TeamDataInterfaces.h"
 #import "MatchData.h"
 #import "TeamScore.h"
 #import "TournamentData.h"
@@ -554,6 +555,31 @@
         }
         else return Nil;
     }
+}
+
+-(NSArray *)getMatchListTournament:(NSNumber *)teamNumber forTournament:(NSString *)tournament {
+    NSArray *sortedMatches = nil;
+    NSError *error;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"TeamScore" inManagedObjectContext:_dataManager.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"ANY tournament.name = %@ AND team.number = %@", tournament, teamNumber];
+    [fetchRequest setPredicate:pred];
+    NSArray *matchData = [_dataManager.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+
+    NSSortDescriptor *typeDescriptor = [[NSSortDescriptor alloc] initWithKey:@"match.matchTypeSection" ascending:YES];
+    NSSortDescriptor *numberDescriptor = [[NSSortDescriptor alloc] initWithKey:@"match.number" ascending:YES];
+    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:typeDescriptor, numberDescriptor, nil];
+    sortedMatches = [matchData sortedArrayUsingDescriptors:sortDescriptors];
+    
+    for (int i=0; i<[sortedMatches count]; i++) {
+        TeamScore *score = [sortedMatches objectAtIndex:i];
+        NSLog(@"Match = %@, Type = %@", score.match.number, score.match.matchType);
+    }
+
+    return sortedMatches;
 }
 
 -(void)setTeamDefaults:(TeamData *)blankTeam {

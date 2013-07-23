@@ -11,6 +11,7 @@
 #import "SettingsData.h"
 #import "TournamentData.h"
 #import "TeamData.h"
+#import "TeamDataInterfaces.h"
 #import "TeamScore.h"
 #import "MatchData.h"
 #import "PopUpPickerViewController.h"
@@ -292,22 +293,12 @@
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    NSError *error;
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    lucienList = [NSMutableArray array];
+    NSArray *teamData = [[[TeamDataInterfaces alloc] initWithDataManager:_dataManager] getTeamListTournament:_settings.tournament.name];
 
-    NSEntityDescription *entity = [NSEntityDescription
-                                   entityForName:@"TeamData" inManagedObjectContext:_dataManager.managedObjectContext];
-    [fetchRequest setEntity:entity];
-    // Add the search for tournament name
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"ANY tournament = %@", _settings.tournament];
-    [fetchRequest setPredicate:pred];
-    NSArray *teamData = [_dataManager.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-  
     for (int i=0; i<[teamData count]; i++) {
         TeamData *team = [teamData objectAtIndex:i];
         LucienNumberObject *lucienNumbers = [[LucienNumberObject alloc] init];
-        // NSLog(@"Team = %@, min height = %@, max height = %.@", team.number, team.minHeight, team.maxHeight);
+        //NSLog(@"Team = %@, min height = %@, max height = %.@", team.number, team.minHeight, team.maxHeight);
         lucienNumbers.teamNumber = [team.number intValue];
         NSArray *allMatches = [team.match allObjects];
         NSPredicate *pred = [NSPredicate predicateWithFormat:@"tournament = %@", _settings.tournament];
@@ -524,6 +515,12 @@
             _settings = [settingsRecord objectAtIndex:0];
         }
     }
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+	return YES;
 }
 
 /**

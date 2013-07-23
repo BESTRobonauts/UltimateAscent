@@ -20,6 +20,7 @@
 -(AddRecordResults)createTeamFromFile:(NSMutableArray *)headers dataFields:(NSMutableArray *)data;
 -(void)setTeamValue:(TeamData *)team forHeader:header withValue:data;
 -(TeamData *)getTeam:(NSNumber *)teamNumber;
+-(NSArray *)getTeamListTournament:(NSString *)tournament;
 -(void) createTeamDataCollection;
 -(void)setTeamDefaults:(TeamData *)blankTeam;
 

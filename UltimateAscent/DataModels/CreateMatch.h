@@ -65,4 +65,6 @@
 
 -(TeamScore *)CreateScore:(NSNumber *)teamNumber forAlliance:(NSString *)alliance;
 
+-(NSArray *)getMatchListTournament:(NSNumber *)teamNumber forTournament:(NSString *)tournament;
+
 @end

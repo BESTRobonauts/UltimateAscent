@@ -9,12 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "TeamDetailPickerController.h"
 
+@class DataManager;
 @class TeamData;
 @class MatchData;
 @class TeamScore;
 
 @interface TeamDetailViewController : UIViewController <UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPopoverControllerDelegate, UITableViewDelegate, UITableViewDataSource, TeamDetailPickerDelegate>
 
+@property (nonatomic, retain) DataManager *dataManager;
 @property (nonatomic, retain) TeamData *team;
 @property (nonatomic, retain) IBOutlet UILabel *numberLabel;
 @property (nonatomic, retain) IBOutlet UITextField *nameTextField;
@@ -61,6 +63,11 @@ typedef enum {
 @property (nonatomic, retain) IBOutlet UITableView *matchInfo;
 @property (nonatomic, retain) UIView *matchHeader;
 
+@property (nonatomic, retain) IBOutlet UITableView *regionalInfo;
+@property (nonatomic, retain) UIView *regionalHeader;
+
+-(void)createRegionalHeader;
+-(void)createMatchHeader;
 -(void)SetTextBoxDefaults:(UITextField *)textField;
 -(void)SetBigButtonDefaults:(UIButton *)currentButton;
 //-(void)SetTextBoxDefaults:(UITextField *)textField;
@@ -70,6 +77,8 @@ typedef enum {
 -(IBAction)useCameraRoll: (id)sender;
 -(void)savePhoto: (UIImage *)image;
 -(void)getPhoto;
+
+- (void)retrieveSettings;
 
 
 @end
