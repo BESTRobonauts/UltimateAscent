@@ -182,39 +182,6 @@
 
     // Set the list of match types
     matchDictionary = [[MatchTypeDictionary alloc] init];    
-    matchTypeList = [self getMatchTypeList];
-    numberMatchTypes = [matchTypeList count];
-    // NSLog(@"Match Type List Count = %@", matchTypeList);
-
-    // If there are no matches in any section then don't set this stuff. ShowMatch will set currentMatch to
-    // nil, printing out blank info in all the display items.
-    if (numberMatchTypes) {
-        // Temporary method to save the data markers
-        storePath = [[self applicationDocumentsDirectory] stringByAppendingPathComponent: @"dataMarker.csv"];
-        fileManager = [NSFileManager defaultManager];
-        if (![fileManager fileExistsAtPath:storePath]) {
-            // Loading Default Data Markers
-            currentSectionType = [[matchDictionary getMatchTypeEnum:[matchTypeList objectAtIndex:0]] intValue];
-            rowIndex = 0;
-            sectionIndex = [self getMatchSectionInfo:currentSectionType];
-            teamIndex = 0;
-        }
-        else {
-            CSVParser *parser = [CSVParser new];
-            [parser openFile: storePath];
-            NSMutableArray *csvContent = [parser parseFile];
-            // NSLog(@"data marker = %@", csvContent);
-            rowIndex = [[[csvContent objectAtIndex:0] objectAtIndex:0] intValue];
-            teamIndex = [[[csvContent objectAtIndex:0] objectAtIndex:2] intValue];
-            currentSectionType = [[[csvContent objectAtIndex:0] objectAtIndex:1] intValue];
-            sectionIndex = [self getMatchSectionInfo:currentSectionType];
-            if (sectionIndex == -1) { // The selected match type does not exist
-                // Go back to the first section in the table
-                currentSectionType = [[matchDictionary getMatchTypeEnum:[matchTypeList objectAtIndex:0]] intValue];
-                sectionIndex = [self getMatchSectionInfo:currentSectionType];
-            }
-        }
-    }
     
     overrideMode = NoOverride;
     teamName.font = [UIFont fontWithName:@"Helvetica" size:24.0];
@@ -294,7 +261,7 @@
 
 - (void) viewWillAppear:(BOOL)animated
 {
-    //    NSLog(@"viewWillAppear");
+    NSLog(@"viewWillAppear");
 	NSError *error = nil;
 	if (![[self fetchedResultsController] performFetch:&error]) {
 		/*
@@ -305,6 +272,39 @@
 		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 		abort();
 	}		
+    matchTypeList = [self getMatchTypeList];
+    numberMatchTypes = [matchTypeList count];
+    // NSLog(@"Match Type List Count = %@", matchTypeList);
+    
+    // If there are no matches in any section then don't set this stuff. ShowMatch will set currentMatch to
+    // nil, printing out blank info in all the display items.
+    if (numberMatchTypes) {
+        // Temporary method to save the data markers
+        storePath = [[self applicationDocumentsDirectory] stringByAppendingPathComponent: @"dataMarker.csv"];
+        fileManager = [NSFileManager defaultManager];
+        if (![fileManager fileExistsAtPath:storePath]) {
+            // Loading Default Data Markers
+            currentSectionType = [[matchDictionary getMatchTypeEnum:[matchTypeList objectAtIndex:0]] intValue];
+            rowIndex = 0;
+            sectionIndex = [self getMatchSectionInfo:currentSectionType];
+            teamIndex = 0;
+        }
+        else {
+            CSVParser *parser = [CSVParser new];
+            [parser openFile: storePath];
+            NSMutableArray *csvContent = [parser parseFile];
+            // NSLog(@"data marker = %@", csvContent);
+            rowIndex = [[[csvContent objectAtIndex:0] objectAtIndex:0] intValue];
+            teamIndex = [[[csvContent objectAtIndex:0] objectAtIndex:2] intValue];
+            currentSectionType = [[[csvContent objectAtIndex:0] objectAtIndex:1] intValue];
+            sectionIndex = [self getMatchSectionInfo:currentSectionType];
+            if (sectionIndex == -1) { // The selected match type does not exist
+                // Go back to the first section in the table
+                currentSectionType = [[matchDictionary getMatchTypeEnum:[matchTypeList objectAtIndex:0]] intValue];
+                sectionIndex = [self getMatchSectionInfo:currentSectionType];
+            }
+        }
+    }
     
     currentMatch = [self getCurrentMatch];
     // NSLog(@"Match = %@, Type = %@, Tournament = %@", currentMatch.number, currentMatch.matchType, currentMatch.tournament);
@@ -584,7 +584,9 @@
         self.matchTypePickerPopover = [[UIPopoverController alloc] 
                                        initWithContentViewController:matchTypePicker];               
     }
-    [self.matchTypePickerPopover presentPopoverFromRect:matchType.bounds inView:matchType 
+    matchTypePicker.matchTypeChoices = matchTypeList;
+    NSLog(@"Match Types = %@", matchTypeList);
+    [self.matchTypePickerPopover presentPopoverFromRect:matchType.bounds inView:matchType
                                permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 

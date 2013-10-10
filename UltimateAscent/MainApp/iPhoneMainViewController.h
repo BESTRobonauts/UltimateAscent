@@ -12,10 +12,14 @@
 
 @interface iPhoneMainViewController : UIViewController <UITextFieldDelegate>
 @property (nonatomic, retain) DataManager *dataManager;
+- (id)initWithDataManager:(DataManager *)initManager;
+
+/*
 @property (strong, nonatomic) IBOutlet UIWebView *viewWeb;
 -(void) extractMatchList:(NSArray *)allLines;
 - (IBAction)getMatchList:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextField *urlTextField;
 @property (weak, nonatomic) NSURL *url;
+ */
 
 @end

@@ -114,7 +114,7 @@ GKPeerPickerController *picker;
     [_headerView addSubview:teamLabel];
 
     UILabel *syncLabel = [[UILabel alloc] initWithFrame:CGRectMake(290, 11, 65, 21)];
-	syncLabel.text = @"Synced";
+	syncLabel.text = @"Saved";
     syncLabel.backgroundColor = [UIColor clearColor];
     [_headerView addSubview:syncLabel];
 }
@@ -322,7 +322,7 @@ GKPeerPickerController *picker;
     score.sc8 = xferData.sc8;
     score.sc9 = xferData.sc9;
     // For now, set saved to zero so that we know that this iPad didn't do the scouting
-    score.saved = [NSNumber numberWithInt:0];
+    // score.saved = [NSNumber numberWithInt:0];
     // Set synced to one so that we know it has been received
     score.synced = [NSNumber numberWithInt:1];
     
@@ -411,7 +411,7 @@ GKPeerPickerController *picker;
     teamLabel.text = [NSString stringWithFormat:@"%d", [info.team.number intValue]];
 
 	UILabel *syncLabel = (UILabel *)[cell viewWithTag:40];
-    syncLabel.text = ([info.synced intValue] == 0) ? @"N" : @"Y";
+    syncLabel.text = ([info.saved intValue] == 0) ? @"N" : @"Y";
 }
 
 - (void)configureReceivedCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
@@ -502,7 +502,7 @@ GKPeerPickerController *picker;
         NSSortDescriptor *numberDescriptor = [[NSSortDescriptor alloc] initWithKey:@"match.number" ascending:YES];
         NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:typeDescriptor, numberDescriptor, nil];
         NSLog(@"Fix this");
-        NSPredicate *pred = [NSPredicate predicateWithFormat:@"(ANY tournament = %@) AND (saved == 1)", settings.tournament];
+        NSPredicate *pred = [NSPredicate predicateWithFormat:@"ANY tournament = %@", settings.tournament];
 //        NSPredicate *pred = [NSPredicate predicateWithFormat:@"(ANY tournament = %@) AND (saved == 1) AND (synced == 1)", settings.tournament];
         [fetchRequest setPredicate:pred];
         [fetchRequest setSortDescriptors:sortDescriptors];

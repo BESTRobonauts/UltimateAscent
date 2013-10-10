@@ -603,6 +603,7 @@
     if ([segue.identifier isEqualToString:@"TeamDetail"]) {
         NSIndexPath *indexPath = [ self.teamInfo indexPathForCell:sender];
         TeamDetailViewController *detailViewController = [segue destinationViewController];
+        [segue.destinationViewController setDataManager:_dataManager];
         NSLog(@"Team = %@", [_teamList objectAtIndex:indexPath.row]);
         TeamData *team = [[[TeamDataInterfaces alloc] initWithDataManager:_dataManager] getTeam:[_teamList objectAtIndex:indexPath.row]];
         detailViewController.team = team;

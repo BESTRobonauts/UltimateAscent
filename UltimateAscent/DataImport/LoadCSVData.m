@@ -53,8 +53,8 @@
         filePath = [[NSBundle mainBundle] pathForResource:@"TeamList" ofType:@"csv"];
         [self loadTeamFile:filePath];
 
-//        filePath = [[NSBundle mainBundle] pathForResource:@"TeamHistory" ofType:@"csv"];
-//        [self loadTeamHistory:filePath];
+        filePath = [[NSBundle mainBundle] pathForResource:@"TeamHistory" ofType:@"csv"];
+        [self loadTeamHistory:filePath];
         
         filePath = [[NSBundle mainBundle] pathForResource:@"MatchList" ofType:@"csv"];
         [self loadMatchFile:filePath];
@@ -76,7 +76,7 @@
     [self loadSettingsFile:filePath];
     [self loadTeamFile:filePath];
     [self loadTeamHistory:filePath];
-    NSLog(@"loaded histiry");
+    NSLog(@"loaded history");
     [self loadMatchFile:filePath];
 //    [self loadMatchResults:filePath];
 }
@@ -131,6 +131,9 @@
                 NSLog(@"Check database - Team Add Code %d", results);
             }
         }
+#ifdef TEST_MODE
+        [team testTeamInterfaces];
+#endif
     }
     [parser closeFile]; 
 }
@@ -140,9 +143,11 @@
     CSVParser *parser = [CSVParser new];
     [parser openFile: filePath];
     NSMutableArray *csvContent = [parser parseFile];
-/*
+
+    if (![csvContent count]) return;
+    
     if ([[[csvContent objectAtIndex: 0] objectAtIndex:0] isEqualToString:@"Team History"]) {
-        CreateTeam *team = [[CreateTeam alloc] initWithDataManager:_dataManager];
+        TeamDataInterfaces *team = [[TeamDataInterfaces alloc] initWithDataManager:_dataManager];
         int c;
         for (c = 1; c < [csvContent count]; c++) {
             // NSLog(@"loadTeamFile:TeamNumber = %@", [[csvContent objectAtIndex: c] objectAtIndex:0]);
@@ -151,7 +156,10 @@
                 NSLog(@"Check database - Team History Add Code %d", results);
             }
         }
-    }*/
+#ifdef TEST_MODE
+        [team testTeamInterfaces];
+#endif
+    }
     [parser closeFile];
 }
 

@@ -11,17 +11,27 @@
 
 @class DataManager;
 @class TeamData;
+@class Regional;
 
 @interface TeamDataInterfaces : NSObject
-@property (nonatomic, retain) DataManager *dataManager;
-@property (nonatomic, retain) NSMutableDictionary *teamDataDictionary;
+@property (nonatomic, strong) DataManager *dataManager;
+@property (nonatomic, strong) NSMutableDictionary *teamDataDictionary;
+@property (nonatomic, strong) NSMutableDictionary *regionalDictionary;
 
 - (id)initWithDataManager:(DataManager *)initManager;
 -(AddRecordResults)createTeamFromFile:(NSMutableArray *)headers dataFields:(NSMutableArray *)data;
 -(void)setTeamValue:(TeamData *)team forHeader:header withValue:data;
+-(AddRecordResults)addTeamHistoryFromFile:(NSMutableArray *)headers dataFields:(NSMutableArray *)data;
+-(void)setRegionalValue:(Regional *)regional forHeader:(NSString *)header withValue:(NSString *)data;
 -(TeamData *)getTeam:(NSNumber *)teamNumber;
 -(NSArray *)getTeamListTournament:(NSString *)tournament;
--(void) createTeamDataCollection;
+-(Regional *)getRegionalRecord:(TeamData *)team forWeek:(NSNumber *)week;
+-(void)createTeamDataCollection;
+-(void)createRegionalCollection;
 -(void)setTeamDefaults:(TeamData *)blankTeam;
+
+#ifdef TEST_MODE
+-(void)testTeamInterfaces;
+#endif
 
 @end

@@ -18,12 +18,12 @@
 @implementation TeamListViewController {
     CalculateTeamStats *teamStats;
     Statistics *stats;
+    SettingsData *settings;
+    UIView *headerView;
+    BOOL dataChange;
 }
-@synthesize managedObjectContext, fetchedResultsController;
 @synthesize dataManager = _dataManager;
-@synthesize settings;
-@synthesize headerView;
-@synthesize dataChange;
+@synthesize fetchedResultsController = _fetchedResultsController;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -32,6 +32,16 @@
         // Custom initialization
     }
     return self;
+}
+
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    NSLog(@"TeamList Unload");
+    settings = nil;
+    _fetchedResultsController = nil;
+    _dataManager = nil;
+    headerView = nil;
 }
 
 - (void)didReceiveMemoryWarning
@@ -47,14 +57,8 @@
 - (void)viewDidLoad
 {
     NSError *error = nil;
-    if (!managedObjectContext) {
-        if (_dataManager) {
-            managedObjectContext = _dataManager.managedObjectContext;
-        }
-        else {
-            _dataManager = [DataManager new];
-            managedObjectContext = [_dataManager managedObjectContext];
-        }
+    if (!_dataManager) {
+        _dataManager = [[DataManager alloc] init];
     }
     
     [self retrieveSettings];
@@ -129,13 +133,6 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
 - (void)viewWillAppear:(BOOL)animated
 {
     dataChange = NO;
@@ -150,7 +147,7 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     NSError *error;
-    if (![managedObjectContext save:&error]) {
+    if (![_dataManager.managedObjectContext save:&error]) {
         NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
     }
     [super viewWillDisappear:animated];
@@ -173,16 +170,7 @@
     
     TeamDetailViewController *detailViewController = [segue destinationViewController];
     [segue.destinationViewController setDataManager:_dataManager];
-    detailViewController.team = [fetchedResultsController objectAtIndexPath:indexPath];
-}
-
-- (void)showTeam:(TeamData *)team animated:(BOOL)animated {
-    // Create a detail view controller, set the team, then push it.
- //   TeamDetailViewController *detailViewController = [[TeamDetailViewController alloc] 
- //                                                     initWithNibName:@"TeamDetailViewController" bundle:nil];
- //   detailViewController.team = team;
-    
- //   [self.navigationController pushViewController:detailViewController animated:animated];
+    detailViewController.team = [_fetchedResultsController objectAtIndexPath:indexPath];
 }
 
 #pragma mark - Table view data source
@@ -206,12 +194,12 @@
 {
     // Return the number of rows in the section.
     id <NSFetchedResultsSectionInfo> sectionInfo = 
-    [[fetchedResultsController sections] objectAtIndex:section];
+    [[_fetchedResultsController sections] objectAtIndex:section];
     return [sectionInfo numberOfObjects];
 }
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    TeamData *info = [fetchedResultsController objectAtIndexPath:indexPath];
+    TeamData *info = [_fetchedResultsController objectAtIndexPath:indexPath];
     // NSLog(@"name = %@", info.name);
     // Configure the cell...
     // Set a background for the cell
@@ -267,9 +255,9 @@
 
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription
-                                   entityForName:@"SettingsData" inManagedObjectContext:managedObjectContext];
+                                   entityForName:@"SettingsData" inManagedObjectContext:_dataManager.managedObjectContext];
     [fetchRequest setEntity:entity];
-    NSArray *settingsRecord = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    NSArray *settingsRecord = [_dataManager.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     if(!settingsRecord) {
         NSLog(@"Karma disruption error");
         settings = Nil;
@@ -350,11 +338,11 @@
 
 - (NSFetchedResultsController *)fetchedResultsController {
     // Set up the fetched results controller if needed.
-    if (fetchedResultsController == nil) {
+    if (_fetchedResultsController == nil) {
         // Create the fetch request for the entity.
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
         // Edit the entity name as appropriate.
-        NSEntityDescription *entity = [NSEntityDescription entityForName:@"TeamData" inManagedObjectContext:managedObjectContext];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"TeamData" inManagedObjectContext:_dataManager.managedObjectContext];
         [fetchRequest setEntity:entity];
         
         // Edit the sort key as appropriate.
@@ -372,7 +360,7 @@
         NSFetchedResultsController *aFetchedResultsController = 
         [[NSFetchedResultsController alloc] 
          initWithFetchRequest:fetchRequest 
-         managedObjectContext:managedObjectContext 
+         managedObjectContext:_dataManager.managedObjectContext
          sectionNameKeyPath:nil 
          cacheName:@"Root"];
         aFetchedResultsController.delegate = self;
@@ -380,7 +368,7 @@
         
     }
 
-	return fetchedResultsController;
+	return _fetchedResultsController;
 }    
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
@@ -406,7 +394,7 @@
             
         case NSFetchedResultsChangeUpdate:
             dataChange = YES;
-            if (![managedObjectContext save:&error]) {
+            if (![_dataManager.managedObjectContext save:&error]) {
                 NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
             }
             [self configureCell:[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];

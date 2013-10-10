@@ -15,6 +15,7 @@
     #import <SystemConfiguration/SystemConfiguration.h>
     #import <MobileCoreServices/MobileCoreServices.h>
 
+#define TEST_MODE
 
 typedef enum {
     Practice,

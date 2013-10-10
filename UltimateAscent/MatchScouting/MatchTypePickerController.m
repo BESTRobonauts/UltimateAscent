@@ -44,6 +44,7 @@
 
 - (void)viewDidUnload
 {
+    [self setMatchTypeChoices:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -86,6 +87,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
+    NSLog(@"Match Types Popper = %@", matchTypeChoices);
     return [matchTypeChoices count];
 }
 

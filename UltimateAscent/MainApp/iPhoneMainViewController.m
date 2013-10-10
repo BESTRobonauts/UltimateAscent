@@ -7,6 +7,7 @@
 //
 
 #import "iPhoneMainViewController.h"
+#import "iPhoneMatchXferViewController.h"
 
 @interface iPhoneMainViewController ()
 
@@ -17,9 +18,10 @@
 }
 
 @synthesize dataManager = _dataManager;
-@synthesize viewWeb = _viewWeb;
+/*@synthesize viewWeb = _viewWeb;
 @synthesize url = _url;
 @synthesize urlTextField = _urlTextField;
+ */
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -30,6 +32,41 @@
     return self;
 }
 
+- (id)initWithDataManager:(DataManager *)initManager {
+	if ((self = [super init]))
+	{
+        _dataManager = initManager;
+	}
+	return self;
+}
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    NSLog(@"iPhone main");
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"Receive"]) {
+        [segue.destinationViewController setXfer_mode:0];
+    }
+    else {
+        [segue.destinationViewController setXfer_mode:1];
+    }
+    [segue.destinationViewController setDataManager:_dataManager];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (void)viewDidUnload {
+    [super viewDidUnload];
+}
+
+#ifdef JUNK
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -52,10 +89,10 @@
     int stage1=1, stage2=0;
     int n;
     int nlines = [allLines count];
-
+    
     strcpy(type, "Seeding");
     csvString = @"Match, Red 1, Red 2, Red 3, Blue 1, Blue 2, Blue 3, Type, Tournament, Red Score, Blue Score\n";
-
+    
     /* Search for the tournament */
     for (i=0; i<nlines; i++) {
         const char *line;
@@ -73,7 +110,7 @@
                         stage1 = 0;
                         stage2 = 1;
                         continue;
-                    } /* if r */ 
+                    } /* if r */
                 } /* if q */
             } // if p
         }
@@ -100,8 +137,8 @@
                     if (r) {
                         *r = '\0';
                         csvString = [csvString stringByAppendingFormat:@"%s, ", q+1];
-       //                 if (n==8) printf("%s, %s, %s, -1, -1\n", q+1, type, tourney);
-       //                 else printf("%s,", q+1);
+                        //                 if (n==8) printf("%s, %s, %s, -1, -1\n", q+1, type, tourney);
+                        //                 else printf("%s,", q+1);
                     } /* if r */
                 } /* if q */
                 n++;
@@ -139,15 +176,6 @@
     [_viewWeb loadRequest:requestObj];
 	return YES;
 }
+#endif
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (void)viewDidUnload {
-    [self setUrlTextField:nil];
-    [super viewDidUnload];
-}
 @end
