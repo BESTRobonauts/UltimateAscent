@@ -26,6 +26,7 @@
 -(TeamData *)getTeam:(NSNumber *)teamNumber;
 -(NSArray *)getTeamListTournament:(NSString *)tournament;
 -(Regional *)getRegionalRecord:(TeamData *)team forWeek:(NSNumber *)week;
+-(TeamData *)addTeam:(NSNumber *)teamNumber forName:(NSString *)teamName forTournament:(NSString *)tournamentName;
 -(void)createTeamDataCollection;
 -(void)createRegionalCollection;
 -(void)setTeamDefaults:(TeamData *)blankTeam;

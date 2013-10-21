@@ -19,6 +19,7 @@
 		2F17D54816BA092B00DC81C1 /* TournamentList.csv in Resources */ = {isa = PBXBuildFile; fileRef = 2F17D54716BA092B00DC81C1 /* TournamentList.csv */; };
 		2F21C5CF170BCC31008A3C24 /* ImportDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F21C5CE170BCC31008A3C24 /* ImportDataViewController.m */; };
 		2F21C5D2170BCDCB008A3C24 /* StackMobImportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F21C5D1170BCDCB008A3C24 /* StackMobImportViewController.m */; };
+		2F267D4C1815A02700198E96 /* UltimateAscent_ipad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F267D4B1815A02700198E96 /* UltimateAscent_ipad.storyboard */; };
 		2F2CA1631733301B00736351 /* TeamDataInterfaces.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CA1621733301A00736351 /* TeamDataInterfaces.m */; };
 		2F30EABC16A0EB4F0026B258 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F30EABB16A0EB4F0026B258 /* UIKit.framework */; };
 		2F30EABE16A0EB4F0026B258 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F30EABD16A0EB4F0026B258 /* Foundation.framework */; };
@@ -83,7 +84,6 @@
 		2FB3A4B816CEC05000E895E5 /* TournamentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB3A4B716CEC05000E895E5 /* TournamentViewController.m */; };
 		2FB3A4C116CEC17C00E895E5 /* MatchAnalysisViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB3A4C016CEC17C00E895E5 /* MatchAnalysisViewController.m */; };
 		2FB3A4C716CF044C00E895E5 /* RossPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB3A4C616CF044C00E895E5 /* RossPageViewController.m */; };
-		2FC18E9516A1F7D100D42251 /* UltimateAscent_ipad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FC18E9416A1F7D100D42251 /* UltimateAscent_ipad.storyboard */; };
 		2FC18EAD16A202FD00D42251 /* parseCSV.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC18EAB16A202FD00D42251 /* parseCSV.m */; };
 		2FC18EAF16A2042000D42251 /* SplashPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC18EAE16A2042000D42251 /* SplashPageViewController.m */; };
 		2FC18EEA16A2083500D42251 /* Blue Fade.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2FC18ED816A2083500D42251 /* Blue Fade.gif */; };
@@ -141,6 +141,7 @@
 		2F21C5CE170BCC31008A3C24 /* ImportDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImportDataViewController.m; path = DataImport/ImportDataViewController.m; sourceTree = "<group>"; };
 		2F21C5D0170BCDCB008A3C24 /* StackMobImportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StackMobImportViewController.h; path = DataImport/StackMobImportViewController.h; sourceTree = "<group>"; };
 		2F21C5D1170BCDCB008A3C24 /* StackMobImportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StackMobImportViewController.m; path = DataImport/StackMobImportViewController.m; sourceTree = "<group>"; };
+		2F267D4B1815A02700198E96 /* UltimateAscent_ipad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UltimateAscent_ipad.storyboard; sourceTree = "<group>"; };
 		2F2CA1611733301A00736351 /* TeamDataInterfaces.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TeamDataInterfaces.h; path = DataModels/TeamDataInterfaces.h; sourceTree = "<group>"; };
 		2F2CA1621733301A00736351 /* TeamDataInterfaces.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TeamDataInterfaces.m; path = DataModels/TeamDataInterfaces.m; sourceTree = "<group>"; };
 		2F30EAB716A0EB4F0026B258 /* UltimateAscent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UltimateAscent.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -295,7 +296,6 @@
 		2FB3A4C016CEC17C00E895E5 /* MatchAnalysisViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MatchAnalysisViewController.m; path = MatchAnalysis/MatchAnalysisViewController.m; sourceTree = "<group>"; };
 		2FB3A4C516CF044C00E895E5 /* RossPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RossPageViewController.h; path = MatchAnalysis/RossPageViewController.h; sourceTree = "<group>"; };
 		2FB3A4C616CF044C00E895E5 /* RossPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RossPageViewController.m; path = MatchAnalysis/RossPageViewController.m; sourceTree = "<group>"; };
-		2FC18E9416A1F7D100D42251 /* UltimateAscent_ipad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UltimateAscent_ipad.storyboard; sourceTree = "<group>"; };
 		2FC18E9F16A1F9A900D42251 /* UltimateAscent-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "UltimateAscent-Info.plist"; path = "MainApp/UltimateAscent-Info.plist"; sourceTree = "<group>"; };
 		2FC18EA016A1F9A900D42251 /* UltimateAscent-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UltimateAscent-Prefix.pch"; path = "MainApp/UltimateAscent-Prefix.pch"; sourceTree = "<group>"; };
 		2FC18EA716A202FD00D42251 /* AddRecordResults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddRecordResults.h; path = DataImport/AddRecordResults.h; sourceTree = "<group>"; };
@@ -522,6 +522,7 @@
 		2F30EAE216A0F56E0026B258 /* Main App */ = {
 			isa = PBXGroup;
 			children = (
+				2F267D4B1815A02700198E96 /* UltimateAscent_ipad.storyboard */,
 				2FC18F0B16A212CE00D42251 /* SetUpPageViewController.h */,
 				2FC18F0C16A212CE00D42251 /* SetUpPageViewController.m */,
 				2FC18EB016A2042600D42251 /* SplashPageViewController.h */,
@@ -532,7 +533,6 @@
 				2F13339D170E20CD006669FF /* iPhoneMainViewController.h */,
 				2F13339E170E20CD006669FF /* iPhoneMainViewController.m */,
 				2F621F2C170E18CA00D2ABD1 /* UltimateAscent_iphone.storyboard */,
-				2FC18E9416A1F7D100D42251 /* UltimateAscent_ipad.storyboard */,
 			);
 			name = "Main App";
 			sourceTree = "<group>";
@@ -795,7 +795,6 @@
 				2F30EAE516A100060026B258 /* Default.png in Resources */,
 				2F30EAE716A100170026B258 /* Default@2x.png in Resources */,
 				2F30EAE916A100250026B258 /* Default-568h@2x.png in Resources */,
-				2FC18E9516A1F7D100D42251 /* UltimateAscent_ipad.storyboard in Resources */,
 				2FC18EEA16A2083500D42251 /* Blue Fade.gif in Resources */,
 				2FC18EEB16A2083500D42251 /* button_robonaut_gold.png in Resources */,
 				2FC18EEC16A2083500D42251 /* cell_robonaut_gold.png in Resources */,
@@ -824,6 +823,7 @@
 				2F621F2D170E18CA00D2ABD1 /* UltimateAscent_iphone.storyboard in Resources */,
 				2F67D4291728815300FA04CF /* InitialDefaults.plist in Resources */,
 				2F99088C1787860700EEFFCE /* T0973_img001.jpg in Resources */,
+				2F267D4C1815A02700198E96 /* UltimateAscent_ipad.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -69,7 +69,10 @@
         annotation:(id)annotation {    
     NSLog(@"openURL");
     if (url != nil && [url isFileURL]) {
-        _dataManager = [[DataManager alloc] init];
+        NSLog(@"data manager = %@", _dataManager);
+        if (!_dataManager) {
+            _dataManager = [[DataManager alloc] init];
+        }
         LoadCSVData *loadData = [[LoadCSVData alloc] initWithDataManager:_dataManager];
         [loadData handleOpenURL:url];
     }

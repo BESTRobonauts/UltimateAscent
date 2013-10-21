@@ -37,6 +37,8 @@ Team Number, name, tournament, driveTrainType, intake, wheelDiameter, cims, minH
 3672, Robo TORS, Lone Star Regional,3,1,6.0,1,30.0,30,0,1,1,0.0," ""caster wheels in front"""
 3696, C.A.R.D.S, Lone Star Regional,4,1,8.0,1,27.0,60,0,0,0,0.0," ""4 friction wheels"
 3728, Iron Panda, Lone Star Regional,4,1,6.0,2,38.0,38,0,0,0,0.0," ""2 omnis and one any mark (6 wheels)"
+3730, Nu-Bots, Lone Star Regional,-1,-1,0.0,0,0.0,0,0,-1,-1,0.0,
+3735, Klein Bots, Lone Star Regional,-1,-1,0.0,0,0.0,0,0,-1,-1,0.0,
 3741, CoreGIX, Lone Star Regional,-1,-1,0.0,0,0.0,0,0,-1,-1,0.0," """""
 3833, The FIRST 3833, Lone Star Regional,-1,-1,0.0,0,0.0,0,0,-1,-1,0.0," """""
 3847, Spectrum, Lone Star Regional,4,0,4.0,3,28.0,84,0,1,1,0.0," ""split arcade 8 wheels"""

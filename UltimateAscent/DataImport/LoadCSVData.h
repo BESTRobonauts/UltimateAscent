@@ -12,7 +12,7 @@
 
 @interface LoadCSVData : NSObject
 
-@property (nonatomic, retain) DataManager *dataManager;
+@property (nonatomic, strong) DataManager *dataManager;
 @property (nonatomic, strong) SettingsData *settings;
 
 - (id)initWithDataManager:(DataManager *)initManager;

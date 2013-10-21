@@ -28,6 +28,63 @@
 	return self;
 }
 
+-(TeamData *)addTeam:(NSNumber *)teamNumber forName:(NSString *)teamName forTournament:(NSString *)tournamentName {
+    if (!_dataManager) {
+        _dataManager = [DataManager new];
+    }
+    
+    // Check to make sure tournament exists, if not, error out
+    TournamentData *tournamentRecord = [[[CreateTournament alloc] initWithDataManager:_dataManager] GetTournament:tournamentName];
+    if (!tournamentRecord) {
+        NSString *msg = [NSString stringWithFormat:@"Tournament %@ does not exist", tournamentName];
+        UIAlertView *prompt  = [[UIAlertView alloc] initWithTitle:@"Team Add Alert"
+                                                          message:msg
+                                                         delegate:nil
+                                                cancelButtonTitle:@"Ok"
+                                                otherButtonTitles:nil];
+        [prompt setAlertViewStyle:UIAlertViewStyleDefault];
+        [prompt show];
+        return nil;
+    }
+    
+    TeamData *teamRecord = [self getTeam:teamNumber];
+    if (teamRecord) {
+        // If team already exists, add it to the tournament
+        NSArray *allTournaments = [teamRecord.tournament allObjects];
+        NSPredicate *pred = [NSPredicate predicateWithFormat:@"name = %@", tournamentRecord.name];
+        NSArray *list = [allTournaments filteredArrayUsingPredicate:pred];
+        if (![list count]) {
+             NSLog(@"Adding Tournament");
+            [teamRecord addTournamentObject:tournamentRecord];
+        }
+        else {
+            NSLog(@"Tournament Exists, count = %d", [list count]);
+            NSLog(@"Add Team %@ already exists", teamNumber);
+            NSString *msg = [NSString stringWithFormat:@"%@ already exists in this tournament", teamNumber];
+            UIAlertView *prompt  = [[UIAlertView alloc] initWithTitle:@"Team Add Alert"
+                                                              message:msg
+                                                             delegate:nil
+                                                    cancelButtonTitle:@"Ok"
+                                                    otherButtonTitles:nil];
+            [prompt setAlertViewStyle:UIAlertViewStyleDefault];
+            [prompt show];
+            teamRecord = nil;
+        }
+
+        return teamRecord;
+    }
+    else {
+        // If team does not exist, add it and add it to the tournament
+        teamRecord = [NSEntityDescription insertNewObjectForEntityForName:@"TeamData"
+                                             inManagedObjectContext:_dataManager.managedObjectContext];
+        [self setTeamDefaults:teamRecord];
+        [teamRecord setValue:teamNumber forKey:@"number"];
+        [teamRecord setValue:teamName forKey:@"name"];
+        [teamRecord addTournamentObject:tournamentRecord];
+        return teamRecord;
+    }
+}
+
 -(AddRecordResults)createTeamFromFile:(NSMutableArray *)headers dataFields:(NSMutableArray *)data {
     NSNumber *teamNumber;
     TeamData *team;
@@ -95,8 +152,10 @@
                 NSPredicate *pred = [NSPredicate predicateWithFormat:@"name = %@", tournamentRecord.name];
                 NSArray *list = [allTournaments filteredArrayUsingPredicate:pred];
                 if (![list count]) {
-                    // NSLog(@"Adding Tournament");
+                   // NSLog(@"Adding Tournament");
+                   // NSLog(@"Team before T add = %@", team);
                     [team addTournamentObject:tournamentRecord];
+                   // NSLog(@"Team after T add = %@", team);
                 }
                 else {
                     // NSLog(@"Tournament Exists, count = %d", [list count]);
