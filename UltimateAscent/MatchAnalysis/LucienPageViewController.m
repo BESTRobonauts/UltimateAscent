@@ -125,6 +125,8 @@
                [NSNumber numberWithFloat:1.0],
                [NSNumber numberWithFloat:1.0], nil];
 
+    lucienList = [[NSMutableArray alloc] init];
+
     storePath = [[self applicationDocumentsDirectory] stringByAppendingPathComponent: @"lucienFactors.csv"];
     fileManager = [NSFileManager defaultManager];
     if ([fileManager fileExistsAtPath:storePath]) {
@@ -295,6 +297,8 @@
 {
     NSArray *teamData = [[[TeamDataInterfaces alloc] initWithDataManager:_dataManager] getTeamListTournament:_settings.tournament.name];
 
+    [lucienList removeAllObjects];
+    
     for (int i=0; i<[teamData count]; i++) {
         TeamData *team = [teamData objectAtIndex:i];
         LucienNumberObject *lucienNumbers = [[LucienNumberObject alloc] init];
@@ -329,9 +333,9 @@
                 [hangPointsList addObject:[NSNumber numberWithInt:hangpoints]];
             }
         }
-        //NSLog(@"Auton List = %@", autonList);
+        // NSLog(@"Auton List = %@", autonList);
         lucienNumbers.autonNumber = [self calculateNumbers:autonList forAverage:[averages objectAtIndex:0] forNormal:[normals objectAtIndex:0] forFactor:[factors objectAtIndex:0]];
-        //NSLog(@"Auton magic number = %.2f", lucienNumbers.autonNumber);
+        // NSLog(@"Auton magic number = %.2f", lucienNumbers.autonNumber);
 
         //NSLog(@"TeleOp List = %@", teleOpList);
         lucienNumbers.teleOpNumber = [self calculateNumbers:teleOpList forAverage:[averages objectAtIndex:1] forNormal:[normals objectAtIndex:1] forFactor:[factors objectAtIndex:1]];

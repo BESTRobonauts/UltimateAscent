@@ -7,15 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AddTeamViewController.h"
+
 @class DataManager;
 @class TeamData;
 
-@interface TeamListViewController : UITableViewController <NSFetchedResultsControllerDelegate>
+@interface TeamListViewController : UITableViewController <NSFetchedResultsControllerDelegate, AddTeamDelegate>
 @property (nonatomic, strong) DataManager *dataManager;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section;
-- (void)showTeam:(TeamData *)team animated:(BOOL)animated;
 - (void)retrieveSettings;
 
 @end

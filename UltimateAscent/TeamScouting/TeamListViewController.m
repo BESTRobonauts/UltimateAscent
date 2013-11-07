@@ -8,19 +8,21 @@
 
 #import "TeamListViewController.h"
 #import "TeamDetailViewController.h"
+#import "TeamDataInterfaces.h"
 #import "TeamData.h"
 #import "DataManager.h"
 #import "SettingsData.h"
 #import "TournamentData.h"
 #import "Statistics.h"
 #import "CalculateTeamStats.h"
+#import "DriveTypeDictionary.h"
 
 @implementation TeamListViewController {
-    CalculateTeamStats *teamStats;
-    Statistics *stats;
     SettingsData *settings;
     UIView *headerView;
-    BOOL dataChange;
+    DriveTypeDictionary *driveDictionary;
+    CalculateTeamStats *teamStats;
+    Statistics *stats;
 }
 @synthesize dataManager = _dataManager;
 @synthesize fetchedResultsController = _fetchedResultsController;
@@ -39,9 +41,12 @@
     [super viewDidUnload];
     NSLog(@"TeamList Unload");
     settings = nil;
+    headerView = nil;
+    driveDictionary = nil;
+    teamStats = nil;
+    stats = nil;
     _fetchedResultsController = nil;
     _dataManager = nil;
-    headerView = nil;
 }
 
 - (void)didReceiveMemoryWarning
@@ -69,6 +74,9 @@
         self.title = @"Team List";
     }
     
+    teamStats = [[CalculateTeamStats alloc] initWithDataManager:_dataManager];
+    driveDictionary = [[DriveTypeDictionary alloc] init];
+
     if (![[self fetchedResultsController] performFetch:&error]) {
         /*
          Replace this implementation with code to handle the error appropriately.
@@ -79,7 +87,7 @@
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
-
+                                     
     headerView = [[UIView alloc] initWithFrame:CGRectMake(0,0,768,50)];
     headerView.backgroundColor = [UIColor lightGrayColor];
     headerView.opaque = YES;
@@ -135,7 +143,6 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    dataChange = NO;
    [super viewWillAppear:animated];
 }
 
@@ -146,10 +153,6 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    NSError *error;
-    if (![_dataManager.managedObjectContext save:&error]) {
-        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
-    }
     [super viewWillDisappear:animated];
 }
 
@@ -164,13 +167,43 @@
 	return YES;
 }
 
+- (void)teamAdded:(NSNumber *)newTeamNumber forName:(NSString *) newTeamName {
+    NSLog(@"Team Added");
+    NSLog(@"Team = [%@]", newTeamNumber);
+    if (!newTeamNumber || ([newTeamNumber intValue] == 0) ) {
+        NSLog(@"blank team data");
+        UIAlertView *prompt  = [[UIAlertView alloc] initWithTitle:@"Team Add Alert"
+                                                          message:@"You must have a non-zero team number"
+                                                         delegate:nil
+                                                cancelButtonTitle:@"Ok"
+                                                otherButtonTitles:nil];
+        [prompt setAlertViewStyle:UIAlertViewStyleDefault];
+        [prompt show];
+        return;
+    }
+    TeamDataInterfaces *team = [[TeamDataInterfaces alloc] initWithDataManager:_dataManager];
+    if ([team addTeam:newTeamNumber forName:newTeamName forTournament:settings.tournament.name]) {
+        NSError *error;
+        if (![_dataManager.managedObjectContext save:&error]) {
+            NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+        }
+    }
+}
+
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    NSIndexPath *indexPath = [ self.tableView indexPathForCell:sender];
-    
-    TeamDetailViewController *detailViewController = [segue destinationViewController];
-    [segue.destinationViewController setDataManager:_dataManager];
-    detailViewController.team = [_fetchedResultsController objectAtIndexPath:indexPath];
+    if ([segue.identifier isEqualToString:@"TeamDetail"]) {
+        NSIndexPath *indexPath = [ self.tableView indexPathForCell:sender];
+        [segue.destinationViewController setDataManager:_dataManager];
+        [segue.destinationViewController setFetchedResultsController:_fetchedResultsController];
+        [segue.destinationViewController setTeamIndex:indexPath];
+    }
+    if ([segue.identifier isEqualToString:@"Add"]) {
+        NSLog(@"add");
+        UINavigationController *nv = (UINavigationController *)[segue destinationViewController];
+        AddTeamViewController *addvc = (AddTeamViewController *)nv.topViewController;
+        addvc.delegate = self;
+    }
 }
 
 #pragma mark - Table view data source
@@ -207,37 +240,26 @@
     UIImage *image = [UIImage imageNamed:@"Blue Fade.gif"];
     imageView.image = image;
     cell.backgroundView = imageView;
-    teamStats = [CalculateTeamStats new];
-    teamStats.managedObjectContext = _dataManager.managedObjectContext;
-    stats = [teamStats calculateMason:info forTournament:settings.tournament.name];
+    [teamStats calculateMasonStats:info forTournament:settings.tournament.name];
     
 	UILabel *numberLabel = (UILabel *)[cell viewWithTag:10];
 	numberLabel.text = [NSString stringWithFormat:@"%d", [info.number intValue]];
     
 	UILabel *aveAutonLabel = (UILabel *)[cell viewWithTag:20];
-	aveAutonLabel.text = [NSString stringWithFormat:@"%d", [stats.aveAuton intValue]];
+	aveAutonLabel.text = [NSString stringWithFormat:@"%d", teamStats.aveAuton];
 
 	UILabel *aveTeleOpLabel = (UILabel *)[cell viewWithTag:30];
-	aveTeleOpLabel.text = [NSString stringWithFormat:@"%d", [stats.aveTeleOp intValue]];
+	aveTeleOpLabel.text = [NSString stringWithFormat:@"%d", teamStats.aveTeleOp];
     
 	UILabel *aveHangLabel = (UILabel *)[cell viewWithTag:40];
-	aveHangLabel.text = [NSString stringWithFormat:@"%.1f", [stats.aveClimbHeight floatValue]];
+	aveHangLabel.text = [NSString stringWithFormat:@"%.1f", teamStats.aveClimbHeight];
 
 	UILabel *speedLabel = (UILabel *)[cell viewWithTag:50];
-	speedLabel.text = [NSString stringWithFormat:@"%.1f", [stats.stat4 floatValue]];
+	speedLabel.text = [NSString stringWithFormat:@"%.1f", teamStats.aveSpeed];
 
     UILabel *driveLabel = (UILabel *)[cell viewWithTag:70];
-    int number = [info.driveTrainType intValue];
-    switch (number) {
-        case 0: driveLabel.text = @"Mech"; break;
-        case 1: driveLabel.text = @"Omni"; break;
-        case 2: driveLabel.text = @"Swerve"; break;
-        case 3: driveLabel.text = @"Traction"; break;
-        case 4: driveLabel.text = @"Multi"; break;
-        case 5: driveLabel.text = @"Tank"; break;
-        case 6: driveLabel.text = @"West Coast"; break;
-        default: driveLabel.text = @""; break;
-    }
+    driveLabel.text = [driveDictionary getDriveTypeString:info.driveTrainType];
+    if ([driveLabel.text isEqualToString:@"Unknown"]) driveLabel.text = @"";
     
     UILabel *defenseLabel = (UILabel *)[cell viewWithTag:80];
 	defenseLabel.text = [NSString stringWithFormat:@"%.1f", [stats.stat3 floatValue]];
@@ -324,15 +346,6 @@
 }
 */
 
-#pragma mark - Table view delegate
-
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//	TeamData *team = (TeamData *)[fetchedResultsController objectAtIndexPath:indexPath];
-    
-//    [self showTeam:team animated:YES];
-//}
-
 #pragma mark -
 #pragma mark Team List Management
 
@@ -380,7 +393,6 @@
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
     
     UITableView *tableView = self.tableView;
-    NSError *error;
     
     switch(type) {
             
@@ -393,10 +405,6 @@
             break;
             
         case NSFetchedResultsChangeUpdate:
-            dataChange = YES;
-            if (![_dataManager.managedObjectContext save:&error]) {
-                NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
-            }
             [self configureCell:[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
             break;
             

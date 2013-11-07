@@ -8,13 +8,10 @@
 
 #import "MatchTypeDictionary.h"
 
-@interface MatchTypeDictionary () {
+@implementation MatchTypeDictionary {
     NSDictionary *dictionary;
     NSArray *objects;
 }
-
-@end
-@implementation MatchTypeDictionary
 
 - (id)init {
 	if ((self = [super init])) {
@@ -44,7 +41,6 @@
 
 -(NSArray *)getMatchTypes {
     return objects;
-
 }
 
 @end

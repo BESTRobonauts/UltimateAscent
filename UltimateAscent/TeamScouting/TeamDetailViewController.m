@@ -15,35 +15,60 @@
 #import "MatchData.h"
 #import "DataManager.h"
 #import "Regional.h"
+#import "DriveTypeDictionary.h"
 #import "FieldDrawingViewController.h"
 
 @implementation TeamDetailViewController {
     SettingsData *settings;
     NSArray *matchList;
+    DriveTypeDictionary *driveDictionary;
+    id popUp;
+    BOOL dataChange;
+    UIView *regionalHeader;
+    NSArray *regionalList;
+    UIView *matchHeader;
+    NSString *photoPath;
 }
+
 @synthesize dataManager = _dataManager;
-@synthesize team;
-@synthesize numberLabel, nameTextField, notesTextField;
-@synthesize notesViewField = _notesViewField;
-@synthesize intakeType, climbZone, shootingLevel; 
-@synthesize auton, maxHeight, minHeight;
-@synthesize wheelType, nwheels, wheelDiameter;
-@synthesize driveType, cims;
-@synthesize intakeList = _intakeList;
+@synthesize fetchedResultsController = _fetchedResultsController;
+@synthesize teamIndex = _teamIndex;
+@synthesize team = _team;
+
 @synthesize driveTypePicker = _driveTypePicker;
+@synthesize drivePickerPopover = _drivePickerPopover;
+@synthesize driveTypeList = _driveTypeList;
+@synthesize driveType = _driveType;
+
 @synthesize intakePicker = _intakePicker;
+@synthesize intakePickerPopover = _intakePickerPopover;
+@synthesize intakeList = _intakeList;
+@synthesize intakeType = _intakeType;
+
 @synthesize climbZonePicker = _climbZonePicker;
-@synthesize detailPickerPopover = _detailPickerPopover;
-@synthesize detailSelection = _detailSelection;
-@synthesize imageView, choosePhotoBtn, takePhotoBtn;
-@synthesize popoverController;
-@synthesize photoPath;
-@synthesize dataChange;
+@synthesize climbZonePickerPopover = _climbZonePickerPopover;
+@synthesize climbZoneList = _climbZoneList;
+@synthesize climbZone = _climbZone;
+
+@synthesize numberLabel = _numberLabel;
+@synthesize nameTextField = _nameTextField;
+@synthesize notesViewField = _notesViewField;
+@synthesize shootingLevel = _shootingLevel;
+@synthesize auton = _auton;
+@synthesize maxHeight = _maxHeight;
+@synthesize minHeight = _minHeight;
+@synthesize wheelType = _wheelType;
+@synthesize nwheels = _nwheels;
+@synthesize wheelDiameter = _wheelDiameter;
+@synthesize cims = _cims;
+
+@synthesize pictureController = _pictureController;
+@synthesize imageView = _imageView;
+@synthesize choosePhotoBtn = _choosePhotoBtn;
+@synthesize takePhotoBtn = _takePhotoBtn;
+
 @synthesize matchInfo = _matchInfo;
-@synthesize matchHeader = _matchHeader;
 @synthesize regionalInfo = _regionalInfo;
-@synthesize regionalHeader = _regionalHeader;
-@synthesize regionalList = _regionalList;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -71,242 +96,270 @@
 }
 */
 
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    NSLog(@"TeamDetail Unload");
+    settings = nil;
+    matchList = nil;
+    driveDictionary = nil;
+    popUp = nil;
+    _dataManager = nil;
+    _fetchedResultsController = nil;
+    _team = nil;
+    _teamIndex = nil;
+    photoPath = nil;
+    _pictureController = nil;
+    _driveTypePicker = nil;
+    _driveTypeList = nil;
+    _intakePicker = nil;
+    _intakeList = nil;
+    _climbZonePicker = nil;
+    _climbZoneList = nil;
+    regionalList = nil;
+    regionalHeader = nil;
+    matchHeader = nil;
+}
+
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
+    if (!_dataManager) {
+        _dataManager = [[DataManager alloc] init];
+    }
+
     [self retrieveSettings];
-    numberLabel.font = [UIFont fontWithName:@"Helvetica" size:24.0];
-    [self SetTextBoxDefaults:nameTextField];
-    [self SetTextBoxDefaults:notesTextField];
-    [self SetTextBoxDefaults:shootingLevel];
-    [self SetTextBoxDefaults:auton];
-    [self SetTextBoxDefaults:minHeight];
-    [self SetTextBoxDefaults:maxHeight];
-    [self SetTextBoxDefaults:wheelType];
-    [self SetTextBoxDefaults:nwheels];
-    [self SetTextBoxDefaults:wheelDiameter];
-    [self SetTextBoxDefaults:cims];
+    _numberLabel.font = [UIFont fontWithName:@"Helvetica" size:24.0];
+    [self SetTextBoxDefaults:_nameTextField];
+    [self SetTextBoxDefaults:_shootingLevel];
+    [self SetTextBoxDefaults:_auton];
+    [self SetTextBoxDefaults:_minHeight];
+    [self SetTextBoxDefaults:_maxHeight];
+    [self SetTextBoxDefaults:_wheelType];
+    [self SetTextBoxDefaults:_nwheels];
+    [self SetTextBoxDefaults:_wheelDiameter];
+    [self SetTextBoxDefaults:_cims];
 //    [takePhotoBtn setTitle:@"Take Photo" forState:UIControlStateNormal];
 //    takePhotoBtn.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:24.0];
 
     [self createRegionalHeader];
     [self createMatchHeader];
     
+    driveDictionary = [[DriveTypeDictionary alloc] init];
+    _driveTypeList = [[driveDictionary getDriveTypes] mutableCopy];
     _intakeList = [[NSMutableArray alloc] initWithObjects:@"Unknown", @"Floor", @"Human", @"Both", nil];
-    _driveTypeList = [[NSMutableArray alloc] initWithObjects:@"Unknown", @"Mech", @"Omni", @"Swerve", @"Traction", @"Multi", @"Tank", @"West Coast", nil];
     _climbZoneList = [[NSMutableArray alloc] initWithObjects:@"Unknown", @"One", @"Two", @"Three", nil];
 
-    NSSortDescriptor *regionalSort = [NSSortDescriptor sortDescriptorWithKey:@"reg1" ascending:YES];
-    _regionalList = [[team.regional allObjects] sortedArrayUsingDescriptors:[NSArray arrayWithObject:regionalSort]];
-    
-    matchList = [[[CreateMatch alloc] initWithDataManager:_dataManager] getMatchListTournament:team.number forTournament:settings.tournament.name];
-    
     [super viewDidLoad];
 }
 
 - (void) viewWillAppear:(BOOL)animated
 {
-    self.title = [NSString stringWithFormat:@"%d - %@", [team.number intValue], team.name];
-    numberLabel.text = [NSString stringWithFormat:@"%d", [team.number intValue]];
-    nameTextField.text = team.name;
-    notesTextField.text = team.notes;
-    _notesViewField.text = team.notes;
-    shootingLevel.text = team.shootsTo;
-    auton.text = [NSString stringWithFormat:@"%d", [team.auton intValue]];
-    minHeight.text = [NSString stringWithFormat:@"%.1f", [team.minHeight floatValue]];
-    maxHeight.text = [NSString stringWithFormat:@"%.1f", [team.maxHeight floatValue]];
-    wheelType.text = team.wheelType;
-    nwheels.text = [NSString stringWithFormat:@"%d", [team.nwheels intValue]];
-    wheelDiameter.text = [NSString stringWithFormat:@"%.1f", [team.wheelDiameter floatValue]];
-    cims.text = [NSString stringWithFormat:@"%.0f", [team.cims floatValue]];
-
-    if ([team.intake intValue] == -1) {
-        [intakeType setTitle:@"Unknown" forState:UIControlStateNormal];
+    if (_fetchedResultsController && _teamIndex) {
+        _team = [_fetchedResultsController objectAtIndexPath:_teamIndex];
+        [_prevTeamButton setHidden:NO];
+        [_nextTeamButton setHidden:NO];
     }
-    else if ([team.intake intValue] == 0) {
-        [intakeType setTitle:@"Floor" forState:UIControlStateNormal];
-    }
-    else if ([team.intake intValue] == 1) {
-        [intakeType setTitle:@"Human" forState:UIControlStateNormal];
-    }
-    else if ([team.intake intValue] == 2) {
-        [intakeType setTitle:@"Both" forState:UIControlStateNormal];
-    }
-    
-    if ([team.climbLevel intValue] == -1) {
-        [climbZone setTitle:@"Unknown" forState:UIControlStateNormal];
-    }
-    else if ([team.climbLevel intValue] == 0) {
-        [climbZone setTitle:@"One" forState:UIControlStateNormal];
-    }
-    else if ([team.climbLevel intValue] == 1) {
-        [climbZone setTitle:@"Two" forState:UIControlStateNormal];
-    }
-    else if ([team.climbLevel intValue] == 2) {
-        [climbZone setTitle:@"Three" forState:UIControlStateNormal];
+    else {
+        [_prevTeamButton setHidden:YES];
+        [_nextTeamButton setHidden:YES];
     }
 
-    if ([team.driveTrainType intValue] == -1) {
-        [driveType setTitle:@"Unknown" forState:UIControlStateNormal];
-    }
-    else if ([team.driveTrainType intValue] == 0) {
-        [driveType setTitle:@"Mech" forState:UIControlStateNormal];
-    }
-    else if ([team.driveTrainType intValue] == 1) {
-        [driveType setTitle:@"Omni" forState:UIControlStateNormal];
-    }
-    else if ([team.driveTrainType intValue] == 2) {
-        [driveType setTitle:@"Swerve" forState:UIControlStateNormal];
-    }
-    else if ([team.driveTrainType intValue] == 3) {
-        [driveType setTitle:@"Traction" forState:UIControlStateNormal];
-    }
-    else if ([team.driveTrainType intValue] == 4) {
-        [driveType setTitle:@"Multi" forState:UIControlStateNormal];
-    }
-    else if ([team.driveTrainType intValue] == 5) {
-        [driveType setTitle:@"Tank" forState:UIControlStateNormal];
-    }
-    else if ([team.driveTrainType intValue] == 6) {
-        [driveType setTitle:@"West Coast" forState:UIControlStateNormal];
-    }
+    [self showTeam];
+}
+
+-(void)createRegionalHeader {
+    regionalHeader = [[UIView alloc] initWithFrame:CGRectMake(0,0,768,35)];
+    regionalHeader.backgroundColor = [UIColor lightGrayColor];
+    regionalHeader.opaque = YES;
     
-    NSString *path = [NSString stringWithFormat:@"Library/RobotPhotos/%@", [NSString stringWithFormat:@"%d", [team.number intValue]]];
+	UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 200, 35)];
+	label1.text = @"Week";
+    label1.backgroundColor = [UIColor clearColor];
+    [regionalHeader addSubview:label1];
+    
+	UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(95, 0, 200, 35)];
+	label2.text = @"Regional";
+    label2.backgroundColor = [UIColor clearColor];
+    [regionalHeader addSubview:label2];
+    
+ 	UILabel *label3 = [[UILabel alloc] initWithFrame:CGRectMake(205, 0, 200, 35)];
+	label3.text = @"Rank";
+    label3.backgroundColor = [UIColor clearColor];
+    [regionalHeader addSubview:label3];
+    
+	UILabel *label4 = [[UILabel alloc] initWithFrame:CGRectMake(270, 0, 200, 35)];
+	label4.text = @"Record";
+    label4.backgroundColor = [UIColor clearColor];
+    [regionalHeader addSubview:label4];
+    
+	UILabel *label5 = [[UILabel alloc] initWithFrame:CGRectMake(365, 0, 200, 35)];
+	label5.text = @"CCWM";
+    label5.backgroundColor = [UIColor clearColor];
+    [regionalHeader addSubview:label5];
+    
+	UILabel *label6 = [[UILabel alloc] initWithFrame:CGRectMake(460, 0, 200, 35)];
+	label6.text = @"OPR";
+    label6.backgroundColor = [UIColor clearColor];
+    [regionalHeader addSubview:label6];
+    
+    UILabel *label7 = [[UILabel alloc] initWithFrame:CGRectMake(555, 0, 200, 35)];
+	label7.text = @"Elim Position";
+    label7.backgroundColor = [UIColor clearColor];
+    [regionalHeader addSubview:label7];
+    
+    UILabel *label8 = [[UILabel alloc] initWithFrame:CGRectMake(730, 0, 200, 35)];
+	label8.text = @"Awards";
+    label8.backgroundColor = [UIColor clearColor];
+    [regionalHeader addSubview:label8];
+}
+
+-(void)createMatchHeader {
+    matchHeader = [[UIView alloc] initWithFrame:CGRectMake(0,0,768,50)];
+    matchHeader.backgroundColor = [UIColor lightGrayColor];
+    matchHeader.opaque = YES;
+    
+	UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 200, 35)];
+	label1.text = @"Match";
+    label1.backgroundColor = [UIColor clearColor];
+    [matchHeader addSubview:label1];
+    
+	UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(105, 0, 200, 35)];
+	label2.text = @"Type";
+    label2.backgroundColor = [UIColor clearColor];
+    [matchHeader addSubview:label2];
+    
+ 	UILabel *label3 = [[UILabel alloc] initWithFrame:CGRectMake(235, 0, 200, 35)];
+	label3.text = @"Results";
+    label3.backgroundColor = [UIColor clearColor];
+    [matchHeader addSubview:label3];
+    
+}
+
+-(void)showTeam {
+    self.title = [NSString stringWithFormat:@"%d - %@", [_team.number intValue], _team.name];
+    _numberLabel.text = [NSString stringWithFormat:@"%d", [_team.number intValue]];
+    _nameTextField.text = _team.name;
+    _notesViewField.text = _team.notes;
+    _shootingLevel.text = _team.shootsTo;
+    _auton.text = [NSString stringWithFormat:@"%d", [_team.auton intValue]];
+    _minHeight.text = [NSString stringWithFormat:@"%.1f", [_team.minHeight floatValue]];
+    _maxHeight.text = [NSString stringWithFormat:@"%.1f", [_team.maxHeight floatValue]];
+    _wheelType.text = _team.wheelType;
+    _nwheels.text = [NSString stringWithFormat:@"%d", [_team.nwheels intValue]];
+    _wheelDiameter.text = [NSString stringWithFormat:@"%.1f", [_team.wheelDiameter floatValue]];
+    _cims.text = [NSString stringWithFormat:@"%.0f", [_team.cims floatValue]];
+    
+    NSSortDescriptor *regionalSort = [NSSortDescriptor sortDescriptorWithKey:@"reg1" ascending:YES];
+    regionalList = [[_team.regional allObjects] sortedArrayUsingDescriptors:[NSArray arrayWithObject:regionalSort]];
+    
+    matchList = [[[CreateMatch alloc] initWithDataManager:_dataManager] getMatchListTournament:_team.number forTournament:settings.tournament.name];
+    
+    [_driveType setTitle:[driveDictionary getDriveTypeString:_team.driveTrainType] forState:UIControlStateNormal];
+    
+    [_intakeType setTitle:[_intakeList objectAtIndex:[_team.intake intValue]+1] forState:UIControlStateNormal];
+    
+    [_climbZone setTitle:[_climbZoneList objectAtIndex:[_team.climbLevel intValue]+1] forState:UIControlStateNormal];
+    
+    NSString *path = [NSString stringWithFormat:@"Library/RobotPhotos/%@", [NSString stringWithFormat:@"%d", [_team.number intValue]]];
     photoPath = [NSHomeDirectory() stringByAppendingPathComponent:path];
     [self getPhoto];
     dataChange = NO;
 }
 
--(void)createRegionalHeader {
-    _regionalHeader = [[UIView alloc] initWithFrame:CGRectMake(0,0,768,35)];
-    _regionalHeader.backgroundColor = [UIColor lightGrayColor];
-    _regionalHeader.opaque = YES;
-    
-	UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 200, 35)];
-	label1.text = @"Week";
-    label1.backgroundColor = [UIColor clearColor];
-    [_regionalHeader addSubview:label1];
-    
-	UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(95, 0, 200, 35)];
-	label2.text = @"Regional";
-    label2.backgroundColor = [UIColor clearColor];
-    [_regionalHeader addSubview:label2];
-    
- 	UILabel *label3 = [[UILabel alloc] initWithFrame:CGRectMake(205, 0, 200, 35)];
-	label3.text = @"Rank";
-    label3.backgroundColor = [UIColor clearColor];
-    [_regionalHeader addSubview:label3];
-    
-	UILabel *label4 = [[UILabel alloc] initWithFrame:CGRectMake(270, 0, 200, 35)];
-	label4.text = @"Record";
-    label4.backgroundColor = [UIColor clearColor];
-    [_regionalHeader addSubview:label4];
-    
-	UILabel *label5 = [[UILabel alloc] initWithFrame:CGRectMake(365, 0, 200, 35)];
-	label5.text = @"CCWM";
-    label5.backgroundColor = [UIColor clearColor];
-    [_regionalHeader addSubview:label5];
-    
-	UILabel *label6 = [[UILabel alloc] initWithFrame:CGRectMake(460, 0, 200, 35)];
-	label6.text = @"OPR";
-    label6.backgroundColor = [UIColor clearColor];
-    [_regionalHeader addSubview:label6];
-    
-    UILabel *label7 = [[UILabel alloc] initWithFrame:CGRectMake(555, 0, 200, 35)];
-	label7.text = @"Elim Position";
-    label7.backgroundColor = [UIColor clearColor];
-    [_regionalHeader addSubview:label7];
-    
-    UILabel *label8 = [[UILabel alloc] initWithFrame:CGRectMake(730, 0, 200, 35)];
-	label8.text = @"Awards";
-    label8.backgroundColor = [UIColor clearColor];
-    [_regionalHeader addSubview:label8];
+-(NSInteger)getNumberOfTeams {
+    return [[[_fetchedResultsController sections] objectAtIndex:0] numberOfObjects];
 }
 
--(void)createMatchHeader {
-    _matchHeader = [[UIView alloc] initWithFrame:CGRectMake(0,0,768,50)];
-    _matchHeader.backgroundColor = [UIColor lightGrayColor];
-    _matchHeader.opaque = YES;
-    
-	UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 200, 35)];
-	label1.text = @"Match";
-    label1.backgroundColor = [UIColor clearColor];
-    [_matchHeader addSubview:label1];
-    
-	UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(105, 0, 200, 35)];
-	label2.text = @"Type";
-    label2.backgroundColor = [UIColor clearColor];
-    [_matchHeader addSubview:label2];
-    
- 	UILabel *label3 = [[UILabel alloc] initWithFrame:CGRectMake(235, 0, 200, 35)];
-	label3.text = @"Results";
-    label3.backgroundColor = [UIColor clearColor];
-    [_matchHeader addSubview:label3];
-    
+-(IBAction)PrevButton {
+    [self checkDataStatus];
+    NSInteger nteams = [self getNumberOfTeams];
+    NSInteger row = _teamIndex.row;
+    if (row > 0) row--;
+    else row =  nteams-1;
+    _teamIndex = [NSIndexPath indexPathForRow:row inSection:0];
+    _team = [_fetchedResultsController objectAtIndexPath:_teamIndex];
+    [self showTeam];
+}
+
+-(IBAction)NextButton {
+    [self checkDataStatus];
+    NSInteger nteams = [self getNumberOfTeams];
+    NSInteger row = _teamIndex.row;
+    if (row < (nteams-1)) row++;
+    else row = 0;
+    _teamIndex = [NSIndexPath indexPathForRow:row inSection:0];
+    _team = [_fetchedResultsController objectAtIndexPath:_teamIndex];
+    [self showTeam];
+}
+
+-(void)checkDataStatus {
+    if (dataChange) {
+        _team.saved = [NSNumber numberWithInt:1];
+        _team.stacked = [NSNumber numberWithInt:0];
+        NSError *error;
+        if (![_dataManager.managedObjectContext save:&error]) {
+            NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+        }
+        dataChange = NO;
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self checkDataStatus];
+    [super viewWillDisappear:animated];
 }
 
 -(IBAction)detailChanged:(id)sender {
     UIButton * PressedButton = (UIButton*)sender;
-    if (PressedButton == intakeType) {
-        _detailSelection = SelectIntake;
+    if (PressedButton == _intakeType) {
+        popUp = _intakeType;
         if (_intakePicker == nil) {
-            _intakePicker = [[TeamDetailPickerController alloc]
+            _intakePicker = [[PopUpPickerViewController alloc]
                              initWithStyle:UITableViewStylePlain];
             _intakePicker.delegate = self;
         }
-        _intakePicker.detailChoices = _intakeList;
-        self.detailPickerPopover = [[UIPopoverController alloc]
+        _intakePicker.pickerChoices = _intakeList;
+        self.intakePickerPopover = [[UIPopoverController alloc]
                                         initWithContentViewController:_intakePicker];
+        [self.intakePickerPopover presentPopoverFromRect:PressedButton.bounds inView:PressedButton
+                                permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     }
-    else if (PressedButton == driveType) {
-        _detailSelection = SelectDriveType;
+    else if (PressedButton == _driveType) {
+        popUp = _driveType;
         if (_driveTypePicker == nil) {
-            _driveTypePicker = [[TeamDetailPickerController alloc]
+            _driveTypePicker = [[PopUpPickerViewController alloc]
                              initWithStyle:UITableViewStylePlain];
             _driveTypePicker.delegate = self;
         }
-        _driveTypePicker.detailChoices = _driveTypeList;
-        self.detailPickerPopover = [[UIPopoverController alloc]
+        _driveTypePicker.pickerChoices = _driveTypeList;
+        self.drivePickerPopover = [[UIPopoverController alloc]
                                         initWithContentViewController:_driveTypePicker];
+        [self.drivePickerPopover presentPopoverFromRect:PressedButton.bounds inView:PressedButton
+                                permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     }
-    else if (PressedButton == climbZone) {
-        _detailSelection = SelectClimbZone;
+    else if (PressedButton == _climbZone) {
+        popUp = _climbZone;
         if (_climbZonePicker == nil) {
-            _climbZonePicker = [[TeamDetailPickerController alloc]
+            _climbZonePicker = [[PopUpPickerViewController alloc]
                                 initWithStyle:UITableViewStylePlain];
             _climbZonePicker.delegate = self;
         }
-        _climbZonePicker.detailChoices = _climbZoneList;
-        self.detailPickerPopover = [[UIPopoverController alloc]
+        _climbZonePicker.pickerChoices = _climbZoneList;
+        self.climbZonePickerPopover = [[UIPopoverController alloc]
                                         initWithContentViewController:_climbZonePicker];
-    }
-    [self.detailPickerPopover presentPopoverFromRect:PressedButton.bounds inView:PressedButton
-                            permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-}
-
-- (void)detailSelected:(NSString *)newDetails {
-    [_detailPickerPopover dismissPopoverAnimated:YES];
-    switch (_detailSelection) {
-        case SelectIntake:
-            [self changeIntake:newDetails];
-            break;
-        case SelectDriveType:
-            [self changeDriveType:newDetails];
-            break;
-        case SelectClimbZone:
-            [self changeClimbZone:newDetails];
-            break;
-        default:
-            break;
+        [self.climbZonePickerPopover presentPopoverFromRect:PressedButton.bounds inView:PressedButton
+                                permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     }
 }
 
 -(void)changeIntake:(NSString *)newIntake {
    for (int i = 0 ; i < [_intakeList count] ; i++) {
         if ([newIntake isEqualToString:[_intakeList objectAtIndex:i]]) {
-            [intakeType setTitle:newIntake forState:UIControlStateNormal];
-            team.intake = [NSNumber numberWithInt:(i-1)];
+            [_intakeType setTitle:newIntake forState:UIControlStateNormal];
+            _team.intake = [NSNumber numberWithInt:(i-1)];
             dataChange = YES;
             break;
         }
@@ -316,8 +369,8 @@
 -(void)changeDriveType:(NSString *)newDriveType {
     for (int i = 0 ; i < [_driveTypeList count] ; i++) {
         if ([newDriveType isEqualToString:[_driveTypeList objectAtIndex:i]]) {
-            [driveType setTitle:newDriveType forState:UIControlStateNormal];
-            team.driveTrainType = [NSNumber numberWithInt:(i-1)];
+            [_driveType setTitle:newDriveType forState:UIControlStateNormal];
+            _team.driveTrainType = [NSNumber numberWithInt:(i-1)];
             dataChange = YES;
             break;
         }
@@ -327,11 +380,29 @@
 -(void)changeClimbZone:(NSString *)newClimbZone {
     for (int i = 0 ; i < [_climbZoneList count] ; i++) {
         if ([newClimbZone isEqualToString:[_climbZoneList objectAtIndex:i]]) {
-            [climbZone setTitle:newClimbZone forState:UIControlStateNormal];
-            team.climbLevel = [NSNumber numberWithInt:(i-1)];
+            [_climbZone setTitle:newClimbZone forState:UIControlStateNormal];
+            _team.climbLevel = [NSNumber numberWithInt:(i-1)];
             dataChange = YES;
             break;
         }
+    }
+}
+
+- (void)pickerSelected:(NSString *)newPick {
+    if (popUp == _driveType) {
+        [_drivePickerPopover dismissPopoverAnimated:YES];
+        _drivePickerPopover = nil;
+        [self changeDriveType:newPick];
+    }
+    else if (popUp == _intakeType) {
+        [_intakePickerPopover dismissPopoverAnimated:YES];
+        _intakePickerPopover = nil;
+        [self changeIntake:newPick];
+    }
+    else if (popUp == _climbZone) {
+        [_climbZonePickerPopover dismissPopoverAnimated:YES];
+        _climbZonePickerPopover = nil;
+        [self changeClimbZone:newPick];
     }
 }
 
@@ -341,35 +412,32 @@
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
 //    NSLog(@"team should end editing");
-    if (textField == nameTextField) {
-		team.name = nameTextField.text;
+    if (textField == _nameTextField) {
+		_team.name = _nameTextField.text;
 	}
-	else if (textField == notesTextField) {
-//		team.notes = notesTextField.text;
+	else if (textField == _auton) {
+		_team.auton = [NSNumber numberWithInt:[_auton.text floatValue]];
 	}
-	else if (textField == auton) {
-		team.auton = [NSNumber numberWithInt:[auton.text floatValue]];
+	else if (textField == _shootingLevel) {
+		_team.shootsTo = _shootingLevel.text;
 	}
-	else if (textField == shootingLevel) {
-		team.shootsTo = shootingLevel.text;
+	else if (textField == _minHeight) {
+		_team.minHeight = [NSNumber numberWithFloat:[_minHeight.text floatValue]];
 	}
-	else if (textField == minHeight) {
-		team.minHeight = [NSNumber numberWithFloat:[minHeight.text floatValue]];
+	else if (textField == _maxHeight) {
+		_team.maxHeight = [NSNumber numberWithFloat:[_maxHeight.text floatValue]];
 	}
-	else if (textField == maxHeight) {
-		team.maxHeight = [NSNumber numberWithFloat:[maxHeight.text floatValue]];
+	else if (textField == _wheelType) {
+		_team.wheelType = _wheelType.text;
 	}
-	else if (textField == wheelType) {
-		team.wheelType = wheelType.text;
+	else if (textField == _nwheels) {
+		_team.nwheels = [NSNumber numberWithInt:[_nwheels.text floatValue]];
 	}
-	else if (textField == nwheels) {
-		team.nwheels = [NSNumber numberWithInt:[nwheels.text floatValue]];
+	else if (textField == _wheelDiameter) {
+		_team.wheelDiameter = [NSNumber numberWithFloat:[_wheelDiameter.text floatValue]];
 	}
-	else if (textField == wheelDiameter) {
-		team.wheelDiameter = [NSNumber numberWithFloat:[wheelDiameter.text floatValue]];
-	}
-	else if (textField == cims) {
-		team.cims = [NSNumber numberWithInt:[cims.text intValue]];
+	else if (textField == _cims) {
+		_team.cims = [NSNumber numberWithInt:[_cims.text intValue]];
 	}
 
 	return YES;
@@ -382,7 +450,7 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     
-    if (textField == nameTextField || textField == notesTextField || textField == wheelType || textField == shootingLevel)  return YES;
+    if (textField == _nameTextField || textField == _wheelType || textField == _shootingLevel)  return YES;
     
     NSString *resultingString = [textField.text stringByReplacingCharactersInRange: range withString: string];
     
@@ -390,7 +458,7 @@
     if ([resultingString length] == 0) {
         return true;
     }
-    if (textField == cims || textField == nwheels) {
+    if (textField == _cims || textField == _nwheels) {
         NSInteger holder;
         NSScanner *scan = [NSScanner scannerWithString: resultingString];
         
@@ -409,7 +477,7 @@
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
-    team.notes = _notesViewField.text;
+    _team.notes = _notesViewField.text;
 }
 
 - (BOOL)textViewShouldEndEditing:(UITextView *)textView; {
@@ -440,15 +508,15 @@
     int dirCount = [dirList count];
     if (dirCount) {
         NSString  *jpgPath = [photoPath stringByAppendingPathComponent:[dirList objectAtIndex:(dirCount-1)]];
-        [imageView setImage:[UIImage imageWithContentsOfFile:jpgPath]];
-        imageView.contentMode = UIViewContentModeScaleAspectFit;
+        [_imageView setImage:[UIImage imageWithContentsOfFile:jpgPath]];
+        _imageView.contentMode = UIViewContentModeScaleAspectFit;
     }
 }
 
 - (IBAction) useCameraRoll: (id)sender
 {
-    if ([self.popoverController isPopoverVisible]) {
-        [self.popoverController dismissPopoverAnimated:YES];
+    if ([self.pictureController isPopoverVisible]) {
+        [self.pictureController dismissPopoverAnimated:YES];
     } else {
         if ([UIImagePickerController isSourceTypeAvailable:
              UIImagePickerControllerSourceTypeSavedPhotosAlbum])
@@ -463,12 +531,12 @@
             //                                      nil];
             imagePicker.allowsEditing = NO;
             
-            self.popoverController = [[UIPopoverController alloc]
+            self.pictureController = [[UIPopoverController alloc]
                                       initWithContentViewController:imagePicker];
             
-            popoverController.delegate = self;
+            _pictureController.delegate = self;
             
-            [popoverController presentPopoverFromRect:choosePhotoBtn.bounds inView:choosePhotoBtn 
+            [_pictureController presentPopoverFromRect:_choosePhotoBtn.bounds inView:_choosePhotoBtn
                              permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
             //            newMedia = NO;
         }
@@ -476,9 +544,9 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)img editingInfo:(NSDictionary *)editInfo {
-	imageView.image = img;
+	_imageView.image = img;
     [self savePhoto:img];
-    [self.popoverController dismissPopoverAnimated:true];
+    [self.pictureController dismissPopoverAnimated:true];
     [picker dismissModalViewControllerAnimated:YES];
 }
 
@@ -495,14 +563,14 @@
     }
     // Create paths to output images
     NSString *number;
-    if ([team.number intValue] < 100) {
-        number = [NSString stringWithFormat:@"T%@", [NSString stringWithFormat:@"00%d", [team.number intValue]]];
-    } else if ( [team.number intValue] < 1000) {
-        number = [NSString stringWithFormat:@"T%@", [NSString stringWithFormat:@"0%d", [team.number intValue]]];
+    if ([_team.number intValue] < 100) {
+        number = [NSString stringWithFormat:@"T%@", [NSString stringWithFormat:@"00%d", [_team.number intValue]]];
+    } else if ( [_team.number intValue] < 1000) {
+        number = [NSString stringWithFormat:@"T%@", [NSString stringWithFormat:@"0%d", [_team.number intValue]]];
     } else {
-        number = [NSString stringWithFormat:@"T%@", [NSString stringWithFormat:@"%d", [team.number intValue]]];
+        number = [NSString stringWithFormat:@"T%@", [NSString stringWithFormat:@"%d", [_team.number intValue]]];
     }
-    //    NSString  *imgName = [NSString stringWithFormat:@"%d", [team.number intValue], @"img001"];
+    //    NSString  *imgName = [NSString stringWithFormat:@"%d", [_team.number intValue], @"img001"];
 //    NSString  *pngPath = [photoPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_img001.png", number]];
     NSString  *jpgPath;
     NSError *fileError;
@@ -532,9 +600,10 @@
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    NSIndexPath *indexPath = [ self.matchInfo indexPathForCell:sender];
+    NSIndexPath *indexPath = [self.matchInfo indexPathForCell:sender];
     [segue.destinationViewController setDrawDirectory:settings.tournament.directory];
     [segue.destinationViewController setTeamScores:matchList];
+    [segue.destinationViewController setStartingIndex:indexPath.row];
     [_matchInfo deselectRowAtIndexPath:indexPath animated:YES];
 }
 
@@ -542,8 +611,8 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
-    if (tableView == _regionalInfo) return _regionalHeader;
-    if (tableView == _matchInfo) return _matchHeader;
+    if (tableView == _regionalInfo) return regionalHeader;
+    if (tableView == _matchInfo) return matchHeader;
     
     return nil;
 }
@@ -561,13 +630,13 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (tableView == _regionalInfo) return [_regionalList count];
+    if (tableView == _regionalInfo) return [regionalList count];
     else return [matchList count];
  
 }
 
 - (void)configureRegionalCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    Regional *regional = [_regionalList objectAtIndex:indexPath.row];
+    Regional *regional = [regionalList objectAtIndex:indexPath.row];
        // Configure the cell...
        // Set a background for the cell
      // UIImageView *tableBackground = [[UIImageView alloc] initWithFrame:cell.frame];
@@ -665,24 +734,6 @@
     if (teamScore.blue3) return teamScore.blue3; */
     
     return nil; 
-}
-
-- (void)viewDidUnload
-{
-    [self setMatchHeader:nil];
-    [self setRegionalHeader:nil];
-    [self setRegionalInfo:nil];
-    [self setRegionalHeader:nil];
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-- (void)viewWillDisappear:(BOOL)animated { // Called when the view is dismissed, covered or otherwise hidden. Default does nothing
-    if (dataChange) {
-        team.saved = [NSNumber numberWithInt:1];
-        team.stacked = [NSNumber numberWithInt:0];
-    }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

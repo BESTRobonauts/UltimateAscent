@@ -28,6 +28,7 @@
 
 @implementation MasonPageViewController {
     int numberMatchTypes;
+    CalculateTeamStats *teamStats;
     MatchTypeDictionary *matchDictionary;
     NSFileManager *fileManager;
     NSString *storePath;
@@ -136,6 +137,7 @@
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
+    teamStats = [[CalculateTeamStats alloc] initWithDataManager:_dataManager];
     matchDictionary = [[MatchTypeDictionary alloc] init];
     
     matchTypeList = [self getMatchTypeList];
@@ -485,9 +487,6 @@
     if (!data) return;
 
     TeamScore *score;
-    CalculateTeamStats *teamStats = [CalculateTeamStats new];
-    teamStats.managedObjectContext = _managedObjectContext;
-    Statistics *stats;
     [teamData removeAllObjects];
 
     if ([data count] == 6) {
@@ -496,23 +495,23 @@
             score = [data objectAtIndex:i];
             [_teamList replaceObjectAtIndex:(i-3)
                                 withObject:[NSString stringWithFormat:@"%d", [score.team.number intValue]]];
-            stats = [teamStats calculateMason:score.team forTournament:_settings.tournament.name];
+            [teamStats calculateMasonStats:score.team forTournament:_settings.tournament.name];
             [_teamMatches replaceObjectAtIndex:(i-3)
-                                    withObject:[NSString stringWithFormat:@"%d", [stats.stat1 intValue]]];
+                                    withObject:[NSString stringWithFormat:@"%d", teamStats.nmatches]];
             [_teamAuton replaceObjectAtIndex:(i-3)
-                                    withObject:[NSString stringWithFormat:@"%d", [stats.autonPoints intValue]]];
+                                    withObject:[NSString stringWithFormat:@"%d", teamStats.autonPoints]];
             [_teamTeleOp replaceObjectAtIndex:(i-3)
-                                  withObject:[NSString stringWithFormat:@"%d", [stats.teleOpPoints intValue]]];
+                                  withObject:[NSString stringWithFormat:@"%d", teamStats.teleOpPoints]];
             [_teamHang replaceObjectAtIndex:(i-3)
-                                   withObject:[NSString stringWithFormat:@"%d", [stats.stat5 intValue]]];
+                                   withObject:[NSString stringWithFormat:@"%d", teamStats.hangs]];
             [_teamHangLevel replaceObjectAtIndex:(i-3)
-                                    withObject:[NSString stringWithFormat:@"%.1f", [stats.aveClimbHeight floatValue]]];
+                                    withObject:[NSString stringWithFormat:@"%.1f", teamStats.aveClimbHeight]];
             [_teamDriving replaceObjectAtIndex:(i-3)
-                                 withObject:[NSString stringWithFormat:@"%.1f", [stats.stat2 floatValue]]];
+                                 withObject:[NSString stringWithFormat:@"%.1f", teamStats.aveDriving]];
             [_teamDefense replaceObjectAtIndex:(i-3)
-                                 withObject:[NSString stringWithFormat:@"%.1f", [stats.stat3 floatValue]]];
+                                 withObject:[NSString stringWithFormat:@"%.1f", teamStats.aveDefense]];
             [_teamSpeed replaceObjectAtIndex:(i-3)
-                                 withObject:[NSString stringWithFormat:@"%.1f", [stats.stat4 floatValue]]];
+                                 withObject:[NSString stringWithFormat:@"%.1f", teamStats.aveSpeed]];
             if (score.team.minHeight) {
                 [_teamHeight replaceObjectAtIndex:(i-3)
                                   withObject:[NSString stringWithFormat:@"%.1f", [score.team.minHeight floatValue]]];
@@ -527,23 +526,23 @@
             score = [data objectAtIndex:i];
             [_teamList replaceObjectAtIndex:(i+3)
                                  withObject:[NSString stringWithFormat:@"%d", [score.team.number intValue]]];
-            stats = [teamStats calculateMason:score.team forTournament:_settings.tournament.name];
+            [teamStats calculateMasonStats:score.team forTournament:_settings.tournament.name];
             [_teamMatches replaceObjectAtIndex:(i+3)
-                                    withObject:[NSString stringWithFormat:@"%d", [stats.stat1 intValue]]];
+                                    withObject:[NSString stringWithFormat:@"%d", teamStats.nmatches]];
             [_teamAuton replaceObjectAtIndex:(i+3)
-                                  withObject:[NSString stringWithFormat:@"%d", [stats.autonPoints intValue]]];
+                                  withObject:[NSString stringWithFormat:@"%d", teamStats.autonPoints]];
             [_teamTeleOp replaceObjectAtIndex:(i+3)
-                                   withObject:[NSString stringWithFormat:@"%d", [stats.teleOpPoints intValue]]];
+                                   withObject:[NSString stringWithFormat:@"%d", teamStats.teleOpPoints]];
             [_teamHang replaceObjectAtIndex:(i+3)
-                                 withObject:[NSString stringWithFormat:@"%d", [stats.stat5 intValue]]];
+                                 withObject:[NSString stringWithFormat:@"%d", teamStats.hangs]];
             [_teamHangLevel replaceObjectAtIndex:(i+3)
-                                      withObject:[NSString stringWithFormat:@"%.1f", [stats.aveClimbHeight floatValue]]];
+                                      withObject:[NSString stringWithFormat:@"%.1f", teamStats.aveClimbHeight]];
             [_teamDriving replaceObjectAtIndex:(i+3)
-                                    withObject:[NSString stringWithFormat:@"%.1f", [stats.stat2 floatValue]]];
+                                    withObject:[NSString stringWithFormat:@"%.1f", teamStats.aveDriving]];
             [_teamDefense replaceObjectAtIndex:(i+3)
-                                    withObject:[NSString stringWithFormat:@"%.1f", [stats.stat3 floatValue]]];
+                                    withObject:[NSString stringWithFormat:@"%.1f", teamStats.aveDefense]];
             [_teamSpeed replaceObjectAtIndex:(i+3)
-                                  withObject:[NSString stringWithFormat:@"%.1f", [stats.stat4 floatValue]]];
+                                  withObject:[NSString stringWithFormat:@"%.1f", teamStats.aveSpeed]];
             if (score.team.minHeight) {
                 [_teamHeight replaceObjectAtIndex:(i+3)
                                        withObject:[NSString stringWithFormat:@"%.1f", [score.team.minHeight floatValue]]];
@@ -783,10 +782,32 @@
 
 -(void)SetBigButtonDefaults:(UIButton *)currentButton {
     currentButton.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:24.0];
+    // Round button corners
+    CALayer *btnLayer = [currentButton layer];
+    [btnLayer setMasksToBounds:YES];
+    [btnLayer setCornerRadius:10.0f];
+    // Apply a 1 pixel, black border
+    [btnLayer setBorderWidth:1.0f];
+    [btnLayer setBorderColor:[[UIColor blackColor] CGColor]];
+    // Set the button Background Color
+    [currentButton setBackgroundColor:[UIColor whiteColor]];
+    // Set the button Text Color
+    [currentButton setTitleColor:[UIColor colorWithRed:(0.0/255) green:(0.0/255) blue:(120.0/255) alpha:1.0 ]forState: UIControlStateNormal];
 }
 
 -(void)SetSmallButtonDefaults:(UIButton *)currentButton {
     currentButton.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:15.0];
+    // Round button corners
+    CALayer *btnLayer = [currentButton layer];
+    [btnLayer setMasksToBounds:YES];
+    [btnLayer setCornerRadius:10.0f];
+    // Apply a 1 pixel, black border
+    [btnLayer setBorderWidth:1.0f];
+    [btnLayer setBorderColor:[[UIColor blackColor] CGColor]];
+    // Set the button Background Color
+    [currentButton setBackgroundColor:[UIColor whiteColor]];
+    // Set the button Text Color
+    [currentButton setTitleColor:[UIColor colorWithRed:(0.0/255) green:(0.0/255) blue:(120.0/255) alpha:1.0 ]forState: UIControlStateNormal];
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {

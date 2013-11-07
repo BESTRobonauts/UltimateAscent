@@ -7,64 +7,64 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TeamDetailPickerController.h"
+#import "PopUpPickerViewController.h"
 
 @class DataManager;
 @class TeamData;
 @class MatchData;
 @class TeamScore;
 
-@interface TeamDetailViewController : UIViewController <UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPopoverControllerDelegate, UITableViewDelegate, UITableViewDataSource, TeamDetailPickerDelegate>
+@interface TeamDetailViewController : UIViewController <UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPopoverControllerDelegate, UITableViewDelegate, UITableViewDataSource, PopUpPickerDelegate>
 
-@property (nonatomic, retain) DataManager *dataManager;
-@property (nonatomic, retain) TeamData *team;
-@property (nonatomic, retain) IBOutlet UILabel *numberLabel;
-@property (nonatomic, retain) IBOutlet UITextField *nameTextField;
-@property (nonatomic, retain) IBOutlet UITextView *notesViewField;
-@property (nonatomic, retain) IBOutlet UITextField *notesTextField;
-@property (nonatomic, retain) IBOutlet UIImageView *imageView;
-@property (nonatomic, retain) IBOutlet UIButton *intakeType;
-@property (nonatomic, retain) IBOutlet UIButton *climbZone;
-@property (nonatomic, retain) IBOutlet UITextField *shootingLevel;
-@property (nonatomic, retain) IBOutlet UITextField *auton;
-@property (nonatomic, retain) IBOutlet UITextField *minHeight;
-@property (nonatomic, retain) IBOutlet UITextField *maxHeight;
-@property (nonatomic, retain) IBOutlet UITextField *wheelType;
-@property (nonatomic, retain) IBOutlet UITextField *nwheels;
-@property (nonatomic, retain) IBOutlet UITextField *wheelDiameter;
-@property (nonatomic, retain) IBOutlet UIButton *driveType;
-@property (nonatomic, retain) IBOutlet UITextField *cims;
-@property (nonatomic, retain) IBOutlet UIButton *choosePhotoBtn;
-@property (nonatomic, retain) IBOutlet UIButton *takePhotoBtn;
-@property (nonatomic, retain) UIPopoverController *popoverController;
-@property (nonatomic, retain) NSString *photoPath;
-@property (nonatomic, assign) BOOL dataChange;
+@property (nonatomic, strong) DataManager *dataManager;
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong) NSIndexPath *teamIndex;
+@property (nonatomic, strong) TeamData *team;
+@property (nonatomic, weak) IBOutlet UIButton *prevTeamButton;
+@property (nonatomic, weak) IBOutlet UIButton *nextTeamButton;
+@property (nonatomic, weak) IBOutlet UILabel *numberLabel;
+@property (nonatomic, weak) IBOutlet UITextField *nameTextField;
+@property (nonatomic, weak) IBOutlet UITextView *notesViewField;
+@property (nonatomic, weak) IBOutlet UIImageView *imageView;
+@property (nonatomic, weak) IBOutlet UIButton *intakeType;
+@property (nonatomic, weak) IBOutlet UIButton *climbZone;
+@property (nonatomic, weak) IBOutlet UITextField *shootingLevel;
+@property (nonatomic, weak) IBOutlet UITextField *auton;
+@property (nonatomic, weak) IBOutlet UITextField *minHeight;
+@property (nonatomic, weak) IBOutlet UITextField *maxHeight;
+@property (nonatomic, weak) IBOutlet UITextField *wheelType;
+@property (nonatomic, weak) IBOutlet UITextField *nwheels;
+@property (nonatomic, weak) IBOutlet UITextField *wheelDiameter;
+@property (nonatomic, weak) IBOutlet UIButton *driveType;
+@property (nonatomic, weak) IBOutlet UITextField *cims;
+@property (nonatomic, weak) IBOutlet UIButton *choosePhotoBtn;
+@property (nonatomic, weak) IBOutlet UIButton *takePhotoBtn;
+@property (nonatomic, strong) UIPopoverController *pictureController;
 
-typedef enum {
-	SelectIntake,
-	SelectClimbZone,
-	SelectDriveType,
-} DetailSelection;
+@property (nonatomic, strong) PopUpPickerViewController *driveTypePicker;
+@property (nonatomic, strong) UIPopoverController *drivePickerPopover;
+@property (nonatomic, strong) NSMutableArray *driveTypeList;
 
-@property (nonatomic, retain) NSMutableArray *intakeList;
-@property (nonatomic, retain) NSMutableArray *climbZoneList;
-@property (nonatomic, retain) NSMutableArray *driveTypeList;
-@property (nonatomic, assign) DetailSelection detailSelection;
-@property (nonatomic, retain) TeamDetailPickerController *intakePicker;
-@property (nonatomic, retain) TeamDetailPickerController *driveTypePicker;
-@property (nonatomic, retain) TeamDetailPickerController *climbZonePicker;
-@property (nonatomic, retain) UIPopoverController *detailPickerPopover;
-@property (nonatomic, strong) NSArray *regionalList;
+@property (nonatomic, strong) PopUpPickerViewController *intakePicker;
+@property (nonatomic, strong) UIPopoverController *intakePickerPopover;
+@property (nonatomic, strong) NSMutableArray *intakeList;
+
+@property (nonatomic, strong) PopUpPickerViewController *climbZonePicker;
+@property (nonatomic, strong) UIPopoverController *climbZonePickerPopover;
+@property (nonatomic, strong) NSMutableArray *climbZoneList;
+
+@property (nonatomic, weak) IBOutlet UITableView *matchInfo;
+@property (nonatomic, weak) IBOutlet UITableView *regionalInfo;
+
+-(IBAction)PrevButton;
+-(IBAction)NextButton;
+-(void)checkDataStatus;
+-(void)showTeam;
+-(NSInteger)getNumberOfTeams;
 -(IBAction)detailChanged:(id)sender;
 -(void)changeIntake:(NSString *)newIntake;
 -(void)changeDriveType:(NSString *)newDriveType;
 -(void)changeClimbZone:(NSString *)newClimbZone;
-
-@property (nonatomic, retain) IBOutlet UITableView *matchInfo;
-@property (nonatomic, retain) UIView *matchHeader;
-
-@property (nonatomic, retain) IBOutlet UITableView *regionalInfo;
-@property (nonatomic, retain) UIView *regionalHeader;
 
 -(void)createRegionalHeader;
 -(void)createMatchHeader;

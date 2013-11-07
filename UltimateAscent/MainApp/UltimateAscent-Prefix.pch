@@ -26,6 +26,17 @@ typedef enum {
 } MatchType;
 
 typedef enum {
+    DriveUnknown = -1,
+    Mech,
+    Omni,
+    Swerve,
+    Traction,
+    Multi,
+    Tank,
+    WestCoast
+} DriveType;
+
+typedef enum {
 	Scouter,     // This is a scounting iPad
 	Master,      // This is the master iPad
 } BlueToothType;

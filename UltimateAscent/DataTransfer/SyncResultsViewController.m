@@ -114,7 +114,7 @@ GKPeerPickerController *picker;
     [_headerView addSubview:teamLabel];
 
     UILabel *syncLabel = [[UILabel alloc] initWithFrame:CGRectMake(290, 11, 65, 21)];
-	syncLabel.text = @"Saved";
+	syncLabel.text = @"Synced";
     syncLabel.backgroundColor = [UIColor clearColor];
     [_headerView addSubview:syncLabel];
 }
@@ -154,6 +154,8 @@ GKPeerPickerController *picker;
     [_peerLabel setHidden:NO];
     [_peerName setHidden:NO];
     _peerName.text = [session displayNameForPeer:peerID];
+    [_sendDataTable setHidden:NO];
+    [_receiveDataTable setHidden:NO];
     picker.delegate = nil;
     
     [picker dismiss];
@@ -411,7 +413,7 @@ GKPeerPickerController *picker;
     teamLabel.text = [NSString stringWithFormat:@"%d", [info.team.number intValue]];
 
 	UILabel *syncLabel = (UILabel *)[cell viewWithTag:40];
-    syncLabel.text = ([info.saved intValue] == 0) ? @"N" : @"Y";
+    syncLabel.text = ([info.synced intValue] == 0) ? @"N" : @"Y";
 }
 
 - (void)configureReceivedCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
@@ -485,6 +487,7 @@ GKPeerPickerController *picker;
  */
 
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self configureCell:[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
 
 }
 
@@ -502,8 +505,8 @@ GKPeerPickerController *picker;
         NSSortDescriptor *numberDescriptor = [[NSSortDescriptor alloc] initWithKey:@"match.number" ascending:YES];
         NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:typeDescriptor, numberDescriptor, nil];
         NSLog(@"Fix this");
-        NSPredicate *pred = [NSPredicate predicateWithFormat:@"ANY tournament = %@", settings.tournament];
-//        NSPredicate *pred = [NSPredicate predicateWithFormat:@"(ANY tournament = %@) AND (saved == 1) AND (synced == 1)", settings.tournament];
+ //       NSPredicate *pred = [NSPredicate predicateWithFormat:@"ANY tournament = %@", settings.tournament];
+        NSPredicate *pred = [NSPredicate predicateWithFormat:@"(ANY tournament = %@) AND (saved == 1)", settings.tournament];
         [fetchRequest setPredicate:pred];
         [fetchRequest setSortDescriptors:sortDescriptors];
         

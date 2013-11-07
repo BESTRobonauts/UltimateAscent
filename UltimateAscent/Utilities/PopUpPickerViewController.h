@@ -15,7 +15,7 @@
 
 @interface PopUpPickerViewController : UITableViewController
 
-@property (nonatomic, retain) NSMutableArray *pickerChoices;
-@property (nonatomic, assign) id<PopUpPickerDelegate> delegate;
+@property (nonatomic, strong) NSMutableArray *pickerChoices;
+@property (nonatomic, weak) id<PopUpPickerDelegate> delegate;
 
 @end

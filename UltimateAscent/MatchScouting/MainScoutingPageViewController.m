@@ -206,6 +206,7 @@
     [self SetSmallButtonDefaults:wall2Button];
     [self SetSmallButtonDefaults:wall3Button];
     [self SetSmallButtonDefaults:wall4Button];
+    [self SetSmallButtonDefaults:_eraserButton];
     [self SetBigButtonDefaults:floorPickUpsButton];
     [self SetTextBoxDefaults:redScore];
     [self SetTextBoxDefaults:blueScore];
@@ -229,6 +230,7 @@
     climbLevel = [[UISegmentedControl alloc] initWithItems:itemArray];
     climbLevel.frame = CGRectMake(738, 600, 207, 44);
     [climbLevel addTarget:self action:@selector(setClimbSegment:) forControlEvents:UIControlEventValueChanged];
+    [climbLevel setTintColor:[UIColor colorWithRed:(0.0/255) green:(0.0/255) blue:(120.0/255) alpha:1.0 ]];
     [self.view addSubview:climbLevel];
     
     [self SetTextBoxDefaults:notes];
@@ -1130,6 +1132,7 @@
     
     if (button == teamEdit) {
         TeamDetailViewController *detailViewController = [segue destinationViewController];
+        [segue.destinationViewController setDataManager:_dataManager];
         detailViewController.team = currentTeam.team;
     }
     else {
@@ -1738,10 +1741,32 @@
 
 -(void)SetBigButtonDefaults:(UIButton *)currentButton {
     currentButton.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:24.0];
+    // Round button corners
+    CALayer *btnLayer = [currentButton layer];
+    [btnLayer setMasksToBounds:YES];
+    [btnLayer setCornerRadius:10.0f];
+    // Apply a 1 pixel, black border
+    [btnLayer setBorderWidth:1.0f];
+    [btnLayer setBorderColor:[[UIColor blackColor] CGColor]];
+    // Set the button Background Color
+    [currentButton setBackgroundColor:[UIColor whiteColor]];
+    // Set the button Text Color
+    [currentButton setTitleColor:[UIColor colorWithRed:(0.0/255) green:(0.0/255) blue:(120.0/255) alpha:1.0 ]forState: UIControlStateNormal];
 }
 
 -(void)SetSmallButtonDefaults:(UIButton *)currentButton {
     currentButton.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:15.0];
+    // Round button corners
+    CALayer *btnLayer = [currentButton layer];
+    [btnLayer setMasksToBounds:YES];
+    [btnLayer setCornerRadius:10.0f];
+    // Apply a 1 pixel, black border
+    [btnLayer setBorderWidth:1.0f];
+    [btnLayer setBorderColor:[[UIColor blackColor] CGColor]];
+    // Set the button Background Color
+    [currentButton setBackgroundColor:[UIColor whiteColor]];
+    // Set the button Text Color
+    [currentButton setTitleColor:[UIColor colorWithRed:(0.0/255) green:(0.0/255) blue:(120.0/255) alpha:1.0 ]forState: UIControlStateNormal];
 }
 
 - (NSFetchedResultsController *)fetchedResultsController {

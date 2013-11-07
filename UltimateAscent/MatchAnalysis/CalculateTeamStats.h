@@ -9,10 +9,25 @@
 #import <Foundation/Foundation.h>
 
 @class TeamData;
-@class Statistics;
+@class DataManager;
 
 @interface CalculateTeamStats : NSObject
-@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
--(Statistics *)calculateMason:(TeamData *)team forTournament:(NSString *)tournament;
+@property (nonatomic, strong) DataManager *dataManager;
+@property (nonatomic, assign) int nmatches;
+@property (nonatomic, assign) float autonAccuracy;
+@property (nonatomic, assign) int autonPoints;
+@property (nonatomic, assign) int aveAuton;
+@property (nonatomic, assign) float aveClimbHeight;
+@property (nonatomic, assign) float aveClimbTime;
+@property (nonatomic, assign) int aveTeleOp;
+@property (nonatomic, assign) float aveDriving;
+@property (nonatomic, assign) float aveDefense;
+@property (nonatomic, assign) float aveSpeed;
+@property (nonatomic, assign) BOOL hangs;
+@property (nonatomic, assign) float teleOpAccuracy;
+@property (nonatomic, assign) int teleOpPoints;
+- (id)initWithDataManager:(DataManager *)initManager;
+-(void)calculateMasonStats:(TeamData *)team forTournament:(NSString *)tournament;
+-(void)setDefaults;
 
 @end

@@ -10,6 +10,7 @@
 		21528C9816AA215800CF7E8E /* CreateMatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 21528C9516AA215800CF7E8E /* CreateMatch.m */; };
 		21EBC7D716B358D000CBFDFD /* TeamDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21EBC7D616B358D000CBFDFD /* TeamDetailViewController.m */; };
 		21F72D6016A78135000B99AB /* TeamListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21F72D5F16A78135000B99AB /* TeamListViewController.m */; };
+		2F042013181F19D4003B994B /* LucienTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F042012181F19D4003B994B /* LucienTableViewController.m */; };
 		2F06F98A17248EE8002C947D /* ftpTransferViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F06F98917248EE8002C947D /* ftpTransferViewController.m */; };
 		2F06F98D1724B180002C947D /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F06F98C1724B180002C947D /* NetworkManager.m */; };
 		2F06F9901724CB70002C947D /* LucienPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F06F98F1724CB70002C947D /* LucienPageViewController.m */; };
@@ -57,7 +58,6 @@
 		2F56B57017052BDB0093A976 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F56B56F17052BDA0093A976 /* Security.framework */; };
 		2F56B573170532F60093A976 /* StackMobExportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F56B572170532F60093A976 /* StackMobExportViewController.m */; };
 		2F5D64BF179212EB0028F57D /* LucienNumberObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D64BE179212EB0028F57D /* LucienNumberObject.m */; };
-		2F5D64C5179220280028F57D /* LucienTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D64C4179220280028F57D /* LucienTableViewController.m */; };
 		2F621F25170DE91300D2ABD1 /* iDeviceExportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F621F24170DE91200D2ABD1 /* iDeviceExportViewController.m */; };
 		2F621F28170DEC9F00D2ABD1 /* SyncMatchListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F621F27170DEC9E00D2ABD1 /* SyncMatchListViewController.m */; };
 		2F621F2B170DF2FE00D2ABD1 /* ImportDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F621F2A170DF2FE00D2ABD1 /* ImportDeviceViewController.m */; };
@@ -78,6 +78,8 @@
 		2F8A13FD1703C8DB00866519 /* UltimateAscent.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2F8A13FB1703C8DB00866519 /* UltimateAscent.xcdatamodeld */; };
 		2F8A14141703EB0900866519 /* UltimateAscent.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = 2F8A13FB1703C8DB00866519 /* UltimateAscent.xcdatamodeld */; };
 		2F8FC26016E999E500992F85 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F8FC25F16E999E500992F85 /* GameKit.framework */; };
+		2F94C1321815B7F5003BB560 /* DriveTypeDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F94C1311815B7F5003BB560 /* DriveTypeDictionary.m */; };
+		2F94C1351815B80A003BB560 /* AddTeamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F94C1341815B80A003BB560 /* AddTeamViewController.m */; };
 		2F99088C1787860700EEFFCE /* T0973_img001.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2F99088B1787860700EEFFCE /* T0973_img001.jpg */; };
 		2F9C12DF1708815C005EE9D3 /* TeamData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9C12DE1708815C005EE9D3 /* TeamData.m */; };
 		2FB29C8316F9620700086C08 /* FieldDrawingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB29C8216F9620700086C08 /* FieldDrawingViewController.m */; };
@@ -101,11 +103,11 @@
 		2FC18F1316A21AA900D42251 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC18F1216A21AA900D42251 /* DataManager.m */; };
 		2FC3B1E816E8107900DF70F4 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FC3B1E716E8107900DF70F4 /* MessageUI.framework */; };
 		2FC5D8C916C473820043F68A /* 2013_field.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FC5D8C816C473820043F68A /* 2013_field.png */; };
+		2FC71CDB18246C3900A73931 /* UltimateAscent.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 2FC71CDA18246C3900A73931 /* UltimateAscent.sqlite */; };
 		2FCE54FA16CC271A00884191 /* Small Blue Button.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2FCE54F816CC271A00884191 /* Small Blue Button.jpg */; };
 		2FCE54FB16CC271A00884191 /* Small Red Button.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2FCE54F916CC271A00884191 /* Small Red Button.jpg */; };
 		2FCE54FD16CC29AB00884191 /* Small Green Button.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2FCE54FC16CC29AB00884191 /* Small Green Button.jpg */; };
 		2FCE54FF16CC29B600884191 /* Small White Button.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2FCE54FE16CC29B600884191 /* Small White Button.jpg */; };
-		2FD5595B16FA61F70099C5D9 /* TeamDetailPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FD5595A16FA61F70099C5D9 /* TeamDetailPickerController.m */; };
 		2FD7E9E716E8C3540075533C /* TeamList.csv in Resources */ = {isa = PBXBuildFile; fileRef = 2FD7E9E616E8C3540075533C /* TeamList.csv */; };
 		2FD7E9E916E8DA130075533C /* MatchList.csv in Resources */ = {isa = PBXBuildFile; fileRef = 2FD7E9E816E8DA130075533C /* MatchList.csv */; };
 		2FEBE13116F226B40094E2C3 /* MatchResults.csv in Resources */ = {isa = PBXBuildFile; fileRef = 2FEBE13016F226B40094E2C3 /* MatchResults.csv */; };
@@ -124,6 +126,8 @@
 		21EBC7D616B358D000CBFDFD /* TeamDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = TeamDetailViewController.m; path = TeamScouting/TeamDetailViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		21F72D5E16A78135000B99AB /* TeamListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TeamListViewController.h; path = TeamScouting/TeamListViewController.h; sourceTree = "<group>"; };
 		21F72D5F16A78135000B99AB /* TeamListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TeamListViewController.m; path = TeamScouting/TeamListViewController.m; sourceTree = "<group>"; };
+		2F042011181F19D4003B994B /* LucienTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LucienTableViewController.h; path = MatchAnalysis/LucienTableViewController.h; sourceTree = "<group>"; };
+		2F042012181F19D4003B994B /* LucienTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LucienTableViewController.m; path = MatchAnalysis/LucienTableViewController.m; sourceTree = "<group>"; };
 		2F06F98817248EE8002C947D /* ftpTransferViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ftpTransferViewController.h; path = DataTransfer/ftpTransferViewController.h; sourceTree = "<group>"; };
 		2F06F98917248EE8002C947D /* ftpTransferViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ftpTransferViewController.m; path = DataTransfer/ftpTransferViewController.m; sourceTree = "<group>"; };
 		2F06F98B1724B17F002C947D /* NetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NetworkManager.h; path = DataTransfer/NetworkManager.h; sourceTree = "<group>"; };
@@ -249,8 +253,6 @@
 		2F56B572170532F60093A976 /* StackMobExportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StackMobExportViewController.m; path = DataExport/StackMobExportViewController.m; sourceTree = "<group>"; };
 		2F5D64BD179212EB0028F57D /* LucienNumberObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LucienNumberObject.h; path = MatchAnalysis/LucienNumberObject.h; sourceTree = "<group>"; };
 		2F5D64BE179212EB0028F57D /* LucienNumberObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LucienNumberObject.m; path = MatchAnalysis/LucienNumberObject.m; sourceTree = "<group>"; };
-		2F5D64C3179220280028F57D /* LucienTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LucienTableViewController.h; sourceTree = "<group>"; };
-		2F5D64C4179220280028F57D /* LucienTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LucienTableViewController.m; sourceTree = "<group>"; };
 		2F621F23170DE91200D2ABD1 /* iDeviceExportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iDeviceExportViewController.h; path = DataExport/iDeviceExportViewController.h; sourceTree = "<group>"; };
 		2F621F24170DE91200D2ABD1 /* iDeviceExportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iDeviceExportViewController.m; path = DataExport/iDeviceExportViewController.m; sourceTree = "<group>"; };
 		2F621F26170DEC9E00D2ABD1 /* SyncMatchListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SyncMatchListViewController.h; path = DataTransfer/SyncMatchListViewController.h; sourceTree = "<group>"; };
@@ -284,6 +286,10 @@
 		2F8A13FC1703C8DB00866519 /* UltimateAscent.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UltimateAscent.xcdatamodel; sourceTree = "<group>"; };
 		2F8A13FE1703C98D00866519 /* UltimateAscent 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "UltimateAscent 2.xcdatamodel"; sourceTree = "<group>"; };
 		2F8FC25F16E999E500992F85 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		2F94C1301815B7F5003BB560 /* DriveTypeDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DriveTypeDictionary.h; sourceTree = "<group>"; };
+		2F94C1311815B7F5003BB560 /* DriveTypeDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DriveTypeDictionary.m; sourceTree = "<group>"; };
+		2F94C1331815B80A003BB560 /* AddTeamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddTeamViewController.h; sourceTree = "<group>"; };
+		2F94C1341815B80A003BB560 /* AddTeamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddTeamViewController.m; sourceTree = "<group>"; };
 		2F99088B1787860700EEFFCE /* T0973_img001.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = T0973_img001.jpg; path = Resources/T0973_img001.jpg; sourceTree = "<group>"; };
 		2F9C12DC170880C9005EE9D3 /* UltimateAscent 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "UltimateAscent 3.xcdatamodel"; sourceTree = "<group>"; };
 		2F9C12DD1708815C005EE9D3 /* TeamData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TeamData.h; path = DataModels/TeamData.h; sourceTree = "<group>"; };
@@ -325,12 +331,11 @@
 		2FC18F1216A21AA900D42251 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataManager.m; path = DataManagement/DataManager.m; sourceTree = "<group>"; };
 		2FC3B1E716E8107900DF70F4 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		2FC5D8C816C473820043F68A /* 2013_field.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 2013_field.png; path = Resources/2013_field.png; sourceTree = "<group>"; };
+		2FC71CDA18246C3900A73931 /* UltimateAscent.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = UltimateAscent.sqlite; path = Resources/UltimateAscent.sqlite; sourceTree = "<group>"; };
 		2FCE54F816CC271A00884191 /* Small Blue Button.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Small Blue Button.jpg"; path = "Resources/Small Blue Button.jpg"; sourceTree = "<group>"; };
 		2FCE54F916CC271A00884191 /* Small Red Button.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Small Red Button.jpg"; path = "Resources/Small Red Button.jpg"; sourceTree = "<group>"; };
 		2FCE54FC16CC29AB00884191 /* Small Green Button.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Small Green Button.jpg"; path = "Resources/Small Green Button.jpg"; sourceTree = "<group>"; };
 		2FCE54FE16CC29B600884191 /* Small White Button.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Small White Button.jpg"; path = "Resources/Small White Button.jpg"; sourceTree = "<group>"; };
-		2FD5595916FA61F70099C5D9 /* TeamDetailPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TeamDetailPickerController.h; path = TeamScouting/TeamDetailPickerController.h; sourceTree = "<group>"; };
-		2FD5595A16FA61F70099C5D9 /* TeamDetailPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TeamDetailPickerController.m; path = TeamScouting/TeamDetailPickerController.m; sourceTree = "<group>"; };
 		2FD7E9E616E8C3540075533C /* TeamList.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TeamList.csv; path = Resources/TeamList.csv; sourceTree = "<group>"; };
 		2FD7E9E816E8DA130075533C /* MatchList.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = MatchList.csv; path = Resources/MatchList.csv; sourceTree = "<group>"; };
 		2FEBE13016F226B40094E2C3 /* MatchResults.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = MatchResults.csv; path = Resources/MatchResults.csv; sourceTree = "<group>"; };
@@ -479,12 +484,12 @@
 		2F30EAE016A0F4E50026B258 /* Team Scouting */ = {
 			isa = PBXGroup;
 			children = (
+				2F94C1331815B80A003BB560 /* AddTeamViewController.h */,
+				2F94C1341815B80A003BB560 /* AddTeamViewController.m */,
 				21EBC7D516B358D000CBFDFD /* TeamDetailViewController.h */,
 				21EBC7D616B358D000CBFDFD /* TeamDetailViewController.m */,
 				21F72D5E16A78135000B99AB /* TeamListViewController.h */,
 				21F72D5F16A78135000B99AB /* TeamListViewController.m */,
-				2FD5595916FA61F70099C5D9 /* TeamDetailPickerController.h */,
-				2FD5595A16FA61F70099C5D9 /* TeamDetailPickerController.m */,
 			);
 			name = "Team Scouting";
 			sourceTree = "<group>";
@@ -522,7 +527,6 @@
 		2F30EAE216A0F56E0026B258 /* Main App */ = {
 			isa = PBXGroup;
 			children = (
-				2F267D4B1815A02700198E96 /* UltimateAscent_ipad.storyboard */,
 				2FC18F0B16A212CE00D42251 /* SetUpPageViewController.h */,
 				2FC18F0C16A212CE00D42251 /* SetUpPageViewController.m */,
 				2FC18EB016A2042600D42251 /* SplashPageViewController.h */,
@@ -533,6 +537,7 @@
 				2F13339D170E20CD006669FF /* iPhoneMainViewController.h */,
 				2F13339E170E20CD006669FF /* iPhoneMainViewController.m */,
 				2F621F2C170E18CA00D2ABD1 /* UltimateAscent_iphone.storyboard */,
+				2F267D4B1815A02700198E96 /* UltimateAscent_ipad.storyboard */,
 			);
 			name = "Main App";
 			sourceTree = "<group>";
@@ -540,6 +545,7 @@
 		2F30EAE316A0F66F0026B258 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2FC71CDA18246C3900A73931 /* UltimateAscent.sqlite */,
 				2F99088B1787860700EEFFCE /* T0973_img001.jpg */,
 				2F67D4281728815300FA04CF /* InitialDefaults.plist */,
 				2FEBE13016F226B40094E2C3 /* MatchResults.csv */,
@@ -693,6 +699,8 @@
 		2FB3A4B016CEB7C400E895E5 /* Match Analysis */ = {
 			isa = PBXGroup;
 			children = (
+				2F042011181F19D4003B994B /* LucienTableViewController.h */,
+				2F042012181F19D4003B994B /* LucienTableViewController.m */,
 				2F56B530170517F70093A976 /* CalculateTeamStats.h */,
 				2F56B531170517F70093A976 /* CalculateTeamStats.m */,
 				2FB29C8116F9620700086C08 /* FieldDrawingViewController.h */,
@@ -707,8 +715,6 @@
 				2F06F98F1724CB70002C947D /* LucienPageViewController.m */,
 				2F5D64BD179212EB0028F57D /* LucienNumberObject.h */,
 				2F5D64BE179212EB0028F57D /* LucienNumberObject.m */,
-				2F5D64C3179220280028F57D /* LucienTableViewController.h */,
-				2F5D64C4179220280028F57D /* LucienTableViewController.m */,
 			);
 			name = "Match Analysis";
 			sourceTree = "<group>";
@@ -727,6 +733,8 @@
 		2FFAE1B016D29B8200B180F9 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				2F94C1301815B7F5003BB560 /* DriveTypeDictionary.h */,
+				2F94C1311815B7F5003BB560 /* DriveTypeDictionary.m */,
 				2FFAE1B216D29B9600B180F9 /* AlertPromptViewController.h */,
 				2FFAE1B316D29B9600B180F9 /* AlertPromptViewController.m */,
 				2FFAE1B916D3235600B180F9 /* MatchTypeDictionary.h */,
@@ -824,6 +832,7 @@
 				2F67D4291728815300FA04CF /* InitialDefaults.plist in Resources */,
 				2F99088C1787860700EEFFCE /* T0973_img001.jpg in Resources */,
 				2F267D4C1815A02700198E96 /* UltimateAscent_ipad.storyboard in Resources */,
+				2FC71CDB18246C3900A73931 /* UltimateAscent.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -865,7 +874,6 @@
 				2F50BF9A16F2D7A9004569F2 /* SyncResultsViewController.m in Sources */,
 				2F50BF9D16F2DD65004569F2 /* MatchResultsObject.m in Sources */,
 				2FB29C8316F9620700086C08 /* FieldDrawingViewController.m in Sources */,
-				2FD5595B16FA61F70099C5D9 /* TeamDetailPickerController.m in Sources */,
 				2F12350316FB71E200DBF4B0 /* MasonPageViewController.m in Sources */,
 				2F80CB0617012821000A2BB8 /* TeamRecordObject.m in Sources */,
 				2F8A13FD1703C8DB00866519 /* UltimateAscent.xcdatamodeld in Sources */,
@@ -894,8 +902,10 @@
 				2F2CA1631733301B00736351 /* TeamDataInterfaces.m in Sources */,
 				2F6A0E5C178A2D66001A114F /* ValuePromptViewController.m in Sources */,
 				2F5D64BF179212EB0028F57D /* LucienNumberObject.m in Sources */,
-				2F5D64C5179220280028F57D /* LucienTableViewController.m in Sources */,
 				2F340CC017A1FB9C006674C3 /* iPhoneMatchXferViewController.m in Sources */,
+				2F94C1321815B7F5003BB560 /* DriveTypeDictionary.m in Sources */,
+				2F94C1351815B80A003BB560 /* AddTeamViewController.m in Sources */,
+				2F042013181F19D4003B994B /* LucienTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
