@@ -13,6 +13,7 @@
 #import "DataManager.h"
 #import "SettingsData.h"
 #import "TournamentData.h"
+#import "TeamDataInterfaces.h"
 
 @implementation DownloadPageViewController
 @synthesize dataManager = _dataManager;
@@ -110,45 +111,16 @@
 -(void)emailTeamData {
     NSString *filePath = [exportPath stringByAppendingPathComponent: @"TeamData.csv"];
     NSLog(@"export data file = %@", filePath);
-    TeamData *team;
-    NSError *error;
-    NSString *csvString;
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription 
-                                   entityForName:@"TeamData" inManagedObjectContext:managedObjectContext];
-    [fetchRequest setEntity:entity];
-    
-    NSSortDescriptor *numberDescriptor = [[NSSortDescriptor alloc] initWithKey:@"number" ascending:YES];
-    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:numberDescriptor, nil];
-
-    [fetchRequest setSortDescriptors:sortDescriptors];
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"saved == 1 AND ANY tournament = %@", settings.tournament];
-    [fetchRequest setPredicate:pred];
-    NSArray *teamData = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
-    if(!teamData) {
-        NSLog(@"Karma disruption error");
-    } 
-    else {
-        if ([teamData count]) {
-            csvString = @"Team Number, Name, Tournament, Drive Train Type, Intake, Wheel Diameter, CIMS, Minimum Height, Maximum Height, Pyramid Dump, Climb Level, Climb Speed, Wheel Type, Notes\n";
-            int c;
-            for (c = 0; c < [teamData count]; c++) {
-                team = [teamData objectAtIndex:c];
-                csvString = [csvString stringByAppendingFormat:@"%@, %@, %@, %@, %@, %@, %@, %@, %@, %@, %@, %@, %@ %@\n", team.number, team.name, settings.tournament.name, team.driveTrainType, team.intake, team.wheelDiameter, team.cims, team.minHeight, team.maxHeight, team.pyramidDump, team.climbLevel, team.climbSpeed, team.wheelType, ([team.notes isEqualToString:@""] ? @"," : [NSString stringWithFormat:@",\"%@\"", team.notes])];
-            }
-//            csvString = [csvString stringByAppendingString:@"\n"];
-            // NSLog(@"csvString = %@", csvString);
-            [csvString writeToFile:filePath 
-                        atomically:YES 
-                        encoding:NSUTF8StringEncoding 
-                        error:nil];
-
-            NSString *emailSubject = @"Team Data CSV File";
-            [self buildEmail:filePath attach:@"TeamData.csv" subject:emailSubject];
-        }
-        else {
-            NSLog(@"No saved data");
-        }
+    TeamDataInterfaces *team = [[TeamDataInterfaces alloc] initWithDataManager:_dataManager];
+    NSString *csvString = [team exportTeamsToCSV:NULL];
+    if (csvString) {
+        [csvString writeToFile:filePath
+                    atomically:YES
+                      encoding:NSUTF8StringEncoding
+                         error:nil];
+        
+        NSString *emailSubject = @"Team Data CSV File";
+        [self buildEmail:filePath attach:@"TeamData.csv" subject:emailSubject];
     }
 }
 

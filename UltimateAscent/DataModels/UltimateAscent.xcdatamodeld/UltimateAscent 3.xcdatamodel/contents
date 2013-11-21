@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="12F45" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3400" systemVersion="12F45" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="MatchData" representedClassName="MatchData" syncable="YES">
         <attribute name="blueScore" optional="YES" attributeType="Integer 16" maxValueString="250" defaultValueString="-1" syncable="YES"/>
         <attribute name="matchdataId" optional="YES" attributeType="String" syncable="YES"/>
@@ -21,9 +21,17 @@
         <attribute name="rank" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="reg1" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="reg2" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="reg3" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="reg3" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES">
+            <userInfo>
+                <entry key="key" value="CCWM"/>
+            </userInfo>
+        </attribute>
         <attribute name="reg4" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="reg5" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="reg5" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="key" value="awards"/>
+            </userInfo>
+        </attribute>
         <attribute name="reg6" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="regionalId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="seedingRecord" optional="YES" attributeType="String" syncable="YES"/>
@@ -79,7 +87,11 @@
         <attribute name="intake" optional="YES" attributeType="Integer 16" minValueString="-1" maxValueString="3" defaultValueString="-1" syncable="YES"/>
         <attribute name="maxHeight" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="minHeight" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" maxValueString="50" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" maxValueString="50" syncable="YES">
+            <userInfo>
+                <entry key="key" value="Team Name"/>
+            </userInfo>
+        </attribute>
         <attribute name="notes" optional="YES" attributeType="String" maxValueString="1000" syncable="YES"/>
         <attribute name="number" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="nwheels" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -166,12 +178,12 @@
         <relationship name="teams" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TeamData" inverseName="tournament" inverseEntity="TeamData" syncable="YES"/>
     </entity>
     <elements>
-        <element name="MatchData" positionX="358" positionY="-63" width="128" height="180"/>
-        <element name="Regional" positionX="684" positionY="-51" width="128" height="285"/>
-        <element name="SettingsData" positionX="360" positionY="-414" width="128" height="150"/>
-        <element name="Statistics" positionX="682" positionY="-432" width="128" height="405"/>
-        <element name="TeamData" positionX="538" positionY="-432" width="128" height="645"/>
-        <element name="TeamScore" positionX="160" positionY="-414" width="128" height="765"/>
-        <element name="TournamentData" positionX="358" positionY="-234" width="128" height="150"/>
+        <element name="MatchData" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Regional" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="SettingsData" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Statistics" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="TeamData" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="TeamScore" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="TournamentData" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

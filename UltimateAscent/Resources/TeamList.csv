@@ -1,4 +1,4 @@
-Team Number, name, tournament, driveTrainType, intake, wheelDiameter, cims, minHeight, maxHeight, shooterHeight, pyramidDump, climbLevel, climbSpeed, notes
+Team Number, Team Name, tournament, driveTrainType, intake, wheelDiameter, cims, minHeight, maxHeight, shooterHeight, pyramidDump, climbLevel, climbSpeed, notes
 57, Leopards, Lone Star Regional,2,1,6.0,2,60.0,60,0,0,1,2.0," ""able to shoot in all goals but first"""
 118, Robonauts, Lone Star Regional,-1,-1,0.0,0,0.0,0,0,-1,-1,0.0," """""
 148, Robowranglers, Lone Star Regional,1,-1,0.0,0,0.0,0,0,-1,-1,0.0," """""
@@ -9,7 +9,7 @@ Team Number, name, tournament, driveTrainType, intake, wheelDiameter, cims, minH
 457, Grease Monkeys, Lone Star Regional,4,1,0.0,0,0.0,0,0,0,1,0.0," """""
 624, CRyptonite, Lone Star Regional,3,2,8.0,2,27.0,27,0,1,1,0.0," ""shoot into pyramid goals"
 653, NOSIDE, Lone Star Regional,0,1,8.0,2,30.5,30,0,1,0,0.0," """""
-704, Warriorsggo, Lone Star Regional,2,2,6.0,1,28.0,0,0,1,1,0.0," ""pick up upside down disks though not preferred.. 6 wheel: 1 omni and 2 regular wheels"
+704, Warriors, Lone Star Regional,2,2,6.0,1,28.0,0,0,1,1,0.0," ""pick up upside down disks though not preferred.. 6 wheel: 1 omni and 2 regular wheels"
 1255, Blarglefish, Lone Star Regional,4,1,6.0,1,32.0,32,0,0,1,0.0," ""6 wheel drive train"
 1429, TEAM KAOS, Lone Star Regional,-1,-1,0.0,0,0.0,0,0,-1,-1,0.0," """""
 1477, Texas Torque, Lone Star Regional,-1,2,4.0,2,28.0,45,0,0,1,0.0," ""could tweak and shoot"

@@ -21,7 +21,6 @@
 @property (nonatomic, assign) BOOL loadDataFromBundle;
 @property (strong, nonatomic) DataManager *dataManager;
 
-- (void) initializeDataCollections;
 - (NSString *)applicationDocumentsDirectory;
 
 

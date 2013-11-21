@@ -27,7 +27,6 @@
     NSLog(@"didFinishLaunchingWithOptions");
     // Create the managed object and persistant store
     _dataManager = [[DataManager alloc] init];
-    [self initializeDataCollections];
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         navigationController = (UINavigationController *)self.window.rootViewController;
@@ -78,11 +77,6 @@
     }
     NSLog(@"end of openurl");
     return YES;
-}
-
-- (void) initializeDataCollections {
-    NSString *teamDataPath = [[self applicationDocumentsDirectory] stringByAppendingPathComponent: @"teamDataDictionary.plist"];
-//    [[TeamDataInterfaces new] createTeamDataCollection:_dataManager dictionaryPath:teamDataPath];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

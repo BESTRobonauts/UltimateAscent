@@ -103,7 +103,6 @@
 		2FC18F1316A21AA900D42251 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FC18F1216A21AA900D42251 /* DataManager.m */; };
 		2FC3B1E816E8107900DF70F4 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FC3B1E716E8107900DF70F4 /* MessageUI.framework */; };
 		2FC5D8C916C473820043F68A /* 2013_field.png in Resources */ = {isa = PBXBuildFile; fileRef = 2FC5D8C816C473820043F68A /* 2013_field.png */; };
-		2FC71CDB18246C3900A73931 /* UltimateAscent.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 2FC71CDA18246C3900A73931 /* UltimateAscent.sqlite */; };
 		2FCE54FA16CC271A00884191 /* Small Blue Button.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2FCE54F816CC271A00884191 /* Small Blue Button.jpg */; };
 		2FCE54FB16CC271A00884191 /* Small Red Button.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2FCE54F916CC271A00884191 /* Small Red Button.jpg */; };
 		2FCE54FD16CC29AB00884191 /* Small Green Button.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2FCE54FC16CC29AB00884191 /* Small Green Button.jpg */; };
@@ -331,7 +330,6 @@
 		2FC18F1216A21AA900D42251 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataManager.m; path = DataManagement/DataManager.m; sourceTree = "<group>"; };
 		2FC3B1E716E8107900DF70F4 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		2FC5D8C816C473820043F68A /* 2013_field.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 2013_field.png; path = Resources/2013_field.png; sourceTree = "<group>"; };
-		2FC71CDA18246C3900A73931 /* UltimateAscent.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = UltimateAscent.sqlite; path = Resources/UltimateAscent.sqlite; sourceTree = "<group>"; };
 		2FCE54F816CC271A00884191 /* Small Blue Button.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Small Blue Button.jpg"; path = "Resources/Small Blue Button.jpg"; sourceTree = "<group>"; };
 		2FCE54F916CC271A00884191 /* Small Red Button.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Small Red Button.jpg"; path = "Resources/Small Red Button.jpg"; sourceTree = "<group>"; };
 		2FCE54FC16CC29AB00884191 /* Small Green Button.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Small Green Button.jpg"; path = "Resources/Small Green Button.jpg"; sourceTree = "<group>"; };
@@ -545,7 +543,6 @@
 		2F30EAE316A0F66F0026B258 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				2FC71CDA18246C3900A73931 /* UltimateAscent.sqlite */,
 				2F99088B1787860700EEFFCE /* T0973_img001.jpg */,
 				2F67D4281728815300FA04CF /* InitialDefaults.plist */,
 				2FEBE13016F226B40094E2C3 /* MatchResults.csv */,
@@ -832,7 +829,6 @@
 				2F67D4291728815300FA04CF /* InitialDefaults.plist in Resources */,
 				2F99088C1787860700EEFFCE /* T0973_img001.jpg in Resources */,
 				2F267D4C1815A02700198E96 /* UltimateAscent_ipad.storyboard in Resources */,
-				2FC71CDB18246C3900A73931 /* UltimateAscent.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
