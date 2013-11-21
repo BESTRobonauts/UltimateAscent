@@ -1762,9 +1762,6 @@
                                 <state key="normal" backgroundImage="button_robonaut_gold.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <segue destination="UTh-8i-hVG" kind="push" id="qRO-BG-LPA"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="elh-Um-nzT">
                                 <rect key="frame" x="375" y="395" width="296" height="70"/>
@@ -2095,48 +2092,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ncH-5j-o7q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2271" y="3685"/>
-        </scene>
-        <!--Stack Mob Export View Controller-->
-        <scene sceneID="7iE-pb-kez">
-            <objects>
-                <viewController id="UTh-8i-hVG" customClass="StackMobExportViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="q24-Qu-1kf">
-                        <rect key="frame" x="0.0" y="64" width="768" height="960"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hZF-xN-YPX">
-                                <rect key="frame" x="323" y="71" width="296" height="70"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" backgroundImage="button_robonaut_gold.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="pushTeamData:" destination="UTh-8i-hVG" eventType="touchUpInside" id="dhz-nk-6tE"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hgc-4y-joI">
-                                <rect key="frame" x="323" y="386" width="296" height="70"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" backgroundImage="button_robonaut_gold.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="pushTournamentData:" destination="UTh-8i-hVG" eventType="touchUpInside" id="tMl-bo-nfM"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="ItQ-zR-o1a"/>
-                    <connections>
-                        <outlet property="_pushTeamButton" destination="hZF-xN-YPX" id="tH7-9t-bHe"/>
-                        <outlet property="pushTeamButton" destination="hZF-xN-YPX" id="dZB-DN-x2z"/>
-                        <outlet property="pushTournamentButton" destination="hgc-4y-joI" id="0C1-WD-KpK"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qa7-oz-Adz" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2271" y="2541"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="PvB-tc-fQH">
@@ -4078,9 +4033,6 @@
                                 <state key="normal" backgroundImage="button_robonaut_gold.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <segue destination="W9u-QK-jHH" kind="push" id="rba-sO-joR"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="TWb-ol-uPd">
                                 <rect key="frame" x="293" y="189" width="400" height="68"/>
@@ -4104,36 +4056,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1In-Qj-dQm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2050" y="-1718"/>
-        </scene>
-        <!--Stack Mob Import View Controller-->
-        <scene sceneID="Hh3-tL-S02">
-            <objects>
-                <viewController id="W9u-QK-jHH" customClass="StackMobImportViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="hrp-T0-qmL">
-                        <rect key="frame" x="0.0" y="64" width="768" height="960"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="l97-i5-ZIH">
-                                <rect key="frame" x="50" y="373" width="400" height="68"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" backgroundImage="button_robonaut_gold.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="pullTeamData:" destination="W9u-QK-jHH" eventType="touchUpInside" id="w9B-gG-kzz"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="hzN-oB-vHT"/>
-                    <connections>
-                        <outlet property="importTeamButton" destination="l97-i5-ZIH" id="F0z-hO-Pdv"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="h9i-xA-wah" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2931" y="-1718"/>
         </scene>
         <!--Add Match View Controller - Add Match-->
         <scene sceneID="trm-SN-wHY">

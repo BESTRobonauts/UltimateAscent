@@ -12,8 +12,6 @@
 
 
 @implementation DataManager
-@synthesize client = _client;
-@synthesize coreDataStore = _coreDataStore;
 @synthesize managedObjectContext = __managedObjectContext;
 @synthesize managedObjectModel = __managedObjectModel;
 @synthesize smManagedObjectContext = _smManagedObjectContext;
@@ -29,24 +27,13 @@
 	if ((self = [super init]))
 	{
         [self managedObjectContext];
- //       Development Key
-        self.client = [[SMClient alloc] initWithAPIVersion:@"0" publicKey:@"109962e9-0f33-4479-9785-49e8cf5e7f1d"];
- //       Production Key
- //       self.client = [[SMClient alloc] initWithAPIVersion:@"1" publicKey:@"415c48e2-f6ea-4bc8-8509-6927fd42abed"];
-        
-        self.coreDataStore = [self.client coreDataStoreWithManagedObjectModel:self.managedObjectModel];
-        _smManagedObjectContext = [self.coreDataStore contextForCurrentThread];
-	}
+    }
 	return self;
 }
 
 -(BOOL)databaseExists {
     [self managedObjectContext];
     return loadDataFromBundle;
-}
-
--(NSManagedObjectContext *)getSMContext {
-    return [self.coreDataStore contextForCurrentThread];
 }
 
 - (void)saveContext

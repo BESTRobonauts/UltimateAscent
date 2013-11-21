@@ -19,7 +19,6 @@
 		2F13339F170E20CD006669FF /* iPhoneMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F13339E170E20CD006669FF /* iPhoneMainViewController.m */; };
 		2F17D54816BA092B00DC81C1 /* TournamentList.csv in Resources */ = {isa = PBXBuildFile; fileRef = 2F17D54716BA092B00DC81C1 /* TournamentList.csv */; };
 		2F21C5CF170BCC31008A3C24 /* ImportDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F21C5CE170BCC31008A3C24 /* ImportDataViewController.m */; };
-		2F21C5D2170BCDCB008A3C24 /* StackMobImportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F21C5D1170BCDCB008A3C24 /* StackMobImportViewController.m */; };
 		2F267D4C1815A02700198E96 /* UltimateAscent_ipad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F267D4B1815A02700198E96 /* UltimateAscent_ipad.storyboard */; };
 		2F2CA1631733301B00736351 /* TeamDataInterfaces.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F2CA1621733301A00736351 /* TeamDataInterfaces.m */; };
 		2F30EABC16A0EB4F0026B258 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F30EABB16A0EB4F0026B258 /* UIKit.framework */; };
@@ -38,8 +37,6 @@
 		2F32A777170678AD00100705 /* Statistics.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F32A776170678AD00100705 /* Statistics.m */; };
 		2F32A77D170678D700100705 /* TeamScore.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F32A77C170678D700100705 /* TeamScore.m */; };
 		2F32A780170678E500100705 /* TournamentData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F32A77F170678E500100705 /* TournamentData.m */; };
-		2F32A7831707336500100705 /* SMTournamentObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F32A7821707336500100705 /* SMTournamentObject.m */; };
-		2F32A7861707771A00100705 /* SMTeamDataObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F32A7851707771A00100705 /* SMTeamDataObject.m */; };
 		2F340CC017A1FB9C006674C3 /* iPhoneMatchXferViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F340CBF17A1FB9C006674C3 /* iPhoneMatchXferViewController.m */; };
 		2F43A1CB16E4F219005CAFD9 /* AddMatchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F43A1CA16E4F219005CAFD9 /* AddMatchViewController.m */; };
 		2F47E38516DFE17400609A3E /* TournamentPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F47E38416DFE17400609A3E /* TournamentPickerController.m */; };
@@ -50,13 +47,10 @@
 		2F50BF9A16F2D7A9004569F2 /* SyncResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F50BF9916F2D7A9004569F2 /* SyncResultsViewController.m */; };
 		2F50BF9D16F2DD65004569F2 /* MatchResultsObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F50BF9C16F2DD65004569F2 /* MatchResultsObject.m */; };
 		2F56B532170517F70093A976 /* CalculateTeamStats.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F56B531170517F70093A976 /* CalculateTeamStats.m */; };
-		2F56B56717052A890093A976 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = 2F56B53417052A890093A976 /* CHANGELOG.md */; };
-		2F56B56817052A890093A976 /* libstackmob-v1.3.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F56B56617052A890093A976 /* libstackmob-v1.3.0.a */; };
 		2F56B56A17052B900093A976 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F56B56917052B900093A976 /* CoreLocation.framework */; };
 		2F56B56C17052BB30093A976 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F56B56B17052BB30093A976 /* MobileCoreServices.framework */; };
 		2F56B56E17052BC80093A976 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F56B56D17052BC80093A976 /* SystemConfiguration.framework */; };
 		2F56B57017052BDB0093A976 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F56B56F17052BDA0093A976 /* Security.framework */; };
-		2F56B573170532F60093A976 /* StackMobExportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F56B572170532F60093A976 /* StackMobExportViewController.m */; };
 		2F5D64BF179212EB0028F57D /* LucienNumberObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F5D64BE179212EB0028F57D /* LucienNumberObject.m */; };
 		2F621F25170DE91300D2ABD1 /* iDeviceExportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F621F24170DE91200D2ABD1 /* iDeviceExportViewController.m */; };
 		2F621F28170DEC9F00D2ABD1 /* SyncMatchListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F621F27170DEC9E00D2ABD1 /* SyncMatchListViewController.m */; };
@@ -66,7 +60,6 @@
 		2F6A0E5C178A2D66001A114F /* ValuePromptViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6A0E5B178A2D66001A114F /* ValuePromptViewController.m */; };
 		2F6AE6F016AD93D1005A24C5 /* 2013_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F6AE6EF16AD93D1005A24C5 /* 2013_logo.png */; };
 		2F80CB0617012821000A2BB8 /* TeamRecordObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F80CB0517012821000A2BB8 /* TeamRecordObject.m */; };
-		2F82694217139F740080253D /* SMMatchObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F82694117139F740080253D /* SMMatchObject.m */; };
 		2F88649A16B76B1700867385 /* AlliancePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F88648D16B76B1700867385 /* AlliancePickerController.m */; };
 		2F88649B16B76B1700867385 /* MainScoutingPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F88648F16B76B1700867385 /* MainScoutingPageViewController.m */; };
 		2F88649C16B76B1700867385 /* MatchDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F88649116B76B1700867385 /* MatchDetailViewController.m */; };
@@ -142,8 +135,6 @@
 		2F17D54716BA092B00DC81C1 /* TournamentList.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TournamentList.csv; path = Resources/TournamentList.csv; sourceTree = "<group>"; };
 		2F21C5CD170BCC31008A3C24 /* ImportDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImportDataViewController.h; path = DataImport/ImportDataViewController.h; sourceTree = "<group>"; };
 		2F21C5CE170BCC31008A3C24 /* ImportDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImportDataViewController.m; path = DataImport/ImportDataViewController.m; sourceTree = "<group>"; };
-		2F21C5D0170BCDCB008A3C24 /* StackMobImportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StackMobImportViewController.h; path = DataImport/StackMobImportViewController.h; sourceTree = "<group>"; };
-		2F21C5D1170BCDCB008A3C24 /* StackMobImportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StackMobImportViewController.m; path = DataImport/StackMobImportViewController.m; sourceTree = "<group>"; };
 		2F267D4B1815A02700198E96 /* UltimateAscent_ipad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UltimateAscent_ipad.storyboard; sourceTree = "<group>"; };
 		2F2CA1611733301A00736351 /* TeamDataInterfaces.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TeamDataInterfaces.h; path = DataModels/TeamDataInterfaces.h; sourceTree = "<group>"; };
 		2F2CA1621733301A00736351 /* TeamDataInterfaces.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TeamDataInterfaces.m; path = DataModels/TeamDataInterfaces.m; sourceTree = "<group>"; };
@@ -171,10 +162,6 @@
 		2F32A77C170678D700100705 /* TeamScore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TeamScore.m; path = DataModels/TeamScore.m; sourceTree = "<group>"; };
 		2F32A77E170678E500100705 /* TournamentData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TournamentData.h; path = DataModels/TournamentData.h; sourceTree = "<group>"; };
 		2F32A77F170678E500100705 /* TournamentData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TournamentData.m; path = DataModels/TournamentData.m; sourceTree = "<group>"; };
-		2F32A7811707336500100705 /* SMTournamentObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SMTournamentObject.h; path = DataTransfer/SMTournamentObject.h; sourceTree = "<group>"; };
-		2F32A7821707336500100705 /* SMTournamentObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SMTournamentObject.m; path = DataTransfer/SMTournamentObject.m; sourceTree = "<group>"; };
-		2F32A7841707771A00100705 /* SMTeamDataObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SMTeamDataObject.h; path = DataTransfer/SMTeamDataObject.h; sourceTree = "<group>"; };
-		2F32A7851707771A00100705 /* SMTeamDataObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SMTeamDataObject.m; path = DataTransfer/SMTeamDataObject.m; sourceTree = "<group>"; };
 		2F340CBE17A1FB9C006674C3 /* iPhoneMatchXferViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iPhoneMatchXferViewController.h; path = DataTransfer/iPhoneMatchXferViewController.h; sourceTree = "<group>"; };
 		2F340CBF17A1FB9C006674C3 /* iPhoneMatchXferViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iPhoneMatchXferViewController.m; path = DataTransfer/iPhoneMatchXferViewController.m; sourceTree = "<group>"; };
 		2F43A1C916E4F219005CAFD9 /* AddMatchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddMatchViewController.h; path = MatchScouting/AddMatchViewController.h; sourceTree = "<group>"; };
@@ -194,62 +181,10 @@
 		2F50BF9C16F2DD65004569F2 /* MatchResultsObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MatchResultsObject.m; path = DataTransfer/MatchResultsObject.m; sourceTree = "<group>"; };
 		2F56B530170517F70093A976 /* CalculateTeamStats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CalculateTeamStats.h; path = MatchAnalysis/CalculateTeamStats.h; sourceTree = "<group>"; };
 		2F56B531170517F70093A976 /* CalculateTeamStats.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CalculateTeamStats.m; path = MatchAnalysis/CalculateTeamStats.m; sourceTree = "<group>"; };
-		2F56B53417052A890093A976 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG.md; sourceTree = "<group>"; };
-		2F56B53617052A890093A976 /* AFHTTPClient+StackMob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AFHTTPClient+StackMob.h"; sourceTree = "<group>"; };
-		2F56B53717052A890093A976 /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
-		2F56B53817052A890093A976 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
-		2F56B53917052A890093A976 /* AFImageRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFImageRequestOperation.h; sourceTree = "<group>"; };
-		2F56B53A17052A890093A976 /* AFJSONRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFJSONRequestOperation.h; sourceTree = "<group>"; };
-		2F56B53B17052A890093A976 /* AFNetworkActivityIndicatorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkActivityIndicatorManager.h; sourceTree = "<group>"; };
-		2F56B53C17052A890093A976 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
-		2F56B53D17052A890093A976 /* AFPropertyListRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFPropertyListRequestOperation.h; sourceTree = "<group>"; };
-		2F56B53E17052A890093A976 /* AFURLConnectionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLConnectionOperation.h; sourceTree = "<group>"; };
-		2F56B53F17052A890093A976 /* AFXMLRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFXMLRequestOperation.h; sourceTree = "<group>"; };
-		2F56B54017052A890093A976 /* Base64EncodedStringFromData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64EncodedStringFromData.h; sourceTree = "<group>"; };
-		2F56B54117052A890093A976 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
-		2F56B54217052A890093A976 /* KeychainWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainWrapper.h; sourceTree = "<group>"; };
-		2F56B54317052A890093A976 /* NSArray+Enumerable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Enumerable.h"; sourceTree = "<group>"; };
-		2F56B54417052A890093A976 /* NSDictionary+AtomicCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+AtomicCounter.h"; sourceTree = "<group>"; };
-		2F56B54517052A890093A976 /* NSEntityDescription+StackMobSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSEntityDescription+StackMobSerialization.h"; sourceTree = "<group>"; };
-		2F56B54617052A890093A976 /* NSManagedObject+StackMobSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+StackMobSerialization.h"; sourceTree = "<group>"; };
-		2F56B54717052A890093A976 /* NSManagedObjectContext+Concurrency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObjectContext+Concurrency.h"; sourceTree = "<group>"; };
-		2F56B54817052A890093A976 /* SMBinaryDataConversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMBinaryDataConversion.h; sourceTree = "<group>"; };
-		2F56B54917052A890093A976 /* SMClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMClient.h; sourceTree = "<group>"; };
-		2F56B54A17052A890093A976 /* SMCoreDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMCoreDataStore.h; sourceTree = "<group>"; };
-		2F56B54B17052A890093A976 /* SMCustomCodeRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMCustomCodeRequest.h; sourceTree = "<group>"; };
-		2F56B54C17052A890093A976 /* SMDataStore+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SMDataStore+Protected.h"; sourceTree = "<group>"; };
-		2F56B54D17052A890093A976 /* SMDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMDataStore.h; sourceTree = "<group>"; };
-		2F56B54E17052A890093A976 /* SMError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMError.h; sourceTree = "<group>"; };
-		2F56B54F17052A890093A976 /* SMGeoPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMGeoPoint.h; sourceTree = "<group>"; };
-		2F56B55017052A890093A976 /* SMIncrementalStore+Query.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SMIncrementalStore+Query.h"; sourceTree = "<group>"; };
-		2F56B55117052A890093A976 /* SMIncrementalStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMIncrementalStore.h; sourceTree = "<group>"; };
-		2F56B55217052A890093A976 /* SMIncrementalStoreNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMIncrementalStoreNode.h; sourceTree = "<group>"; };
-		2F56B55317052A890093A976 /* SMJSONRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMJSONRequestOperation.h; sourceTree = "<group>"; };
-		2F56B55417052A890093A976 /* SMLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMLocationManager.h; sourceTree = "<group>"; };
-		2F56B55517052A890093A976 /* SMNetworkReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMNetworkReachability.h; sourceTree = "<group>"; };
-		2F56B55617052A890093A976 /* SMOAuth1Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMOAuth1Client.h; sourceTree = "<group>"; };
-		2F56B55717052A890093A976 /* SMOAuth2Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMOAuth2Client.h; sourceTree = "<group>"; };
-		2F56B55817052A890093A976 /* SMPredicate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMPredicate.h; sourceTree = "<group>"; };
-		2F56B55917052A890093A976 /* SMPushClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMPushClient.h; sourceTree = "<group>"; };
-		2F56B55A17052A890093A976 /* SMPushToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMPushToken.h; sourceTree = "<group>"; };
-		2F56B55B17052A890093A976 /* SMQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMQuery.h; sourceTree = "<group>"; };
-		2F56B55C17052A890093A976 /* SMRequestOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMRequestOptions.h; sourceTree = "<group>"; };
-		2F56B55D17052A890093A976 /* SMResponseBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMResponseBlocks.h; sourceTree = "<group>"; };
-		2F56B55E17052A890093A976 /* SMUserManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMUserManagedObject.h; sourceTree = "<group>"; };
-		2F56B55F17052A890093A976 /* SMUserSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMUserSession.h; sourceTree = "<group>"; };
-		2F56B56017052A890093A976 /* SMVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMVersion.h; sourceTree = "<group>"; };
-		2F56B56117052A890093A976 /* StackMob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StackMob.h; sourceTree = "<group>"; };
-		2F56B56217052A890093A976 /* StackMobPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StackMobPush.h; sourceTree = "<group>"; };
-		2F56B56317052A890093A976 /* Synchronization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Synchronization.h; sourceTree = "<group>"; };
-		2F56B56417052A890093A976 /* SystemInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemInformation.h; sourceTree = "<group>"; };
-		2F56B56517052A890093A976 /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
-		2F56B56617052A890093A976 /* libstackmob-v1.3.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libstackmob-v1.3.0.a"; sourceTree = "<group>"; };
 		2F56B56917052B900093A976 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		2F56B56B17052BB30093A976 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		2F56B56D17052BC80093A976 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		2F56B56F17052BDA0093A976 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		2F56B571170532F60093A976 /* StackMobExportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StackMobExportViewController.h; path = DataExport/StackMobExportViewController.h; sourceTree = "<group>"; };
-		2F56B572170532F60093A976 /* StackMobExportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StackMobExportViewController.m; path = DataExport/StackMobExportViewController.m; sourceTree = "<group>"; };
 		2F5D64BD179212EB0028F57D /* LucienNumberObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LucienNumberObject.h; path = MatchAnalysis/LucienNumberObject.h; sourceTree = "<group>"; };
 		2F5D64BE179212EB0028F57D /* LucienNumberObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LucienNumberObject.m; path = MatchAnalysis/LucienNumberObject.m; sourceTree = "<group>"; };
 		2F621F23170DE91200D2ABD1 /* iDeviceExportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iDeviceExportViewController.h; path = DataExport/iDeviceExportViewController.h; sourceTree = "<group>"; };
@@ -265,8 +200,6 @@
 		2F6AE6EF16AD93D1005A24C5 /* 2013_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 2013_logo.png; path = Resources/2013_logo.png; sourceTree = "<group>"; };
 		2F80CB0417012821000A2BB8 /* TeamRecordObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TeamRecordObject.h; path = DataTransfer/TeamRecordObject.h; sourceTree = "<group>"; };
 		2F80CB0517012821000A2BB8 /* TeamRecordObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TeamRecordObject.m; path = DataTransfer/TeamRecordObject.m; sourceTree = "<group>"; };
-		2F82694017139F740080253D /* SMMatchObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SMMatchObject.h; path = DataTransfer/SMMatchObject.h; sourceTree = "<group>"; };
-		2F82694117139F740080253D /* SMMatchObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SMMatchObject.m; path = DataTransfer/SMMatchObject.m; sourceTree = "<group>"; };
 		2F88648C16B76B1700867385 /* AlliancePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlliancePickerController.h; path = MatchScouting/AlliancePickerController.h; sourceTree = "<group>"; };
 		2F88648D16B76B1700867385 /* AlliancePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AlliancePickerController.m; path = MatchScouting/AlliancePickerController.m; sourceTree = "<group>"; };
 		2F88648E16B76B1700867385 /* MainScoutingPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainScoutingPageViewController.h; path = MatchScouting/MainScoutingPageViewController.h; sourceTree = "<group>"; };
@@ -363,7 +296,6 @@
 				2F30EABE16A0EB4F0026B258 /* Foundation.framework in Frameworks */,
 				2F30EAC016A0EB4F0026B258 /* CoreGraphics.framework in Frameworks */,
 				2F30EAC216A0EB4F0026B258 /* CoreData.framework in Frameworks */,
-				2F56B56817052A890093A976 /* libstackmob-v1.3.0.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -419,7 +351,6 @@
 				2F30EAE016A0F4E50026B258 /* Team Scouting */,
 				2F30EAE216A0F56E0026B258 /* Main App */,
 				2FFAE1B016D29B8200B180F9 /* Utilities */,
-				2F56B53317052A890093A976 /* StackMob-v1.3.0 */,
 				2F30EAE316A0F66F0026B258 /* Resources */,
 				2F30EAC416A0EB4F0026B258 /* Supporting Files */,
 			);
@@ -444,8 +375,6 @@
 			children = (
 				2FC18F0E16A215EA00D42251 /* DownloadPageViewController.h */,
 				2FC18F0F16A215EA00D42251 /* DownloadPageViewController.m */,
-				2F56B571170532F60093A976 /* StackMobExportViewController.h */,
-				2F56B572170532F60093A976 /* StackMobExportViewController.m */,
 				2F621F23170DE91200D2ABD1 /* iDeviceExportViewController.h */,
 				2F621F24170DE91200D2ABD1 /* iDeviceExportViewController.m */,
 			);
@@ -462,8 +391,6 @@
 				2FC18EAB16A202FD00D42251 /* parseCSV.m */,
 				2F21C5CD170BCC31008A3C24 /* ImportDataViewController.h */,
 				2F21C5CE170BCC31008A3C24 /* ImportDataViewController.m */,
-				2F21C5D0170BCDCB008A3C24 /* StackMobImportViewController.h */,
-				2F21C5D1170BCDCB008A3C24 /* StackMobImportViewController.m */,
 				2F621F29170DF2FE00D2ABD1 /* ImportDeviceViewController.h */,
 				2F621F2A170DF2FE00D2ABD1 /* ImportDeviceViewController.m */,
 			);
@@ -587,12 +514,6 @@
 				2F50BF9C16F2DD65004569F2 /* MatchResultsObject.m */,
 				2F80CB0417012821000A2BB8 /* TeamRecordObject.h */,
 				2F80CB0517012821000A2BB8 /* TeamRecordObject.m */,
-				2F32A7811707336500100705 /* SMTournamentObject.h */,
-				2F82694017139F740080253D /* SMMatchObject.h */,
-				2F82694117139F740080253D /* SMMatchObject.m */,
-				2F32A7821707336500100705 /* SMTournamentObject.m */,
-				2F32A7841707771A00100705 /* SMTeamDataObject.h */,
-				2F32A7851707771A00100705 /* SMTeamDataObject.m */,
 				2F621F26170DEC9E00D2ABD1 /* SyncMatchListViewController.h */,
 				2F621F27170DEC9E00D2ABD1 /* SyncMatchListViewController.m */,
 				2F06F98817248EE8002C947D /* ftpTransferViewController.h */,
@@ -601,71 +522,6 @@
 				2F340CBF17A1FB9C006674C3 /* iPhoneMatchXferViewController.m */,
 			);
 			name = "Data Transfer";
-			sourceTree = "<group>";
-		};
-		2F56B53317052A890093A976 /* StackMob-v1.3.0 */ = {
-			isa = PBXGroup;
-			children = (
-				2F56B53417052A890093A976 /* CHANGELOG.md */,
-				2F56B53517052A890093A976 /* Headers */,
-				2F56B56617052A890093A976 /* libstackmob-v1.3.0.a */,
-			);
-			path = "StackMob-v1.3.0";
-			sourceTree = "<group>";
-		};
-		2F56B53517052A890093A976 /* Headers */ = {
-			isa = PBXGroup;
-			children = (
-				2F56B53617052A890093A976 /* AFHTTPClient+StackMob.h */,
-				2F56B53717052A890093A976 /* AFHTTPClient.h */,
-				2F56B53817052A890093A976 /* AFHTTPRequestOperation.h */,
-				2F56B53917052A890093A976 /* AFImageRequestOperation.h */,
-				2F56B53A17052A890093A976 /* AFJSONRequestOperation.h */,
-				2F56B53B17052A890093A976 /* AFNetworkActivityIndicatorManager.h */,
-				2F56B53C17052A890093A976 /* AFNetworking.h */,
-				2F56B53D17052A890093A976 /* AFPropertyListRequestOperation.h */,
-				2F56B53E17052A890093A976 /* AFURLConnectionOperation.h */,
-				2F56B53F17052A890093A976 /* AFXMLRequestOperation.h */,
-				2F56B54017052A890093A976 /* Base64EncodedStringFromData.h */,
-				2F56B54117052A890093A976 /* Common.h */,
-				2F56B54217052A890093A976 /* KeychainWrapper.h */,
-				2F56B54317052A890093A976 /* NSArray+Enumerable.h */,
-				2F56B54417052A890093A976 /* NSDictionary+AtomicCounter.h */,
-				2F56B54517052A890093A976 /* NSEntityDescription+StackMobSerialization.h */,
-				2F56B54617052A890093A976 /* NSManagedObject+StackMobSerialization.h */,
-				2F56B54717052A890093A976 /* NSManagedObjectContext+Concurrency.h */,
-				2F56B54817052A890093A976 /* SMBinaryDataConversion.h */,
-				2F56B54917052A890093A976 /* SMClient.h */,
-				2F56B54A17052A890093A976 /* SMCoreDataStore.h */,
-				2F56B54B17052A890093A976 /* SMCustomCodeRequest.h */,
-				2F56B54C17052A890093A976 /* SMDataStore+Protected.h */,
-				2F56B54D17052A890093A976 /* SMDataStore.h */,
-				2F56B54E17052A890093A976 /* SMError.h */,
-				2F56B54F17052A890093A976 /* SMGeoPoint.h */,
-				2F56B55017052A890093A976 /* SMIncrementalStore+Query.h */,
-				2F56B55117052A890093A976 /* SMIncrementalStore.h */,
-				2F56B55217052A890093A976 /* SMIncrementalStoreNode.h */,
-				2F56B55317052A890093A976 /* SMJSONRequestOperation.h */,
-				2F56B55417052A890093A976 /* SMLocationManager.h */,
-				2F56B55517052A890093A976 /* SMNetworkReachability.h */,
-				2F56B55617052A890093A976 /* SMOAuth1Client.h */,
-				2F56B55717052A890093A976 /* SMOAuth2Client.h */,
-				2F56B55817052A890093A976 /* SMPredicate.h */,
-				2F56B55917052A890093A976 /* SMPushClient.h */,
-				2F56B55A17052A890093A976 /* SMPushToken.h */,
-				2F56B55B17052A890093A976 /* SMQuery.h */,
-				2F56B55C17052A890093A976 /* SMRequestOptions.h */,
-				2F56B55D17052A890093A976 /* SMResponseBlocks.h */,
-				2F56B55E17052A890093A976 /* SMUserManagedObject.h */,
-				2F56B55F17052A890093A976 /* SMUserSession.h */,
-				2F56B56017052A890093A976 /* SMVersion.h */,
-				2F56B56117052A890093A976 /* StackMob.h */,
-				2F56B56217052A890093A976 /* StackMobPush.h */,
-				2F56B56317052A890093A976 /* Synchronization.h */,
-				2F56B56417052A890093A976 /* SystemInformation.h */,
-				2F56B56517052A890093A976 /* UIImageView+AFNetworking.h */,
-			);
-			path = Headers;
 			sourceTree = "<group>";
 		};
 		2F88648716B7688A00867385 /* Match Scouting */ = {
@@ -824,7 +680,6 @@
 				2FD7E9E716E8C3540075533C /* TeamList.csv in Resources */,
 				2FD7E9E916E8DA130075533C /* MatchList.csv in Resources */,
 				2FEBE13116F226B40094E2C3 /* MatchResults.csv in Resources */,
-				2F56B56717052A890093A976 /* CHANGELOG.md in Resources */,
 				2F621F2D170E18CA00D2ABD1 /* UltimateAscent_iphone.storyboard in Resources */,
 				2F67D4291728815300FA04CF /* InitialDefaults.plist in Resources */,
 				2F99088C1787860700EEFFCE /* T0973_img001.jpg in Resources */,
@@ -874,24 +729,19 @@
 				2F80CB0617012821000A2BB8 /* TeamRecordObject.m in Sources */,
 				2F8A13FD1703C8DB00866519 /* UltimateAscent.xcdatamodeld in Sources */,
 				2F56B532170517F70093A976 /* CalculateTeamStats.m in Sources */,
-				2F56B573170532F60093A976 /* StackMobExportViewController.m in Sources */,
 				2F32A76E1706787D00100705 /* MatchData.m in Sources */,
 				2F32A7711706788F00100705 /* Regional.m in Sources */,
 				2F32A7741706789B00100705 /* SettingsData.m in Sources */,
 				2F32A777170678AD00100705 /* Statistics.m in Sources */,
 				2F32A77D170678D700100705 /* TeamScore.m in Sources */,
 				2F32A780170678E500100705 /* TournamentData.m in Sources */,
-				2F32A7831707336500100705 /* SMTournamentObject.m in Sources */,
-				2F32A7861707771A00100705 /* SMTeamDataObject.m in Sources */,
 				2F9C12DF1708815C005EE9D3 /* TeamData.m in Sources */,
 				2F21C5CF170BCC31008A3C24 /* ImportDataViewController.m in Sources */,
-				2F21C5D2170BCDCB008A3C24 /* StackMobImportViewController.m in Sources */,
 				2F621F25170DE91300D2ABD1 /* iDeviceExportViewController.m in Sources */,
 				2F621F28170DEC9F00D2ABD1 /* SyncMatchListViewController.m in Sources */,
 				2F621F2B170DF2FE00D2ABD1 /* ImportDeviceViewController.m in Sources */,
 				2F13339F170E20CD006669FF /* iPhoneMainViewController.m in Sources */,
 				2F4CD04417122E1600428859 /* PopUpPickerViewController.m in Sources */,
-				2F82694217139F740080253D /* SMMatchObject.m in Sources */,
 				2F06F98A17248EE8002C947D /* ftpTransferViewController.m in Sources */,
 				2F06F98D1724B180002C947D /* NetworkManager.m in Sources */,
 				2F06F9901724CB70002C947D /* LucienPageViewController.m in Sources */,
