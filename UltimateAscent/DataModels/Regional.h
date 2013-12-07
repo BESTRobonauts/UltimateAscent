@@ -2,7 +2,7 @@
 //  Regional.h
 //  UltimateAscent
 //
-//  Created by FRC on 3/29/13.
+//  Created by FRC on 12/7/13.
 //  Copyright (c) 2013 FRC. All rights reserved.
 //
 
@@ -13,6 +13,8 @@
 
 @interface Regional : NSManagedObject
 
+@property (nonatomic, retain) NSString * awards;
+@property (nonatomic, retain) NSNumber * ccwm;
 @property (nonatomic, retain) NSNumber * dpr;
 @property (nonatomic, retain) NSString * eliminated;
 @property (nonatomic, retain) NSString * eliminationRecord;
@@ -26,8 +28,8 @@
 @property (nonatomic, retain) NSNumber * reg4;
 @property (nonatomic, retain) NSString * reg5;
 @property (nonatomic, retain) NSString * reg6;
-@property (nonatomic, retain) NSString * regionalId;
 @property (nonatomic, retain) NSString * seedingRecord;
+@property (nonatomic, retain) NSNumber * week;
 @property (nonatomic, retain) TeamData *team;
 
 @end

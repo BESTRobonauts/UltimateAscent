@@ -297,7 +297,6 @@
 -(void)checkDataStatus {
     if (dataChange) {
         _team.saved = [NSNumber numberWithInt:1];
-        _team.stacked = [NSNumber numberWithInt:0];
         NSError *error;
         if (![_dataManager.managedObjectContext save:&error]) {
             NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);

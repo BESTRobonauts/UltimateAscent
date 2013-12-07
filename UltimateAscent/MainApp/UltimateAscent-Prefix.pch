@@ -17,6 +17,9 @@
 
 #define TEST_MODE
 
+#define APPNAME = @"UltimateAscent"
+#define GAME = @"Ultimate Ascent"
+
 typedef enum {
     Practice,
 	Seeding,
@@ -35,6 +38,13 @@ typedef enum {
     Tank,
     WestCoast
 } DriveType;
+
+typedef enum {
+    SyncTeams,
+    SyncTournaments,
+    SyncMatches,
+    SyncMatchList
+} SyncOptions;
 
 typedef enum {
 	Scouter,     // This is a scounting iPad

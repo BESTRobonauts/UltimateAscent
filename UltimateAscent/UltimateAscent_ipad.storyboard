@@ -1806,7 +1806,7 @@
                         <outlet property="mainLogo" destination="qzp-fZ-Mdo" id="8lp-4m-1xd"/>
                         <outlet property="pictureCaption" destination="wlf-zr-3iE" id="X42-46-oNJ"/>
                         <outlet property="splashPicture" destination="dab-GT-vw3" id="CAB-Re-fnf"/>
-                        <outlet property="stackMobButton" destination="QAv-yQ-RKf" id="ugh-aC-aJ0"/>
+                        <outlet property="syncButton" destination="QAv-yQ-RKf" id="4gz-NQ-DT1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tJ9-kC-7Hd" userLabel="First Responder" sceneMemberID="firstResponder"/>

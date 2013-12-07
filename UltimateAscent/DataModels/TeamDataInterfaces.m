@@ -246,121 +246,51 @@
     }
 }
 
--(NSString *) exportTeamsToCSV:(NSString *)tournament {
+-(NSString *) exportTeamsToCSV:(BOOL)header forTeam:(TeamData *)team forTournament:(NSString *)tournament {
     NSLog(@"Export teams to csv");
-    TeamData *team;
-    NSError *error;
     NSString *csvString;
-    NSString *csvTournament;
-    NSString *csvRegionals;
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 
     if (!_dataManager) {
         _dataManager = [DataManager new];
     }
     
-    NSEntityDescription *entity = [NSEntityDescription
-    entityForName:@"TeamData" inManagedObjectContext:_dataManager.managedObjectContext];
-    [fetchRequest setEntity:entity];
-     
-    NSSortDescriptor *numberDescriptor = [[NSSortDescriptor alloc] initWithKey:@"number" ascending:YES];
-    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:numberDescriptor, nil];
-    [fetchRequest setSortDescriptors:sortDescriptors];
-    if (tournament) {
-        NSPredicate *pred = [NSPredicate predicateWithFormat:@"ANY tournament.name = %@", tournament];
-        [fetchRequest setPredicate:pred];
+    if(!team) {
+        NSLog(@"Karma disruption error");
+        return NULL;
     }
-     NSArray *teamData = [_dataManager.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-     if(!teamData) {
-         NSLog(@"Karma disruption error");
-     }
-     else {
-         csvString = @"";
-         BOOL firstPass = TRUE;
-         if ([teamData count]) {
-             NSDictionary *properties = [[[teamData objectAtIndex:0] entity] attributesByName];
-             for (NSString *key in properties) {
-                 if (!firstPass) {
-                     csvString = [csvString stringByAppendingString:@", "];
-                 }
-                 csvString = [csvString stringByAppendingFormat:@"%@", key];
-                 firstPass = FALSE;
-             }
-             csvString = [csvString stringByAppendingFormat:@"\n"];
-             csvTournament = @"Team Number, tournament\n";
-             csvRegionals = @"Team History, week, name, rank, seedingRecord, CCWM, opr, finishPosition, awards\n";
-//             csvRegionals =
-             for (int c = 0; c < [teamData count]; c++) {
-                 team = [teamData objectAtIndex:c];
-                 NSLog(@"index = %d", c);
-                 /************************************************************/
-                 NSArray *allTournaments = [team.tournament allObjects];
-                 for (int j=0; j<[allTournaments count]; j++) {
-                     TournamentData *tourney = [allTournaments objectAtIndex:j];
-                     csvTournament = [csvTournament stringByAppendingFormat:@"%@, %@\n", team.number, tourney.name];
-                 }
-                 NSArray *allRegionals = [team.regional allObjects];
-                 for (int j=0; j<[allRegionals count]; j++) {
-                     Regional *regional = [allRegionals objectAtIndex:j];
-                     csvRegionals = [csvRegionals stringByAppendingFormat:@"%@, %@, %@, %@, %@, %@, %@, \"%@\", \"%@\"\n", team.number, regional.reg1, regional.name, regional.rank, regional.seedingRecord, regional.reg3, regional.opr, regional.finishPosition, regional.reg5];
-                 }
-                 /************************************************************/
-                 firstPass = TRUE;
-                 for (NSString *key in properties) {
-                     id description = [properties valueForKey:key];
-                     if ([description isKindOfClass:[NSAttributeDescription class]]) {
-                         if (!firstPass) {
-                             csvString = [csvString stringByAppendingString:@", "];
-                         }
-                         firstPass = FALSE;
-                         NSAttributeType attributeType = [description attributeType];
-                         switch (attributeType) {
-                             case NSInteger16AttributeType:
-                             case NSInteger32AttributeType:
-                             case NSInteger64AttributeType: {
-                                 NSNumber *value = [team valueForKey:key];
-                                 if (value) {
-                                     csvString = [csvString stringByAppendingFormat:@"%@", value];
-                                 }
-                             }
-                             break;
-                             case NSFloatAttributeType:
-                             case NSDoubleAttributeType:
-                             case NSDecimalAttributeType: {
-                                 NSNumber *value = [team valueForKey:key];
-                                 if (value) {
-                                     csvString = [csvString stringByAppendingFormat:@"%@", value];
-                                 }
-                             }
-                             break;
-                             case NSBooleanAttributeType: {
-                                 NSNumber *value = [team valueForKey:key];
-                                 if (value) {
-                                     csvString = [csvString stringByAppendingFormat:@"%@", value];
-                                 }
-                             }
-                             break;
-                             case NSStringAttributeType: {
-                                 NSString *value = [team valueForKey:key];
-                                 if (value) {
-                                     csvString = [csvString stringByAppendingFormat:@"\"%@\"", value];
-                                 }
-                             }
-                             break;
-                             default:
-                                 break;
-                         }
-                     }
-                 }
-                 csvString = [csvString stringByAppendingFormat:@"\n"];
-             }
-         }
-             //else if ([value isKindOfClass:[NSAttributeDescription class]]) {
-//     csvString = [csvString stringByAppendingFormat:@"%@, %@, %@, %@, %@, %@, %@, %@, %@, %@, %@, %@, %@ %@\n", team.number, team.name, settings.tournament.name, team.driveTrainType, team.intake, team.wheelDiameter, team.cims, team.minHeight, team.maxHeight, team.pyramidDump, team.climbLevel, team.climbSpeed, team.wheelType, ([team.notes isEqualToString:@""] ? @"," : [NSString stringWithFormat:@",\"%@\"", team.notes])];
+
+    NSDictionary *attributes = [[team entity] attributesByName];
+    if (header) {
+        csvString = @"Team Number, Team Name, Tournament";
+        for (NSString *item in attributes) {
+            NSString *output = [[[attributes objectForKey:item] userInfo] objectForKey:@"output"];
+            if (output) {
+                csvString = [csvString stringByAppendingFormat:@", %@", output];
+                NSLog(@"output = %@, value = %@", output, [team valueForKey:item]);
+            }
+        }
+        csvString = [csvString stringByAppendingString:@"\n"];
     }
-    csvString = [csvString stringByAppendingString:csvTournament];
-    csvString = [csvString stringByAppendingString:csvRegionals];
+    else {
+        csvString = [[NSString alloc] initWithFormat:@"%@, %@, %@", team.number, team.name, tournament];
+        for (NSString *item in attributes) {
+            NSString *output = [[[attributes objectForKey:item] userInfo] objectForKey:@"output"];
+            if (output) {
+                csvString = [csvString stringByAppendingFormat:@", %@",[self outputFormat:[[attributes objectForKey:item] attributeType] forValue:[team valueForKey:item]]];
+                NSLog(@"output = %@, value = %@", output, [team valueForKey:item]);
+            }
+        }
+        csvString = [csvString stringByAppendingString:@"\n"];
+
+    }
     return csvString;
+}
+
+-(NSString *) outputFormat:(NSAttributeType)type forValue:data {
+    if (type == NSStringAttributeType) {
+        return ([data isEqualToString:@""] ? @"," : [NSString stringWithFormat:@",\"%@\"", data]);
+    }
+    else return [NSString stringWithFormat:@"%@", data];
 }
 
 -(Regional *)getRegionalRecord:(TeamData *)team forWeek:(NSNumber *)week {

@@ -2,7 +2,7 @@
 //  TeamScore.h
 //  UltimateAscent
 //
-//  Created by FRC on 3/29/13.
+//  Created by FRC on 12/7/13.
 //  Copyright (c) 2013 FRC. All rights reserved.
 //
 
@@ -32,8 +32,10 @@
 @property (nonatomic, retain) NSNumber * otherRating;
 @property (nonatomic, retain) NSNumber * passes;
 @property (nonatomic, retain) NSNumber * pyramid;
+@property (nonatomic, retain) NSNumber * received;
 @property (nonatomic, retain) NSNumber * robotSpeed;
 @property (nonatomic, retain) NSNumber * saved;
+@property (nonatomic, retain) NSString * savedBy;
 @property (nonatomic, retain) NSNumber * sc1;
 @property (nonatomic, retain) NSNumber * sc2;
 @property (nonatomic, retain) NSNumber * sc3;
@@ -43,9 +45,8 @@
 @property (nonatomic, retain) NSString * sc7;
 @property (nonatomic, retain) NSString * sc8;
 @property (nonatomic, retain) NSString * sc9;
-@property (nonatomic, retain) NSNumber * stacked;
+@property (nonatomic, retain) NSData * storedFieldDrawing;
 @property (nonatomic, retain) NSNumber * synced;
-@property (nonatomic, retain) NSString * teamscoreId;
 @property (nonatomic, retain) NSNumber * teleOpHigh;
 @property (nonatomic, retain) NSNumber * teleOpLow;
 @property (nonatomic, retain) NSNumber * teleOpMid;

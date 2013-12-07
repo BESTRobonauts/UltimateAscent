@@ -29,7 +29,8 @@
 -(Regional *)getRegionalRecord:(TeamData *)team forWeek:(NSNumber *)week;
 -(TeamData *)addTeam:(NSNumber *)teamNumber forName:(NSString *)teamName forTournament:(NSString *)tournamentName;
 -(id)checkAlternateKeys:(NSDictionary *)keyList forEntry:header;
--(NSString *) exportTeamsToCSV:(NSString *)tournament;
+-(NSString *) exportTeamsToCSV:(BOOL)header forTeam:(TeamData *)team forTournament:(NSString *)tournament;
+-(NSString *) outputFormat:(NSAttributeType)type forValue:data;
 -(void)setTeamDefaults:(TeamData *)blankTeam;
 
 #ifdef TEST_MODE

@@ -17,15 +17,14 @@
 
 @implementation DownloadPageViewController
 @synthesize dataManager = _dataManager;
-@synthesize managedObjectContext;
 @synthesize settings;
 @synthesize exportTeamData;
 @synthesize exportMatchData;
-@synthesize mainLogo;
-@synthesize splashPicture;
-@synthesize pictureCaption;
+@synthesize mainLogo = _mainLogo;
+@synthesize splashPicture = _splashPicture;
+@synthesize pictureCaption = _pictureCaption;
 @synthesize exportPath;
-@synthesize stackMobButton = _stackMobButton;
+@synthesize syncButton = _syncButton;
 @synthesize ftpButton = _ftpButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -51,14 +50,8 @@
 - (void)viewDidLoad
 {
     NSLog(@"Download Page");
-    if (!managedObjectContext) {
-        if (_dataManager) {
-            managedObjectContext = _dataManager.managedObjectContext;
-        }
-        else {
-            _dataManager = [DataManager new];
-            managedObjectContext = [_dataManager managedObjectContext];
-        }
+    if (!_dataManager) {
+        _dataManager = [DataManager new];
     }
 
     [self retrieveSettings];
@@ -70,22 +63,22 @@
     }
 
     // Display the Robotnauts Banner
-    [mainLogo setImage:[UIImage imageNamed:@"robonauts app banner.jpg"]];
+    [_mainLogo setImage:[UIImage imageNamed:@"robonauts app banner.jpg"]];
     // Set Font and Text for Export Buttons
     [exportTeamData setTitle:@"Export Team Data" forState:UIControlStateNormal];
     exportTeamData.titleLabel.font = [UIFont fontWithName:@"Nasalization" size:24.0];
     [exportMatchData setTitle:@"Export Match Data" forState:UIControlStateNormal];
     exportMatchData.titleLabel.font = [UIFont fontWithName:@"Nasalization" size:24.0];
     exportPath = [self applicationDocumentsDirectory];
-    [_stackMobButton setTitle:@"Export to Stack Mob" forState:UIControlStateNormal];
-    _stackMobButton.titleLabel.font = [UIFont fontWithName:@"Nasalization" size:24.0];
+    [_syncButton setTitle:@"Sync Data" forState:UIControlStateNormal];
+    _syncButton.titleLabel.font = [UIFont fontWithName:@"Nasalization" size:24.0];
     [_iPadExportButton setTitle:@"Export to iDevice" forState:UIControlStateNormal];
     _iPadExportButton.titleLabel.font = [UIFont fontWithName:@"Nasalization" size:24.0];
     [_ftpButton setTitle:@"FTP" forState:UIControlStateNormal];
     _ftpButton.titleLabel.font = [UIFont fontWithName:@"Nasalization" size:24.0];
     // Display the Label for the Picture
-    pictureCaption.font = [UIFont fontWithName:@"Nasalization" size:24.0];
-    pictureCaption.text = @"Just Hangin' Out";
+    _pictureCaption.font = [UIFont fontWithName:@"Nasalization" size:24.0];
+    _pictureCaption.text = @"Just Hangin' Out";
     [super viewDidLoad];
 }
 
@@ -109,11 +102,38 @@
 }
 
 -(void)emailTeamData {
+    NSError *error;
+    TeamData *team;
+    BOOL firstPass = TRUE;
     NSString *filePath = [exportPath stringByAppendingPathComponent: @"TeamData.csv"];
     NSLog(@"export data file = %@", filePath);
-    TeamDataInterfaces *team = [[TeamDataInterfaces alloc] initWithDataManager:_dataManager];
-    NSString *csvString = [team exportTeamsToCSV:NULL];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:@"TeamData" inManagedObjectContext:_dataManager.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    NSSortDescriptor *numberDescriptor = [[NSSortDescriptor alloc] initWithKey:@"number" ascending:YES];
+    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:numberDescriptor, nil];
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"ANY tournament.name = %@", settings.tournament.name];
+    [fetchRequest setPredicate:pred];
+    NSArray *teamData = [_dataManager.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    if(!teamData) {
+        NSLog(@"Karma disruption error");
+    }
+    TeamDataInterfaces *teamInterface = [[TeamDataInterfaces alloc] initWithDataManager:_dataManager];
+    
+    NSString *csvString;
+    for (int i=0; i<[teamData count]; i++) {
+        team = [teamData objectAtIndex:i];
+        if (firstPass) {
+            csvString = [teamInterface exportTeamsToCSV:firstPass forTeam:team forTournament:settings.tournament.name];
+            firstPass = FALSE;
+        }
+        csvString = [csvString stringByAppendingString:[teamInterface exportTeamsToCSV:firstPass forTeam:team forTournament:settings.tournament.name]];
+    }
     if (csvString) {
+        NSLog(@"csvString = %@", csvString);
         [csvString writeToFile:filePath
                     atomically:YES
                       encoding:NSUTF8StringEncoding
@@ -138,7 +158,7 @@
     NSError *error;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription 
-                                   entityForName:@"MatchData" inManagedObjectContext:managedObjectContext];
+                                   entityForName:@"MatchData" inManagedObjectContext:_dataManager.managedObjectContext];
     [fetchRequest setEntity:entity];
 
     // Edit the sort key as appropriate.
@@ -150,7 +170,7 @@
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"tournament CONTAINS %@", settings.tournament.name];
     [fetchRequest setPredicate:pred];
     [fetchRequest setSortDescriptors:sortDescriptors];
-     NSArray *matchData = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
+     NSArray *matchData = [_dataManager.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     if(!matchData) {
         NSLog(@"Karma disruption error");
     } 
@@ -357,6 +377,9 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
+- (void)pickerSelected:(NSString *)newPick {
+}
+
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     [segue.destinationViewController setDataManager:_dataManager];
@@ -367,9 +390,9 @@
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription
-                                   entityForName:@"SettingsData" inManagedObjectContext:managedObjectContext];
+                                   entityForName:@"SettingsData" inManagedObjectContext:_dataManager.managedObjectContext];
     [fetchRequest setEntity:entity];
-    NSArray *settingsRecord = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    NSArray *settingsRecord = [_dataManager.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     if(!settingsRecord) {
         NSLog(@"Karma disruption error");
         settings = Nil;
@@ -390,27 +413,27 @@
     switch (interfaceOrientation) {
         case UIInterfaceOrientationPortrait:
         case UIInterfaceOrientationPortraitUpsideDown:
-            mainLogo.frame = CGRectMake(-20, 0, 285, 960);
-            [mainLogo setImage:[UIImage imageNamed:@"robonauts app banner.jpg"]];
+            _mainLogo.frame = CGRectMake(-20, 0, 285, 960);
+            [_mainLogo setImage:[UIImage imageNamed:@"robonauts app banner.jpg"]];
             exportTeamData.frame = CGRectMake(325, 125, 400, 68);
             exportMatchData.frame = CGRectMake(325, 225, 400, 68);
-            _stackMobButton.frame = CGRectMake(325, 325, 400, 68);
+            _syncButton.frame = CGRectMake(325, 325, 400, 68);
             _iPadExportButton.frame = CGRectMake(325, 425, 400, 68);
             _ftpButton.frame = CGRectMake(325, 525, 400, 68);
-            splashPicture.frame = CGRectMake(293, 563, 468, 330);
-            pictureCaption.frame = CGRectMake(293, 901, 468, 39);
+            _splashPicture.frame = CGRectMake(293, 563, 468, 330);
+            _pictureCaption.frame = CGRectMake(293, 901, 468, 39);
             break;
         case UIInterfaceOrientationLandscapeLeft:
         case UIInterfaceOrientationLandscapeRight:
-            mainLogo.frame = CGRectMake(0, -60, 1024, 255);
-            [mainLogo setImage:[UIImage imageNamed:@"robonauts app banner original.jpg"]];
+            _mainLogo.frame = CGRectMake(0, -60, 1024, 255);
+            [_mainLogo setImage:[UIImage imageNamed:@"robonauts app banner original.jpg"]];
             exportTeamData.frame = CGRectMake(550, 225, 400, 68);
             exportMatchData.frame = CGRectMake(550, 325, 400, 68);
-            _stackMobButton.frame = CGRectMake(550, 425, 400, 68);
+            _syncButton.frame = CGRectMake(550, 425, 400, 68);
             _iPadExportButton.frame = CGRectMake(550, 525, 400, 68);
             _ftpButton.frame = CGRectMake(550, 625, 400, 68);
-            splashPicture.frame = CGRectMake(50, 243, 468, 330);
-            pictureCaption.frame = CGRectMake(50, 581, 468, 39);
+            _splashPicture.frame = CGRectMake(50, 243, 468, 330);
+            _pictureCaption.frame = CGRectMake(50, 581, 468, 39);
             break;
         default:
             break;

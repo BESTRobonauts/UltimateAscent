@@ -8,24 +8,30 @@
 
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
+#import "PopUpPickerViewController.h"
+
 @class MatchData;
 @class TeamScore;
 @class SettingsData;
 @class DataManager;
 
-@interface DownloadPageViewController : UIViewController <UIActionSheetDelegate, MFMailComposeViewControllerDelegate>
-@property (nonatomic, retain) DataManager *dataManager;
-@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+@interface DownloadPageViewController : UIViewController <UIActionSheetDelegate, MFMailComposeViewControllerDelegate, PopUpPickerDelegate>
+@property (nonatomic, strong) DataManager *dataManager;
 @property (nonatomic, strong) SettingsData *settings;
-@property (nonatomic, strong) IBOutlet UIImageView *mainLogo;
-@property (nonatomic, strong) IBOutlet UIImageView *splashPicture;
-@property (nonatomic, strong) IBOutlet UILabel *pictureCaption;
-@property (nonatomic, strong) IBOutlet UIButton *exportTeamData;
-@property (nonatomic, strong) IBOutlet UIButton *exportMatchData;
-@property (weak, nonatomic) IBOutlet UIButton *stackMobButton;
-@property (weak, nonatomic) IBOutlet UIButton *ftpButton;
+@property (nonatomic, weak) IBOutlet UIImageView *mainLogo;
+@property (nonatomic, weak) IBOutlet UIImageView *splashPicture;
+@property (nonatomic, weak) IBOutlet UILabel *pictureCaption;
+@property (nonatomic, weak) IBOutlet UIButton *exportTeamData;
+@property (nonatomic, weak) IBOutlet UIButton *exportMatchData;
+@property (nonatomic, weak) IBOutlet UIButton *ftpButton;
 @property (nonatomic, strong) NSString *exportPath;
-@property (weak, nonatomic) IBOutlet UIButton *iPadExportButton;
+@property (nonatomic, weak) IBOutlet UIButton *iPadExportButton;
+
+
+@property (nonatomic, weak) IBOutlet UIButton *syncButton;
+@property (nonatomic, strong) PopUpPickerViewController *syncPicker;
+@property (nonatomic, strong) UIPopoverController *syncPickerPopover;
+@property (nonatomic, strong) NSMutableArray *syncList;
 
 -(IBAction)exportTapped:(id)sender;
 -(void)emailTeamData;
